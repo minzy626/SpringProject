@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"  prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,17 +9,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-login.jsp
+<s:authorize ifAnyGranted="ROLE_USER">
+LOGIN<br/>
+</s:authorize>
+<s:authorize ifNotGranted="ROLE_USER">
+LOG OUT<br/>
+</s:authorize>
 
-<c:if test="${not empty pageContext.request.userPrincipal}">
-	<p>is login</p>
-</c:if>
 
-<c:if test="${empty pageContext.request.userPrincipal}">
-	<p>is logout</p>
-</c:if>
-
-USER ID : ${pageContext.request.userPrincipal.name}<br/>
+USER ID : <s:authentication property="name"/><br/>
 <a href="${pageContext.request.contextPath}/j_spring_security_logout">LOG OUT</a><br/>
 
 </body>
