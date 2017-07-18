@@ -53,7 +53,7 @@ public class BController {
 	public String content_view(HttpServletRequest request, Model model) {
 		System.out.println("content_view()");
 		
-		model.addAttribute(request);
+		model.addAttribute("request", request);
 		command=new BContentCommand();
 		
 		command.execute(model);
@@ -65,7 +65,7 @@ public class BController {
 	public String modify(HttpServletRequest request, Model model) {
 		System.out.println("modify()");
 		
-		model.addAttribute(request);
+		model.addAttribute("request", request);
 		command=new BModifyCommand();
 		command.execute(model);
 		
@@ -76,7 +76,7 @@ public class BController {
 	public String reply_view(HttpServletRequest request, Model model) {
 		System.out.println("reply_view()");
 		
-		model.addAttribute(request);
+		model.addAttribute("request", request);
 		command=new BReplyViewCommand();
 		command.execute(model);
 		
@@ -87,7 +87,7 @@ public class BController {
 	public String reply(HttpServletRequest request, Model model) {
 		System.out.println("reply()");
 		
-		model.addAttribute(request);
+		model.addAttribute("request", request);
 		command=new BReplyCommand();
 		command.execute(model);
 		
@@ -98,7 +98,7 @@ public class BController {
 	public String delete(HttpServletRequest request, Model model) {
 		System.out.println("delete()");
 		
-		model.addAttribute(request);
+		model.addAttribute("request", request);
 		command=new BDeleteCommand();
 		command.execute(model);
 		
