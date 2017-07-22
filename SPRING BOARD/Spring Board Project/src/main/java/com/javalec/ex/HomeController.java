@@ -35,6 +35,7 @@ public class HomeController {
 		
 		return "home";
 	}
+
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String Index(Model model) {
