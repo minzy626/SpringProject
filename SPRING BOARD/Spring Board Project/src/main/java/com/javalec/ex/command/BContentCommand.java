@@ -1,12 +1,30 @@
 package com.javalec.ex.command;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
+
+import com.javalec.ex.dao.BDao;
+import com.javalec.ex.dto.BDto;
 
 public class BContentCommand implements BCommand {
 
 	@Override
 	public void execute(Model model) {
-		// TODO Auto-generated method stub
+		
+		//BController에서 보낸 model에 담긴 id값을 꺼냄
+		Map<String, Object> map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		String bId = request.getParameter("bId");
+		
+		
+		BDao dao = new BDao();
+		BDto dto = dao.contentView(bId);
+		
+		model.addAttribute("content_view",dto);
+		
 
 	}
 

@@ -2,6 +2,7 @@ package com.javalec.ex.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,22 @@ import com.javalec.ex.command.BModifyCommand;
 import com.javalec.ex.command.BReplyCommand;
 import com.javalec.ex.command.BReplyViewCommand;
 import com.javalec.ex.command.BWriteCommand;
+import com.javalec.ex.util.Constant;
 
 @Controller
 public class BController {
 	BCommand command=null;
-
+	private JdbcTemplate template;
+	
 	public BController() {
 		
 	}
 	
+	@Autowired //Autowired 해놓으면 스프링 설정파일에서 Jdbc 템플릿 빈 생성시 자동으로 BController에있는 template에 맵핑 시켜줌.
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+		Constant.template = this.template;
+	}
 	
 	@RequestMapping("/list") //게시판 글 목록 가져오기
 	public String list(Model model) // Controller->Command->DAO를 거쳐서 데이터를 다시 가져오므로 model객체를 인자로 받아야함. 
@@ -72,6 +80,8 @@ public class BController {
 	} 
 	//GET방식과 POST방식의 차이  https://blog.outsider.ne.kr/312 
 	
+	
+	
 	@RequestMapping("/reply_view") //글 답변달기
 	public String reply_view(HttpServletRequest request,Model model) { //request에는 글의 id가 저장돼있음. 
 		model.addAttribute("request",request);
@@ -80,6 +90,8 @@ public class BController {
 		return "reply_view"; 
 	} 
 	
+	
+	
 	@RequestMapping("/reply") //글 답변달기
 	public String reply(HttpServletRequest request,Model model) { //request에는 글의 id가 저장돼있음. 
 		model.addAttribute("request",request);
@@ -87,6 +99,8 @@ public class BController {
 		command.execute(model);   
 		return "redirect:list"; 
 	} 
+	
+	
 	
 	@RequestMapping("/delete") //글 삭제하기
 	public String delete(HttpServletRequest request,Model model) { //request에는 글의 id가 저장돼있음. 
