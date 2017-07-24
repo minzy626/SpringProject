@@ -45,7 +45,7 @@ public class BDao {
 		
 		replyShape(bGroup, bStep);
 		
-		String query = "insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (mvc_board_seq.nextval, ?, ?, ?, ?, ?, ?)";
+		String query = "insert into mvc_board (bId, bName, bTitle, bContent, bGroup, bStep, bIndent) values (last_insert_id(), ?, ?, ?, ?, ?, ?)";
 		
 		this.template.update(query, new PreparedStatementSetter() {
 			
@@ -109,7 +109,7 @@ public class BDao {
 	
 	public void write(final String bName,final String bTitle, final String bContent)
 	{
-		String query = "insert into mvc_board (bId,bName,bTitle,bContent,bHit,bGroup,bStep,bIndent) values (mvc_board_seq.nextval,?,?,?,0,mvc_board_seq.currval,0,0)";
+		String query = "insert into mvc_board (bId,bName,bTitle,bContent,bHit,bGroup,bStep,bIndent) values (last_insert_id(),?,?,?,0,last_insert_id()+1,0,0)";
 		template.update(query,new PreparedStatementSetter() {
 			
 			@Override

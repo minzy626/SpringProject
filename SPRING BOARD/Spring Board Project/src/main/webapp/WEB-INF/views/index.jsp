@@ -200,7 +200,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="profile"><img src="assets/rion.png" class="img-circle" width="60"></a></p>
               	  <h5 class="centered">회원 닉네임</h5>
               	  	
                   <li class="mt">
@@ -296,6 +296,7 @@
                       <!--CUSTOM CHART START -->
                       <div class="border-head">
                           <h3>게시판</h3>
+                          <a href="memberinfo">회원정보보기</a>
                       </div>
                      <!--  <div class="custom-bar-chart">
                           <ul class="y-axis">

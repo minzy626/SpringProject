@@ -1482,6 +1482,80 @@ PANELS CONFIGURATIONS
   border: 2px solid #96c93c;
   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAHCAYAAAA1WQxeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGFJREFUeNpinHLMhgEHKADia0xQThIQs6JJ9gPxZhYQAcS6QHwDiI8hSYJAC0gBPxDLAvFcIJ6JJJkDxFNBVtgBcQ8Qa6BLghgwN4A4a9ElQYAFSj8C4mwg3o8sCQIAAQYA78QTYqnPZuEAAAAASUVORK5CYII=') no-repeat center center;
 }
+.frame{
+    border:black;
+    border:1px solid rgba(0,0,0,0.15);
+    position:relative;
+    padding:0;
+    display:table;
+    border-radius:2px;
+}
+.frame > div:first-of-type{
+    position:absolute; 
+    z-index:-1;
+    height:25%;
+    width:100%;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMnLtQSWlj5VetZstWV6zV19JLKIjttnH6TJdeVgMMHA4EA78A');
+}
+.frame > div:nth-child(3){
+    position:relative;
+    border-bottom:black;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    display:flex;
+    flex-direction:column; 
+    justify-content:center;
+    width:100%;
+    align-items:center;
+    
+}
+.frame > div:nth-child(3) > div:nth-child(1) > h4{
+    text-align:center;
+}
+.frame > div:nth-child(3) > div:nth-child(1) > p{
+    text-align:center;color:#adadad; font-family:Source Sans Pro;font-weight: 400;font-size: 13px;
+}
+.frame > div:nth-child(3) > div:nth-child(1){
+    width:100%;
+    border-bottom:black;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}          
+.frame > div:nth-child(3) > div:nth-child(2){
+    border-bottom:black;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    display:table;
+    width:100%;
+    padding:10px;    
+}
+.frame .column{
+    width:50%;float:left;
+}
+.frame .column > p:first-of-type{
+    text-align:center;
+    margin-bottom:0;
+    font-size:21px;
+    color:#0084bf;
+}
+.frame .column > p:last-of-type{
+    text-align:center;
+}          
+.frame > div:nth-child(3) > div:nth-child(3){
+    padding:10px;
+    width:100%;
+    position:relative;
+    display:table;
+}
+
+.profile{
+    margin-top:25%;
+    display:flex; 
+    justify-content:center;
+    width:100%;
+    align-items:center;
+}
+.profile > img {
+    padding:1px;
+    width:30%;
+}
 
 /* PROFILE PANELS */
 /* Profile 01*/

@@ -107,4 +107,9 @@ public class HomeController {
 	public String Basic_Table(Model model) {
 		return "basic_table";
 	}
+	
+	@RequestMapping(value="/memberinfo", method = RequestMethod.GET)
+	public String memberinfo(Model model) {
+		return "memberinfo";
+	}
 }
