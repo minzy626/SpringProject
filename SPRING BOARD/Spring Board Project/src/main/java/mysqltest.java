@@ -13,7 +13,7 @@ public class mysqltest {
     
     @Test
     public void test() {
-        //hihihidd
+        //hihihiddgd
         try {
             Class.forName(DRIVER);
             
