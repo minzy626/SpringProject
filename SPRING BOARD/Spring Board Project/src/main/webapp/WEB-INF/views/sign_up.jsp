@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head> 
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -703,7 +703,7 @@
               </a>
           </div>
       </footer>
-      <!--footer end-->
+      <!--footer end--> 
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
