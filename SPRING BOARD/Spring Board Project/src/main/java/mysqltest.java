@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 
 import org.junit.Test;
  
-public class mysqltest {
+public class mysqltest { 
  
     private final String DRIVER = "com.mysql.jdbc.Driver";
     private final String URL = "jdbc:mysql://127.0.0.1/board";
@@ -12,7 +12,7 @@ public class mysqltest {
     private final String PW = "tiger";
     
     @Test
-    public void test() {
+    public void test() { 
         
         try {
             Class.forName(DRIVER);
