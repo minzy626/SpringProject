@@ -1,0 +1,111 @@
+@charset "EUC-KR";
+body {
+		margin: 10px;
+		font-size: 14px;
+	}
+
+	select.type01 {
+		width:80px;
+		height:30px;
+		margin-right = 5px;
+		padding: .3em .1em .1em;
+		font-family: inherit;
+		background:
+			url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+			no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		border-radius: 5px;
+	}
+	select.type02 {
+		width:80px;
+		height:40px;
+		margin-right = 5px;
+		padding: .3em .1em .1em;
+		font-family: inherit;
+		background:
+			url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+			no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		border-radius: 5px;
+	}
+	select::-ms-expand { /* for IE 11 */
+		display: none;
+	}
+/*  @media ( max-width : 768px) {
+	body {
+		margin: 10px;
+		font-size: 14px;
+	}
+
+	select {
+		width:100px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background:
+			url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+			no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		border-radius: 0px;
+	}
+	select::-ms-expand { for IE 11
+		display: none;
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 1024px) {
+	body {
+		margin: 10px;
+		font-size: 14px;
+	}
+	select {
+		width:100px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background:
+			url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+			no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		border-radius: 0px;
+	}
+	select::-ms-expand { for IE 11
+		display: none;
+	}
+	
+
+}
+
+@media ( min-width : 1024px) {
+	body {
+		margin: 10px;
+		font-size: 14px;
+	}
+
+	select {
+		width:100px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background:
+			url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+			no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		border-radius: 0px;
+	}
+	select::-ms-expand { for IE 11
+		display: none;
+	} */
+}
