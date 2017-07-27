@@ -47,7 +47,7 @@ public class BController {
 	}
 	
 	
-	
+	//dd
 	@RequestMapping("/write") //글 작성
 	public String write(HttpServletRequest request,Model model) //글 작성시 작성자,내용등 정보를 가져와야되니까 request를 인자로받아야함.  
 	{
