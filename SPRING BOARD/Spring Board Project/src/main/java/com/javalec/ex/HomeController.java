@@ -103,6 +103,11 @@ public class HomeController {
 		return "blank";
 	}
 	
+	@RequestMapping(value="/sign_up", method = RequestMethod.GET)
+	public String sign_up(Model model) {
+		return "sign_up";
+	}
+	
 	@RequestMapping(value="/basic_table", method = RequestMethod.GET)
 	public String Basic_Table(Model model) {
 		return "basic_table";
