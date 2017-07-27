@@ -12,7 +12,7 @@ public class mysqltest {
     private final String PW = "tiger";
     
     @Test
-    public void test() {
+    public void test() { 
         
         try {
             Class.forName(DRIVER);
