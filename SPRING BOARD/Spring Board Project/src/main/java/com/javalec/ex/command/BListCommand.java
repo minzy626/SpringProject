@@ -1,20 +1,22 @@
 package com.javalec.ex.command;
 
-import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
-import com.javalec.ex.dao.BDao;
-import com.javalec.ex.dto.BDto;
+
+import com.javalec.ex.dao.IDao;
+
 
 public class BListCommand implements BCommand {
-
+	
+	
 	@Override
-	public void execute(Model model) {
-		BDao dao = new BDao();
-		ArrayList<BDto> dtos = dao.list();
-		model.addAttribute("list",dtos);
-
+	public void execute(SqlSession sqlsession,Model model) {
+		IDao dao = sqlsession.getMapper(IDao.class);
+		model.addAttribute("list",dao.list());
+	
 	}
 
 }

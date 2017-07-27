@@ -4,14 +4,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.javalec.ex.dao.BDao;
+import com.javalec.ex.dao.IDao;
 
 public class BModifyCommand implements BCommand {
 
 	@Override
-	public void execute(Model model) {
+	public void execute(SqlSession sqlsession,Model model) {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		String bId = request.getParameter("bId");
@@ -19,8 +20,8 @@ public class BModifyCommand implements BCommand {
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
 		
-		BDao dao = new BDao();
-		dao.modify(bId,bName,bTitle,bContent);
+		IDao dao = sqlsession.getMapper(IDao.class);
+		dao.modify(bName,bTitle,bContent,bId);
 		
 
 	}

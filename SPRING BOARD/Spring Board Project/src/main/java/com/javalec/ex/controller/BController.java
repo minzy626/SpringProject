@@ -2,7 +2,7 @@ package com.javalec.ex.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -25,6 +25,9 @@ public class BController {
 	BCommand command=null;
 	private JdbcTemplate template;
 	
+	@Autowired
+	SqlSession sqlsession;
+	
 	public BController() {
 		
 	}
@@ -39,7 +42,7 @@ public class BController {
 	public String list(Model model) // Controller->Command->DAO를 거쳐서 데이터를 다시 가져오므로 model객체를 인자로 받아야함. 
 	{
 		command = new BListCommand();
-		command.execute(model); //컨트롤러에서 Command로 제어를 넘김 (모델에 정보를 계속 담아야 하므로 인자로 넣음)
+		command.execute(sqlsession,model); //컨트롤러에서 Command로 제어를 넘김 (모델에 정보를 계속 담아야 하므로 인자로 넣음)
 		return "list"; //list.jsp를 실행하기 위함.
 	}
 	
@@ -50,7 +53,7 @@ public class BController {
 	{
 		model.addAttribute("request",request); //Write커맨드 객체로 글 작성정보를 넘거야되므로 모델에 리퀘스트를 담는다.
 		command = new BWriteCommand();
-		command.execute(model);
+		command.execute(sqlsession,model);
 		
 		return "redirect:list"; //글 작성 하고나서는 다시 글 목록이 보여야 하므로 list.jsp호출되게끔.
 	}
@@ -66,7 +69,7 @@ public class BController {
 	public String content_view(HttpServletRequest request,Model model) { //list.jsp에서 글 목로 글릭시 ID값에 해당하는 글을 출력 해줘야 하므로 request 필요
 		model.addAttribute("request",request);
 		command = new BContentCommand();
-		command.execute(model);  
+		command.execute(sqlsession,model);  
 		return "content_view"; //뷰에 뿌려야함,model에는 값이 섲렁된 dto가 들어있음. jsp파일에서 dto값 꺼내서 쓰면됨.
 	} 
 	
@@ -75,7 +78,7 @@ public class BController {
 	public String modify(HttpServletRequest request,Model model) { 
 		model.addAttribute("request",request);
 		command = new BModifyCommand();
-		command.execute(model);  
+		command.execute(sqlsession,model);  
 		return "redirect:list"; //글 수정한뒤 다시 글 목록 출력
 	} 
 	//GET방식과 POST방식의 차이  https://blog.outsider.ne.kr/312 
@@ -86,7 +89,7 @@ public class BController {
 	public String reply_view(HttpServletRequest request,Model model) { //request에는 글의 id가 저장돼있음. 
 		model.addAttribute("request",request);
 		command = new BReplyViewCommand(); 
-		command.execute(model); //DB접근해서 글 ID에 해당하는 작성자,내용등을 가져와서 뷰에 뿌리면 됨.  
+		command.execute(sqlsession,model); //DB접근해서 글 ID에 해당하는 작성자,내용등을 가져와서 뷰에 뿌리면 됨.  
 		return "reply_view"; 
 	} 
 	
@@ -96,7 +99,7 @@ public class BController {
 	public String reply(HttpServletRequest request,Model model) { //request에는 글의 id가 저장돼있음. 
 		model.addAttribute("request",request);
 		command = new BReplyCommand(); 
-		command.execute(model);   
+		command.execute(sqlsession,model);   
 		return "redirect:list"; 
 	} 
 	
@@ -106,7 +109,7 @@ public class BController {
 	public String delete(HttpServletRequest request,Model model) { //request에는 글의 id가 저장돼있음. 
 		model.addAttribute("request",request);
 		command = new BDeleteCommand(); 
-		command.execute(model);   
+		command.execute(sqlsession,model);   
 		return "redirect:list"; 
 	}
 	
