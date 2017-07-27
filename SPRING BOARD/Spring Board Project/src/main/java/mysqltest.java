@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import org.junit.Test;
  
 public class mysqltest {  
+	
+	//¹ÚÃ¤¹ü
  
     private final String DRIVER = "com.mysql.jdbc.Driver";
     private final String URL = "jdbc:mysql://127.0.0.1/board";
