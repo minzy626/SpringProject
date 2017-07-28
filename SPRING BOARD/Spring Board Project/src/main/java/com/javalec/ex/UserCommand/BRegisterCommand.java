@@ -29,16 +29,6 @@ public class BRegisterCommand implements BUserCommand {
 		userdto.setbPass(request.getParameter("bPass"));
 		userdto.setbRegion(request.getParameter("bRegion"));
 		userdto.setbSchool(request.getParameter("bSchool"));
-		
-		System.out.println(request.getParameter("bId"));
-		System.out.println(request.getParameter("bNick"));
-		System.out.println(request.getParameter("bPass"));
-		System.out.println(request.getParameter("bGender"));
-		System.out.println(request.getParameter("bSchool"));
-		System.out.println(request.getParameter("bGrade"));
-		System.out.println(request.getParameter("bMajor"));
-		System.out.println(request.getParameter("bEmail"));
-		System.out.println(request.getParameter("bRegion"));
 		UserDao userdao = sqlsession.getMapper(UserDao.class);
 		userdao.register(userdto);
 	}
