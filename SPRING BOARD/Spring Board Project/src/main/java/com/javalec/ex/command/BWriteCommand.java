@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
 import com.javalec.ex.dao.IDao;
+import com.javalec.ex.dto.BDto;
 
 
 public class BWriteCommand implements BCommand {
@@ -19,8 +20,18 @@ public class BWriteCommand implements BCommand {
 		String bName = request.getParameter("bName");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
+		System.out.println(bContent);
+		BDto dto = new BDto();
+		dto.setbContent(bContent);
+		dto.setbHit(0);
+		dto.setbName(bName);
+		dto.setbTitle(bTitle);
 		IDao dao = sqlsession.getMapper(IDao.class);
-		dao.write(bName,bTitle,bContent,0,0,0);
+		System.out.println(dto.getbContent());
+		System.out.println(dto.getbHit());
+		System.out.println(dto.getbName());
+		System.out.println(dto.getbTitle());
+		dao.write(dto);
 		
 	}
 

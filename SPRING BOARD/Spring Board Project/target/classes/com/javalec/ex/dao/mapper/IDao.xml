@@ -5,40 +5,27 @@
     
 <mapper namespace="com.javalec.ex.dao.IDao">
 
-	<select id="list" resultType="com.javalec.ex.dto.BDto">
-		SELECT * FROM MVC_BOARD ORDER BY bGroup desc, bStep asc
+	<select id="list" resultType="Dto">
+		SELECT * FROM MVC_BOARD ORDER BY bId desc
 	</select>
 	
-	<select id="contentView" resultType="com.javalec.ex.dto.BDto">
+	<select id="contentView" parameterType="string" resultType="Dto">
 		SELECT * FROM MVC_BOARD WHERE BID = #{param2}
 	</select>
 	
-	<select id="reply_view" resultType="com.javalec.ex.dto.BDto">
-		SELECT * FROM MVC_BOARD WHERE BID = #{param1}
-	</select>
-	
-	<insert id="reply">
-		INSERT INTO MVC_BOARD (BNAME, BTITLE, BCONTENT, BGROUP, BSTEP, BINDENT) VALUES (#{param1}, #{param2}, #{param3},#{param4}, #{param5}, #{param6})
-	</insert>
-	
-	
-	<update id="replyShape">
-		UPDATE MVC_BOARD SET BSTEP = BSTEP + 1 WHERE BGROUP = ${param1} AND BSTEP > ${param2}
+	<update id="modify" parameterType="Dto">
+		UPDATE MVC_BOARD SET BNAME = #{bName}, BTITLE = #{bTitle}, BCONTENT= #{bContent} WHERE BID = #{bId}
 	</update>
 	
-	<update id="modify">
-		UPDATE MVC_BOARD SET BNAME = #{param1}, BTITLE = #{param2}, BCONTENT= #{param3} WHERE BID = #{param4}
-	</update>
-	
-	<delete id="delete">
-		DELETE FROM MVC_BOARD WHERE BID = #{param1]}
+	<delete id="delete" parameterType="String">
+		DELETE FROM MVC_BOARD WHERE BID = #{param1}
 	</delete>
 	
-	<insert id="write">
-		INSERT INTO MVC_BOARD (BNAME,BTITLE,BCONTENT,BHIT,BSTEP,BINDENT) VALUES(#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+	<insert id="write" parameterType="Dto">
+		INSERT INTO MVC_BOARD (BNAME,BTITLE,BCONTENT,BHIT) VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
 	</insert>
 	
-	<update id="upHit">
+	<update id="upHit" parameterType="String">
 		UPDATE MVC_BOARD SET BHIT = BHIT + 1 WHERE BID = #{param1}
 	</update>
 </mapper>

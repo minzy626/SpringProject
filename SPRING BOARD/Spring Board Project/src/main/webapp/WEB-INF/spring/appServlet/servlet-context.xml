@@ -35,17 +35,18 @@
 	
 	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"></beans:property>
-		<beans:property name="mapperLocations" value="classpath:com/javalec/ex/dao/mapper/*.xml"></beans:property>
+		<beans:property name="configLocation" value="classpath:com/javalec/ex/dao/mapper/mybatisConfig.xml"></beans:property>
+		<beans:property name="mapperLocations" value="classpath:com/javalec/ex/dao/mapper/IDao.xml"></beans:property>
 	</beans:bean>
 	
 	<beans:bean id="sqlsession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	</beans:bean>
 	
-	<!-- jdbc 템플릿-->
+	<!-- jdbc 템플릿
 	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
 		<beans:property name="dataSource" ref="dataSource"/>
-	</beans:bean>
+	</beans:bean>-->
 	 
 	<!-- 오라클 db연동 
 	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">

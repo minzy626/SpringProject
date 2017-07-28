@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%    
-    //제대로 utf-8환경이 아니라 한글 깨짐 그래서 임의로 추가                                                   
-    request.setCharacterEncoding("utf-8"); 
+<%@page import="java.util.*"%>
+<%
+    request.setCharacterEncoding("UTF-8");
 %>
 
-    
     <script language = "javascript"> 
     function writeCheck() { 
     	var form = document.writeform; 
@@ -36,7 +35,7 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
@@ -320,7 +319,7 @@
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 		<div class="container">	
 			
-			<form class="form-horizontal" name="writeform" action="write" role="form" id="write-form">
+			<form class="form-horizontal" name="writeform" action="write" role="form" id="write-form" method="post">
 			  <div class="form-group">
 			  <div class="col-md-8">
 				<h1>글 작성하기 </h1>
@@ -428,15 +427,7 @@
     <script src="assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-    
-  <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
+  
 
   </body>
 </html>
