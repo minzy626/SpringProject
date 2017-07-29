@@ -12,13 +12,12 @@
       <property name="username" value="springteam11@gmail.com" />
       <property name="password" value="springteam!!" />
       <property name="javaMailProperties">
-         <props>
-               <prop key="mail.transport.protocol">smtp</prop>
-               <prop key="mail.smtp.auth">true</prop>
-               <prop key="mail.smtp.starttls.enable">true</prop>
-               <prop key="mail.debug">true</prop>
-         </props>
-      </property>
+            <props>
+                <prop key="mail.smtp.from">springteam11@gmail.comr</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
    </bean>
 		
 		

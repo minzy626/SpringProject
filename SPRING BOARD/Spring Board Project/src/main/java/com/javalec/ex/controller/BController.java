@@ -15,6 +15,7 @@ import com.javalec.ex.command.BDeleteCommand;
 import com.javalec.ex.command.BListCommand;
 import com.javalec.ex.command.BModifyCommand;
 import com.javalec.ex.command.BWriteCommand;
+import com.javalec.ex.dto.BDto;
 
 
 @Controller
@@ -36,17 +37,14 @@ public class BController {
 		command.execute(sqlsession,model); //컨트롤러에서 Command로 제어를 넘김 (모델에 정보를 계속 담아야 하므로 인자로 넣음)
 		return "list"; //list.jsp를 실행하기 위함.
 	}
-	
-	
+
 	
 	
 	@RequestMapping(value="/write", method = RequestMethod.POST) //글 작성
-	public String write(HttpServletRequest request,Model model) //글 작성시 작성자,내용등 정보를 가져와야되니까 request를 인자로받아야함.  
+	public String write(BDto bDto,Model model) //글 작성시 작성자,내용등 정보를 가져와야되니까 request를 인자로받아야함.  
 	{
-		model.addAttribute("request",request); //Write커맨드 객체로 글 작성정보를 넘거야되므로 모델에 리퀘스트를 담는다.
-		command = new BWriteCommand();
-		command.execute(sqlsession,model);
-		System.out.println(request.getParameter("bContent"));
+		BWriteCommand command= new BWriteCommand();
+		command.execute(sqlsession,bDto);
 		return "redirect:list"; //글 작성 하고나서는 다시 글 목록이 보여야 하므로 list.jsp호출되게끔.
 	}
 	
@@ -66,11 +64,10 @@ public class BController {
 	} 
 	
 	
-	@RequestMapping(value="/modify", method=RequestMethod.POST) //글 수정하기
-	public String modify(HttpServletRequest request,Model model) { 
-		model.addAttribute("request",request);
-		command = new BModifyCommand();
-		command.execute(sqlsession,model);  
+	@RequestMapping(value="/modify") //글 수정하기
+	public String modify(BDto bDto,Model model) { 
+		BModifyCommand command = new BModifyCommand();
+		command.execute(sqlsession,bDto);  
 		return "redirect:list"; //글 수정한뒤 다시 글 목록 출력
 	} 
 	//GET방식과 POST방식의 차이  https://blog.outsider.ne.kr/312 

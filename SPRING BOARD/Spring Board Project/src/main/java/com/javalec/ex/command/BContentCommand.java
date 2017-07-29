@@ -28,4 +28,6 @@ public class BContentCommand implements BCommand {
 
 	}
 
+	
+
 }

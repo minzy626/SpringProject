@@ -14,17 +14,15 @@ public class BModifyCommand implements BCommand {
 
 	@Override
 	public void execute(SqlSession sqlsession,Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		BDto dto = new BDto();
-		dto.setbId(Integer.parseInt(request.getParameter("bId")));
-		dto.setbName(request.getParameter("bName"));
-		dto.setbTitle(request.getParameter("bTitle"));
-		dto.setbContent(request.getParameter("bContent"));
-		IDao dao = sqlsession.getMapper(IDao.class);
-		dao.modify(dto);
-		
-
 	}
+	
+	//오버로딩
+	public void execute(SqlSession sqlsession,BDto bDto)
+	{
+		IDao dao = sqlsession.getMapper(IDao.class);
+		dao.modify(bDto);
+	}
+
+
 
 }

@@ -356,7 +356,7 @@
 				  	<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 미팅
 				  </label>
 			   </div>
-			  
+			  <input type="hidden" name="bHit" id="bHit" value="0">
 			  
 			  <div class="form-group">
 			    <label for="bTitle" class="col-md-1 control-label">제 목</label>

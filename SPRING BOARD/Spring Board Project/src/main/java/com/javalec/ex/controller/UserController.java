@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.javalec.ex.UserCommand.BFindpassCommand;
 import com.javalec.ex.UserCommand.BRegisterCommand;
 import com.javalec.ex.UserCommand.BUserCommand;
 
@@ -27,6 +28,13 @@ public class UserController {
 		return "sign_up";
 	}
 	
+	@RequestMapping(value="/find_pass", method = RequestMethod.POST)
+	public String find_pass(HttpServletRequest request,Model model) {
+		model.addAttribute("request",request);
+		command = new BFindpassCommand();
+		command.execute(sqlsession, model);
+		return "redirect:index";
+	}
 	
 	@RequestMapping(value="/memberinfo", method = RequestMethod.GET)
 	public String memberinfo(Model model) {

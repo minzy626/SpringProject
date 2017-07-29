@@ -35,7 +35,11 @@ public class HomeController {
 		
 		return "home";
 	}
-
+	
+	@RequestMapping(value="/find_passView", method = RequestMethod.GET)
+	public String Find_passView(Model model) {
+		return "find_passView";
+	}
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String Index(Model model) {

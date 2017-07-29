@@ -12,9 +12,23 @@ public class UserDto {
 	String bRegion;
 	
 	public UserDto() {
-		// TODO Auto-generated constructor stub
+	
 	}
 	
+	public UserDto(String bId, String bPass, String bNick, String bGender, String bSchool, int bGrade, String bMajor,
+			String bEmail, String bRegion) {
+		super();
+		this.bId = bId;
+		this.bPass = bPass;
+		this.bNick = bNick;
+		this.bGender = bGender;
+		this.bSchool = bSchool;
+		this.bGrade = bGrade;
+		this.bMajor = bMajor;
+		this.bEmail = bEmail;
+		this.bRegion = bRegion;
+	}
+
 	public String getbId() {
 		return bId;
 	}
