@@ -1,24 +1,28 @@
-package com.javalec.ex.command;
+package com.javalec.ex.service;
 
+import java.util.Map;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-
 
 import com.javalec.ex.dao.IDao;
 import com.javalec.ex.dto.BDto;
 
+public class BModifyService implements BService {
 
-public class BListCommand implements BCommand {
-	
 	@Override
 	public void execute(SqlSession sqlsession,Model model) {
-		IDao dao = sqlsession.getMapper(IDao.class);
-		model.addAttribute("list",dao.list());
 	}
+	
+	//오버로딩
+	public void execute(SqlSession sqlsession,BDto bDto)
+	{
+		IDao dao = sqlsession.getMapper(IDao.class);
+		dao.modify(bDto);
+	}
+
 
 
 }

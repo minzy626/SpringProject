@@ -28,8 +28,8 @@
 		<level value="info" />
 	</logger>
 
-	<logger name="org.springframework.web">
-		<level value="info" />
+	<logger name="org.springframework.web.servlet">
+		<level value="DEBUG" />
 	</logger>
 
 	<!-- Root Logger -->

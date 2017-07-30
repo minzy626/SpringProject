@@ -1,4 +1,4 @@
-package com.javalec.ex.command;
+package com.javalec.ex.service;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.javalec.ex.dao.IDao;
 import com.javalec.ex.dto.BDto;
 
 
-public class BWriteCommand implements BCommand {
+public class BWriteService implements BService {
 
 	@Override
 	public void execute(SqlSession sqlsession, Model model) {

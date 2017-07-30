@@ -1,8 +1,9 @@
-package com.javalec.ex.UserCommand;
+package com.javalec.ex.UserService;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-public interface BUserCommand {
+public interface BUserService {
 	void execute(SqlSession sqlsession,Model model);
+	
 }
