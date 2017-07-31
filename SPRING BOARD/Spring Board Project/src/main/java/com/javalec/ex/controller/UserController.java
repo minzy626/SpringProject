@@ -36,15 +36,18 @@ public class UserController {
 		new FindPassValidator().validate(userDto, errors);
 		if(errors.hasErrors())
 			return "find_passView";
-//		try {
-//			
-//		}catch()
-//		{
-//			
-//		}
+		
 		command = new BFindpassService();
-		command.execute(sqlsession, model);
-		return "redirect:index";
+		
+		try {
+			command.execute(sqlsession, userDto);
+			return "redirect:index";
+		}catch(Exception e)
+		{
+			errors.reject("IdEmailNotMatch");
+			return "find_passView";
+		}
+		
 	}
 	
 	@RequestMapping(value="/memberinfo", method = RequestMethod.GET)

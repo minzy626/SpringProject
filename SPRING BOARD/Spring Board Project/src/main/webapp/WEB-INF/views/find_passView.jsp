@@ -38,6 +38,7 @@
 	                                    <div class="col-md-offset-2 col-md-10">
 	                                    	<div style="color:red ; margin-top:2px" >
 	                                     		<form:errors path="bEmail"/>
+	                                     		<form:errors/>
 	                                    	</div>
 	                                    </div>                 
                                     
