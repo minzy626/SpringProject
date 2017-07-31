@@ -13,7 +13,7 @@
       <property name="password" value="springteam!!" />
       <property name="javaMailProperties">
             <props>
-                <prop key="mail.smtp.from">springteam11@gmail.comr</prop>
+                <prop key="mail.smtp.from">springteam11@gmail.com</prop>
                 <prop key="mail.smtp.starttls.enable">true</prop>
                 <prop key="mail.smtp.auth">true</prop>
             </props>
