@@ -35,23 +35,78 @@
     <script type="text/javascript">
         function checkValue()
         {
-            var form = document.agreement;
+            var form = document.userInfo;
         
-            if (!form.agree1.checked) {
-            	alert("회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
-            	form.agree1.focus();
-            	return false;
-         	}
+            if(!form.bId.value){
+                alert("아이디를 입력해 주세요.");
+                return false;
+            }
+            
+/*             if(form.idDuplication.value != "idCheck"){
+                alert("아이디 중복체크를 해주세요.");
+                return false;
+            }
+             */
+            if(!form.bPass.value){
+                alert("비밀번호를 입력해 주세요.");
+                return false;
+            }
+            
+            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+            if(form.bPass.value != form.bPassCheck.value ){
+                alert("비밀번호를 동일하게 입력해 주세요.");
+                return false;
+            }    
+            
+            if(!form.bNick.value){
+                alert("닉네임을 입력해 주세요.");
+                return false;
+            }
+            
+            if(form.bRegion.value == ""){
+                alert("지역을 선택해 주세요.");
+                return false;
+            }
+            
+            if(!form.bSchool.value){
+                alert("학교를 입력해 주세요.");
+                return false;
+            }
+            
+            if(!form.bGrade.value){
+                alert("학년을 입력해 주세요");
+                return false;
+            }
+            
+            if(!form.bMajor.value){
+                alert("전공을 입력해 주세요.");
+                return false;
+            }
 
-        	if (!form.agree2.checked) {
-            	alert("개인정보처리방침안내의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
-            	form.agree2.focus();
-            	return false;
-       		}
-
-        	return true;   
+            if(!form.bEmail.value){
+                alert("메일 주소를 입력해 주세요.");
+                return false;
+            }
+            
+            if(!form.bNumcheck.value){
+                alert("인증번호를 입력해 주세요.");
+                return false;
+            }
+        }
+        // 아이디 중복체크 화면open
+        function openIdChk(){
+        
+            window.name = "parentForm";
+            window.open("IdCheckForm.jsp",
+                    "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
         }
  
+        // 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
+        // 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때
+        // 다시 중복체크를 하도록 한다.
+        function inputIdChk(){
+            document.userInfo.idDuplication.value ="idUncheck";
+        }
 
   </script>
   </head>
@@ -310,86 +365,184 @@
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
-     <!--main content start-->
-      <section id="main-content">
-      <section class="wrapper">
+      <!--main content start-->
+		<section id="main-content">
+		<section class="wrapper">
+			<div class="row">
+			<div class="col-lg-9 main-chart">
 			
-      	<div class="row">
-      	<div class="col-lg-9 main-chart">
-                  
-        	<div class="col-md-12">
+			<div class="col-md-12">
 			<div class="page-header">
-			<h1>이용약관</h1>
+			<h1>회원가입</h1>
 			</div>
-	
+			<form class="form-horizontal" action="register" method="POST" name="userInfo">
+					
+			<!-- 아이디 입력 -->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">아이디</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<div class="input-group">
+				<input type="text" class="form-control" name="bId" placeholder="아이디" onkeydown="inputIdChk()"/>
+				<span class="input-group-btn">
+					<button class="btn btn-success" onclick="openIdChk()"> 중 복 확 인 </button>
+					<input type="hidden" name="idDuplication" value="idUncheck" >
+				</span>
+				</div>	
+			</div>
+			</div>
+			</div>
+					
+			<!-- 비밀번호 입력 -->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">비밀번호</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bPass" type="password" placeholder="비밀번호">
+				<p class="help-block">숫자, 영어 포함 8자 이상</p>
+			</div>
+			</div>
+			</div>
+					
+			<!-- 비밀번호 입력 확인-->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">비밀번호 확인</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bPassCheck" type="password" placeholder="비밀번호 확인">
+				<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+			</div>
+			</div>
+			</div>     
+			 
+			<!-- 닉네임 입력-->    
+			<div class="form-group">
+            <label class="col-sm-3 control-label">닉네임</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<div class="input-group">
+				<input class="form-control" name="bNick" type="text" placeholder="닉네임">
+				<span class="input-group-btn">
+					<button class="btn btn-success"> 중 복 확 인 </button>
+				</span>
+				</div>
+			</div>
+			</div>
+			</div>
 			
-			<div class="mbskin">
-    
-    <form name="agreement" action="sign_up2" method="POST">
-   
+			<!-- 지역 입력--> 
+			<div class="form-group">
+			<label class="col-sm-3 control-label">지역</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<select class="form-control" name="bRegion">
+					<option value="">시/도 선택</option>
+    				<option value="서울특별시">서울특별시</option>
+   					<option value="부산광역시">부산광역시</option>
+    				<option value="대구광역시">대구광역시</option>
+    				<option value="인천광역시">인천광역시</option>
+    				<option value="광주광역시">광주광역시</option>
+   					<option value="대전광역시">대전광역시</option>
+    				<option value="울산광역시">울산광역시</option>
+    				<option value="세종특별자치시">세종특별자치시</option>
+    				<option value="경기도">경기도</option>
+   					<option value="강원도">강원도</option>
+    				<option value="충청북도">충청북도</option>
+    				<option value="충청남도">충청남도</option>
+    				<option value="전라북도">전라북도</option>
+   					<option value="전라남도">전라남도</option>
+    				<option value="경상북도">경상북도</option>
+    				<option value="경상남도">경상북도</option>
+    				<option value="제주특별자치도">경상북도</option>
+				</select>
+			</div>
+			</div>
+			</div>
+			
+			<!-- 성별 입력 -->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">성별</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<div class="radio">
+					<label>
+						<input type="radio" name="bGender" type="text" value="남" checked>남
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="bGender" type="text" value="여">여
+					</label>
+				</div>
+			</div>
+			</div>
+			</div>
+			<!-- 학교 입력--> 
+			<div class="form-group">
+            <label class="col-sm-3 control-label">학교</label>
+            <div class="row">
+				<div class="col-sm-3">
+             	<input class="form-control" name="bSchool" type="text" placeholder="학교 이름">
+          		</div>
+				<div class="col-sm-2">
+             	<input class="form-control" name="bGrade" type="text" placeholder="학년">
+          		</div>
+          	</div>
+			</div>
+			
+			<!-- 전공 입력-->    
+			<div class="form-group">
+            <label class="col-sm-3 control-label">전공</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bMajor" type="text" placeholder="전공">
+			</div>
+			</div>
+			</div>
+			
+			<!-- 이메일 입력--> 
+			<div class="form-group">
+			<label class="col-sm-3 control-label">이메일</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<div class="input-group">
+					<input class="form-control" name="bEmail" type="email" placeholder="이메일">
+					<span class="input-group-btn">
+                    	<button class="btn btn-success">인증번호 전송<i class="fa fa-mail-forward spaceLeft"></i></button>
+                  	</span>
+				</div>
+          	</div>
+          	</div>
+			</div>
+			
+			<!-- 인증번호 입력--> 
+			<div class="form-group">
+			<label class="col-sm-3 control-label">인증번호 확인</label>
+			<div class="row">
+			<div class="col-sm-6">
+            	<div class="input-group">
+					<input class="form-control" name="bNumcheck" type="text" placeholder="인증번호">
+					<span class="input-group-btn">
+						<button class="btn btn-success" type="button">인증번호 확인<i class="fa fa-edit spaceLeft"></i></button>
+					</span>
+           		</div>
+            <p class="help-block">전송된 인증번호를 입력해주세요.</p>
+          	</div>
+          	</div>
+        	</div>
 
-	<div class="register-form-wrap text-center">
-	<div class="row">
-		<div class="col-sm-6">
-			<h2>회원가입약관</h2>
-			<textarea readonly rows="10" cols="40" style="resize:none;font-size:20px"><?>은 재학생/졸업생을 대상으로 운영되는 사이트입니다. 
-			</textarea>
-		</div>
-
-		<div class="col-sm-6">
-			<h2>개인정보처리방침안내</h2>
-			<textarea readonly rows="10" cols="40" style="resize:none;font-size:20px">다음 개인정보취급방침에 동의하셔야 홍익인의 이용이 가능합니다.
-
-1.개인정보의 수집목적 및 이용
- <?>이 회원님 개인의 정보를 수집하는 목적은 <?>사이트를 이용하고 하시는 재학생과 졸업생, 타대생 혹은 기타 이용자분들을 구분하여 맞춤화된 서비스를 제공하기 위한 것입니다. <?>은 사이트 내의 모든 컨텐츠를 모든 회원들에게 무료로 제공하고 있습니다. 이러한 개인정보를 통한 구분은 콘텐츠, 통계처리 등에 유용한 정보를 선택적으로 제공하는 것이 가능하게 합니다.
-
-2.수집하는 개인정보 항목 및 수집방법
- <?>은 최초 회원가입을 하실 때 홍대생과 그 외의 구분을 위해 가장 필수적이고 최소한의 개인정보를 받고 있습니다. 회원가입 시에 받는 정보는 아이디, 비밀번호, 이름, 닉네임, 이메일, 생년월일, 학번 등입니다. 이 이외에 특정 상황을 제외하고는 추가적인 정보제공을 요청하고 있지 않습니다. 또한, 홍대생 확인절차를 통해 차별화된 콘텐츠를 제공하게 됩니다. 이를 원하실 경우에만 학번을 통한 인증절차를 수행하시면 됩니다. 이때에 기입하신 학번정보는 콘텐츠 제공이나 회원님께 사전에 밝힌 목적 이외의 다른 어떠한 목적으로도 사용되지 않음을 알려드립니다.
-
-3.개인정보의 보유기간 및 폐기
- 이용자가 <?>의 회원으로서 <?>이 제공하는 서비스를 받는 동안 회원님의 개인정보는<?>에서 계속 보유하며 서비스 제공을 위해 이용하게 됩니다. 다만 <?> 의 회원이 아래의 &#039;7. 자신의 개인정보 열람, 정정 및 삭제&#039;에서 설명한 절차에 따라 ID를 삭제하거나 가입해지를 요청한 경우와 회원님께 사전에 알려드린 개인정보를 제공받은 목적이 달성된 경우에 수집된 개인의 정보는 재생할 수 없는 방법에 의하여 하드디스크에서 완전히 삭제되며 어떠한 용도로도 열람 또는 이용할 수 없도록 처리됩니다. 단, 홍익인 내에서 미풍양속을 해치는 행위 및 타인에게 피해를 주는 행위 등에 대해서는 재발 방지 및 재가입 방지를 위해 인증정보(학번)를 암호화하여 보관하게 됩니다. 이 암호화된 식별값은 복호화가 불가능하며 개인을 특정할 수 없는 값으로 개인정보에 해당하지 않습니다.
-			</textarea>
-		</div>
-	</div>
-	</div>
-	<br>
-	
-	<div class="register-form-wrap text-center">
-	<div class="row">
-	       	<div class="col-sm-6" data-toggle="buttons">
-	       		이용수칙에 동의 합니다.
-            	<label class="btn btn-warning">
-                <input name="agree1" type="checkbox">
-                	<span class="fa fa-check"></span>
-              	</label>
-  			</div>
-	       	<div class="col-sm-6" data-toggle="buttons">
-	       		개인정보처리방침안내의 내용에 동의합니다.
-            	<label class="btn btn-warning">
-                <input name="agree2" type="checkbox">
-                	<span class="fa fa-check"></span>
-              	</label>
-  			</div>  			
-	</div>
-	</div>
-	
-	<br><br><br>
-	
+          
 			<div class="form-group">
 			<div class="col-sm-12 text-center">
-				<button class="btn btn-primary" type="submit" onclick="return checkValue()">다음단계<i class="fa fa-check spaceLeft"></i></button>
+				<button class="btn btn-primary" type="submit" onclick="return checkValue()">회원가입<i class="fa fa-check spaceLeft"></i></button>
             	<button class="btn btn-danger" type="reset" onclick="location.href='index'">가입취소<i class="fa fa-times spaceLeft"></i></button>
 			</div>
-			</div>	
-    </form>
-
-    <script>
-
-    </script>
-
-	</div>				
-	</div>
-	</div>       
+			</div>
+			</form>
+			<hr>
+			</div>
+      
+			</div>
       <!-- **********************************************************************************************************************************************************
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->                  

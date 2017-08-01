@@ -33,6 +33,11 @@ public class UserController {
 		return "sign_up";
 	}
 	
+	@RequestMapping(value="/sign_up2", method = RequestMethod.POST)
+	public String sign_up2(Model model) {
+		return "sign_up2";
+	}
+	
 	@RequestMapping(value="/find_pass", method = RequestMethod.POST)
 	public String find_pass(UserDto userDto,RedirectAttributes redirectattr,Errors errors) {
 		new FindPassValidator().validate(userDto, errors);
@@ -43,12 +48,12 @@ public class UserController {
 		
 		try {
 			UserDto resultDto = service.execute(sqlsession, userDto);
-			redirectattr.addFlashAttribute("resultDto",resultDto); //¸®´ÙÀÌ·ºÆ® ½Ã¿¡´Â ¸ðµ¨¿¡ ³ÖÀº °ªÀÌ Á¦´ë·Î Àü´ÞÀÌ ¾ÈµÅ¼­ ÀÌ°Å »ç¿ëÇÔ.
-			return "redirect:sendpass"; //°ªÀ» ¹«¸®¾øÀÌ Àß °¡Á®¿ÔÀ¸¸é ¸ÞÀÏÀ» Àü¼ÛÇÔ.
+			redirectattr.addFlashAttribute("resultDto",resultDto); //ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½Æ® ï¿½Ã¿ï¿½ï¿½ï¿½ ï¿½ðµ¨¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÅ¼ï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
+			return "redirect:sendpass"; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		}catch(Exception e)
 		{
 			errors.reject("IdEmailNotMatch");
-			return "find_passView"; //¾ÆÀÌµð°¡ Á¸ÀçÇÏÁö¾Ê°Å³ª ¾ÆÀÌµð¿Í ÀÌ¸ÞÀÏÀÌ ÀÏÄ¡ÇÏÁö ¾Ê´Â°æ¿ì ´Ù½Ã ÀÔ·Â¹ÞÀ½.
+			return "find_passView"; //ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê°Å³ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½.
 		}
 		
 	}
