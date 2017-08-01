@@ -185,7 +185,7 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login">로그아웃</a></li>
+                    <li><a class="login" href="login">login</a></li>
             	</ul>
             </div>
         </header>

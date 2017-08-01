@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
     <title>로그인</title>
 
     <!-- Bootstrap core CSS -->
@@ -48,17 +48,50 @@
 		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> 로그인</button>
+		               <script type="text/javascript">
+				        function checkValue()
+				        {
+				            var form = document.userInfo;
+				        
+				            if(!form.bId.value){
+				                alert("아이디를 입력해 주세요.");
+				                return false;
+				            }
+				            
+				            if(!form.bPass.value){
+				                alert("비밀번호를 입력해 주세요.");
+				                return false;
+				            }
+				         }  
+				    </script>
+
+		            <button class="btn btn-theme btn-block" href="index.html" onclick="return checkValue()" type="submit"><i class="fa fa-lock"></i> 로그인</button>
 		            <hr>
-		            
 		            <div class="login-social-link centered">
 		            <p>SNS로 로그인 하기</p>
+		            		<a id="kakao-login-btn"></a><a href="http://developers.kakao.com/logout"></a>
+						<script type='text/javascript'>
+					  //<![CDATA[
+					    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+					    Kakao.init('66eaa05d85d122328c5e0ddf88073992');
+					    // 카카오 로그인 버튼을 생성합니다.
+					    Kakao.Auth.createLoginButton({
+					      container: '#kakao-login-btn',
+					      success: function(authObj) {
+					        alert(JSON.stringify(authObj));
+					      },
+					      fail: function(err) {
+					         alert(JSON.stringify(err));
+					      }
+					    });
+					  //]]>
+					</script>
+		            <br/> <br/>
 		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> 페이스북</button>
-		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> 트위터</button>
 		            </div>
 		            <div class="registration">
 		            		               아직 계정이 없으십니까?<br/>
-		                <a class="" href="#">
+		                <a class="" href="sign_up.html">
 		                    	회원가입
 		                </a>
 		            </div>

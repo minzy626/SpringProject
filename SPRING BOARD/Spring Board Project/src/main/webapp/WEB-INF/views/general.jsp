@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="false" %>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -192,54 +193,55 @@
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
+     <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">Marcel Newman</h5>
+              	  <p class="centered"><a href="profile"><img src="assets/rion.png" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">회원 닉네임</h5>
               	  	
                   <li class="mt">
-                      <a href="index.html">
+                      <a class="active" href="index">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>홈</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
-                          <span>UI Elements</span>
+                          <span>스터디</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="general.html">General</a></li>
-                          <li><a  href="buttons.html">Buttons</a></li>
-                          <li><a  href="panels.html">Panels</a></li>
+                          <li><a  href="general">어학 스터디</a></li>
+                          <li><a  href="buttons">취업 스터디</a></li>
+                          <li><a  href="panels">전공 스터디</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
-                          <span>Components</span>
+                          <span>모임</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Calendar</a></li>
-                          <li><a  href="gallery.html">Gallery</a></li>
-                          <li><a  href="todo_list.html">Todo List</a></li>
+                          <li><a  href="calendar">동아리</a></li>
+                          <li><a  href="gallery">기타1</a></li>
+                          <li><a  href="todo_list">기타2</a></li>
                       </ul>
                   </li>
+                  <!--  
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
                           <span>Extra Pages</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                          <li><a  href="blank">Blank Page</a></li>
+                          <li><a  href="login">Login</a></li>
+                          <li><a  href="lock_screen">Lock Screen</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -248,7 +250,7 @@
                           <span>Forms</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="form_component.html">Form Components</a></li>
+                          <li><a  href="form_component">Form Components</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -257,8 +259,8 @@
                           <span>Data Tables</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
+                          <li><a  href="basic_table">Basic Table</a></li>
+                          <li><a  href="responsive_table">Responsive Table</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -267,10 +269,10 @@
                           <span>Charts</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="morris">Morris</a></li>
+                          <li><a  href="chartjs">Chartjs</a></li>
                       </ul>
-                  </li>
+                  </li>-->
 
               </ul>
               <!-- sidebar menu end-->
