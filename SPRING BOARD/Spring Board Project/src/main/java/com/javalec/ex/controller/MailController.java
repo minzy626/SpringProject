@@ -1,9 +1,11 @@
 package com.javalec.ex.controller;
 
+import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -24,7 +26,7 @@ public class MailController {
 	
 	// mailSending 코드
 	  @RequestMapping(value = "/sendpass")
-	  public String mailSending(Model model) {
+	  public String mailSending(Model model,HttpServletResponse response) {
 		Map<String, Object> map = model.asMap();
 		UserDto userDto = (UserDto)map.get("resultDto");
 	    
@@ -46,11 +48,18 @@ public class MailController {
 	      messageHelper.setText(content);  // 메일 내용
 	     
 	      mailSender.send(message);
+	      
+	      response.setContentType("text/html; charset=UTF-8");
+	      PrintWriter out = response.getWriter();
+	      out.println("<script>alert('성공적으로 메일을 발송했습니다.');history.go(-1);</script>");
+	      out.flush();
+
+
 	    } catch(Exception e){
 	      System.out.println(e);
 	    }
 	   
-	    return "redirect:list";
+	    return "login";
 	  }
 	
 }

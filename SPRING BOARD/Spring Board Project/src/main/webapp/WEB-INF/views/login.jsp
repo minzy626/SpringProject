@@ -19,7 +19,17 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
+<script type="text/javascript">
+function popupOpen(){
 
+	var popUrl = "find_passView";	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width=460, height=325, resizable=no, scrollbars=no, status=no,menubar=no,resizable=no;";    //팝업창 옵션(optoin)
+
+		window.open(popUrl,"",popOption);
+
+	}
+</script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -44,7 +54,7 @@
 		            <input type="password" class="form-control" placeholder="Password">
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> 비밀번호를 잊어버리셨습니까?</a>
+		                    <a data-toggle="modal" href="javascript:popupOpen();"> 비밀번호를 잊어버리셨습니까?</a>
 		
 		                </span>
 		            </label>
@@ -63,6 +73,7 @@
 				                return false;
 				            }
 				         }  
+
 				    </script>
 
 		            <button class="btn btn-theme btn-block" href="index.html" onclick="return checkValue()" type="submit"><i class="fa fa-lock"></i> 로그인</button>
@@ -107,7 +118,7 @@
 		                          <h4 class="modal-title">비밀번호를 잊어버리셨습니까 ?</h4>
 		                      </div>
 		                      <div class="modal-body">
-		                          <p>비밀번호를 초기화 하기 위해 이메일 주소를 적어주세요</p>
+		                          <p>비밀번호를 찾기 위해 아이디와 이메일을 적어주세요.</p>
 		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 		
 		                      </div>

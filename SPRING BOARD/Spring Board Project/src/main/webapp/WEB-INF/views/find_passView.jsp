@@ -8,10 +8,13 @@
   <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
 </head>
+<script type="text/javascript">
+	
+</script>
 <body>
 <div class="container">
-	<div id="passwordreset" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-info">
+	<div id="passwordreset" style="margin-left:-15px;margin-right:-15px">
+                    <div class="panel panel-info" style="margin-bottom:0px">
                         <div class="panel-heading">
                             <div class="panel-title">비밀번호 찾기</div>
                             <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#">아이디 찾기</a></div>
@@ -44,7 +47,7 @@
                                     
                                 </div>
                                     
-                                <div class="form-group" style="margin-right:1%">
+                                <div class="form-group" style="margin-left:82%">
                                     <!-- Button -->
                                                   
                                     <div class="col-md-offset-10 col-md-9">

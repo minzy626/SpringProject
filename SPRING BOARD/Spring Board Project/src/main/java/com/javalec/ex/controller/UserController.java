@@ -48,12 +48,12 @@ public class UserController {
 		
 		try {
 			UserDto resultDto = service.execute(sqlsession, userDto);
-			redirectattr.addFlashAttribute("resultDto",resultDto); //�����̷�Ʈ �ÿ��� �𵨿� ���� ���� ����� ������ �ȵż� �̰� �����.
-			return "redirect:sendpass"; //���� �������� �� ���������� ������ ������.
+			redirectattr.addFlashAttribute("resultDto",resultDto); 
+			return "redirect:sendpass";
 		}catch(Exception e)
 		{
 			errors.reject("IdEmailNotMatch");
-			return "find_passView"; //���̵� ���������ʰų� ���̵�� �̸����� ��ġ���� �ʴ°�� �ٽ� �Է¹���.
+			return "find_passView"; 
 		}
 		
 	}
