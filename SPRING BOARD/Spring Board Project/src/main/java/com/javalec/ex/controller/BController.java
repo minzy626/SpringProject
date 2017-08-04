@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javalec.ex.dto.BDto;
-import com.javalec.ex.service.BService;
 import com.javalec.ex.service.BContentService;
 import com.javalec.ex.service.BDeleteService;
-import com.javalec.ex.service.BListService;
 import com.javalec.ex.service.BModifyService;
+import com.javalec.ex.service.BService;
 import com.javalec.ex.service.BWriteService;
 
 
@@ -30,50 +29,50 @@ public class BController {
 	}
 	
 	
-	@RequestMapping("/list") //°Ô½ÃÆÇ ±Û ¸ñ·Ï °¡Á®¿À±â
-	public String list(Model model) // Controller->Command->DAO¸¦ °ÅÃÄ¼­ µ¥ÀÌÅÍ¸¦ ´Ù½Ã °¡Á®¿À¹Ç·Î model°´Ã¼¸¦ ÀÎÀÚ·Î ¹Þ¾Æ¾ßÇÔ. 
+	/*@RequestMapping("/list") //ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public String list(Model model) // Controller->Command->DAOï¿½ï¿½ ï¿½ï¿½ï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ modelï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Þ¾Æ¾ï¿½ï¿½ï¿½. 
 	{
 		command = new BListService();
-		command.execute(sqlsession,model); //ÄÁÆ®·Ñ·¯¿¡¼­ Command·Î Á¦¾î¸¦ ³Ñ±è (¸ðµ¨¿¡ Á¤º¸¸¦ °è¼Ó ´ã¾Æ¾ß ÇÏ¹Ç·Î ÀÎÀÚ·Î ³ÖÀ½)
-		return "list"; //list.jsp¸¦ ½ÇÇàÇÏ±â À§ÇÔ.
-	}
+		command.execute(sqlsession,model); //ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ Commandï¿½ï¿½ ï¿½ï¿½ï¿½î¸¦ ï¿½Ñ±ï¿½ (ï¿½ðµ¨¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¾ï¿½ ï¿½Ï¹Ç·ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½)
+		return "list"; //list.jspï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½.
+	}*/
 
 	
 	
-	@RequestMapping(value="/write", method = RequestMethod.POST) //±Û ÀÛ¼º
-	public String write(BDto bDto,Model model) //±Û ÀÛ¼º½Ã ÀÛ¼ºÀÚ,³»¿ëµî Á¤º¸¸¦ °¡Á®¿Í¾ßµÇ´Ï±î request¸¦ ÀÎÀÚ·Î¹Þ¾Æ¾ßÇÔ.  
+	@RequestMapping(value="/write", method = RequestMethod.POST) //ï¿½ï¿½ ï¿½Û¼ï¿½
+	public String write(BDto bDto,Model model) //ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ßµÇ´Ï±ï¿½ requestï¿½ï¿½ ï¿½ï¿½ï¿½Ú·Î¹Þ¾Æ¾ï¿½ï¿½ï¿½.  
 	{
 		BWriteService command= new BWriteService();
 		command.execute(sqlsession,bDto);
-		return "redirect:list"; //±Û ÀÛ¼º ÇÏ°í³ª¼­´Â ´Ù½Ã ±Û ¸ñ·ÏÀÌ º¸¿©¾ß ÇÏ¹Ç·Î list.jspÈ£ÃâµÇ°Ô²û.
+		return "redirect:list"; //ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½Ï°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹Ç·ï¿½ list.jspÈ£ï¿½ï¿½Ç°Ô²ï¿½.
 	}
 	
 	
 	@RequestMapping("/write_view")
 	public String write_view(Model model) {
-		return "write_view";} // ±Û¾²±â ¸Þ´º ´­·¶À»¶§ ¹Ù·Î È­¸é¸¸ º¸¿©ÁÖ¸é µÇ´Ï±î ¹Ù·Î ¸®ÅÏÇØÁÖ¸é µÊ
+		return "write_view";} // ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ È­ï¿½é¸¸ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½Ç´Ï±ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½
 	
 	
 	
-	@RequestMapping("/content_view") //±Û ³»¿ë º¸±â
-	public String content_view(HttpServletRequest request,Model model) { //list.jsp¿¡¼­ ±Û ¸ñ·Î ±Û¸¯½Ã ID°ª¿¡ ÇØ´çÇÏ´Â ±ÛÀ» Ãâ·Â ÇØÁà¾ß ÇÏ¹Ç·Î request ÇÊ¿ä
+	@RequestMapping("/content_view") //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public String content_view(HttpServletRequest request,Model model) { //list.jspï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Û¸ï¿½ï¿½ï¿½ IDï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¹Ç·ï¿½ request ï¿½Ê¿ï¿½
 		model.addAttribute("request",request);
 		command = new BContentService();
 		command.execute(sqlsession,model);  
-		return "content_view"; //ºä¿¡ »Ñ·Á¾ßÇÔ,model¿¡´Â °ªÀÌ ™A··µÈ dto°¡ µé¾îÀÖÀ½. jspÆÄÀÏ¿¡¼­ dto°ª ²¨³»¼­ ¾²¸éµÊ.
+		return "content_view"; //ï¿½ä¿¡ ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½,modelï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Aï¿½ï¿½ï¿½ï¿½ dtoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. jspï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ dtoï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 	} 
 	
 	
-	@RequestMapping(value="/modify") //±Û ¼öÁ¤ÇÏ±â
+	@RequestMapping(value="/modify") //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public String modify(BDto bDto,Model model) { 
 		BModifyService command = new BModifyService();
 		command.execute(sqlsession,bDto);  
-		return "redirect:list"; //±Û ¼öÁ¤ÇÑµÚ ´Ù½Ã ±Û ¸ñ·Ï Ãâ·Â
+		return "redirect:list"; //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñµï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	} 
-	//GET¹æ½Ä°ú POST¹æ½ÄÀÇ Â÷ÀÌ  https://blog.outsider.ne.kr/312 
+	//GETï¿½ï¿½Ä°ï¿½ POSTï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  https://blog.outsider.ne.kr/312 
 	
-	@RequestMapping("/delete") //±Û »èÁ¦ÇÏ±â
-	public String delete(HttpServletRequest request,Model model) { //request¿¡´Â ±ÛÀÇ id°¡ ÀúÀåµÅÀÖÀ½. 
+	@RequestMapping("/delete") //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+	public String delete(HttpServletRequest request,Model model) { //requestï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. 
 		model.addAttribute("request",request);
 		command = new BDeleteService(); 
 		command.execute(sqlsession,model);   

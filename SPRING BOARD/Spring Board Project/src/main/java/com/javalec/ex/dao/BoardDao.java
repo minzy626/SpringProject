@@ -1,27 +1,14 @@
 package com.javalec.ex.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.BSearchDto;
 import com.javalec.ex.dto.SearchingPageDto;
 
-public interface IDao {
-	public ArrayList<BDto> list();
-
-	public BDto contentView(String bId);
-
-	public void modify(BDto dto);
-
-	public void delete(String bId);
-
+public interface BoardDao {
+	
 	public BDto read(Integer bno);
-
-	public void write(BDto dto);
-
-	public void upHit(String bId);
-
 	// 게시물 업데이트
 	public void update(BDto dto);
 
@@ -39,6 +26,4 @@ public interface IDao {
 
 	// 총 검색 결과 게시물 수 계산
 	public Integer searchBoardTotalCount(SearchingPageDto spdto);
-	
-	
 }

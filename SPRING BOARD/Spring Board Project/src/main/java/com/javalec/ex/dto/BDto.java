@@ -62,6 +62,11 @@ public class BDto {
 		this.bHit = bHit;
 	}
 	
+	@Override
+	public String toString() {
+		return "BDto [bId=" + bId + ", bTitle=" + bTitle + ", bContent=" + bContent + ", bName=" + bName + ", bDate="
+				+ bDate + ", bHit=" + bHit + "]";
+	}
 	
 	
 

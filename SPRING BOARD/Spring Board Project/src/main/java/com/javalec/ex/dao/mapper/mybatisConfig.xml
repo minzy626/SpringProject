@@ -9,5 +9,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
     	<typeAlias alias="Dto" type="com.javalec.ex.dto.BDto"/>
     	<typeAlias alias="UserDto" type="com.javalec.ex.dto.UserDto"/>
+    	<typeAlias alias="BSearchDto" type="com.javalec.ex.dto.BSearchDto"/>
+    	<typeAlias alias="BPageDto" type="com.javalec.ex.dto.BPageDto"/>
+    	<typeAlias alias="SearchingPageDto" type="com.javalec.ex.dto.SearchingPageDto"/>
 	</typeAliases>
 </configuration>

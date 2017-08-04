@@ -2,30 +2,106 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<mapper namespace="com.javalec.ex.dao.IDao">
 
-	<select id="list" resultType="Dto">
-		SELECT * FROM MVC_BOARD ORDER BY bId desc
+<mapper namespace="com.javalec.ex.dao.mapper.IDao">
+
+	<select id="list" resultType="com.javalec.ex.dto.BDto">
+		SELECT * FROM MVC_BOARD ORDER BY
+		bId desc
 	</select>
-	
+
 	<select id="contentView" parameterType="string" resultType="Dto">
 		SELECT * FROM MVC_BOARD WHERE BID = #{param2}
 	</select>
-	
+
 	<update id="modify" parameterType="Dto">
-		UPDATE MVC_BOARD SET BNAME = #{bName}, BTITLE = #{bTitle}, BCONTENT= #{bContent} WHERE BID = #{bId}
+		UPDATE MVC_BOARD SET BNAME =
+		#{bName}, BTITLE = #{bTitle}, BCONTENT= #{bContent} WHERE BID = #{bId}
 	</update>
-	
+
 	<delete id="delete" parameterType="String">
-		DELETE FROM MVC_BOARD WHERE BID = #{param1}
+		DELETE FROM MVC_BOARD WHERE
+		BID = #{param1}
 	</delete>
-	
+
+	<select id="read" resultType="Dto">
+		SELECT * FROM MVC_BOARD WHERE BID =
+		#{bId}
+	</select>
+
 	<insert id="write" parameterType="Dto">
-		INSERT INTO MVC_BOARD (BNAME,BTITLE,BCONTENT,BHIT) VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
+		INSERT INTO MVC_BOARD
+		(BNAME,BTITLE,BCONTENT,BHIT)
+		VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
 	</insert>
-	
+
 	<update id="upHit" parameterType="String">
-		UPDATE MVC_BOARD SET BHIT = BHIT + 1 WHERE BID = #{param1}
+		UPDATE MVC_BOARD SET BHIT =
+		BHIT + 1 WHERE BID = #{param1}
 	</update>
+
+	<!-- 게시물 업데이트 -->
+	<update id="update">
+		UPDATE MVC_BOARD SET BTITLE = #{bTitle}, BCONTENT =
+		#{bContent} WHERE BID = #{bId}
+	</update>
+
+	<!-- 게시물 조회( 모든 게시물 조회 ) -->
+	<select id="listAll" resultType="Dto">
+	<![CDATA[
+	SELECT * FROM MVC_BOARD WHERE BID>0 ORDER BY BID desc, BDATE desc
+	]]>
+	</select>
+
+	<!-- 페이징된 게시물 조회( Criteria( page, perPageNum ) -->
+	<select id="listCriteria" resultType="Dto"
+		parameterType="com.javalec.ex.dto.BSearchDto">
+	<![CDATA[
+	SELECT * FROM MVC_BOARD WHERE bId>0 ORDER BY bId desc, bDate desc limit #{bPageStart}, #{bPerPageNum}
+	]]>
+	</select>
+
+	<!-- 게시물 총 갯수 계산 -->
+	<select id="boardTotalCount" resultType="java.lang.Integer">
+	<![CDATA[
+	SELECT COUNT(*) FROM MVC_BOARD WHERE bId>0
+	]]>
+	</select>
+
+	<sql id="dynamicSearchCondition">
+
+		<if test="bSearchType != null">
+			<if test="bSearchType == 't'.toString()">
+				and bTitle like concat("%", #{bKeyword} ,"%")
+			</if>
+			<if test="bSearchType == 'c'.toString()">
+				and bContent like concat("%", #{bKeyword} ,"%")
+			</if>
+			<if test="bSearchType == 'w'.toString()">
+				and bName like concat("%", #{bKeyword} ,"%")
+			</if>
+		</if>
+	</sql>
+
+	<!-- 페이징 + 검색처리된 게시물 조회( SearchCriteria( page, perPageNum, searchType, keyword 
+		) -->
+	<select id="listSearchCriteria" resultType="Dto"
+		parameterType="com.javalec.ex.dto.SearchingPageDto">
+	<![CDATA[
+	SELECT * FROM MVC_BOARD WHERE bId>0
+	]]>
+		<include refid="dynamicSearchCondition" />
+	<![CDATA[
+	ORDER BY bId desc, bDate desc limit #{bPageStart}, #{bPerPageNum}
+	]]>
+	</select>
+
+	<!-- 검색 결과 게시물 총 갯수 계산 -->
+	<select id="searchBoardTotalCount" resultType="java.lang.Integer"
+		parameterType="com.javalec.ex.dto.SearchingPageDto">
+	<![CDATA[
+	SELECT COUNT(*) FROM MVC_BOARD WHERE bId>0
+	]]>
+		<include refid="dynamicSearchCondition"></include>
+	</select>
 </mapper>
