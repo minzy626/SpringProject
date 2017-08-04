@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.javalec.ex.UserService.BFindpassService;
-import com.javalec.ex.UserService.BRegisterService;
+import com.javalec.ex.UserService.FindpassService;
+import com.javalec.ex.UserService.RegisterService;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 
@@ -44,7 +44,7 @@ public class UserController {
 		if(errors.hasErrors())
 			return "find_passView";
 		
-		BFindpassService service = new BFindpassService();
+		FindpassService service = new FindpassService();
 		
 		try {
 			UserDto resultDto = service.execute(sqlsession, userDto);
@@ -66,7 +66,7 @@ public class UserController {
 	@RequestMapping(value="/register" ,method = RequestMethod.POST) 
 	public String register(HttpServletRequest request,UserDto userDto)
 	{
-		BRegisterService service = new BRegisterService();
+		RegisterService service = new RegisterService();
 		service.execute(sqlsession,userDto);
 		return "redirect:index"; 
 	}

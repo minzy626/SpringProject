@@ -47,8 +47,8 @@ public class HomeController {
 	}
 
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String LogIn(Model model) {
+	@RequestMapping(value="/login_view", method = RequestMethod.GET)
+	public String LogInView(Model model) {
 		return "login";
 	}
 	

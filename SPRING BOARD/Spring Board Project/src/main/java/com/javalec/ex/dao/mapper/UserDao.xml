@@ -10,9 +10,10 @@
 		INSERT INTO USERINFO (bid,bpass,bnick,bgender,bschool,bgrade,bmajor,bemail,bregion) VALUES(#{bId},#{bPass},#{bNick},#{bGender},#{bSchool},#{bGrade},#{bMajor},#{bEmail},#{bRegion})
 	</insert>
 	
-	<select id="find_pass" parameterType="UserDto" resultType="UserDto">
+	<select id="find_by_id" parameterType="UserDto" resultType="UserDto">
 		SELECT * FROM USERINFO WHERE bId = #{bId}
 	</select>
+	
 	
 </mapper>
     

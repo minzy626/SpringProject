@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="false" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -46,15 +47,15 @@ function popupOpen(){
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="index">
+		      <form:form class="form-login" action="login" commandName="userDto">
 		        <h2 class="form-login-heading">로그인</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="User ID" autofocus>
+		            <input type="text" name="bId" value="${userDto.bId}" class="form-control" placeholder="User ID" >
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password">
+		            <input type="password" name="bPass" value="${userDto.bPass}" class="form-control" placeholder="Password">
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="javascript:popupOpen();"> 비밀번호를 잊어버리셨습니까?</a>
+		                    <a href="javascript:popupOpen();"> 비밀번호를 잊어버리셨습니까?</a>
 		
 		                </span>
 		            </label>
@@ -131,7 +132,7 @@ function popupOpen(){
 		          </div>
 		          <!-- modal -->
 		
-		      </form>	  	
+		      </form:form>	  	
 	  	
 	  	</div>
 	  </div>
