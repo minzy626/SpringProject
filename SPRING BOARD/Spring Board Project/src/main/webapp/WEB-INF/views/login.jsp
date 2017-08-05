@@ -53,6 +53,9 @@ function popupOpen(){
 		            <input type="text" name="bId" value="${userDto.bId}" class="form-control" placeholder="User ID" >
 		            <br>
 		            <input type="password" name="bPass" value="${userDto.bPass}" class="form-control" placeholder="Password">
+		            <div style="color:red; margin-top:5px ;margin-left:5px">
+		            	<form:errors/>
+		            </div>
 		            <label class="checkbox">
 		                <span class="pull-right">
 		                    <a href="javascript:popupOpen();"> 비밀번호를 잊어버리셨습니까?</a>
@@ -116,6 +119,7 @@ function popupOpen(){
 		                  <div class="modal-content">
 		                      <div class="modal-header">
 		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                          
 		                          <h4 class="modal-title">비밀번호를 잊어버리셨습니까 ?</h4>
 		                      </div>
 		                      <div class="modal-body">

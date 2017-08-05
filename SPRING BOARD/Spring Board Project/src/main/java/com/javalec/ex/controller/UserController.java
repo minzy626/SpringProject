@@ -3,6 +3,7 @@ package com.javalec.ex.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class UserController {
 	
 	public UserController() {
 	
+	}
+	
+	@RequestMapping(value="/find_passView", method = RequestMethod.GET)
+	public String Find_passView(Model model) {
+		return "find_passView";
 	}
 	
 	@RequestMapping(value="/sign_up", method = RequestMethod.GET)
@@ -52,14 +58,16 @@ public class UserController {
 			return "redirect:sendpass";
 		}catch(Exception e)
 		{
+			errors.reject("IDPASSNOTMATCH");
+			errors.reject("bId","IDNotExist");
 			errors.reject("IdEmailNotMatch");
 			return "find_passView"; 
 		}
 		
 	}
 	
-	@RequestMapping(value="/memberinfo", method = RequestMethod.GET)
-	public String memberinfo(Model model) {
+	@RequestMapping(value="/memberinfo")
+	public String memberinfo(Model model,HttpSession httpsession) {
 		return "memberinfo";
 	}
 	

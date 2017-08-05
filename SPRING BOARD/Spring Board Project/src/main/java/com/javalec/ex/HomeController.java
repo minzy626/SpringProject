@@ -4,12 +4,16 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.javalec.ex.dto.UserDto;
 
 /**
  * Handles requests for the application home page.
@@ -36,21 +40,16 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/find_passView", method = RequestMethod.GET)
-	public String Find_passView(Model model) {
-		return "find_passView";
-	}
 	
-	@RequestMapping(value="/index", method = RequestMethod.GET)
-	public String Index(Model model) {
+	
+	@RequestMapping(value="/index")
+	public String Index(Model model,HttpSession httpSession) {
+		
 		return "index";
 	}
 
 	
-	@RequestMapping(value="/login_view", method = RequestMethod.GET)
-	public String LogInView(Model model) {
-		return "login";
-	}
+	
 	
 	@RequestMapping(value="/lock_screen", method = RequestMethod.GET)
 	public String Lock_Screen(Model model) {

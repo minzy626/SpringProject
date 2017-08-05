@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,7 +20,7 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">심재님의 프로필 정보</h3>
+              <h3 class="panel-title">${userinfo.bId}님의 프로필 정보</h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -42,15 +43,11 @@
                     <tbody>
                       <tr>
                         <td>닉네임:</td>
-                        <td>심재</td>
-                      </tr>
-                      <tr>
-                        <td>가입일:</td>
-                        <td>06/23/2013</td>
-                      </tr>
+                        <td>${userinfo.bNick}</td>
+                      </tr>                 
                       <tr>
                         <td>학교:</td>
-                        <td>홍익대학교</td>
+                        <td>${userinfo.bSchool}</td>
                       </tr>
                    
                          <tr>
@@ -58,16 +55,16 @@
                       </tr>
                         <tr>
                         <td>학년:</td>
-                        <td>3</td>
+                        <td>${userinfo.bGrade}</td>
                       </tr>
                       <tr>
                         <td>전공:</td>
-                        <td>컴퓨터공학</td>
+                        <td>${userinfo.bMajor}</td>
                            
                       </tr>
                       <tr>
                         <td>이메일 주소:</td>
-                        <td><a href="mailto:info@support.com">simsimjae@naver.com</a></td>
+                        <td><a href="mailto:info@support.com">${userinfo.bEmail}</a></td>
                       </tr>
                       
                      
@@ -84,7 +81,7 @@
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
                         <span class="pull-right">
                             <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a data-original-title="Remove this user" data-toggle="tooltip"  type="button" class="btn btn-sm btn-danger" onClick="self.close();"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
                     </div>
             

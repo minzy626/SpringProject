@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <html>
  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -185,7 +185,8 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="login_view" href="login_view">login</a></li>
+                    <c:if test="${empty userinfo}"><li><a class="login_view" href="login_view">login</a></li></c:if>
+                    <c:if test="${not empty userinfo}"><li><a class="login_view" href="logout">logout</a></li></c:if>
             	</ul>
             </div>
         </header>
@@ -201,7 +202,8 @@
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile"><img src="assets/rion.png" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">회원 닉네임</h5>
+              	  <c:if test="${not empty userinfo}"><h5 class="centered"><c:out value="${userinfo.bNick}"/>님 환영합니다</h5></c:if>
+              	  <c:if test="${empty userinfo}"><h5 class="centered">로그인을 해주세요</h5></c:if>
               	  	
                   <li class="mt">
                       <a class="active" href="index">
