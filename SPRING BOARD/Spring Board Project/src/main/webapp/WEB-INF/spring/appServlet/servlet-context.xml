@@ -69,6 +69,7 @@
 				<mvc:mapping path="/**"/> <!-- http://localhost:8181/ex/ 포함 및 그 하위 경로를 나타냄 -->
 				<!-- 로그인 돼있으면 접근 가능한 경로는 아래에 적어야함. -->
 				<mvc:exclude-mapping path="/index/**"/>
+				<mvc:exclude-mapping path="/list/**"/>
 				<mvc:exclude-mapping path="/login_view/**"/>
 				<mvc:exclude-mapping path="/login/**"/>
 				<mvc:exclude-mapping path="/sign_up/**"/>
