@@ -76,6 +76,8 @@
 				<mvc:exclude-mapping path="/sign_up2/**"/>
 				<mvc:exclude-mapping path="/find_passView/**"/>
 				<mvc:exclude-mapping path="/assets/**"/>
+				<mvc:exclude-mapping path="/idCheckForm/**"/>
+				<mvc:exclude-mapping path="/id_duplication_check/**"/>
 				<beans:bean class="com.javalec.ex.Interceptor.LoginCheckInterceptor"/>
 			</mvc:interceptor>
 		</mvc:interceptors>

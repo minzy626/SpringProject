@@ -42,11 +42,11 @@
                 return false;
             }
             
-/*             if(form.idDuplication.value != "idCheck"){
+            if(form.idDuplication.value != "idCheck"){
                 alert("아이디 중복체크를 해주세요.");
                 return false;
             }
-             */
+            
             if(!form.bPass.value){
                 alert("비밀번호를 입력해 주세요.");
                 return false;
@@ -97,7 +97,7 @@
         function openIdChk(){
         
             window.name = "parentForm";
-            window.open("IdCheckForm.jsp",
+            window.open("idCheckForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
         }
  
@@ -385,7 +385,7 @@
 				<div class="input-group">
 				<input type="text" class="form-control" name="bId" placeholder="아이디" onkeydown="inputIdChk()"/>
 				<span class="input-group-btn">
-					<button class="btn btn-success" onclick="openIdChk()"> 중 복 확 인 </button>
+					<button class="btn btn-success" type="button" onclick="openIdChk()"> 중 복 확 인 </button>
 					<input type="hidden" name="idDuplication" value="idUncheck" >
 				</span>
 				</div>	
