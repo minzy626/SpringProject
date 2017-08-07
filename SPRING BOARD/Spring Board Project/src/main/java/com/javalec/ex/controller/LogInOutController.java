@@ -1,5 +1,10 @@
 package com.javalec.ex.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,7 +33,7 @@ public class LogInOutController {
 	}
 	
 	@RequestMapping("/login")
-	public String LogIn(UserDto userDto,Errors errors,HttpSession httpSession)
+	public String LogIn(UserDto userDto,Errors errors,HttpSession httpSession,HttpServletResponse response) throws IOException
 	{
 		LogInService logInService = new LogInService();
 		
@@ -39,7 +44,11 @@ public class LogInOutController {
 			errors.reject("IDPASSNOTMATCH");
 			return "login";
 		}
-		return "index";
+		response.setContentType("text/html; charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    out.println("<script>alert('성공적으로 로그인 되었습니다.');</script>");
+	    out.flush();
+	    return "index";
 	}
 	
 	@RequestMapping("/logout")

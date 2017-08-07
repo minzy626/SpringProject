@@ -66,21 +66,27 @@
 	<!-- 컨트롤러로 요청이 가기전에 인터셉트 -->
 		<mvc:interceptors>
 			<mvc:interceptor>
-				<mvc:mapping path="/**"/> <!-- http://localhost:8181/ex/ 포함 및 그 하위 경로를 나타냄 -->
-				<!-- 로그인 돼있으면 접근 가능한 경로는 아래에 적어야함. -->
-				<mvc:exclude-mapping path="/index/**"/>
+				<mvc:mapping path="/board/**"/> <!-- http://localhost:8181/ex/board/ 포함 및 그 하위 경로를 나타냄 -->
+				<mvc:mapping path="/logout/**"/>
+				<mvc:mapping path="/memberinfo/**"/>
 				<mvc:exclude-mapping path="/list/**"/>
-				<mvc:exclude-mapping path="/login_view/**"/>
-				<mvc:exclude-mapping path="/login/**"/>
-				<mvc:exclude-mapping path="/sign_up/**"/>
-				<mvc:exclude-mapping path="/sign_up2/**"/>
-				<mvc:exclude-mapping path="/find_passView/**"/>
-				<mvc:exclude-mapping path="/assets/**"/>
-				<mvc:exclude-mapping path="/idCheckForm/**"/>
-				<mvc:exclude-mapping path="/id_duplication_check/**"/>
 				<beans:bean class="com.javalec.ex.Interceptor.LoginCheckInterceptor"/>
-			</mvc:interceptor>
+			</mvc:interceptor>	
+			<!-- 아래 내용은 로그아웃후 뒤로가기버튼눌렀을때 다시 로그인 되는것을 방지하기 위함. -->
+			<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+		        <beans:property name="cacheSeconds" value="0" />
+		        <beans:property name="useExpiresHeader" value="true" />
+		        <beans:property name="useCacheControlHeader" value="true" />
+		        <beans:property name="useCacheControlNoStore" value="true" />
+		        <beans:property name="cacheMappings">
+                   <beans:props>
+                      <beans:prop key="/index/**">86400</beans:prop>
+                   </beans:props>
+    		 	 </beans:property>
+		     </beans:bean>	
+		     
 		</mvc:interceptors>
+		
 	
 	<!-- jdbc 템플릿
 	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">

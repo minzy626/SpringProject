@@ -288,12 +288,16 @@
 										<c:forEach items="${list}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
+<<<<<<< HEAD
+												<td ><a href="board/content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+=======
 												<td><a
 													href="list?bMeetingGroup=${dto.bMeetingGroup}&bRegionGroup=${dto.bRegionGroup}"
 													style="font-size: 12px; color: gray;">
 														${dto.bMeetingGroup}/${dto.bRegionGroup}</a>
 													&nbsp;&nbsp;|&nbsp; &nbsp; <a
 													href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+>>>>>>> 0deb6e1e6383add36e31f689112c1196cc272caf
 												<td align="center">${dto.bName}</td>
 												<td align="center"><fmt:formatDate value="${dto.bDate}"
 														pattern="yyyy-MM-dd" /></td>
@@ -340,7 +344,7 @@
 									</tr>
 								</table>
 								<!-- </div> -->
-								<a href="write_view" class="btn btn-default pull-right">글작성</a>
+								<a href="board/write_view" class="btn btn-default pull-right">글작성</a>
 
 								<div class="dataTables_paginate paging_simple_numbers"
 									id="example1_paginate">
