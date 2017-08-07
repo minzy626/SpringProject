@@ -63,6 +63,11 @@
                 return false;
             }
             
+            if(form.nickDuplication.value != "nickCheck"){
+                alert("닉네임 중복체크를 해주세요.");
+                return false;
+            }
+            
             if(form.bRegion.value == ""){
                 alert("지역을 선택해 주세요.");
                 return false;
@@ -73,7 +78,7 @@
                 return false;
             }
             
-            if(!form.bGrade.value){
+            if(form.bGrade.value == ""){
                 alert("학년을 입력해 주세요");
                 return false;
             }
@@ -100,12 +105,23 @@
             window.open("idCheckForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
         }
+        
+        function openNickChk(){
+            
+            window.name = "parentForm";
+            window.open("nickCheckForm",
+                    "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
+        }
  
         // 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
         // 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때
         // 다시 중복체크를 하도록 한다.
         function inputIdChk(){
             document.userInfo.idDuplication.value ="idUncheck";
+        }
+        
+        function inputNickChk(){
+            document.userInfo.nickDuplication.value ="nickUncheck";
         }
 
   </script>
@@ -423,7 +439,8 @@
 				<div class="input-group">
 				<input class="form-control" name="bNick" type="text" placeholder="닉네임">
 				<span class="input-group-btn">
-					<button class="btn btn-success"> 중 복 확 인 </button>
+					<button class="btn btn-success" type="button" onclick="openNickChk();inputNickChk()"> 중 복 확 인 </button>
+					<input type="hidden" name="nickDuplication" value="nickUncheck" >
 				</span>
 				</div>
 			</div>
@@ -477,6 +494,7 @@
 			</div>
 			</div>
 			</div>
+			
 			<!-- 학교 입력--> 
 			<div class="form-group">
             <label class="col-sm-3 control-label">학교</label>
@@ -485,7 +503,14 @@
              	<input class="form-control" name="bSchool" type="text" placeholder="학교 이름">
           		</div>
 				<div class="col-sm-2">
-             	<input class="form-control" name="bGrade" type="text" placeholder="학년">
+   				<select class="form-control" name="bGrade">
+					<option value="">학년 선택</option>
+    				<option value="1">1학년</option>
+   					<option value="2">2학년</option>
+    				<option value="3">3학년</option>
+    				<option value="4">4학년</option>
+    				<option value="5">5학년이상</option>
+				</select>
           		</div>
           	</div>
 			</div>

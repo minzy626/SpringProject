@@ -18,10 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalec.ex.UserService.FindpassService;
 import com.javalec.ex.UserService.IdDuplicationService;
+import com.javalec.ex.UserService.NickDuplicationService;
 import com.javalec.ex.UserService.RegisterService;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
+import com.javalec.ex.validator.NickDuplicationValidator;
 
 @Controller
 public class UserController {
@@ -109,6 +111,7 @@ public class UserController {
 		
 	}
 	
+	//닉네임 중복체크
 	@RequestMapping(value="/idCheckForm/id_check_confirm", method = RequestMethod.GET)
 	public String id_check_confirm(Model model, HttpServletResponse response) {
 		Map<String, Object> map = model.asMap();
@@ -129,5 +132,48 @@ public class UserController {
 		return "idCheckForm";
 	}
 	
+	@RequestMapping(value="/nickCheckForm", method = RequestMethod.GET)//닉네임 중복체크 창
+	public String nickCheckForm(Model model) {
+		return "nickCheckForm";
+	}
 	
+	@RequestMapping(value="/nick_duplication_check", method = RequestMethod.POST)
+	public String nick_duplication_check(UserDto userDto,RedirectAttributes redirectattr,Errors errors) {
+		new NickDuplicationValidator().validate(userDto, errors);
+		if(errors.hasErrors()) 
+			return "nickCheckForm";
+		
+		NickDuplicationService service = new NickDuplicationService();
+		
+		try {
+			UserDto resultDto = service.execute(sqlsession, userDto);
+			redirectattr.addFlashAttribute("resultDto",resultDto); 
+			return "redirect:/nickCheckForm/nick_check_confirm";
+		}catch(Exception e)
+		{
+			errors.reject("NickExist");
+			return "nickCheckForm"; 
+		}
+		
+	}
+	
+	@RequestMapping(value="/nickCheckForm/nick_check_confirm", method = RequestMethod.GET)
+	public String nick_check_confirm(Model model, HttpServletResponse response) {
+		Map<String, Object> map = model.asMap();
+		UserDto userDto = (UserDto)map.get("resultDto");
+		
+		if(userDto == null) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('사용할 수 있는 닉네임입니다.');history.go(-1);</script>");
+				out.println("<script>opener.document.userInfo.nickDuplication.value =\"nickCheck\";</script>");				
+				out.flush();
+			} catch(Exception e){
+				System.out.println(e);
+			}
+		}
+
+		return "nickCheckForm";
+	}
 }
