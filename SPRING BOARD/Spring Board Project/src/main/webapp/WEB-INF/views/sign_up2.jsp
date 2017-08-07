@@ -385,7 +385,7 @@
 				<div class="input-group">
 				<input type="text" class="form-control" name="bId" placeholder="아이디" onkeydown="inputIdChk()"/>
 				<span class="input-group-btn">
-					<button class="btn btn-success" type="button" onclick="openIdChk()"> 중 복 확 인 </button>
+					<button class="btn btn-success" type="button" onclick="openIdChk();inputIdChk()"> 중 복 확 인 </button>
 					<input type="hidden" name="idDuplication" value="idUncheck" >
 				</span>
 				</div>	

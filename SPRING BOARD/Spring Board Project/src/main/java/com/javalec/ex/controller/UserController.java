@@ -38,16 +38,6 @@ public class UserController {
 		return "find_passView";
 	}
 	
-	@RequestMapping(value="/sign_up", method = RequestMethod.GET)
-	public String sign_up(Model model) {
-		return "sign_up";
-	}
-	
-	@RequestMapping(value="/sign_up2", method = RequestMethod.POST)
-	public String sign_up2(Model model) {
-		return "sign_up2";
-	}
-	
 	@RequestMapping(value="/find_pass", method = RequestMethod.POST)
 	public String find_pass(UserDto userDto,RedirectAttributes redirectattr,Errors errors) {
 		new FindPassValidator().validate(userDto, errors);
@@ -75,7 +65,18 @@ public class UserController {
 		return "memberinfo";
 	}
 	
-	@RequestMapping(value="/register" ,method = RequestMethod.POST) 
+	//회원가입 관련
+	@RequestMapping(value="/sign_up", method = RequestMethod.GET)//이용약관
+	public String sign_up(Model model) {
+		return "sign_up";
+	}
+	
+	@RequestMapping(value="/sign_up2", method = RequestMethod.POST)//회원가입
+	public String sign_up2(Model model) {
+		return "sign_up2";
+	}
+	
+	@RequestMapping(value="/register" ,method = RequestMethod.POST) //회원가입 완료
 	public String register(HttpServletRequest request,UserDto userDto)
 	{
 		RegisterService service = new RegisterService();
@@ -83,7 +84,7 @@ public class UserController {
 		return "redirect:index"; 
 	}
 	
-	@RequestMapping(value="/idCheckForm", method = RequestMethod.GET)
+	@RequestMapping(value="/idCheckForm", method = RequestMethod.GET)//아이디 중복체크 창
 	public String idCheckForm(Model model) {
 		return "idCheckForm";
 	}
@@ -125,6 +126,8 @@ public class UserController {
 			}
 		}
 
-		return "sign_up2";
+		return "idCheckForm";
 	}
+	
+	
 }

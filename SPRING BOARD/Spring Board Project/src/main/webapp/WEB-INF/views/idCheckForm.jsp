@@ -44,7 +44,10 @@
                 opener.chkForm = null;
                 self.close();
             }    
-        }    
+        }
+        function inputIdChk(){
+        	opener.document.userInfo.idDuplication.value ="idUncheck";
+        }
    </script>
     
 </head>
@@ -59,7 +62,7 @@
             <div class="form-group">
             <div class="col-sm-6 text-center">
             	<div class="input-group">          
-            	<input type="text" class="form-control" name="bId" id="bId" value="${userDto.bId}"placeholder="아이디를 입력해주세요">
+            	<input type="text" class="form-control" name="bId" id="bId" value="${userDto.bId}" placeholder="아이디를 입력해주세요" onkeydown="inputIdChk()">
             	<span class="input-group-btn">
             		<button class="btn btn-success" type="submit">중복확인</button><!-- onclick="sendCheckValue()" -->
             	</span>
