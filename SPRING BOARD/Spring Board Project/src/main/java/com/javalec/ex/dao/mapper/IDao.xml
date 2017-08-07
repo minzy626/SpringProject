@@ -10,8 +10,8 @@
 		bId desc
 	</select>
 
-	<select id="contentView" parameterType="string" resultType="Dto">
-		SELECT * FROM MVC_BOARD WHERE BID = #{param2}
+	<select id="contentView" parameterType="string" resultType="com.javalec.ex.dto.BDto">
+		SELECT * FROM MVC_BOARD WHERE BID = #{bId}
 	</select>
 
 	<update id="modify" parameterType="Dto">
@@ -67,9 +67,33 @@
 	SELECT COUNT(*) FROM MVC_BOARD WHERE bId>0
 	]]>
 	</select>
-
+	<!-- select 조건에 따른 검색 쿼리 -->
 	<sql id="dynamicSearchCondition">
-
+		<!-- 모임 종류에 따른 검색 -->
+		<if test="bSearchMType != null">
+			<if test="bSearchMType == 'club'.toString()">
+				and bMeetingGroup like concat("%", "동아리" ,"%")
+			</if>
+			<if test="bSearchMType == 'study'.toString()">
+				and bMeetingGroup like concat("%", "스터디" ,"%")
+			</if>
+			<if test="bSearchMType == 'meeting'.toString()">
+				and bMeetingGroup like concat("%", "미팅" ,"%")
+			</if>
+		</if>
+		<!-- 지역에 따른 분류 -->
+		<if test="bSearchRType != null">
+			<if test="bSearchRType == 'seoul'.toString()">
+				and bRegionGroup like concat("%", "서울" ,"%")
+			</if>
+			<if test="bSearchRType == 'incheon'.toString()">
+				and bRegionGroup like concat("%", "인천" ,"%")
+			</if>
+			<if test="bSearchRType == 'ansan'.toString()">
+				and bRegionGroup like concat("%", "안산" ,"%")
+			</if>
+		</if>
+		<!-- 키워드로 검색 -->
 		<if test="bSearchType != null">
 			<if test="bSearchType == 't'.toString()">
 				and bTitle like concat("%", #{bKeyword} ,"%")

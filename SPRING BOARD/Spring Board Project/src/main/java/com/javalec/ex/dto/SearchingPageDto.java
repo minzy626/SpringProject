@@ -3,9 +3,10 @@ package com.javalec.ex.dto;
 public class SearchingPageDto extends BSearchDto{
 
 	
-	private String bSearchType;	// ê²€ìƒ‰ íƒ€ìž…
-	private String bKeyword;		// ê²€ìƒ‰ í‚¤ì›Œë“œ
-	
+	private String bSearchType;	// °Ë»ö Å¸ÀÔ
+	private String bSearchMType; // ¸ðÀÓ ºÐ·ù Å¸ÀÔ
+	private String bSearchRType; // Áö¿ª ºÐ·ù Å¸ÀÔ
+	private String bKeyword;	// °Ë»ö Å°¿öµå
 	
 	
 	public String getbSearchType() {
@@ -28,6 +29,30 @@ public class SearchingPageDto extends BSearchDto{
 
 	public void setbKeyword(String bKeyword) {
 		this.bKeyword = bKeyword;
+	}
+
+
+
+	public String getbSearchMType() {
+		return bSearchMType;
+	}
+
+
+
+	public void setbSearchMType(String bSearchMType) {
+		this.bSearchMType = bSearchMType;
+	}
+
+
+
+	public String getbSearchRType() {
+		return bSearchRType;
+	}
+
+
+
+	public void setbSearchRType(String bSearchRType) {
+		this.bSearchRType = bSearchRType;
 	}
 
 

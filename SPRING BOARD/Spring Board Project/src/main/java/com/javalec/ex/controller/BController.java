@@ -28,38 +28,27 @@ public class BController {
 		
 	}
 	
-	
-	/*@RequestMapping("/list") //�Խ��� �� ��� ��������
-	public String list(Model model) // Controller->Command->DAO�� ���ļ� �����͸� �ٽ� �������Ƿ� model��ü�� ���ڷ� �޾ƾ���. 
-	{
-		command = new BListService();
-		command.execute(sqlsession,model); //��Ʈ�ѷ����� Command�� ��� �ѱ� (�𵨿� ������ ��� ��ƾ� �ϹǷ� ���ڷ� ����)
-		return "list"; //list.jsp�� �����ϱ� ����.
-	}*/
-
-	
-	
-	@RequestMapping(value="/write", method = RequestMethod.POST) //�� �ۼ�
-	public String write(BDto bDto,Model model) //�� �ۼ��� �ۼ���,����� ������ �����;ߵǴϱ� request�� ���ڷι޾ƾ���.  
+	@RequestMapping(value="/write", method = RequestMethod.POST)
+	public String write(BDto bDto,Model model)
 	{
 		BWriteService command= new BWriteService();
 		command.execute(sqlsession,bDto);
-		return "redirect:list"; //�� �ۼ� �ϰ����� �ٽ� �� ����� ������ �ϹǷ� list.jspȣ��ǰԲ�.
+		return "redirect:list";
 	}
 	
 	
 	@RequestMapping("/write_view")
 	public String write_view(Model model) {
-		return "write_view";} // �۾��� �޴� �������� �ٷ� ȭ�鸸 �����ָ� �Ǵϱ� �ٷ� �������ָ� ��
+		return "write_view";} 
 	
 	
 	
-	@RequestMapping("/content_view") //�� ���� ����
-	public String content_view(HttpServletRequest request,Model model) { //list.jsp���� �� ��� �۸��� ID���� �ش��ϴ� ���� ��� ����� �ϹǷ� request �ʿ�
+	@RequestMapping("/content_view") 
+	public String content_view(HttpServletRequest request,Model model) { 
 		model.addAttribute("request",request);
 		command = new BContentService();
 		command.execute(sqlsession,model);  
-		return "content_view"; //�信 �ѷ�����,model���� ���� �A���� dto�� �������. jsp���Ͽ��� dto�� ������ �����.
+		return "content_view";
 	} 
 	
 	
@@ -67,12 +56,12 @@ public class BController {
 	public String modify(BDto bDto,Model model) { 
 		BModifyService command = new BModifyService();
 		command.execute(sqlsession,bDto);  
-		return "redirect:list"; //�� �����ѵ� �ٽ� �� ��� ���
+		return "redirect:list";
 	} 
-	//GET��İ� POST����� ����  https://blog.outsider.ne.kr/312 
+
 	
 	@RequestMapping("/delete") //�� �����ϱ�
-	public String delete(HttpServletRequest request,Model model) { //request���� ���� id�� ���������. 
+	public String delete(HttpServletRequest request,Model model) { 
 		model.addAttribute("request",request);
 		command = new BDeleteService(); 
 		command.execute(sqlsession,model);   

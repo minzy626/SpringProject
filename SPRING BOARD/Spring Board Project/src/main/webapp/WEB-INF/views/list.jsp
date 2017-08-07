@@ -252,17 +252,25 @@
 							<h4>
 								<!-- 							<i class="fa fa-angle-right"></i> Responsive Table -->
 							</h4>
-
-							<select class="type02">
-								<option selected>분류</option>
-								<option>동아리</option>
-								<option>스터디</option>
-								<option>프로젝트</option>
-							</select> <select class="type02">
-								<option selected>지역</option>
-								<option>서울</option>
-								<option>인천</option>
-								<option>안산</option>
+							<select class="type02" name="bSearchMType" id="selM">
+								<!--  	<option selected>분류</option>-->
+								<option value="null"
+									<c:out value="${bPage.sdto.bSearchMType == null? 'selected': ''}"/>>분류</option>
+								<option value="club" id="searchMClub"
+									<c:out value="${bPage.sdto.bSearchMType == 'club'? 'selected': ''}"/>>동아리</option>
+								<option value="study"
+									<c:out value="${bPage.sdto.bSearchMType == 'study'? 'selected': ''}"/>>스터디</option>
+								<option value="meeting"
+									<c:out value="${bPage.sdto.bSearchMType == 'meeting'? 'selected': ''}"/>>미팅</option>
+							</select> <select class="type02" name="bSearchRType" id="selR">
+								<option value="null"
+									<c:out value="${bPage.sdto.bSearchRType == null? 'selected': ''}"/>>지역</option>
+								<option value="seoul"
+									<c:out value="${bPage.sdto.bSearchRType == 'seoul'? 'selected': ''}"/>>서울</option>
+								<option value="incheon"
+									<c:out value="${bPage.sdto.bSearchRType == 'incheon'? 'selected': ''}"/>>인천</option>
+								<option value="ansan"
+									<c:out value="${bPage.sdto.bSearchRType == 'ansan'? 'selected': ''}"/>>안산</option>
 							</select>
 							<section id="unseen">
 								<table
@@ -280,7 +288,12 @@
 										<c:forEach items="${list}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
-												<td ><a href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+												<td><a
+													href="list?bMeetingGroup=${dto.bMeetingGroup}&bRegionGroup=${dto.bRegionGroup}"
+													style="font-size: 12px; color: gray;">
+														${dto.bMeetingGroup}/${dto.bRegionGroup}</a>
+													&nbsp;&nbsp;|&nbsp; &nbsp; <a
+													href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
 												<td align="center">${dto.bName}</td>
 												<td align="center"><fmt:formatDate value="${dto.bDate}"
 														pattern="yyyy-MM-dd" /></td>
@@ -362,12 +375,13 @@
 										<c:choose>
 											<c:when test="${bPage.next}">
 												<li class="paginate_button next" id="example1_next"><a
-													href="/ex/list${bPage.makeSearch(bPage.endPage+1)}"> Next </a></li>
+													href="/ex/list${bPage.makeSearch(bPage.endPage+1)}">
+														Next </a></li>
 											</c:when>
 											<c:otherwise>
 												<li class="paginate_button next disabled" id="example1_next">
-													<a href="/ex/list${bPage.makeSearch(bPage.endPage+1)}"> Next
-												</a>
+													<a href="/ex/list${bPage.makeSearch(bPage.endPage+1)}">
+														Next </a>
 												</li>
 											</c:otherwise>
 										</c:choose>
@@ -412,31 +426,102 @@
 
 	<!--script for this page-->
 	<script>
-		$(function() {
+	$(document).ready(function() {
+		$('#selM').change(function() {
 			
-			$('.disabled').on('click', function(event){
+			var bSearchRType = $("select[name=bSearchRType]").val();
+			var bSearchMType = $("select[name=bSearchMType]")
+			.val();
+			var bSearchType = $("select[name=bSearchType]")
+			.val();
+
+	// 키워드 값 가져와서
+	var bKeyword = $("input[name=bKeyword]").val();
+
+	console.log("bSearchType : " + bSearchType);
+	console.log("bKeyword : " + bKeyword+ bKeyword);
+
+	// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
+	// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
+	console
+			.log("localhost:/8181/list${bPage.makeQuery(1)}&bSearchType="
+					+ bSearchType
+					+ "&bKeyword="
+					+ bKeyword);
+
+	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+			+ bSearchType + "&bKeyword=" + bKeyword + "&bSearchMType="
+			+ bSearchMType + "&bSearchRType=" + bSearchRType;
+
+});
+$('#selR').change(function() {
+			
+			var bSearchRType = $("select[name=bSearchRType]").val();
+			var bSearchMType = $("select[name=bSearchMType]")
+			.val();
+			var bSearchType = $("select[name=bSearchType]")
+			.val();
+			
+
+	// 키워드 값 가져와서
+	var bKeyword = $("input[name=bKeyword]").val();
+
+	console.log("bSearchType : " + bSearchType);
+	console.log("bKeyword : " + bKeyword+ bKeyword);
+
+	// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
+	// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
+	console
+			.log("localhost:/8181/list${bPage.makeQuery(1)}&bSearchType="
+					+ bSearchType
+					+ "&bKeyword="
+					+ bKeyword);
+
+	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+			+ bSearchType + "&bKeyword=" + bKeyword + "&bSearchMType="
+			+ bSearchMType + "&bSearchRType=" + bSearchRType;
+
+});
+	});
+		$(function() {
+
+			$('.disabled').on('click', function(event) {
 				console.log("여기 들어옴");
 				console.log(event);
 				event.preventDefault();
 			});
+			
+			
+			
 			$('#searchBtn').on("click", function(event) {
 
 								// 검색옵션 값 가져오고
-								var bSearchType = $("select[name=bSearchType]").val();
+								var bSearchRType = $("select[name=bSearchRType]").val();
+								var bSearchMType = $("select[name=bSearchMType]").val();
+								var bSearchType = $("select[name=bSearchType]")
+										.val();
 
 								// 키워드 값 가져와서
 								var bKeyword = $("input[name=bKeyword]").val();
 
 								console.log("bSearchType : " + bSearchType);
-								console.log("bKeyword : " + bKeyword + bKeyword);
+								console
+										.log("bKeyword : " + bKeyword
+												+ bKeyword);
 
 								alert("잠깐");
 
 								// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 								// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
-								console.log("localhost:/8181/list${bPage.makeQuery(1)}&bSearchType="+ bSearchType+ "&bKeyword="+ bKeyword);
+								console
+										.log("localhost:/8181/list${bPage.makeQuery(1)}&bSearchType="
+												+ bSearchType
+												+ "&bKeyword="
+												+ bKeyword);
 
-								self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="+ bSearchType + "&bKeyword=" + bKeyword;
+								self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+										+ bSearchType + "&bKeyword=" + bKeyword + "&bSearchMType="
+										+ bSearchMType + "&bSearchRType=" + bSearchRType;
 
 							});
 		});
