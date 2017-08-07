@@ -5,125 +5,118 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class BPageDto {
 
-private BSearchDto sdto; // page, perPageNum
-	
-	private Integer totalCount;	// ì´ ê²Œì‹œë¬¼ ìˆ˜
-	
-	private Integer bStartPage;	// ì‹œìž‘ íŽ˜ì´ì§€
-	private Integer endPage;	// ë íŽ˜ì´ì§€
-	private boolean prev;		// ì´ ì „
-	private boolean next;		// ì´ í›„
-	
-	private Integer displayPageNum = 10; // íŽ˜ì´ì§€ë„¤ì´ì…˜ ë³´ì—¬ì¤„ ê°¯ ìˆ˜ 10ê°œë¡œ ê³ ì •
-	
-	// ë¦¬ìŠ¤íŠ¸ íŽ˜ì´ì§€ì—ì„œ ë‹¨ì¼ ê²Œì‹œê¸€ í´ë¦­í•˜ë©´ íŽ˜ì´ì§•, ê²€ìƒ‰ ì •ë³´ë¥¼ ê°€ì§€ê³  URIë¬¸ìžì—´ì„ ë§Œë“¤ì–´ì„œ ì¡°íšŒíŽ˜ì´ì§€ë¡œ ì´ë™í•œë‹¤. 
-		// ê·¸ëŸ¬ë©´ ì¡°íšŒíŽ˜ì´ì§€ì—ì„œ íŽ˜ì´ì§•, ê²€ìƒ‰ì •ë³´ë¥¼ ìœ ì§€í•˜ê³  ìžˆê¸° ë•Œë¬¸ì— ë‹¤ì‹œ ë¦¬ìŠ¤íŠ¸ íŽ˜ì´ì§€ë¡œ ì´ë™í•  ë•Œ ì›ëž˜ pageì™€ ê²€ìƒ‰ ì¡°ê±´ì˜ ë¦¬ìŠ¤íŠ¸ë¡œ ì´ë™í•  ìˆ˜ ìžˆë‹¤.
-		public String makeSearch(Integer bPage){
-			
-			UriComponents uriComponents = 
-					UriComponentsBuilder.newInstance()
-					.queryParam("bPage", bPage)
-					.queryParam("bPerPageNum", sdto.getbPerPageNum())
-					.queryParam("bSearchType", ((SearchingPageDto)sdto).getbSearchType())
-					.queryParam("bKeyword", ((SearchingPageDto)sdto).getbKeyword())
-					.build();
-			
-			return uriComponents.toUriString();
-		}
-		
-		// ë¦¬ìŠ¤íŠ¸íŽ˜ì´ì§€ì—ì„œ ë‹¨ì¼ ê²Œì‹œê¸€ í´ë¦­í•˜ë©´ í•´ë‹¹ pageì •ë³´ë¥¼ ê°€ì§€ê³  page, perPageNum íŒŒë¼ë¯¸í„°ë¥¼ í¬í•¨í•œ URI ë¬¸ìžì—´ì„ ë§Œë“¤ì–´ì„œ ì¡°íšŒíŽ˜ì´ì§€ë¡œ 
-		// ì´ë™í•œë‹¤. ê·¸ëŸ¬ë©´ ì¡°íšŒíŽ˜ì´ì§€ì—ì„œ page, perPageNum, bno ê°’ì„ ìœ ì§€í•˜ê³  ìžˆê¸° ë•Œë¬¸ì— ë‹¤ì‹œ ë¦¬ìŠ¤íŠ¸ íŽ˜ì´ì§€ë¡œ ì´ë™í• ë•Œ ì›ëž˜ pageë¡œ ì´ë™í•  ìˆ˜ ìžˆë‹¤.
-		public String makeQuery(Integer bPage){
-			
-			UriComponents uriComponents = 
-					UriComponentsBuilder.newInstance()
-					.queryParam("bPage", bPage)
-					.queryParam("bPerPageNum", sdto.getbPerPageNum())
-					.build();
-			
-			return uriComponents.toUriString();
-		}
+	private BSearchDto sdto; // page, perPageNum
 
-		public BSearchDto getSdto() {
-			return sdto;
-		}
+	private Integer totalCount; // ÃÑ °Ô½Ã¹° ¼ö
 
-		public void setSdto(BSearchDto sdto) {
-			this.sdto = sdto;
-		}
+	private Integer bStartPage; // ½ÃÀÛ ÆäÀÌÁö
+	private Integer endPage; // ³¡ ÆäÀÌÁö
+	private boolean prev;
+	private boolean next;
 
-		public Integer getTotalCount() {
-			return totalCount;
-		}
+	private Integer displayPageNum = 10; // ÆäÀÌÁö º¸¿©ÁÙ °¹¼ö 10°³·Î ¼³Á¤
 
-		public void setTotalCount(Integer totalCount) {
-			this.totalCount = totalCount;
-			
-			calculData();
-		}
-		private void calculData(){
-			
-			// ë íŽ˜ì´ì§€
-			endPage = (int)Math.ceil((double)sdto.getbPage()/displayPageNum) * displayPageNum;
+	// ¸®½ºÆ® ÆäÀÌÁö¿¡¼­ ´ÜÀÏ °Ô½Ã±Û Å¬¸¯ÇÏ¸é ÆäÀÌÁö, °Ë»ö Á¤º¸¸¦ °¡Áö°í URI¹®ÀÚ¿­À» ¸¸µé¾î¼­ Á¶È¸ÆäÀÌÁö·Î ÀÌµ¿ÇÑ´Ù.
+	// ±×·¯¸é Á¶È¸ÆäÀÌÁö¿¡¼­ ÆäÀÌÂ¡, °Ë»öÁ¤º¸¸¦ À¯ÁöÇÏ°í ÀÖ±â ¶§¹®¿¡ ´Ù½Ã ¸®½ºÆ® ÆäÀÌÁö·Î ÀÌµ¿ÇÒ ¶§ ¿ø·¡ page¿Í °Ë»ö Á¶°ÇÀÇ ¸®½ºÆ®·Î ÀÌµ¿ÇÒ
+	// ¼ö ÀÖ´Ù
+	public String makeSearch(Integer bPage) {
 
-			// ì‹œìž‘ íŽ˜ì´ì§€
-			bStartPage = (endPage - displayPageNum) + 1;
-			
-			
-			int tempEndPage = (int)Math.ceil((double)totalCount/displayPageNum);
-			
-			// ë íŽ˜ì´ì§€ ê²€ì¦
-			if( endPage > tempEndPage ){
-				endPage = tempEndPage;
-			}// if()
-			
-			// ì´ì „
-			prev = (bStartPage == 1 ? false : true);
-			// ì´í›„
-			next = (tempEndPage > endPage ? true : false); 
-			
-		}
-		
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("bPage", bPage)
+				.queryParam("bPerPageNum", sdto.getbPerPageNum())
+				.queryParam("bSearchType", ((SearchingPageDto) sdto).getbSearchType())
+				.queryParam("bKeyword", ((SearchingPageDto) sdto).getbKeyword()).build();
 
-		public Integer getbStartPage() {
-			return bStartPage;
-		}
+		return uriComponents.toUriString();
+	}
 
-		public void setStartPage(Integer bStartPage) {
-			this.bStartPage = bStartPage;
-		}
+	// ¸®½ºÆ®ÆäÀÌÁö¿¡¼­ ´ÜÀÏ °Ô½Ã±Û Å¬¸¯ÇÏ¸é ÇØ´ç pageÁ¤º¸¸¦ °¡Áö°í page, perPageNum ÆÄ¶ó¹ÌÅÍ¸¦ Æ÷ÇÔÇÑ URI ¹®ÀÚ¿­À» ¸¸µé¾î¼­
+	// Á¶È¸ÆäÀÌÁö·Î
+	// ÀÌµ¿ÇÑ´Ù. ±×·¯¸é Á¶È¸ÆäÀÌÁö¿¡¼­ page, perPageNum, bId °ªÀ» À¯ÁöÇÏ°í ÀÖ±â ¶§¹®¿¡ ´Ù½Ã ¸®½ºÆ® ÆäÀÌÁö·Î ÀÌµ¿ÇÒ¶§ ¿ø·¡
+	// page·Î ÀÌµ¿ÇÒ ¼ö ÀÖ´Ù.
+	public String makeQuery(Integer bPage) {
 
-		public Integer getEndPage() {
-			return endPage;
-		}
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("bPage", bPage)
+				.queryParam("bPerPageNum", sdto.getbPerPageNum()).build();
 
-		public void setEndPage(Integer endPage) {
-			this.endPage = endPage;
-		}
+		return uriComponents.toUriString();
+	}
 
-		public boolean isPrev() {
-			return prev;
-		}
+	public BSearchDto getSdto() {
+		return sdto;
+	}
 
-		public void setPrev(boolean prev) {
-			this.prev = prev;
-		}
+	public void setSdto(BSearchDto sdto) {
+		this.sdto = sdto;
+	}
 
-		public boolean isNext() {
-			return next;
-		}
+	public Integer getTotalCount() {
+		return totalCount;
+	}
 
-		public void setNext(boolean next) {
-			this.next = next;
-		}
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
 
-		public Integer getDisplayPageNum() {
-			return displayPageNum;
-		}
+		calculData();
+	}
 
-		public void setDisplayPageNum(Integer displayPageNum) {
-			this.displayPageNum = displayPageNum;
-		}
-		
-		
+	private void calculData() {
+
+		// ³¡ ÆäÀÌÁö
+		endPage = (int) Math.ceil((double) sdto.getbPage() / displayPageNum) * displayPageNum;
+
+		// ½ÃÀÛ ÆäÀÌÁö
+		bStartPage = (endPage - displayPageNum) + 1;
+
+		int tempEndPage = (int) Math.ceil((double) totalCount / displayPageNum);
+
+		// ³¡ ÆäÀÌÁö °ËÁõ
+		if (endPage > tempEndPage) {
+			endPage = tempEndPage;
+		} // if()
+
+		prev = (bStartPage == 1 ? false : true);
+		next = (tempEndPage > endPage ? true : false);
+
+	}
+
+	public Integer getbStartPage() {
+		return bStartPage;
+	}
+
+	public void setStartPage(Integer bStartPage) {
+		this.bStartPage = bStartPage;
+	}
+
+	public Integer getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(Integer endPage) {
+		this.endPage = endPage;
+	}
+
+	public boolean isPrev() {
+		return prev;
+	}
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+
+	public Integer getDisplayPageNum() {
+		return displayPageNum;
+	}
+
+	public void setDisplayPageNum(Integer displayPageNum) {
+		this.displayPageNum = displayPageNum;
+	}
+
 }

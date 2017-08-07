@@ -28,7 +28,6 @@ public class BSearchDto {
 
 
 	public void setbPerPageNum(Integer bPerPageNum) {
-		// bPerPageNum을 10 미만 또는 100이상일 경우 10으로 고정.		
 				this.bPerPageNum = (bPerPageNum <10 || bPerPageNum >=100) ? 10 : bPerPageNum;
 	}
 

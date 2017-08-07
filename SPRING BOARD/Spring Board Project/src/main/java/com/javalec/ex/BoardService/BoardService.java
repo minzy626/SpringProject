@@ -9,22 +9,21 @@ import com.javalec.ex.dto.SearchingPageDto;
 public interface BoardService {
 
 	public BDto read(Integer bno);
-
-	// ê²Œì‹œë¬¼ ì—…ë°ì´íŠ¸
+	
 	public void update(BDto dto);
 
-	// ê²Œì‹œë¬¼( ëª¨ë“  ê²Œì‹œë¬¼ ì¡°íšŒ )
+	// °Ô½Ã¹°( ¸ğµç °Ô½Ã¹° Á¶È¸ )
 	public List<BDto> listAll();
 
-	// ê²Œì‹œë¬¼ ( í˜ì´ì§• ì²˜ë¦¬ ê²Œì‹œë¬¼ ì¡°íšŒ)
+	// °Ô½Ã¹° ( ÆäÀÌÂ¡ Ã³¸® °Ô½Ã¹° Á¶È¸)
 	public List<BDto> listCriteria(BSearchDto sdto);
 
-	// ì´ ê²Œì‹œë¬¼ ìˆ˜ ê³„ì‚°
+	// ÃÑ °Ô½Ã¹° ¼ö °è»ê
 	public Integer boardTotalCount();
 
-	// ê²Œì‹œë¬¼ ( í˜ì´ì§• ì²˜ë¦¬ + ê²€ìƒ‰ê²°ê³¼ ê²Œì‹œë¬¼ ì¡°íšŒ)
+	// °Ô½Ã¹° ( ÆäÀÌÂ¡ Ã³¸® + °Ë»ö°á°ú °Ô½Ã¹° Á¶È¸)
 	public List<BDto> listSearchCriteria(SearchingPageDto spdto);
 
-	// ì´ ê²€ìƒ‰ ê²°ê³¼ ê²Œì‹œë¬¼ ìˆ˜ ê³„ì‚°
+	// ÃÑ °Ë»ö °á°ú °Ô½Ã¹° ¼ö °è»ê
 	public Integer searchBoardTotalCount(SearchingPageDto spdto);
 }

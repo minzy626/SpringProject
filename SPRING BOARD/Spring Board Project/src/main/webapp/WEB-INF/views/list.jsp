@@ -269,18 +269,18 @@
 									class="table table-bordered table-striped table-condensed">
 									<thead>
 										<tr>
-											<th scope="col" align="center">번호</th>
-											<th scope="col" align="center">제목</th>
-											<th scope="col" align="center">작성자</th>
-											<th scope="col" align="center">날짜</th>
-											<th scope="col" align="center">조회수</th>
+											<th scope="col" class="text-center">번호</th>
+											<th scope="col" class="text-center">제목</th>
+											<th scope="col" class="text-center">작성자</th>
+											<th scope="col" class="text-center">날짜</th>
+											<th scope="col" class="text-center">조회수</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${list}" var="dto">
 											<tr class="listToChange">
-												<th scope="row">${dto.bId}</th>
-												<td align="center"><a href="/read${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}">${dto.bTitle}</a></td>
+												<th scope="row" class="text-center">${dto.bId}</th>
+												<td ><a href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
 												<td align="center">${dto.bName}</td>
 												<td align="center"><fmt:formatDate value="${dto.bDate}"
 														pattern="yyyy-MM-dd" /></td>
