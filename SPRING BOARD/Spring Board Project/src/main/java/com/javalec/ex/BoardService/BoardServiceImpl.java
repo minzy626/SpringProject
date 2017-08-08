@@ -58,4 +58,10 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return dao.read(bId);
 	}
+
+	@Override
+	public List<BDto> listNotice() {
+		// TODO Auto-generated method stub
+		return dao.listNotice();
+	}
 }

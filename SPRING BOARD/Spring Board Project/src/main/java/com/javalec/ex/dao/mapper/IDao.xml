@@ -9,6 +9,10 @@
 		SELECT * FROM MVC_BOARD ORDER BY
 		bId desc
 	</select>
+	
+	<select id="listNotice" resultType="com.javalec.ex.dto.BDto">
+			SELECT * FROM MVC_BOARD WHERE BNOTICE LIKE '%notice%' ORDER BY bId desc 
+	</select>
 
 	<select id="contentView" parameterType="string" resultType="com.javalec.ex.dto.BDto">
 		SELECT * FROM MVC_BOARD WHERE BID = #{bId}

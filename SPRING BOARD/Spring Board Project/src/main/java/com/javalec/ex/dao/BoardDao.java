@@ -12,7 +12,9 @@ public interface BoardDao {
 	public BDto read(Integer bId);
 	// 게시물 업데이트
 	public void update(BDto dto);
-
+	// 공지사항 조회
+	public List<BDto> listNotice();
+	
 	// 게시물( 모든 게시물 조회 )
 	public List<BDto> listAll();
 

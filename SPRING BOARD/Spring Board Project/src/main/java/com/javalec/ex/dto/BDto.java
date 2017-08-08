@@ -10,6 +10,7 @@ public class BDto {
 	String bContent;
 	String bMeetingGroup;
 	String bRegionGroup;
+	String bNotice;
 	Timestamp bDate;
 	int bHit;
 	
@@ -78,6 +79,14 @@ public class BDto {
 
 	public void setbRegionGroup(String bRegionGroup) {
 		this.bRegionGroup = bRegionGroup;
+	}
+
+	public String getbNotice() {
+		return bNotice;
+	}
+
+	public void setbNotice(String bNotice) {
+		this.bNotice = bNotice;
 	}
 	
 }

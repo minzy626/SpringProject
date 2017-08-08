@@ -29,17 +29,6 @@ public class BController {
 		
 	}
 
-	
-	/*@RequestMapping("/list") //占쌉쏙옙占쏙옙 占쏙옙 占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙
-	public String list(Model model) // Controller->Command->DAO占쏙옙 占쏙옙占식쇽옙 占쏙옙占쏙옙占싶몌옙 占쌕쏙옙 占쏙옙占쏙옙占쏙옙占실뤄옙 model占쏙옙체占쏙옙 占쏙옙占쌘뤄옙 占쌨아억옙占쏙옙. 
-	{
-		command = new BListService();
-		command.execute(sqlsession,model); //占쏙옙트占싼뤄옙占쏙옙占쏙옙 Command占쏙옙 占쏙옙占쏘를 占싼깍옙 (占쏜델울옙 占쏙옙占쏙옙占쏙옙 占쏙옙占� 占쏙옙틴占� 占싹므뤄옙 占쏙옙占쌘뤄옙 占쏙옙占쏙옙)
-		return "list"; //list.jsp占쏙옙 占쏙옙占쏙옙占싹깍옙 占쏙옙占쏙옙.
-	}*/
-
-	
-	
 	@RequestMapping(value="/write", method = RequestMethod.POST) 
 	public String write(BDto bDto,Model model)  
 	{

@@ -29,6 +29,12 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
+	public List<BDto> listNotice() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listNotice");
+	}
+	
+	@Override
 	public List<BDto> listAll() {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".listAll");
@@ -63,5 +69,6 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".read", bId);
 	}
+
 
 }
