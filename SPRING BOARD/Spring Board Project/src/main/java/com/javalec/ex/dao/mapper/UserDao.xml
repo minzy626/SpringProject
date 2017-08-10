@@ -7,7 +7,7 @@
 <mapper namespace="com.javalec.ex.dao.UserDao">
 
 	<insert id="register" parameterType="UserDto">
-		INSERT INTO USERINFO (bid,bpass,bnick,bgender,bschool,bgrade,bmajor,bemail,bregion) VALUES(#{bId},#{bPass},#{bNick},#{bGender},#{bSchool},#{bGrade},#{bMajor},#{bEmail},#{bRegion})
+		INSERT INTO USERINFO (bid,bpass,bnick,bgender,bschool,bgrade,bmajor,bregion) VALUES(#{bId},#{bPass},#{bNick},#{bGender},#{bSchool},#{bGrade},#{bMajor},#{bRegion})
 	</insert>
 	
 	<select id="find_by_id" parameterType="UserDto" resultType="UserDto">
@@ -16,6 +16,10 @@
 	
 	<select id="find_by_nick" parameterType="UserDto" resultType="UserDto">
 		SELECT * FROM USERINFO WHERE bNick = #{bNick}
+	</select>
+	
+	<select id="find_by_email" parameterType="UserDto" resultType="UserDto">
+		SELECT * FROM USERINFO WHERE bEmail = #{bEmail}
 	</select>
 	
 </mapper>

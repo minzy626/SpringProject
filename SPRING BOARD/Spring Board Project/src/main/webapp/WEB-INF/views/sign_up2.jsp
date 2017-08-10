@@ -25,12 +25,6 @@
 
     <script src="assets/js/chart-master/Chart.js"></script>
     
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
     <!-- 미입력 찾기 함수 -->
     <script type="text/javascript">
         function checkValue()
@@ -93,10 +87,10 @@
                 return false;
             }
             
-            if(!form.bNumcheck.value){
-                alert("인증번호를 입력해 주세요.");
+/*             if(form.emailDuplication.value != "emailCheck"){
+                alert("이메일 인증을 해주세요.");
                 return false;
-            }
+            } */
         }
         // 아이디 중복체크 화면open
         function openIdChk(){
@@ -112,6 +106,13 @@
             window.open("nickCheckForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
         }
+        
+/*         function openEmailChk(){
+            
+            window.name = "parentForm";
+            window.open("emailCheckForm",
+                    "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
+        } */
  
         // 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
         // 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때
@@ -123,6 +124,10 @@
         function inputNickChk(){
             document.userInfo.nickDuplication.value ="nickUncheck";
         }
+        
+/*         function inputEmailChk(){
+            document.userInfo.emailDuplication.value ="emailUncheck";
+        } */
 
   </script>
   </head>
@@ -524,24 +529,26 @@
 			</div>
 			</div>
 			</div>
-			
-			<!-- 이메일 입력--> 
+<!-- 			
+			이메일 입력 
 			<div class="form-group">
 			<label class="col-sm-3 control-label">이메일</label>
 			<div class="row">
 			<div class="col-sm-6">
 				<div class="input-group">
-					<input class="form-control" name="bEmail" type="email" placeholder="이메일">
+					<input class="form-control" name="bEmail" type="text" placeholder="이메일" onkeydown="inputEmailChk()"/>
 					<span class="input-group-btn">
-                    	<button class="btn btn-success">인증번호 전송<i class="fa fa-mail-forward spaceLeft"></i></button>
+                    	<button class="btn btn-success" type="button" onclick="openEmailChk();inputEmailChk()">인증번호 전송<i class="fa fa-mail-forward spaceLeft"></i></button>
+                    	<input type="hidden" name="emailDuplication" value="emailUncheck" >
                   	</span>
 				</div>
           	</div>
           	</div>
-			</div>
+			</div> -->
+
 			
 			<!-- 인증번호 입력--> 
-			<div class="form-group">
+<!-- 			<div class="form-group">
 			<label class="col-sm-3 control-label">인증번호 확인</label>
 			<div class="row">
 			<div class="col-sm-6">
@@ -554,7 +561,7 @@
             <p class="help-block">전송된 인증번호를 입력해주세요.</p>
           	</div>
           	</div>
-        	</div>
+        	</div> -->
 
           
 			<div class="form-group">
