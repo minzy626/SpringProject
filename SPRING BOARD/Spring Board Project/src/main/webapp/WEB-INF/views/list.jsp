@@ -304,7 +304,7 @@
 													style="font-size: 12px; color: gray;">
 														${dto.bMeetingGroup}/${dto.bRegionGroup}</a>
 													&nbsp;&nbsp;|&nbsp; &nbsp; <a
-													href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}">${dto.bTitle}</a></td>
 												<td align="center">${dto.bName}</td>
 												<td align="center"><fmt:formatDate value="${dto.bDate}"
 														pattern="yyyy-MM-dd" /></td>
@@ -351,7 +351,7 @@
 									</tr>
 								</table>
 								<!-- </div> -->
-								<a href="board/write_view" class="btn btn-default pull-right">글작성</a>
+								<a href="/ex/write_view${bPage.makeSearch(bPage.sdto.bPage)}" class="btn btn-default pull-right">글작성</a>
 
 								<div class="dataTables_paginate paging_simple_numbers"
 									id="example1_paginate">

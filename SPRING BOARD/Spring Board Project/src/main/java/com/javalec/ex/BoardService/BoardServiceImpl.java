@@ -64,4 +64,10 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return dao.listNotice();
 	}
+	
+	@Override
+	public void delete(Integer bId) {
+		// TODO Auto-generated method stub
+		dao.delete(bId);
+	}
 }

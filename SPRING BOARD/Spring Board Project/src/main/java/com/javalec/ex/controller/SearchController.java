@@ -30,30 +30,87 @@ public class SearchController {
 
 		
 		System.out.println("list:");
-		// ÇöÀç SearchingPageDto¿¡ page, perPageNum, searchType, keyword°¡ ÀÖÀ½. ¸®½ºÆ® »ı¼º
+		// í˜„ì¬ SearchingPageDtoì— page, perPageNum, searchType, keywordê°€ ìˆìŒ. ë¦¬ìŠ¤íŠ¸ ìƒì„±
 		model.addAttribute("list", service.listSearchCriteria(spdto));
 		
-		// ÆäÀÌÁö »ı¼º(°è»ê)
+		// í˜ì´ì§€ ìƒì„±(ê³„ì‚°)
 		BPageDto bPage = new BPageDto();
 		bPage.setSdto(spdto);
 		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
 
 		model.addAttribute("bPage", bPage);
-		// ÆäÀÌÁö Áß¿¡¼­ page, perPageNum, searchType, keyword°¡ À¯ÁöµÇ¾î¾ß ÇÏ¹Ç·Î
-		// BPageDto¿¡¼­ makeSearch¶ó´Â ÀÌ¸§À¸·Î ¸Ş¼Òµå¸¦ ¸¸µé¾î¼­ UriComponent¸¦ ÀÌ¿ëÇØ¼­ uri¹®ÀÚ¿­À» ¸¸µé¾î³½´Ù.
+		// í˜ì´ì§€ ì¤‘ì—ì„œ page, perPageNum, searchType, keywordê°€ ìœ ì§€ë˜ì–´ì•¼ í•˜ë¯€ë¡œ
+		// BPageDtoì—ì„œ makeSearchë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ë©”ì†Œë“œë¥¼ ë§Œë“¤ì–´ì„œ UriComponentë¥¼ ì´ìš©í•´ì„œ urië¬¸ìì—´ì„ ë§Œë“¤ì–´ë‚¸ë‹¤.
 	}
 	
-	// /read?bno=?&page=?&perPageNum=?&searchType=?&keyword=?(ÀÌ·± ÇüÅÂ·Î) bId,ÆäÀÌÁö,°Ë»ö°á°ú¿¡ ÇØ´çÇÏ´Â °Ô½Ã¹°À» Á¶È¸ÇÏ´Â °æ¿ì.
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	// @ModelAttribute ·Î ÆÄ¶ó¹ÌÅÍ¸¦ ¼öÁıÇÏ¸é ÁöÁ¤ÇÑ ¹®ÀÚ¿­·Î È­¸éÀ¸·Î±îÁö Àü´Ş µÊ.
-	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto,
-			Model model) {
+	@RequestMapping(value="/content_view", method= RequestMethod.GET)
+	public void readGET(@RequestParam("bId") Integer bId, 
+						// @ModelAttribute æ¿¡ï¿½ ï¿½ë™†ï¿½ì”ªèª˜ëª…ê½£ç‘œï¿½ ï¿½ë‹”ï§ë¬“ë¸¯ï§ï¿½ ï§ï¿½ï¿½ì ™ï¿½ë¸³ è‡¾ëª„ì˜„ï¿½ë¿´æ¿¡ï¿½ ï¿½ì†•ï§ëŒì‘æ¿¡ì’“í‰´ï§ï¿½ ï¿½ìŸ¾ï¿½ë–– ï¿½ë§‚ï¿½ë–.
+						@ModelAttribute("spdto") SearchingPageDto spdto, 
+						Model model)
+	{
+		logger.info("readGET is called......");
 		
+		logger.info(" page : " + spdto.getbPage().toString());
+		logger.info(" perPageNum : " +spdto.getbPerPageNum().toString());
+		logger.info(" searchType : " + spdto.getbSearchType());
+		logger.info(" keyword : " +spdto.getbKeyword());
 		System.out.println("read:");
 		model.addAttribute("spdto", spdto);
 		model.addAttribute("BDto", service.read(bId));
-
+	}// readGET()
+	
+	@RequestMapping(value="/modify_view", method= RequestMethod.GET)
+	public void writeView(@RequestParam("bId") Integer bId, 
+						// @ModelAttribute æ¿¡ï¿½ ï¿½ë™†ï¿½ì”ªèª˜ëª…ê½£ç‘œï¿½ ï¿½ë‹”ï§ë¬“ë¸¯ï§ï¿½ ï§ï¿½ï¿½ì ™ï¿½ë¸³ è‡¾ëª„ì˜„ï¿½ë¿´æ¿¡ï¿½ ï¿½ì†•ï§ëŒì‘æ¿¡ì’“í‰´ï§ï¿½ ï¿½ìŸ¾ï¿½ë–– ï¿½ë§‚ï¿½ë–.
+						@ModelAttribute("spdto") SearchingPageDto spdto, 
+						Model model)
+	{
+		logger.info("modify_view is called......");
+		
+		System.out.println("modify_view:");
+		model.addAttribute("spdto", spdto);
+		model.addAttribute("BDto", service.read(bId));
+	}// readGET()
+	
+	@RequestMapping(value="/write_view", method= RequestMethod.GET)
+	public void writeView(//@RequestParam("bId") Integer bId, 
+						// @ModelAttribute æ¿¡ï¿½ ï¿½ë™†ï¿½ì”ªèª˜ëª…ê½£ç‘œï¿½ ï¿½ë‹”ï§ë¬“ë¸¯ï§ï¿½ ï§ï¿½ï¿½ì ™ï¿½ë¸³ è‡¾ëª„ì˜„ï¿½ë¿´æ¿¡ï¿½ ï¿½ì†•ï§ëŒì‘æ¿¡ì’“í‰´ï§ï¿½ ï¿½ìŸ¾ï¿½ë–– ï¿½ë§‚ï¿½ë–.
+						@ModelAttribute("spdto") SearchingPageDto spdto, 
+						Model model)
+	{
+		logger.info("writeView is called......");
+		
+		System.out.println("write_view:");
+		model.addAttribute("spdto", spdto);
+		
 	}
+	
+	// bIdì— í•´ë‹¹í•˜ëŠ” ê¸€ì„ ì‚­ì œí•©ë‹ˆë‹¤.
+		@RequestMapping(value="/delete", method= RequestMethod.POST)
+		public String deletePOST(@RequestParam("bId") Integer bId,
+						SearchingPageDto spdto,
+						RedirectAttributes rttr){
+			
+			service.delete(bId);
+			
+			logger.info("deletePOST is called......");
+			
+			logger.info(" page : " + spdto.getbPage().toString());
+			logger.info(" perPageNum : " + spdto.getbPerPageNum().toString());
+			logger.info(" searchType : " + spdto.getbSearchType());
+			logger.info(" keyword : " +spdto.getbKeyword());
+			
+			rttr.addAttribute("page", spdto.getbPage());
+			rttr.addAttribute("perPageNum", spdto.getbPerPageNum());
+			rttr.addAttribute("searchType", spdto.getbSearchType());
+			rttr.addAttribute("keyword", spdto.getbKeyword());
+			
+			rttr.addFlashAttribute("msg", "SUCCESS");
+			
+			
+			return "redirect:/list";
+		}// deletePOST()
 
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public void updateGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto,

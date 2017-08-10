@@ -70,5 +70,9 @@ public class BoardDaoImpl implements BoardDao{
 		return session.selectOne(namespace+".read", bId);
 	}
 
-
+	@Override
+	public void delete(Integer bId) {
+		// TODO Auto-generated method stub
+		session.delete(namespace+".delete", bId);
+	}
 }

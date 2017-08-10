@@ -28,4 +28,7 @@ public interface BoardService {
 
 	// 총 검색 결과 게시물 수 계산
 	public Integer searchBoardTotalCount(SearchingPageDto spdto);
+
+	// 글 삭제하기
+	public void delete(Integer bId);
 }

@@ -7,7 +7,8 @@ import com.javalec.ex.dto.BSearchDto;
 import com.javalec.ex.dto.SearchingPageDto;
 
 public interface BoardDao {
-	
+	// 게시물 삭제
+	public void delete(Integer bId);
 	// 게시물 조회(bId에 해당하는 단일 게시물 조회)
 	public BDto read(Integer bId);
 	// 게시물 업데이트

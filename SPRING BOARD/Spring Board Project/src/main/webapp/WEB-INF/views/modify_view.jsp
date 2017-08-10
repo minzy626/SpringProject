@@ -1,10 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <%@page import="java.util.*"%>
 <%
     request.setCharacterEncoding("UTF-8");
 %>
+
+    <script language = "javascript"> 
+    
+    function modifyCheck() { 
+    	var form = document.writeform; 
+    	if( !form.bTitle.value ) { 
+    		alert( "제목을 입력해주세요" ); 
+    		form.bTitle.focus(); 
+    		return false;
+    	} 
+    	if( !form.bContent.value ) {
+    		alert( "내용을 입력해주세요" ); 
+    		form.bContent.focus(); 
+    		return false;
+    	}
+    	alert( "게시물의 내용이 성공적으로 수정되었습니다!" ); 
+    	form.submit();
+    }
+    function submitContents() {
+        // 에디터의 내용이 textarea에 적용된다.
+        oEditors.getById["bContent"].exec("UPDATE_CONTENTS_FIELD", []);
+     	alert("javascript:submitContents()");
+        // 에디터의 내용에 대한 값 검증은 이곳에서
+        // document.getElementById("ir1").value를 이용해서 처리한다.
+    }
+    </script>
     
     
 <!DOCTYPE html>
@@ -290,64 +316,102 @@
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
-      <link rel="stylesheet" href="assets/css/write.css"/>
+      <!-- invalid link....필요없는듯? <link rel="stylesheet" href="assets/css/write.css"/>  -->
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/js/bootstrapValidator.min.js"></script>
 		<div class="container">	
-			
-			<article class="form-horizontal">
-			  <div class="form-group">
-			  <div class="col-md-8">
-				<h1>글 작성하기 </h1>
-			  </div>	
-			  </div>
-				
-			  <legend>신촌지역 스터디/공모전/미팅 게시판 - 글 보기 페이지</legend>
-				
-			  <form role="form" method="post">
+		
+		<form role="form" name="pageInfo" method="post">
             	<input type="hidden" name="bPage" value="${spdto.bPage}">
             	<input type="hidden" name="bPerPageNum" value="${spdto.bPerPageNum}">
             	<input type="hidden" name="bSearchType" value="${spdto.bSearchType}">
             	<input type="hidden" name="bKeyword" value="${spdto.bKeyword}">
             	<input type="hidden" name="bId" value="${BDto.bId}">
-              </form>
+        </form>
+	
 				
-			  <div>
-			    <div class="col-md-12">
-			   	 <h2 style="color:#2F4F4F">${BDto.bTitle}</h2>
-			    </div>
-			  
-			  
-			  
-			  <div class="col-md-12 ">
-			    <p>
-				    <a href="#"><span class="label label-info">공모전</span></a> <!-- 클릭 시 공모전 게시판 해당 변수+페이지링크 필요 -->
-					<a href="#"><span class="label label-info">질문/답변</span></a> <!-- 클릭 시 공모전-질문답변 글 필터링해서 보여줘(굳이..?) -->
-					| <i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> 홍길동</a> <!-- 클릭 시 멤버정보 팝업창 -->
-					| <i class="glyphicon glyphicon-calendar">${BDto.bDate}</i>  
-				 	| <i class="glyphicon glyphicon-comment"></i> <a href="#"> 댓글 0</a> <!-- 클릭 시 댓글 부분으로 스크롤 다운(필요시..) -->
-				   	| <i class="glyphicon glyphicon-eye-open">${BDto.bHit }회</i>
-				</p>
+		<form class="form-horizontal" name="writeform" action="update" role="form" id="write-form" method="post">
+		  <div class="form-group">
+		  <div class="col-md-8">
+			<h1>' </h1>
+		  </div>	
+		  </div>
+			
+			<legend>글 수정하기</legend>
+			
+			<input type=hidden name="bId" value="${BDto.bId }">
+			<input type="hidden" name="bHit" id="bHit" value="${BDto.bHit }">
+		  	<input type="hidden" name="bTitle" id="bTitle" value="${BDto.bTitle }">
+			<!-- Select Basic -->
+			<div class="form-group">
+			  <label class="col-md-1 control-label" for="selectbasic">글 종류</label>
+			  <div class="col-md-2">
+			    <select id="selectbasic" name="selectbasic" class="form-control">
+			      <option value="">선택</option>
+			      <option value="">질문</option>
+			      <option value="">후기</option>
+			      <option value="">머시기</option>
+			      <option value="">저시기</option>
+			      <option value="">기타</option>
+			    </select>
 			  </div>
-			  
-			 
-			  <div class="col-md-12">
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:1000px; height:400px;">
-			  	  <div style="padding:10px;">
-			  		${BDto.bContent}
-			  	  </div>
-			  	</div>
-			  </div>
-			  
-	          <div class="col-sm-10 text-center" style="padding: 10px;">
-	            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> 목록으로</button>	
-	          	<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
-	          	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
-	          </div>
-	          </div>
-			</article>
-		</div>
-		
-		<!-- 댓글 part -->
+			</div>
+			
+			<div class="form-group">
+			<label class="col-md-1 control-label">게시판</label>
+			
+			  <label class="radio-inline">
+			  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked"> 스터디
+			  </label>
+			  <label class="radio-inline">
+			 	 <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 공모전
+			  </label>
+			  <label class="radio-inline">
+			  	<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 미팅
+			  </label>
+		   </div>
+		  
+		  
+	 
+	 	  <div class="form-group">
+		    <label for="bTitle" class="col-md-1 control-label">제 목</label>
+		    <div class="col-md-9">
+		      <input type="text" class="form-control" name="bTitle" id="bTitle" value="${BDto.bTitle}">
+		      
+		    </div>
+		  </div>
+		 
+ 		  
+
+		  
+		  <div class="form-group">
+		  <label for="bContent" class="col-md-1 control-label">내 용</label>
+		  	<div class="col-md-9">
+		  	<script type="text/javascript" src="se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+				<textarea class="form-control textarea" name="bContent" id="bContent" rows="15" cols="100">
+		${BDto.bContent}
+					</textarea>
+				</div>
+				
+				<script type="text/javascript">
+					var oEditors = [];
+					nhn.husky.EZCreator.createInIFrame({
+				    oAppRef: oEditors,
+				    elPlaceHolder: "bContent",
+				    sSkinURI: "se2/SmartEditor2Skin.html",
+				    fCreator: "createSEditor2"
+					});
+				</script>
+		  </div>
+		  
+		  <div class="form-group">
+          <div class="col-sm-12 text-center">
+          	<button type="submit" id="specificBtn" class="btn btn-info"  OnClick="javascript:submitContents(); javascript:modifyCheck(); return false;"><span class="glyphicon glyphicon-ok-sign"></span> 수정 완료</button>
+          	<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span>취소</button>
+          </div>
+          </div>
+		</form>
+	</div>
+	
       </section><!-- /MAIN CONTENT -->
 		
       <!--main content end-->
@@ -377,52 +441,22 @@
     <script src="assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-  	<script>
-	// 버튼 클릭 이벤트로 폼 태그에 action 속성을 달아주면 된다. 원하는 곳에..
-	$(function(){
+    <script>
+    $(function(){
 		
-		var bKeyword = '${spdto.bKeyword}';
+		var formObj = $('form[name="pageInfo"]');
 		
-		// 여기서 받아오는 keyword가 '입        '이다
-		console.log(bKeyword+bKeyword);
-		
-		
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		
-		
-		// 리스트 페이지
-		$(".btn-info").on("click", function(){
+		$(".btn-warning").on("click", function(event){
 			formObj.attr("action", "/ex/list");
 			formObj.attr("method", "get");
-			formObj.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
-		});
-		
-		
-		
-		// 수정
-		// 버튼 클릭됐을때 formObj에 action 속성을 /board/update로 주고,
-		// submit()를 사용해서 셀렉터의 submit이벤트를 발생시켜서 form데이터가 전송되도록 해준다.
-		$(".btn-warning").on("click", function(){
-			// 폼을 선택해서 action을 list가 하게 한다.
-			formObj.attr("action", "/ex/modify_view");
-			
-			// 그리고 method는 조회하는 거니까 get방식으로 한다.
-			formObj.attr("method", "get");
-			formObj.submit();
+			formObj.submit(); 
+			return false;
 			
 		});
 		
-		
-		// 삭제
-		$(".btn-danger").on("click", function(){
-			formObj.attr("action", "/ex/delete");
-			formObj.attr("method", "post");
-			formObj.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
-		});
-
-	});//$(function(){})
-</script>
+	});
+    </script>
+  	
 
   </body>
 </html>

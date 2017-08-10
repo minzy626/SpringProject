@@ -14,8 +14,8 @@
 			SELECT * FROM MVC_BOARD WHERE BNOTICE LIKE '%notice%' ORDER BY bId desc 
 	</select>
 
-	<select id="contentView" parameterType="string" resultType="com.javalec.ex.dto.BDto">
-		SELECT * FROM MVC_BOARD WHERE BID = #{bId}
+	<select id="contentView" parameterType="string" resultType="Dto">
+		SELECT * FROM MVC_BOARD WHERE BID = #{param2}
 	</select>
 
 	<update id="modify" parameterType="Dto">
@@ -23,9 +23,9 @@
 		#{bName}, BTITLE = #{bTitle}, BCONTENT= #{bContent} WHERE BID = #{bId}
 	</update>
 
-	<delete id="delete" parameterType="String">
+	<delete id="delete">
 		DELETE FROM MVC_BOARD WHERE
-		BID = #{param1}
+		BID = #{bId}
 	</delete>
 
 	<select id="read" resultType="Dto">
