@@ -336,7 +336,7 @@
 		  </div>	
 		  </div>
 			
-			<legend>글 수정하기</legend>
+			<legend>게시글 수정하기</legend>
 			
 			<input type=hidden name="bId" value="${BDto.bId }">
 			<input type="hidden" name="bHit" id="bHit" value="${BDto.bHit }">

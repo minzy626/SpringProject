@@ -83,6 +83,12 @@ public class SearchController {
 		model.addAttribute("spdto", spdto);
 		
 	}
+	@RequestMapping(value="/write", method = RequestMethod.POST)
+	public String write(BDto Dto, RedirectAttributes rttr)
+	{
+		service.write(Dto);
+		return "redirect:/list";
+	}
 	
 	// bId에 해당하는 글을 삭제합니다.
 		@RequestMapping(value="/delete", method= RequestMethod.POST)

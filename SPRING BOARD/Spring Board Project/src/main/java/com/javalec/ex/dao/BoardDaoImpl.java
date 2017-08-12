@@ -27,6 +27,10 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		session.update(namespace+".update", dto);
 	}
+	@Override
+	public void write(BDto dto) {
+		session.insert(namespace+".write", dto);
+	}
 
 	@Override
 	public List<BDto> listNotice() {

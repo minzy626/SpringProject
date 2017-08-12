@@ -22,6 +22,10 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		dao.update(dto);
 	}
+	@Override
+	public void write(BDto dto) {
+		dao.write(dto);
+	}
 
 	@Override
 	public List<BDto> listCriteria(BSearchDto sdto) {

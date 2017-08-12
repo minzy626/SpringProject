@@ -5,7 +5,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class BPageDto {
 
-	private BSearchDto sdto; // page, perPageNum
+	private BSearchDto sdto; // bPage, bPerPageNum
 
 	private Integer totalCount; // ÃÑ °Ô½Ã¹° ¼ö
 

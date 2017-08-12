@@ -11,6 +11,8 @@ public interface BoardDao {
 	public void delete(Integer bId);
 	// 조회수 ++
 	public void upHit(Integer bId);
+	// 게시물 등록(새글쓰기)
+	public void write(BDto dto);
 	// 게시물 조회(bId에 해당하는 단일 게시물 조회)
 	public BDto read(Integer bId);
 	// 게시물 업데이트

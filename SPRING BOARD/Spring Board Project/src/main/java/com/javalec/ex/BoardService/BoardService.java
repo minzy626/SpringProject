@@ -11,6 +11,8 @@ public interface BoardService {
 	public BDto read(Integer bno);
 	
 	public void update(BDto dto);
+	
+	public void write(BDto dto);
 	// 공지사항 조회
 	public List<BDto> listNotice();
 	
