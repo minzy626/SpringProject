@@ -44,10 +44,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/content_view", method= RequestMethod.GET)
-	public void readGET(@RequestParam("bId") Integer bId, 
-						// @ModelAttribute 濡� �뙆�씪誘명꽣瑜� �닔吏묓븯硫� 吏��젙�븳 臾몄옄�뿴濡� �솕硫댁쑝濡쒓퉴吏� �쟾�떖 �맂�떎.
-						@ModelAttribute("spdto") SearchingPageDto spdto, 
-						Model model)
+	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model)
 	{
 		logger.info("readGET is called......");
 		
@@ -56,6 +53,7 @@ public class SearchController {
 		logger.info(" searchType : " + spdto.getbSearchType());
 		logger.info(" keyword : " +spdto.getbKeyword());
 		System.out.println("read:");
+		service.upHit(bId);
 		model.addAttribute("spdto", spdto);
 		model.addAttribute("BDto", service.read(bId));
 	}// readGET()
@@ -101,31 +99,39 @@ public class SearchController {
 			logger.info(" searchType : " + spdto.getbSearchType());
 			logger.info(" keyword : " +spdto.getbKeyword());
 			
-			rttr.addAttribute("page", spdto.getbPage());
-			rttr.addAttribute("perPageNum", spdto.getbPerPageNum());
-			rttr.addAttribute("searchType", spdto.getbSearchType());
-			rttr.addAttribute("keyword", spdto.getbKeyword());
+			rttr.addFlashAttribute("bPage", spdto.getbPage());
+			rttr.addFlashAttribute("bPerPageNum", spdto.getbPerPageNum());
+			rttr.addFlashAttribute("bSearchType", spdto.getbSearchType());
+			rttr.addFlashAttribute("bSearchMType", spdto.getbSearchMType());
+			rttr.addFlashAttribute("bSearchRType", spdto.getbSearchRType());
+			rttr.addFlashAttribute("bKeyword", spdto.getbKeyword());
+			//rttr.addFlashAttribute("spdto", spdto);
+			// 삭제버튼 눌렀을때 기존의 검색조건 가지고있는 원래의 list 페이지로 넘어가는게....안되네요ㅜㅜ 일단 보류....
+//			BPageDto bPage = new BPageDto();
+//			bPage.setSdto(spdto);
+//			bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+//
+//			rttr.addAttribute("bPage", bPage);
 			
 			rttr.addFlashAttribute("msg", "SUCCESS");
-			
 			
 			return "redirect:/list";
 		}// deletePOST()
 
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public void updateGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto,
-			Model model) {
-
-		logger.info("updateGET is called......");
-
-		logger.info(" page : " + spdto.getbPage().toString());
-		logger.info(" perPageNum : " + spdto.getbPerPageNum().toString());
-		logger.info(" searchType : " + spdto.getbSearchType());
-		logger.info(" keyword : " + spdto.getbKeyword());
-
-		model.addAttribute("BDto", service.read(bId));
-
-	}// updateGET()
+//	@RequestMapping(value = "/update", method = RequestMethod.GET)
+//	public void updateGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto,
+//			Model model) {
+//
+//		logger.info("updateGET is called......");
+//
+//		logger.info(" page : " + spdto.getbPage().toString());
+//		logger.info(" perPageNum : " + spdto.getbPerPageNum().toString());
+//		logger.info(" searchType : " + spdto.getbSearchType());
+//		logger.info(" keyword : " + spdto.getbKeyword());
+//
+//		model.addAttribute("BDto", service.read(bId));
+//
+//	}// updateGET()
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updatePOST(BDto Dto, SearchingPageDto spdto, RedirectAttributes rttr) {
@@ -136,17 +142,22 @@ public class SearchController {
 		logger.info(" perPageNum : " + spdto.getbPerPageNum().toString());
 		logger.info(" searchType : " + spdto.getbSearchType());
 		logger.info(" keyword : " + spdto.getbKeyword());
-
+		logger.info(" bTitle : " + Dto.getbTitle());
 		service.update(Dto);
 
-		rttr.addAttribute("bPage", spdto.getbPage());
-		rttr.addAttribute("bPerPageNum", spdto.getbPerPageNum());
-		rttr.addAttribute("bSearchType", spdto.getbSearchType());
-		rttr.addAttribute("bKeyword", spdto.getbKeyword());
+		rttr.addFlashAttribute("bPage", spdto.getbPage());
+		rttr.addFlashAttribute("bPerPageNum", spdto.getbPerPageNum());
+		rttr.addFlashAttribute("bSearchType", spdto.getbSearchType());
+		rttr.addFlashAttribute("bSearchMType", spdto.getbSearchMType());
+		rttr.addFlashAttribute("bSearchRType", spdto.getbSearchRType());
+		rttr.addFlashAttribute("bKeyword", spdto.getbKeyword());
 
 		rttr.addFlashAttribute("updateMsg", "success");
 
 		return "redirect:/list";
 	}// updatePOST()
+	
+//	@RequestMapping(value="/write", method = RequestMethod.POST)
+//	public String write()
 
 }

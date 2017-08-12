@@ -31,4 +31,7 @@ public interface BoardService {
 
 	// 글 삭제하기
 	public void delete(Integer bId);
+	
+	// 조회수 늘리기
+	public void upHit(Integer bId);
 }

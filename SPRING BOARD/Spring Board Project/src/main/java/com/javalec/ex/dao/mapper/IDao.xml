@@ -39,7 +39,7 @@
 		VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
 	</insert>
 
-	<update id="upHit" parameterType="String">
+	<update id="upHit" parameterType="Integer">
 		UPDATE MVC_BOARD SET BHIT =
 		BHIT + 1 WHERE BID = #{param1}
 	</update>

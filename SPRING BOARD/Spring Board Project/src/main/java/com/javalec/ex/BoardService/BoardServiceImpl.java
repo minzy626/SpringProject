@@ -70,4 +70,9 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		dao.delete(bId);
 	}
+	
+	@Override
+	public void upHit(Integer bId) {
+		dao.upHit(bId);
+	}
 }

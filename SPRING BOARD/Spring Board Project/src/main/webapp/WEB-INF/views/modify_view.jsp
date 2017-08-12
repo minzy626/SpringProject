@@ -329,7 +329,7 @@
         </form>
 	
 				
-		<form class="form-horizontal" name="writeform" action="update" role="form" id="write-form" method="post">
+		<form class="form-horizontal" name="writeform" action="update" role="form" id="writeform" method="post">
 		  <div class="form-group">
 		  <div class="col-md-8">
 			<h1>' </h1>
@@ -340,7 +340,7 @@
 			
 			<input type=hidden name="bId" value="${BDto.bId }">
 			<input type="hidden" name="bHit" id="bHit" value="${BDto.bHit }">
-		  	<input type="hidden" name="bTitle" id="bTitle" value="${BDto.bTitle }">
+		  	
 			<!-- Select Basic -->
 			<div class="form-group">
 			  <label class="col-md-1 control-label" for="selectbasic">글 종류</label>
@@ -376,7 +376,6 @@
 		    <label for="bTitle" class="col-md-1 control-label">제 목</label>
 		    <div class="col-md-9">
 		      <input type="text" class="form-control" name="bTitle" id="bTitle" value="${BDto.bTitle}">
-		      
 		    </div>
 		  </div>
 		 
@@ -445,13 +444,12 @@
     $(function(){
 		
 		var formObj = $('form[name="pageInfo"]');
-		
+		var submitFormObj= $('form[name="writeform"]');
 		$(".btn-warning").on("click", function(event){
 			formObj.attr("action", "/ex/list");
 			formObj.attr("method", "get");
 			formObj.submit(); 
 			return false;
-			
 		});
 		
 	});
