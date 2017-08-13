@@ -30,12 +30,10 @@ public class MailController {
 		Map<String, Object> map = model.asMap();
 		UserDto userDto = (UserDto)map.get("resultDto");
 	    
-	    System.out.println(userDto.getbEmail());
-		System.out.println(userDto.getbId());
 	    String setfrom = "springteam11@gmail.com";         
-	    String tomail  = userDto.getbEmail();     // 받는 사람 이메일
-	    String title   = userDto.getbId() + "님의 비밀번호 입니다.";      // 제목
-	    String content = userDto.getbId() + "님의 비밀번호는 " +userDto.getbPass()
+	    String tomail  = userDto.getbId();     // 받는 사람 이메일
+	    String title   = userDto.getbNick() + "님의 비밀번호 입니다.";      // 제목
+	    String content = userDto.getbNick() + "님의 비밀번호는 " +userDto.getbPass()
 	    					+ " 입니다.";    // 내용
 	   
 	    try {

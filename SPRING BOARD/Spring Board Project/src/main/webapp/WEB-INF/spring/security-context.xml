@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:security="http://www.springframework.org/schema/security"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+    
+       
+   
+      <bean id="customUserDetailsService" class="com.javalec.ex.UserService.CustomUserDetailsService">
+      	<property name="sqlsession" ref="sqlsession"></property>
+      </bean>
+      
+     <security:authentication-manager>
+     	<security:authentication-provider user-service-ref ="customUserDetailsService">
+     	</security:authentication-provider>
+     </security:authentication-manager>
+     
+   
+    
+     <security:http use-expressions="true"> 
+          <security:intercept-url pattern="/memberinfo/**" access="isAuthenticated()" />
+          <security:intercept-url pattern="/write_view/**" access="isAuthenticated()" />
+		  <security:intercept-url pattern="/**" access="permitAll" />
+
+                   <security:form-login login-page="/login_view"
+                           login-processing-url="/login"
+                           username-parameter="bId"
+                           password-parameter="bPass"
+                           authentication-failure-url="/login_view?error=true" />
+ 
+                  <security:logout logout-url="/logout" 
+                  				logout-success-url="/index"/>       
+     </security:http>
+           
+           
+     
+     
+ </beans>

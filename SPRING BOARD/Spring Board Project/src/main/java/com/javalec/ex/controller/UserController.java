@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -33,6 +34,11 @@ public class UserController {
 	
 	public UserController() {
 	
+	}
+	
+	@RequestMapping(value="/login_view")
+	public String login_view(Model model) {
+		return "login";
 	}
 	
 	@RequestMapping(value="/find_passView", method = RequestMethod.GET)
@@ -63,7 +69,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/memberinfo")
-	public String memberinfo(Model model,HttpSession httpsession) {
+	public String memberinfo(Model model,Authentication auth) {
+		model.addAttribute("userinfo",auth);
 		return "memberinfo";
 	}
 	

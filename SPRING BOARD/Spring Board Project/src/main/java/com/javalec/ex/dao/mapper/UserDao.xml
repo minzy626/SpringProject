@@ -14,13 +14,14 @@
 		SELECT * FROM USERINFO WHERE bId = #{bId}
 	</select>
 	
+	<select id="find_by_string_id" parameterType="String" resultType="UserDto">
+		SELECT * FROM USERINFO WHERE bId = #{bId}
+	</select>
+	
 	<select id="find_by_nick" parameterType="UserDto" resultType="UserDto">
 		SELECT * FROM USERINFO WHERE bNick = #{bNick}
 	</select>
 	
-	<select id="find_by_email" parameterType="UserDto" resultType="UserDto">
-		SELECT * FROM USERINFO WHERE bEmail = #{bEmail}
-	</select>
 	
 </mapper>
     

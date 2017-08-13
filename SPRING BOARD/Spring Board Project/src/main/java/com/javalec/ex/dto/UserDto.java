@@ -8,7 +8,6 @@ public class UserDto {
 	String bSchool;
 	int bGrade;
 	String bMajor;
-	String bEmail;
 	String bRegion;
 	
 	public UserDto() {
@@ -16,7 +15,7 @@ public class UserDto {
 	}
 	
 	public UserDto(String bId, String bPass, String bNick, String bGender, String bSchool, int bGrade, String bMajor,
-			String bEmail, String bRegion) {
+			 String bRegion) {
 		super();
 		this.bId = bId;
 		this.bPass = bPass;
@@ -25,7 +24,6 @@ public class UserDto {
 		this.bSchool = bSchool;
 		this.bGrade = bGrade;
 		this.bMajor = bMajor;
-		this.bEmail = bEmail;
 		this.bRegion = bRegion;
 	}
 
@@ -71,12 +69,7 @@ public class UserDto {
 	public void setbMajor(String bMajor) {
 		this.bMajor = bMajor;
 	}
-	public String getbEmail() {
-		return bEmail;
-	}
-	public void setbEmail(String bEmail) {
-		this.bEmail = bEmail;
-	}
+
 	public String getbRegion() {
 		return bRegion;
 	}

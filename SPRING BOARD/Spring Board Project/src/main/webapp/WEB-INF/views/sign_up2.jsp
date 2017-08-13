@@ -35,11 +35,11 @@
                 alert("아이디를 입력해 주세요.");
                 return false;
             }
-            
+            <!--
             if(form.idDuplication.value != "idCheck"){
                 alert("아이디 중복체크를 해주세요.");
                 return false;
-            }
+            } -->
             
             if(!form.bPass.value){
                 alert("비밀번호를 입력해 주세요.");
@@ -56,11 +56,11 @@
                 alert("닉네임을 입력해 주세요.");
                 return false;
             }
-            
+            <!--
             if(form.nickDuplication.value != "nickCheck"){
                 alert("닉네임 중복체크를 해주세요.");
                 return false;
-            }
+            }-->
             
             if(form.bRegion.value == ""){
                 alert("지역을 선택해 주세요.");

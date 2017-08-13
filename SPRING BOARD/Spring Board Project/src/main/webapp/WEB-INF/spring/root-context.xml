@@ -5,6 +5,31 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!--https://m.blog.naver.com/PostView.nhn?blogId=racoon_z&logNo=220695568817&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F-->
+	
+	 <!-- mysql 연동 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+			<property  name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+			<property name="url" value="jdbc:mysql://localhost:3306/board?characterEncoding=UTF-8"/>
+			<property name="username" value="root"/> 
+			<property name="password" value="tiger"/> 
+	</bean>   
+	
+	 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:com/javalec/ex/dao/mapper/mybatisConfig.xml"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/javalec/ex/dao/mapper/IDao.xml</value>
+				<value>classpath:com/javalec/ex/dao/mapper/UserDao.xml</value>
+			</list>
+		</property>
+	</bean>     
+	
+    <bean id="sqlsession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	
 	<!-- 메일 보내기 -->
 	<bean id="mailSender" class = "org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="smtp.gmail.com" />

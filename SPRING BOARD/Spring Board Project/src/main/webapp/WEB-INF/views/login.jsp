@@ -47,14 +47,14 @@ function popupOpen(){
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form:form class="form-login" action="login" commandName="userDto">
+		      <form:form class="form-login" action="login" method="post">
 		        <h2 class="form-login-heading">로그인</h2>
 		        <div class="login-wrap">
-		            <input type="text" name="bId" value="${userDto.bId}" class="form-control" placeholder="User ID" >
+		            <input type="text" name="bId" value="${param.bId}" class="form-control" placeholder="이메일 아이디" >
 		            <br>
-		            <input type="password" name="bPass" value="${userDto.bPass}" class="form-control" placeholder="Password">
+		            <input type="password" name="bPass" value="${param.bPass}" class="form-control" placeholder="비밀번호">
 		            <div style="color:red; margin-top:5px ;margin-left:5px">
-		            	<form:errors/>
+		            <c:if test="${param.error == 'true'}">아이디와 비밀번호가 일치하지 않습니다.</c:if>
 		            </div>
 		            <label class="checkbox">
 		                <span class="pull-right">
@@ -85,7 +85,7 @@ function popupOpen(){
 		            <div class="login-social-link centered">
 		            <p>SNS로 로그인 하기</p>
 		            		<a id="kakao-login-btn"></a><a href="http://developers.kakao.com/logout"></a>
-						<script type='text/javascript'>
+					<script type='text/javascript'>
 					  //<![CDATA[
 					    // 사용할 앱의 JavaScript 키를 설정해 주세요.
 					    Kakao.init('66eaa05d85d122328c5e0ddf88073992');

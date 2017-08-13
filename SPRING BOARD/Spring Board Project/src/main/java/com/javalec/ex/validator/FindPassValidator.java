@@ -32,11 +32,11 @@ public class FindPassValidator implements Validator { //비밀번호 찾기 화면에서 �
 			errors.rejectValue("bId", "IdLengthError");
 		
 		//이메일이 올바른 형식인지 검사
-		matcher = pattern.matcher(userDto.getbEmail());
-		if(userDto.getbEmail() == null || userDto.getbEmail().trim().isEmpty())
-			errors.rejectValue("bEmail", "EmailRequired");
+		matcher = pattern.matcher(userDto.getbId());
+		if(userDto.getbId() == null || userDto.getbId().trim().isEmpty())
+			errors.rejectValue("bId", "IdRequired");
 		else if(!matcher.matches()) //사용자가 입력한 이메일이 정규표현식에 매치 되지않는다면
-			errors.rejectValue("bEmail", "bad");
+			errors.rejectValue("bId", "bad");
 			
 		
 	}

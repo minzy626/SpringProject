@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +21,7 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">${userinfo.bId}님의 프로필 정보</h3>
+              <h3 class="panel-title"><security:authentication property="principal.bNick"/>님의 프로필 정보</h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -42,12 +43,12 @@
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td>닉네임:</td>
-                        <td>${userinfo.bNick}</td>
+                        <td>이메일:</td>
+                        <td><security:authentication property="principal.bId"/></td>
                       </tr>                 
                       <tr>
                         <td>학교:</td>
-                        <td>${userinfo.bSchool}</td>
+                        <td><security:authentication property="principal.bSchool"/></td>
                       </tr>
                    
                          <tr>
@@ -55,16 +56,16 @@
                       </tr>
                         <tr>
                         <td>학년:</td>
-                        <td>${userinfo.bGrade}</td>
+                        <td><security:authentication property="principal.bGrade"/></td>
                       </tr>
                       <tr>
                         <td>전공:</td>
-                        <td>${userinfo.bMajor}</td>
+                        <td><security:authentication property="principal.bMajor"/></td>
                            
                       </tr>
                       <tr>
-                        <td>이메일 주소:</td>
-                        <td><a href="mailto:info@support.com">${userinfo.bEmail}</a></td>
+                        <td>성별:</td>
+                        <td><security:authentication property="principal.bGender"/></a></td>
                       </tr>
                       
                      
