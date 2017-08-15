@@ -26,18 +26,12 @@ public class FindPassValidator implements Validator { //ºñ¹Ğ¹øÈ£ Ã£±â È­¸é¿¡¼­ À
 	public void validate(Object target, Errors errors) {
 		UserDto userDto = (UserDto)target;
 		String id = userDto.getbId();
+		matcher = pattern.matcher(userDto.getbId());
+		
 		if(id == null || id.trim().isEmpty())
 			errors.rejectValue("bId", "IdRequired");
-		else if(id.length()<5 || id.length()>15 || id.matches(".*[¤¡-¤¾¤¿-¤Ó°¡-ÆR]+.*"))
-			errors.rejectValue("bId", "IdLengthError");
-		
-		//ÀÌ¸ŞÀÏÀÌ ¿Ã¹Ù¸¥ Çü½ÄÀÎÁö °Ë»ç
-		matcher = pattern.matcher(userDto.getbId());
-		if(userDto.getbId() == null || userDto.getbId().trim().isEmpty())
-			errors.rejectValue("bId", "IdRequired");
-		else if(!matcher.matches()) //»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ÀÌ¸ŞÀÏÀÌ Á¤±ÔÇ¥Çö½Ä¿¡ ¸ÅÄ¡ µÇÁö¾Ê´Â´Ù¸é
+		else if(!matcher.matches())
 			errors.rejectValue("bId", "bad");
-			
 		
 	}
 

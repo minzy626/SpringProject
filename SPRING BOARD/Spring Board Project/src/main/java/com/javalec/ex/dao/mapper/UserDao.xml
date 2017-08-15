@@ -22,6 +22,9 @@
 		SELECT * FROM USERINFO WHERE bNick = #{bNick}
 	</select>
 	
+	<update id="update_pass_by_id" parameterType="UserDto">
+		UPDATE USERINFO SET bPass = #{bPass} WHERE bId = #{bId}
+	</update>
 	
 </mapper>
     

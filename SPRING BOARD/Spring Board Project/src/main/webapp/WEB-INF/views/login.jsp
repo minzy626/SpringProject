@@ -25,7 +25,7 @@ function popupOpen(){
 
 	var popUrl = "find_passView";	//팝업창에 출력될 페이지 URL
 
-	var popOption = "width=460, height=325, resizable=no, scrollbars=no, status=no,menubar=no,resizable=no;";    //팝업창 옵션(optoin)
+	var popOption = "width=460, height=250, resizable=no, scrollbars=no, status=no,menubar=no,resizable=no;";    //팝업창 옵션(optoin)
 
 		window.open(popUrl,"",popOption);
 
@@ -59,7 +59,6 @@ function popupOpen(){
 		            <label class="checkbox">
 		                <span class="pull-right">
 		                    <a href="javascript:popupOpen();"> 비밀번호를 잊어버리셨습니까?</a>
-		
 		                </span>
 		            </label>
 		               <script type="text/javascript">
@@ -83,7 +82,8 @@ function popupOpen(){
 		            <button class="btn btn-theme btn-block" href="index.html" onclick="return checkValue()" type="submit"><i class="fa fa-lock"></i> 로그인</button>
 		            <hr>
 		            <div class="login-social-link centered">
-		            <p>SNS로 로그인 하기</p>
+		            
+		            <!-- <p>SNS로 로그인 하기</p>
 		            		<a id="kakao-login-btn"></a><a href="http://developers.kakao.com/logout"></a>
 					<script type='text/javascript'>
 					  //<![CDATA[
@@ -103,7 +103,8 @@ function popupOpen(){
 					</script>
 		            <br/> <br/>
 		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> 페이스북</button>
-		            </div>
+		            </div> -->
+		            
 		            <div class="registration">
 		            		               아직 계정이 없으십니까?<br/>
 		                <a class="" href="sign_up.html">

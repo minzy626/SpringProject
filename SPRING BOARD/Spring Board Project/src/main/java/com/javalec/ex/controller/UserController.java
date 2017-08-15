@@ -31,6 +31,10 @@ public class UserController {
 	
 	@Autowired
 	SqlSession sqlsession;
+	@Autowired
+	RegisterService registerService;
+	@Autowired
+	FindpassService findpassService;
 	
 	public UserController() {
 	
@@ -51,18 +55,14 @@ public class UserController {
 		new FindPassValidator().validate(userDto, errors);
 		if(errors.hasErrors())
 			return "find_passView";
-		
-		FindpassService service = new FindpassService();
-		
+			
 		try {
-			UserDto resultDto = service.execute(sqlsession, userDto);
+			UserDto resultDto = findpassService.execute(sqlsession, userDto);
 			redirectattr.addFlashAttribute("resultDto",resultDto); 
 			return "redirect:sendpass";
 		}catch(Exception e)
 		{
-			errors.reject("IDPASSNOTMATCH");
-			errors.reject("bId","IDNotExist");
-			errors.reject("IdEmailNotMatch");
+			errors.reject("IDNotExist");
 			return "find_passView"; 
 		}
 		
@@ -88,8 +88,7 @@ public class UserController {
 	@RequestMapping(value="/register" ,method = RequestMethod.POST) //회원가입 완료
 	public String register(HttpServletRequest request,UserDto userDto)
 	{
-		RegisterService service = new RegisterService();
-		service.execute(sqlsession,userDto);
+		registerService.execute(sqlsession,userDto);
 		return "redirect:index"; 
 	}
 	

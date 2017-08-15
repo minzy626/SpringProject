@@ -8,14 +8,24 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
     
-       
+      <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> 
    
       <bean id="customUserDetailsService" class="com.javalec.ex.UserService.CustomUserDetailsService">
       	<property name="sqlsession" ref="sqlsession"></property>
       </bean>
       
+      <bean id="registerService" class="com.javalec.ex.UserService.RegisterService">
+      	<property name="passwordEncoder" ref="passwordEncoder"></property>
+      </bean>
+      
+      <bean id="findpassService" class="com.javalec.ex.UserService.FindpassService">
+      	<property name="passwordEncoder" ref="passwordEncoder"></property>
+   	  </bean>
+   	  
+   	  
      <security:authentication-manager>
      	<security:authentication-provider user-service-ref ="customUserDetailsService">
+     		<security:password-encoder ref="passwordEncoder"/>
      	</security:authentication-provider>
      </security:authentication-manager>
      

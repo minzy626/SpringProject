@@ -33,8 +33,8 @@ public class MailController {
 	    String setfrom = "springteam11@gmail.com";         
 	    String tomail  = userDto.getbId();     // 받는 사람 이메일
 	    String title   = userDto.getbNick() + "님의 비밀번호 입니다.";      // 제목
-	    String content = userDto.getbNick() + "님의 비밀번호는 " +userDto.getbPass()
-	    					+ " 입니다.";    // 내용
+	    String content = userDto.getbNick() + "님의 임시 비밀번호는 " +userDto.getbPass()
+	    					+ " 입니다.\n 로그인 후 반드시 비밀번호를 수정해 주시기 바랍니다.";    // 내용
 	   
 	    try {
 	      MimeMessage message = mailSender.createMimeMessage();
