@@ -446,10 +446,12 @@
 		var formObj = $('form[name="pageInfo"]');
 		var submitFormObj= $('form[name="writeform"]');
 		$(".btn-warning").on("click", function(event){
-			formObj.attr("action", "/ex/list");
-			formObj.attr("method", "get");
-			formObj.submit(); 
-			return false;
+			if(confirm("작성을 취소하고 목록으로 돌아갑니다.")){
+				formObj.attr("action", "/ex/list");
+				formObj.attr("method", "get");
+				formObj.submit(); 
+				return false;
+			}
 		});
 		
 	});

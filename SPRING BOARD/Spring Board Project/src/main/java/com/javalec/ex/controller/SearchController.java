@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalec.ex.BoardService.BoardService;
+import com.javalec.ex.BoardService.CommentService;
 import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.BPageDto;
 import com.javalec.ex.dto.SearchingPageDto;
@@ -22,6 +23,8 @@ public class SearchController {
 
 	@Inject
 	BoardService service;
+	@Inject
+	CommentService cService;
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
@@ -56,6 +59,7 @@ public class SearchController {
 		service.upHit(bId);
 		model.addAttribute("spdto", spdto);
 		model.addAttribute("BDto", service.read(bId));
+		model.addAttribute("commentList", cService.cListAll(bId));
 	}// readGET()
 	
 	@RequestMapping(value="/modify_view", method= RequestMethod.GET)
