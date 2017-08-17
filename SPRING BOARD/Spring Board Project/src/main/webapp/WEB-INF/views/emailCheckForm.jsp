@@ -43,7 +43,7 @@
             	return false;
         	}
             
-            opener.document.userInfo.bNumcheck.value = document.getElementById("number").value;
+            opener.document.userInfo.bNumcheck.value = document.getElementById("certNumber").value;
             
         }
    </script>
@@ -76,7 +76,7 @@
             </form:form>
             <br>
             
-            <form:form id="number" role="form" action="email_certify_confirm" method="post">
+            <form:form id="number" name="number" role="form" action="email_certify_confirm" method="post">
         	<div class="form-group">
             <div class="col-sm-6 text-center">
             	<div class="input-group">          

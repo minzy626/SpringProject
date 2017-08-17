@@ -85,7 +85,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/sign_up2", method = RequestMethod.POST)//회원가입
-	public String sign_up2(Model model) {
+	public String sign_up2(Model model, HttpSession session) {
 		return "sign_up2";
 	}
 	
@@ -119,10 +119,10 @@ public class UserController {
 		}
 		
 		String success = (String)session.getAttribute("success");
+		System.out.println(success);
 		
 		try {
 			if(success.equals("success")) {
-				
 				RegisterService service = new RegisterService();
 				service.execute(sqlsession,userDto);
 
@@ -130,7 +130,8 @@ public class UserController {
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('회원가입이 완료 되었습니다.');</script>");
 				out.flush();
-				    
+				  
+				session.invalidate();
 				return "index";
 			}
 			else {
@@ -275,6 +276,7 @@ public class UserController {
 			return "withdrawForm"; 
 		}
 		
+		session.invalidate();
 		return "index";
 	}
 }

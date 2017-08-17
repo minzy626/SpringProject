@@ -30,16 +30,12 @@
     
  <!-- 미입력 찾기 함수 -->
     <script type="text/javascript">
-    $(document).ready(function() {
-/*     	var hRegion = <security:authentication property="principal.bRegion"/>;
-    	var hGender = <security:authentication property="principal.bGender"/>;
-    	var hGrade = <security:authentication property="principal.bGrade"/>;
-     */	
-        $("#bRegion").val(<security:authentication property="principal.bRegion"/>);
+     $(document).ready(function() {
+        $("#bRegion").val("${principal.bRegion}");
         $("#bGender").val(<security:authentication property="principal.bGender"/>);
         $("#bGrade").val(<security:authentication property="principal.bGrade"/>);
         // you need to specify id of combo to set right combo, if more than one combo
-    });
+     });
         function checkValue()
         {
             var form = document.userInfo;
@@ -81,7 +77,6 @@
             window.open("withdrawForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
         }
-
   </script>
   </head>
 
@@ -347,7 +342,7 @@
 			
 			<div class="col-md-12">
 			<div class="page-header">
-			<h1>회원가입</h1>
+			<h1>회원정보 수정</h1>
 			</div>
 			<form:form class="form-horizontal" action="user_modify_confirm" method="POST" name="userInfo" commandName = "userDto" >
 					
@@ -400,6 +395,7 @@
 			<label class="col-sm-3 control-label">지역</label>
 			<div class="row">
 			<div class="col-sm-6">
+			<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
 				<select class="form-control" name="bRegion" id="bRegion">
 					<option value="">시/도 선택</option>
     				<option value="서울특별시">서울특별시</option>
@@ -420,7 +416,8 @@
     				<option value="경상남도">경상북도</option>
     				<option value="제주특별자치도">경상북도</option>
 				</select>
-				<input type="hidden" name="hRegion" id="hRegion" value="<security:authentication property="principal.bRegion"/>">
+ 				<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
+<%-- 				<input type="hidden" name="hRegion" id="hRegion" value="<security:authentication property="principal.bRegion"/>"> --%>
 			</div>
 			</div>
 			</div>
@@ -480,7 +477,7 @@
 			<div class="form-group">
 			<div class="col-sm-12 text-center">
 				<button class="btn btn-primary" type="submit" onclick="return checkValue()">회원수정<i class="fa fa-check spaceLeft"></i></button>
-				<button class="btn btn-warning" type="button" onclick="return MemberWithdraw()">회원탈퇴<i class="fa fa-times spaceLeft"></i></button>
+				<button class="btn btn-warning" type="button" onclick="MemberWithdraw()">회원탈퇴<i class="fa fa-times spaceLeft"></i></button>
             	<button class="btn btn-danger" type="reset" onclick="location.href='index'">취소</button>
 			</div>
 			</div>
