@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -28,44 +29,18 @@
     <script src="assets/js/chart-master/Chart.js"></script>
     
  <!-- 미입력 찾기 함수 -->
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-/*      $(document).ready(function() {
-    	$('#bRegion').change(function() {
-       		$("#bRegion").val("${userDto.bRegion}");
-    	});
-    	$('#bRegion').change(function() {
-        	$("#bGender").val("${userDto.bGender}");
-    	});
-        $('#bRegion').change(function() {
-        	$("#bGrade").val("${userDto.bGrade}");
-        });
-        // you need to specify id of combo to set right combo, if more than one combo
-    	
-    });  */
-    </script>
-    
     <script type="text/javascript">
-    $(document).ready(function() {
-        $("#bRegion").val("${userDto.bRegion}");
-        $("#bGender").val("${userDto.bGender}");
-        $("#bGrade").val("${userDto.bGrade}");
+     $(document).ready(function() {
+        $("#bRegion").val("${principal.bRegion}");
+        $("#bGender").val(<security:authentication property="principal.bGender"/>);
+        $("#bGrade").val(<security:authentication property="principal.bGrade"/>);
         // you need to specify id of combo to set right combo, if more than one combo
-    });
+     });
         function checkValue()
         {
             var form = document.userInfo;
-        
-            if(!form.bId.value){
-                alert("아이디를 입력해 주세요.");
-                return false;
-            }
             
-            if(!form.bPass.value){
-                alert("비밀번호를 입력해 주세요.");
-                return false;
-            }
-            
-            if(form.bPass.value.length < 8){
+            if(form.bPass.value.length < 8 && form.bPass.value.length > 0){
                 alert("비밀번호를 8자 이상으로 입력해 주세요.");
                 return false;
             }
@@ -74,22 +49,12 @@
                 alert("비밀번호를 동일하게 입력해 주세요.");
                 return false;
             }    
-            
-            if(!form.bNick.value){
-                alert("닉네임을 입력해 주세요.");
-                return false;
-            }
            
-            
             if(form.bRegion.value == ""){
                 alert("지역을 선택해 주세요.");
                 return false;
             }
-            
-            if(form.bGender.value == ""){
-                alert("성별을 선택해 주세요.");
-                return false;
-            }
+
             
             if(!form.bSchool.value){
                 alert("학교를 입력해 주세요.");
@@ -106,18 +71,12 @@
                 return false;
             }
             
-             if(!form.bNumcheck.value){
-            	alert("인증번호를 입력해 주세요.");
-            	return false;
-        	}
-
         }
-        function SendCheckNumber(){
+        function MemberWithdraw(){
         	window.name = "parentForm";
-            window.open("emailCheckForm",
+            window.open("withdrawForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
         }
-
   </script>
   </head>
 
@@ -383,9 +342,9 @@
 			
 			<div class="col-md-12">
 			<div class="page-header">
-			<h1>회원가입</h1>
+			<h1>회원정보 수정</h1>
 			</div>
-			<form:form class="form-horizontal" action="register" method="POST" name="userInfo" commandName = "userDto" >
+			<form:form class="form-horizontal" action="user_modify_confirm" method="POST" name="userInfo" commandName = "userDto" >
 					
 			<!-- 아이디 입력 -->
 			
@@ -393,29 +352,29 @@
 			<label class="col-sm-3 control-label">아이디</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input type="text" class="form-control" name="bId" value="${userDto.bId}" placeholder="아이디"/> <!-- onkeydown="inputIdChk()" -->
-				<p class="help-block">본인의 이메일을 입력해주세요.</p>
+				<input type="text" class="form-control" value="<security:authentication property="principal.bId"/>" disabled/>
+				<input type="hidden" name="bId" id="bId" value="<security:authentication property="principal.bId"/>">
 			</div>
 			</div>
 			</div>
 					
 			<!-- 비밀번호 입력 -->
 			<div class="form-group">
-			<label class="col-sm-3 control-label">비밀번호</label>
+			<label class="col-sm-3 control-label">새 비밀번호</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bPass" type="password" value="${userDto.bPass}" placeholder="비밀번호">
-				<p class="help-block">숫자, 영어 포함 8자 이상</p>
+				<input class="form-control" name="bPass" type="password" placeholder="비밀번호">
+				<p class="help-block">비밀번호를 변경하시려면 입력하세요(숫자, 영어 포함 8자 이상)</p>
 			</div>
 			</div>
 			</div>
 					
 			<!-- 비밀번호 입력 확인-->
 			<div class="form-group">
-			<label class="col-sm-3 control-label">비밀번호 확인</label>
+			<label class="col-sm-3 control-label">새 비밀번호 확인</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bPassCheck" type="password" value="${userDto.bPass}" placeholder="비밀번호 확인">
+				<input class="form-control" name="bPassCheck" type="password" placeholder="비밀번호 확인">
 				<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
 			</div>
 			</div>
@@ -426,7 +385,7 @@
             <label class="col-sm-3 control-label">닉네임</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bNick" type="text" value="${userDto.bNick}" placeholder="닉네임">
+				<input class="form-control" name="bNick" type="text" value="<security:authentication property="principal.bNick"/>" disabled>
 			</div>
 			</div>
 			</div>
@@ -436,6 +395,7 @@
 			<label class="col-sm-3 control-label">지역</label>
 			<div class="row">
 			<div class="col-sm-6">
+			<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
 				<select class="form-control" name="bRegion" id="bRegion">
 					<option value="">시/도 선택</option>
     				<option value="서울특별시">서울특별시</option>
@@ -456,6 +416,8 @@
     				<option value="경상남도">경상북도</option>
     				<option value="제주특별자치도">경상북도</option>
 				</select>
+ 				<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
+<%-- 				<input type="hidden" name="hRegion" id="hRegion" value="<security:authentication property="principal.bRegion"/>"> --%>
 			</div>
 			</div>
 			</div>
@@ -470,6 +432,7 @@
     				<option value="남">남</option>
    					<option value="여">여</option>
 				</select>
+				<input type="hidden" name="hGender" id="hGender" value="<security:authentication property="principal.bGender"/>">
 			</div>
 			</div>
 			</div>
@@ -479,7 +442,7 @@
             <label class="col-sm-3 control-label">학교</label>
             <div class="row">
 				<div class="col-sm-3">
-             	<input class="form-control" name="bSchool" type="text" value="${userDto.bSchool}" placeholder="학교 이름">
+             	<input class="form-control" name="bSchool" type="text" value="<security:authentication property="principal.bSchool"/>" placeholder="학교 이름">
           		</div>
 				<div class="col-sm-2">
    				<select class="form-control" name="bGrade" id="bGrade">
@@ -490,6 +453,7 @@
     				<option value="4">4학년</option>
     				<option value="5">5학년이상</option>
 				</select>
+				<input type="hidden" name="hGrade" id="hGrade" value="<security:authentication property="principal.bGrade"/>">
           		</div>
           	</div>
 			</div>
@@ -499,39 +463,22 @@
             <label class="col-sm-3 control-label">전공</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bMajor" type="text" placeholder="전공" value="${userDto.bMajor}">
+				<input class="form-control" name="bMajor" type="text" placeholder="전공" value="<security:authentication property="principal.bMajor"/>">
 			</div>
 			</div>
 			</div>
-			
-			<!-- 인증번호 입력--> 
- 			<div class="form-group">
-			<label class="col-sm-3 control-label">인증번호 확인</label>
-			<div class="row">
-			<div class="col-sm-6">
-            	<div class="input-group">
-					<input class="form-control" name="bNumcheck" id="bNumcheck" type="text" placeholder="인증번호">
-					<span class="input-group-btn">
-						<button class="btn btn-success" type="button" onclick="SendCheckNumber()">인증번호 전송<i class="fa fa-edit spaceLeft"></i></button>
-					</span>
-           		</div>
-            <p class="help-block">아이디(이메일)로 전송된 인증번호를 입력해주세요.</p>
-          	</div>
-          	</div>
-        	</div>
         	
 			<div class="col-sm-12 text-center">
 	        <div style="color:red ; margin-top:2px" >
-	        	<form:errors path="bId"/>
-	        	<form:errors path="bNick"/>
 	            <form:errors/>
 	        </div>
 	        </div>
           
 			<div class="form-group">
 			<div class="col-sm-12 text-center">
-				<button class="btn btn-primary" type="submit" onclick="return checkValue()">회원가입<i class="fa fa-check spaceLeft"></i></button>
-            	<button class="btn btn-danger" type="reset" onclick="location.href='index'">가입취소<i class="fa fa-times spaceLeft"></i></button>
+				<button class="btn btn-primary" type="submit" onclick="return checkValue()">회원수정<i class="fa fa-check spaceLeft"></i></button>
+				<button class="btn btn-warning" type="button" onclick="MemberWithdraw()">회원탈퇴<i class="fa fa-times spaceLeft"></i></button>
+            	<button class="btn btn-danger" type="reset" onclick="location.href='index'">취소</button>
 			</div>
 			</div>
 			</form:form>

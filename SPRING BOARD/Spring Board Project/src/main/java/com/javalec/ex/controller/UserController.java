@@ -1,5 +1,6 @@
 package com.javalec.ex.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -17,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.javalec.ex.UserService.EmailCertifyService;
 import com.javalec.ex.UserService.FindpassService;
 import com.javalec.ex.UserService.IdDuplicationService;
 import com.javalec.ex.UserService.NickDuplicationService;
 import com.javalec.ex.UserService.RegisterService;
+import com.javalec.ex.UserService.UserModifyService;
+import com.javalec.ex.UserService.WithdrawService;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
@@ -81,105 +85,198 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/sign_up2", method = RequestMethod.POST)//회원가입
-	public String sign_up2(Model model) {
+	public String sign_up2(Model model, HttpSession session) {
 		return "sign_up2";
 	}
 	
 	@RequestMapping(value="/register" ,method = RequestMethod.POST) //회원가입 완료
-	public String register(HttpServletRequest request,UserDto userDto)
-	{
-		registerService.execute(sqlsession,userDto);
-		return "redirect:index"; 
-	}
-	
-	@RequestMapping(value="/idCheckForm", method = RequestMethod.GET)//아이디 중복체크 창
-	public String idCheckForm(Model model) {
-		return "idCheckForm";
-	}
-	
-	@RequestMapping(value="/id_duplication_check", method = RequestMethod.POST)
-	public String duplication_check(UserDto userDto,RedirectAttributes redirectattr,Errors errors) {
+	public String register(HttpServletRequest request, HttpServletResponse response, UserDto userDto, Errors errors, HttpSession session){
 		new IdDuplicationValidator().validate(userDto, errors);
 		if(errors.hasErrors()) 
-			return "idCheckForm";
+			return "sign_up2";
 		
-		IdDuplicationService service = new IdDuplicationService();
-		
+		IdDuplicationService idservice = new IdDuplicationService();
 		try {
-			UserDto resultDto = service.execute(sqlsession, userDto);
-			redirectattr.addFlashAttribute("resultDto",resultDto); 
-			return "redirect:/idCheckForm/id_check_confirm";
+			idservice.execute(sqlsession, userDto);
 		}catch(Exception e)
 		{
 			errors.reject("IDExist");
-			return "idCheckForm"; 
+			return "sign_up2"; 
 		}
 		
-	}
-	
-	//닉네임 중복체크
-	@RequestMapping(value="/idCheckForm/id_check_confirm", method = RequestMethod.GET)
-	public String id_check_confirm(Model model, HttpServletResponse response) {
-		Map<String, Object> map = model.asMap();
-		UserDto userDto = (UserDto)map.get("resultDto");
-		
-		if(userDto == null) {
-			try {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('사용할 수 있는 계정입니다.');history.go(-1);</script>");
-				out.println("<script>opener.document.userInfo.idDuplication.value =\"idCheck\";</script>");				
-				out.flush();
-			} catch(Exception e){
-				System.out.println(e);
-			}
-		}
-
-		return "idCheckForm";
-	}
-	
-	@RequestMapping(value="/nickCheckForm", method = RequestMethod.GET)//닉네임 중복체크 창
-	public String nickCheckForm(Model model) {
-		return "nickCheckForm";
-	}
-	
-	@RequestMapping(value="/nick_duplication_check", method = RequestMethod.POST)
-	public String nick_duplication_check(UserDto userDto,RedirectAttributes redirectattr,Errors errors) {
 		new NickDuplicationValidator().validate(userDto, errors);
 		if(errors.hasErrors()) 
-			return "nickCheckForm";
+			return "sign_up2";
 		
-		NickDuplicationService service = new NickDuplicationService();
+		NickDuplicationService nickservice = new NickDuplicationService();
 		
 		try {
-			UserDto resultDto = service.execute(sqlsession, userDto);
-			redirectattr.addFlashAttribute("resultDto",resultDto); 
-			return "redirect:/nickCheckForm/nick_check_confirm";
+			nickservice.execute(sqlsession, userDto);
 		}catch(Exception e)
 		{
 			errors.reject("NickExist");
-			return "nickCheckForm"; 
+			return "sign_up2"; 
+		}
+		
+		String success = (String)session.getAttribute("success");
+		System.out.println(success);
+		
+		try {
+			if(success.equals("success")) {
+				RegisterService service = new RegisterService();
+				service.execute(sqlsession,userDto);
+
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('회원가입이 완료 되었습니다.');</script>");
+				out.flush();
+				  
+				session.invalidate();
+				return "index";
+			}
+			else {
+				errors.reject("FailCertify");
+				return "sign_up2"; 
+			}
+		} catch (Exception e) {
+			errors.reject("NotCertify");
+			return "sign_up2"; 
+		}
+
+	}
+	@RequestMapping(value="/emailCheckForm", method = RequestMethod.GET)//이메일 인증번호창
+	public String emailCheckForm(Model model, HttpSession session) {
+		return "emailCheckForm";
+	}
+	
+	@RequestMapping(value="/email_certify", method = RequestMethod.POST)
+	public String email_certify(HttpServletRequest request, HttpServletResponse response, UserDto userDto, RedirectAttributes redirectattr, Errors errors, HttpSession session) {
+		EmailCertifyService service = new EmailCertifyService();
+
+		try {
+			UserDto resultDto = service.execute(sqlsession, userDto);
+			redirectattr.addFlashAttribute("resultDto", resultDto); 
+			redirectattr.addFlashAttribute("userDto", userDto);
+			return "redirect:/email_certify_send";
+		}catch(Exception e)
+		{
+			errors.reject("IDExist");
+			return "emailCheckForm"; 
 		}
 		
 	}
 	
-	@RequestMapping(value="/nickCheckForm/nick_check_confirm", method = RequestMethod.GET)
-	public String nick_check_confirm(Model model, HttpServletResponse response) {
-		Map<String, Object> map = model.asMap();
-		UserDto userDto = (UserDto)map.get("resultDto");
+	@RequestMapping(value="/email_certify_confirm", method = RequestMethod.POST)
+	public String email_certification_check(Model model, HttpServletResponse response, HttpServletRequest request, HttpSession session) {
+		String certifyNum = (String)session.getAttribute("certifyNum");
+		String certNumber = (String)request.getParameter("certNumber");
+		String success = "fail";
 		
-		if(userDto == null) {
+		if(certifyNum.equals(certNumber) && certNumber != null) {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('사용할 수 있는 닉네임입니다.');history.go(-1);</script>");
-				out.println("<script>opener.document.userInfo.nickDuplication.value =\"nickCheck\";</script>");				
+				out.println("<script>alert('인증에 성공하셨습니다.');history.go(-1);</script>");
+				out.println("<script>self.close();history.go(-1);</script>");		
 				out.flush();
+				success = "success";
 			} catch(Exception e){
 				System.out.println(e);
 			}
 		}
 
-		return "nickCheckForm";
+		session.setAttribute("success", success);
+		return "emailCheckForm";
+	}
+	
+	@RequestMapping(value="/memberModify", method = RequestMethod.GET)
+	public String memberModify(Model model, HttpSession session) {
+		return "memberModify2";
+	}
+	
+	@RequestMapping(value="/memberModify2", method = RequestMethod.POST)
+	public String memberModify2(Model model, HttpSession session) {
+		return "memberModify2";
+	}
+	
+	@RequestMapping(value="/user_modify", method = RequestMethod.POST)
+	public String user_modify(UserDto userDto,Errors errors,HttpSession httpSession,HttpServletResponse response)
+	{
+/*		LogInService logInService = new LogInService();
+		
+		try {
+			logInService.login(sqlsession,userDto);
+		} catch (Exception e) {
+			errors.reject("IDPASSNOTMATCH");
+			return "memberModify";
+		}*/
+	    return "memberModify2";
+	}
+	
+	@RequestMapping(value="/user_modify_confirm", method = RequestMethod.POST)
+	public String user_modify_confirm(UserDto userDto,Errors errors,HttpSession httpSession,HttpServletResponse response) throws IOException
+	{
+		UserModifyService service = new UserModifyService();
+		service.execute(sqlsession,userDto);
+		
+		response.setContentType("text/html; charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    out.println("<script>alert('회원정보 수정을 완료 하였습니다.');</script>");
+	    out.flush();
+	    
+		return "index"; 
+	}
+	
+	@RequestMapping(value="/withdrawForm", method = RequestMethod.GET)
+	public String withdrawForm(Model model, HttpSession session) {
+		return "withdrawForm";
+	}
+
+	@RequestMapping(value="/withdraw_certify", method = RequestMethod.POST)
+	public String withdraw_certify(HttpServletRequest request, HttpServletResponse response, UserDto userDto, RedirectAttributes redirectattr, Errors errors, HttpSession session) {
+		
+		try {
+			redirectattr.addFlashAttribute("userDto", userDto);
+			return "redirect:/withdraw_certify_send";
+		}catch(Exception e)
+		{
+			System.out.println(e);
+			return "withdrawForm"; 
+		}
+		
+	}
+	
+	@RequestMapping(value="/withdraw_certify_confirm", method = RequestMethod.POST)
+	public String withdraw_certify_confirm(Model model, HttpServletResponse response, HttpServletRequest request, HttpSession session){
+		String certifyNum = (String)session.getAttribute("certifyNum");
+		String certNumber = (String)request.getParameter("certNumber");
+		String dropId = (String)request.getParameter("dropId");
+		UserDto userDto = new UserDto();
+		userDto.setbId(dropId);
+		
+		if(certifyNum.equals(certNumber) && certNumber != null) {
+			
+			try {
+				WithdrawService service = new WithdrawService();
+				service.execute(sqlsession,userDto);
+					
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('회원탈퇴를 완료하였습니다.');history.go(-1);</script>");
+				out.println("<script>opener.location.href=\"index\";history.go(-1);</script>");	
+				out.println("<script>self.close();history.go(-1);</script>");		
+				out.flush();
+				
+			} catch (Exception e) {
+				System.out.println(e);
+				return "withdrawForm";
+			}
+		}
+		else {
+			return "withdrawForm"; 
+		}
+		
+		session.invalidate();
+		return "index";
 	}
 }
