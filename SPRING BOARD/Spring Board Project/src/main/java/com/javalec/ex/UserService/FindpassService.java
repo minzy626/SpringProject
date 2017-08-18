@@ -25,7 +25,7 @@ public class FindpassService {
 			
 			//예외가 발생하지 않았을 경우 랜덤값을 암호화해서 데이터베이스에 비밀번호 업데이트해줌.
 			double randomvalue = Math.random();
-			int random = (int)(randomvalue * 100000) +1;
+			int random = (int)(randomvalue * 1000000) +1;
 			String password = passwordEncoder.encode(String.valueOf(random));
 			
 			resultdto.setbPass(password); //암호화된 비밀번호를 디비에 저장해줌.
