@@ -4,11 +4,49 @@ public class SearchingPageDto extends BSearchDto{
 
 	
 	private String bSearchType;	// 검색 타입
-	private String bSearchMType; // 모임 분류 타입
+	private String bMeetingGroup; // 모임 분류 타입
 	private String bSearchRType; // 지역 분류 타입
 	private String bKeyword;	// 검색 키워드
+	private String bStudyGroup;
+	private String bCategory;
 	
 	
+	public String getbStudyGroup() {
+		return bStudyGroup;
+	}
+
+
+
+	public void setbStudyGroup(String bStudyGroup) {
+		this.bStudyGroup = bStudyGroup;
+	}
+
+
+
+	public String getbCategory() {
+		return bCategory;
+	}
+
+
+
+	public void setbCategory(String bCategory) {
+		this.bCategory = bCategory;
+	}
+
+
+
+	public void setbMeetingGroup(String bMeetingGroup) {
+		this.bMeetingGroup = bMeetingGroup;
+	}
+
+
+
+	public String getbMeetingGroup() {
+		return bMeetingGroup;
+	}
+
+
+
 	public String getbSearchType() {
 		return bSearchType;
 	}
@@ -33,17 +71,6 @@ public class SearchingPageDto extends BSearchDto{
 
 
 
-	public String getbSearchMType() {
-		return bSearchMType;
-	}
-
-
-
-	public void setbSearchMType(String bSearchMType) {
-		this.bSearchMType = bSearchMType;
-	}
-
-
 
 	public String getbSearchRType() {
 		return bSearchRType;
@@ -61,4 +88,8 @@ public class SearchingPageDto extends BSearchDto{
 	public String toString() {
 		return "SearchingPageDto [bSearchType=" + bSearchType + ", bKeyword=" + bKeyword + "]";
 	}
+
+
+
+
 }

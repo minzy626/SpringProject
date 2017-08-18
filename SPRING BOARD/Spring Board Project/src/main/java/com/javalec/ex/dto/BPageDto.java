@@ -24,7 +24,9 @@ public class BPageDto {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("bPage", bPage)
 				.queryParam("bPerPageNum", sdto.getbPerPageNum())
 				.queryParam("bSearchType", ((SearchingPageDto) sdto).getbSearchType())
-				.queryParam("bSearchMType", ((SearchingPageDto) sdto).getbSearchMType())
+				.queryParam("bMeetingGroup", ((SearchingPageDto) sdto).getbMeetingGroup())
+				.queryParam("bCategory", ((SearchingPageDto) sdto).getbCategory())
+				.queryParam("bStudyGroup", ((SearchingPageDto) sdto).getbStudyGroup())
 				.queryParam("bSearchRType", ((SearchingPageDto) sdto).getbSearchRType())
 				.queryParam("bKeyword", ((SearchingPageDto) sdto).getbKeyword()).build();
 

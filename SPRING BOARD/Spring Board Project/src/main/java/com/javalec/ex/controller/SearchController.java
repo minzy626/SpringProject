@@ -102,7 +102,7 @@ public class SearchController {
 			rttr.addFlashAttribute("bPage", spdto.getbPage());
 			rttr.addFlashAttribute("bPerPageNum", spdto.getbPerPageNum());
 			rttr.addFlashAttribute("bSearchType", spdto.getbSearchType());
-			rttr.addFlashAttribute("bSearchMType", spdto.getbMeetingGroup());
+			rttr.addFlashAttribute("bMeetingGroup", spdto.getbMeetingGroup());
 			rttr.addFlashAttribute("bSearchRType", spdto.getbSearchRType());
 			rttr.addFlashAttribute("bKeyword", spdto.getbKeyword());
 			//rttr.addFlashAttribute("spdto", spdto);
