@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.servlet.http.HttpSession;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +13,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.javalec.ex.BoardService.BoardService;
+import com.javalec.ex.dto.BPageDto;
+import com.javalec.ex.dto.SearchingPageDto;
+
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-	
+	@Inject
+	BoardService service;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -40,12 +45,22 @@ public class HomeController {
 	
 	
 	
-	@RequestMapping(value="/index")
+	/*@RequestMapping(value="/index")
 	public String Index(Model model,HttpSession httpSession) {
 		
 		return "index";
-	}
+	}*/
 
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String listGET(SearchingPageDto spdto, Model model) {
+	
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+		return "index";
+	}
 	
 	
 	
