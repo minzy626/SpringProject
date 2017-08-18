@@ -73,16 +73,44 @@
 	</select>
 	<!-- select 조건에 따른 검색 쿼리 -->
 	<sql id="dynamicSearchCondition">
-		<!-- 모임 종류에 따른 검색 -->
-		<if test="bSearchMType != null">
-			<if test="bSearchMType == 'club'.toString()">
-				and bMeetingGroup like concat("%", "동아리" ,"%")
+		
+		<!-- 스터디 종류에 따른 검색 -->
+		<if test="bStudyGroup != null">
+			<if test="bStudyGroup == '어학'.toString()">
+				and bStudyGroup like concat("%", "어학" ,"%")
 			</if>
-			<if test="bSearchMType == 'study'.toString()">
+			<if test="bStudyGroup == '취업'.toString()">
+				and bStudyGroup like concat("%", "취업" ,"%")
+			</if>
+			<if test="bStudyGroup == '전공'.toString()">
+				and bStudyGroup like concat("%", "전공" ,"%")
+			</if>
+			<if test="bStudyGroup == '기타'.toString()">
+				and bStudyGroup like concat("%", "기타" ,"%")
+			</if>
+		</if>
+		<!-- 모임 종류에 따른 검색 -->
+		<if test="bMeetingGroup != null">
+			<if test="bMeetingGroup == '스터디'.toString()">
 				and bMeetingGroup like concat("%", "스터디" ,"%")
 			</if>
-			<if test="bSearchMType == 'meeting'.toString()">
-				and bMeetingGroup like concat("%", "미팅" ,"%")
+			<if test="bMeetingGroup == '공모전'.toString()">
+				and bMeetingGroup like concat("%", "공모전" ,"%")
+			</if>
+			<if test="bMeetingGroup == '동아리'.toString()">
+				and bMeetingGroup like concat("%", "동아리" ,"%")
+			</if>
+			<if test="bMeetingGroup == '전체글보기'.toString()">
+				and bMeetingGroup like concat("%", "전체글보기" ,"%")
+			</if>
+		</if>
+		<!-- 모집/참여에 따른 분류 -->
+		<if test="bCategory != null">
+			<if test="bCategory == 'recruit'.toString()">
+				and bRegionGroup like concat("%", "모집" ,"%")
+			</if>
+			<if test="bCategory == 'participation'.toString()">
+				and bRegionGroup like concat("%", "참여" ,"%")
 			</if>
 		</if>
 		<!-- 지역에 따른 분류 -->

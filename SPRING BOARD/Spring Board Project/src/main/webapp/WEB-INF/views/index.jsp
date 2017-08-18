@@ -219,21 +219,46 @@
                           <span>홈</span>
                       </a>
                   </li>
-
+				  <li class="sub-menu">
+                      <a  href="/ex/list">
+                          <i class="fa fa-cogs"></i>
+                          <span>전체글보기</span>
+                      </a>
+                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>스터디</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="general">어학 스터디</a></li>
-                          <li><a  href="buttons">취업 스터디</a></li>
-                          <li><a  href="panels">전공 스터디</a></li>
+                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bbMeetingGroup=&bKeyword=&bSearchMType=스터디
+                          &bStudyGroup=어학
+					&bSearchRType=&bCategory=">어학 스터디</a></li>
+                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=취업
+					&bSearchRType=&bCategory=">취업 스터디</a></li>
+                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=전공
+					&bSearchRType=&bCategory=">전공 스터디</a></li>
+                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=기타
+					&bSearchRType=&bCategory=">기타</a></li>
                       </ul>
                   </li>
-
+				  <li class="sub-menu">
+                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=동아리&bStudyGroup=
+					&bSearchRType=&bCategory=">
+                          <i class="fa fa-cogs"></i>
+                          <span>동아리</span>
+                      </a>
+                  </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=공모전&bStudyGroup=
+					&bSearchRType=&bCategory=">
+                          <i class="fa fa-cogs"></i>
+                          <span>공모전</span>
+                      </a>
+                  </li>
+                 <%--  <li class="sub-menu">
+                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bSearchMType=&bStudyGroup=
+					&bSearchRType=&bCategory=공모전">
                           <i class="fa fa-cogs"></i>
                           <span>모임</span>
                       </a>
@@ -242,7 +267,7 @@
                           <li><a  href="gallery">기타1</a></li>
                           <li><a  href="todo_list">기타2</a></li>
                       </ul>
-                  </li>
+                  </li> --%>
                   <!--  
                   <li class="sub-menu">
                       <a href="javascript:;" >
