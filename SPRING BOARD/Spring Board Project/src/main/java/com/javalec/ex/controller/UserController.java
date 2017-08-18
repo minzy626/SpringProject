@@ -46,7 +46,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/find_passView", method = RequestMethod.GET)
-	public String Find_passView(Model model) {
+	public String Find_passView() {
 		return "find_passView";
 	}
 	

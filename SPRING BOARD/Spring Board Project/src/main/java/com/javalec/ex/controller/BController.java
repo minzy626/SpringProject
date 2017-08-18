@@ -19,14 +19,7 @@ public class BController {
 		
 	}
 
-//	@RequestMapping(value="/write", method = RequestMethod.POST) 
-//	public String write(BDto bDto,Model model)  
-//	{
-//		BWriteService command= new BWriteService();
-//		command.execute(sqlsession,bDto);
-//		return "redirect:/board/list"; 
-//	}
-//	
+
 //	
 //	
 //	@RequestMapping("/write_view")
