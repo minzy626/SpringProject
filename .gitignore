@@ -6,3 +6,11 @@
 target/
 
 # End of https://www.gitignore.io/api/java-web
+*.name
+*.xml
+*.component
+*.prefs
+*.jsdtscope
+*.project
+*.classpath
+*.container
