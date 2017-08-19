@@ -18,5 +18,7 @@ public class IdDuplicationValidator implements Validator {
 		String id = userDto.getbId();
 		if(id == null || id.trim().isEmpty()) 
 			errors.rejectValue("bId", "IdRequired");
+		else if(id.length()<5 || id.length()>15)
+			errors.rejectValue("bId", "IdLengthError");
 	}
 }

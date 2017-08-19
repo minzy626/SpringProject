@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>       
+    
 <%@page import="java.util.*"%>
 <%
     request.setCharacterEncoding("UTF-8");
 %>
-
+    
+    
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -300,9 +300,8 @@
 				<h1>글 작성하기 </h1>
 			  </div>	
 			  </div>
-			  
 				
-			  <h2>신촌지역 스터디/공모전/미팅 게시판 - 글 보기 페이지</h2>
+			  <legend>신촌지역 스터디/공모전/미팅 게시판 - 글 보기 페이지</legend>
 				
 			  <form role="form" method="post">
             	<input type="hidden" name="bPage" value="${spdto.bPage}">
@@ -330,9 +329,9 @@
 				</p>
 			  </div>
 			  
-			 <!-- 글 박스 크기 고정에 스크롤바 사용하려면div style-> height:350px, overflow:auto 로 설정 -->
+			 
 			  <div class="col-md-12">
-			  	<div style="border:2px solid; background-color:#F5FFFF; width:1000px; min-height:350px; height:auto;">
+			  	<div style="border:1px solid; background-color:#F5FFFF; width:1000px; height:400px;">
 			  	  <div style="padding:10px;">
 			  		${BDto.bContent}
 			  	  </div>
@@ -341,131 +340,19 @@
 			  
 	          <div class="col-sm-10 text-center" style="padding: 10px;">
 	            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> 목록으로</button>	
-	            <!-- bDto.bNick==security:authentication property="principal.bNick 이라면... -->
-	            
-	            <c:choose>
-	            <c:when test="true">
-		          	<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
-		          	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
-	          	</c:when>
-	          	<c:otherwise>
-	          		<button type="submit" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
-		          	<button type="submit" class="btn btn-danger" disabled="disabled"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
-	          	</c:otherwise>
-	          	</c:choose>
+	          	<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
+	          	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
 	          </div>
 	          </div>
 			</article>
 		</div>
+		
 		<!-- 댓글 part -->
-		<!-- *****************************댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글댓글************************* -->
-		<div class="container">
-			<div class="col-md-12" style="padding-bottom:35px; padding-top:70px;">
-			  	<div style="border-bottom: 1px solid #c9aa5f; background-color:#ffd777; width:1000px; height:40px;">
-			  	  <div style="padding:10px;">
-			  		댓글 목록
-			  	  </div>
-			  	</div>
-			</div>
-			
-			<c:forEach items="${commentList }" var="dto">
-				<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
-			  	<div>
-			  	  <p>
-			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> ${dto.cNick}</a> <!-- 클릭 시 멤버정보 팝업창 -->
-					| <i class="glyphicon glyphicon-calendar">${dto.cDate}</i>
-					<c:if test="true">
-					| <a href="#" onclick="modifyComment('${dto.cId}','${dto.cContent }'); return false;">수정</a>
-					| <a href="/ex/cDelete?cId=${dto.cId }&cBoardNum=${BDto.bId}">삭제</a>
-					</c:if>
-			  	  </p>
-			  	</div>
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; min-height:80px; height:auto;">
-			  	  <div style="padding:10px;">
-			  		${dto.cContent}
-			  	  </div>
-			  	</div>
-				</div>
-			</c:forEach>
-			
-			<!-- 
-			<!-- 첫번째 댓글(아직 c:forEach 구현x)
-			<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
-			  	<div>
-			  	  <p>
-			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> cNick</a> <!-- 클릭 시 멤버정보 팝업창
-					| <i class="glyphicon glyphicon-calendar">cDate</i>
-					<c:if test="${cDto.cNick==userinfo.bNick }">
-					| <a href="#">수정</a>
-					| <a href="#">삭제</a>
-					</c:if>
-			  	  </p>
-			  	</div>
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; min-height:80px; height:auto;">
-			  	  <div style="padding:10px;">
-			  		BOARD_COMMENT.cContent
-			  	  </div>
-			  	</div>
-			</div>
-			<!-- 두번째 댓글
-			<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
-			  	<div>
-			  	  <p>
-			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> cNick</a> <!-- 클릭 시 멤버정보 팝업창
-					| <i class="glyphicon glyphicon-calendar">cDate</i>  
-			  	  </p>
-			  	</div>
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; min-height:80px; height:auto;">
-			  	  <div style="padding:10px;">
-			  		BOARD_COMMENT.cContent
-			  	  </div>
-			  	</div>
-			</div>
-			 -->
-			<!-- 댓글 작성 부분(로그인여부에 따라 활/비활성화) -->
-			<!-- ****************************************************************************************************************************** -->
-			<!-- ****************************************************************************************************************************** -->
-			<!-- ****************************************************************************************************************************** -->
-			
-			<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px; padding-top:30px; ">
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; height:280px;">
-			  	  <div style="padding-top:10px;"><p id="cType" class="text-center"><strong style="font-size:20px;">댓글 작성</strong></p>
-			  	  <security:authorize access="isAuthenticated()">
-			  	  <form name="commentForm" action="cWrite" role="form" method="post">
-			  	  	<input type="hidden" name="cNick" value="<security:authentication property="principal.bNick"/>">
-			  	  	<input type="hidden" name="cBoardNum" value="${BDto.bId }">
-			  	  	<div id="modifyIdInput"></div>
-			  	  	<div class="centered" style="padding-right:50px; padding-left:50px; padding-top:10px;">
-			  			<textarea class="form-control" id="cContent" name="cContent" rows="3" style="width:800px; height:150px; overflow:auto;" placeholder="댓글 내용"></textarea>
-			  	 	 </div>
-			  	 	 <div class="centered" id="cButton" style="padding-top:15px; padding-right:50px; padding-left:50px;">
-			  	 	 <button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-ok">등록하기</span></button>
-			  	  	</div>
-				  </form>
-			  	  </security:authorize>
-			  	  <security:authorize access="!isAuthenticated()">
-              	  	  <div class="centered" style="padding-right:50px; padding-left:50px; padding-top:10px;">
-				  		<textarea class="form-control" rows="3" style="width:800px; height:150px; overflow:auto;" readonly>댓글은 로그인 후 작성하실 수 있습니다.</textarea>
-				  	  </div>
-				  	  <div class="centered" style="padding-top:15px; padding-right:50px; padding-left:50px;">
-				  	  <button type="submit" class="btn btn-success" disabled="disabled"><span class="glyphicon glyphicon-ok">등록하기</span></button>
-				  	  </div>
-            	  </security:authorize>
-			  	</div>
-			</div>
-		</div>
-		
-		<!-- 댓글 작성 부분 div 끝!!!! -->
-		<!-- ****************************************************************************************************************************** -->
-		<!-- ****************************************************************************************************************************** -->
-		<!-- ****************************************************************************************************************************** -->
-		
-		</div>
       </section><!-- /MAIN CONTENT -->
 		
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer" style="margin-top:50px;">
+      <footer class="site-footer">
           <div class="text-center">
               2017 - Spring Board Project
               <a href="/ex/index" class="go-top">
@@ -473,7 +360,6 @@
               </a>
           </div>
       </footer>
-   
       <!--footer end-->
   </section>
 
@@ -492,26 +378,19 @@
 
     <!--script for this page-->
   	<script>
-  	function modifyComment(id, comment)
-  	{
-  		document.getElementById('cContent').value=comment;
-  		document.getElementById('cType').innerHTML='<strong style="font-size:20px;">댓글 내용수정</strong>';
-  		//document.getElementById('cButton').innerHTML='<button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
-  		document.getElementById('cButton').innerHTML='<a href="/ex/cUpdate?" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></a>';
-  		//document.getElementById('modifyIdInput').innerHTML='<input type="hidden" name="cId" value="'+id+'">';
-  		
-  	}
-  	
 	// 버튼 클릭 이벤트로 폼 태그에 action 속성을 달아주면 된다. 원하는 곳에..
 	$(function(){
 		
+		var bKeyword = '${spdto.bKeyword}';
 		
+		// 여기서 받아오는 keyword가 '입        '이다
+		console.log(bKeyword+bKeyword);
 		
-		// 댓글 수정버튼
-		
-		// 댓글 삭제버튼
 		
 		var formObj = $("form[role='form']");
+		console.log(formObj);
+		
+		
 		// 리스트 페이지
 		$(".btn-info").on("click", function(){
 			formObj.attr("action", "/ex/list");
@@ -519,25 +398,27 @@
 			formObj.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
 		});
 		
+		
+		
 		// 수정
 		// 버튼 클릭됐을때 formObj에 action 속성을 /board/update로 주고,
 		// submit()를 사용해서 셀렉터의 submit이벤트를 발생시켜서 form데이터가 전송되도록 해준다.
 		$(".btn-warning").on("click", function(){
-			if(confirm("게시물을 수정하시겠습니까?")){
-				// 폼을 선택해서 action을 list가 하게 한다.
-				formObj.attr("action", "/ex/modify_view");
-				// 그리고 method는 조회하는 거니까 get방식으로 한다.
-				formObj.attr("method", "get");
-				formObj.submit();	
-			}
+			// 폼을 선택해서 action을 list가 하게 한다.
+			formObj.attr("action", "/ex/modify_view");
+			
+			// 그리고 method는 조회하는 거니까 get방식으로 한다.
+			formObj.attr("method", "get");
+			formObj.submit();
+			
 		});
+		
+		
 		// 삭제
 		$(".btn-danger").on("click", function(){
-			if(confirm("게시물을 삭제하시겠습니까?\n취소 할 수 없습니다!!")){
-				formObj.attr("action", "/ex/delete");
-				formObj.attr("method", "post");
-				formObj.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
-			}
+			formObj.attr("action", "/ex/delete");
+			formObj.attr("method", "post");
+			formObj.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
 		});
 
 	});//$(function(){})

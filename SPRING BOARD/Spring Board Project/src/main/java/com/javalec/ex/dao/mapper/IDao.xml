@@ -5,29 +5,6 @@
 
 <mapper namespace="com.javalec.ex.dao.mapper.IDao">
 
-	<!-- 댓글 작성 -->
-	<insert id="cWrite" parameterType="CDto">
-		INSERT INTO BOARD_COMMENT
-		(CBOARDNUM,CNICK,CCONTENT)
-		VALUES(#{cBoardNum},#{cNick},#{cContent})
-	</insert>
-	
-	<!-- 댓글 수정 -->
-	<update id="cUpdate">
-		UPDATE BOARD_COMMENT SET CCONTENT=#{cContent}
-		WHERE CID=#{cId}
-	</update>
-	
-	<!-- 댓글 삭제 -->
-	<delete id="cDelete">
-		DELETE FROM BOARD_COMMENT WHERE CID=#{cId}
-	</delete>
-	
-	<!-- 댓글 조회(클릭한 게시물에 해당하는 모든 댓글) -->
-	<select id="cListAll" parameterType="Integer" resultType="CDto">
-		SELECT * FROM BOARD_COMMENT WHERE CBOARDNUM=#{param1} ORDER BY cId asc
-	</select>
-
 	<select id="list" resultType="com.javalec.ex.dto.BDto">
 		SELECT * FROM MVC_BOARD ORDER BY
 		bId desc
@@ -50,8 +27,6 @@
 		DELETE FROM MVC_BOARD WHERE
 		BID = #{bId}
 	</delete>
-	
-	
 
 	<select id="read" resultType="Dto">
 		SELECT * FROM MVC_BOARD WHERE BID =
@@ -81,7 +56,6 @@
 	SELECT * FROM MVC_BOARD WHERE BID>0 ORDER BY BID desc, BDATE desc
 	]]>
 	</select>
-	
 
 	<!-- 페이징된 게시물 조회( Criteria( page, perPageNum ) -->
 	<select id="listCriteria" resultType="Dto"
