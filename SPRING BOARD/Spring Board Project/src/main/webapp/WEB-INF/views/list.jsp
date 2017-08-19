@@ -255,13 +255,13 @@
 							<select class="type02" name="bSearchMType" id="selM">
 								<!--  	<option selected>분류</option>-->
 								<option value="null"
-									<c:out value="${bPage.sdto.bCategory == null? 'selected': ''}"/>>분류</option>
+									<c:out value="${bPage.sdto.bSearchMType == null? 'selected': ''}"/>>분류</option>
 								<option value="club" id="searchMClub"
-									<c:out value="${bPage.sdto.bCategory == 'club'? 'selected': ''}"/>>동아리</option>
+									<c:out value="${bPage.sdto.bSearchMType == 'club'? 'selected': ''}"/>>동아리</option>
 								<option value="study"
-									<c:out value="${bPage.sdto.bCategory == 'study'? 'selected': ''}"/>>스터디</option>
+									<c:out value="${bPage.sdto.bSearchMType == 'study'? 'selected': ''}"/>>스터디</option>
 								<option value="meeting"
-									<c:out value="${bPage.sdto.bCategory == 'meeting'? 'selected': ''}"/>>미팅</option>
+									<c:out value="${bPage.sdto.bSearchMType == 'meeting'? 'selected': ''}"/>>미팅</option>
 							</select> <select class="type02" name="bSearchRType" id="selR">
 								<option value="null"
 									<c:out value="${bPage.sdto.bSearchRType == null? 'selected': ''}"/>>지역</option>

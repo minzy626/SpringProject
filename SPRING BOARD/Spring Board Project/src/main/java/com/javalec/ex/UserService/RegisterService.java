@@ -9,7 +9,7 @@ import com.javalec.ex.dto.UserDto;
 
 public class RegisterService {
 	
-	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	BCryptPasswordEncoder passwordEncoder;
 	
 	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
