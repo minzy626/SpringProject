@@ -29,7 +29,15 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.javalec.ex" />
-	
+	<!-- 브라우저 캐시 지우기 (뒤로가기 방지) -->
+	<mvc:interceptors>
+	     <mvc:interceptor>
+	          <mvc:mapping path="/**"/>
+	          <beans:bean class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+	               <beans:property name="cacheSeconds" value="0"/>
+	          </beans:bean>
+	     </mvc:interceptor>
+	</mvc:interceptors>
 	
 
 

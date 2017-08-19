@@ -42,7 +42,6 @@
                            login-processing-url="/login"
                            username-parameter="bId"
                            password-parameter="bPass"
-                           authentication-failure-url="/login_view?error=true"
                            authentication-failure-handler-ref="customAuthenticationFailHandler" />
  
                   <security:logout logout-url="/logout" 
