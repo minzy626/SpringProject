@@ -34,6 +34,7 @@
      <security:http use-expressions="true"> 
           <security:intercept-url pattern="/memberinfo/**" access="isAuthenticated()" />
           <security:intercept-url pattern="/write_view/**" access="isAuthenticated()" />
+          <security:intercept-url pattern="/memberModify/**" access="isAuthenticated()" />
 		  <security:intercept-url pattern="/**" access="permitAll" />
 
                    <security:form-login login-page="/login_view"
