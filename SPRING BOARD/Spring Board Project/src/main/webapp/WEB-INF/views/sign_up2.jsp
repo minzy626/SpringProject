@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -25,8 +27,30 @@
 
     <script src="assets/js/chart-master/Chart.js"></script>
     
-    <!-- 미입력 찾기 함수 -->
+ <!-- 미입력 찾기 함수 -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+/*      $(document).ready(function() {
+    	$('#bRegion').change(function() {
+       		$("#bRegion").val("${userDto.bRegion}");
+    	});
+    	$('#bRegion').change(function() {
+        	$("#bGender").val("${userDto.bGender}");
+    	});
+        $('#bRegion').change(function() {
+        	$("#bGrade").val("${userDto.bGrade}");
+        });
+        // you need to specify id of combo to set right combo, if more than one combo
+    	
+    });  */
+    </script>
+    
     <script type="text/javascript">
+    $(document).ready(function() {
+        $("#bRegion").val("${userDto.bRegion}");
+        $("#bGender").val("${userDto.bGender}");
+        $("#bGrade").val("${userDto.bGrade}");
+        // you need to specify id of combo to set right combo, if more than one combo
+    });
         function checkValue()
         {
             var form = document.userInfo;
@@ -35,18 +59,17 @@
                 alert("아이디를 입력해 주세요.");
                 return false;
             }
-            <!--
-            if(form.idDuplication.value != "idCheck"){
-                alert("아이디 중복체크를 해주세요.");
-                return false;
-            } -->
             
             if(!form.bPass.value){
                 alert("비밀번호를 입력해 주세요.");
                 return false;
             }
             
-            // 비밀번호와 비밀번호 확인에 입력된 값이 동일한지 확인
+            if(form.bPass.value.length < 8){
+                alert("비밀번호를 8자 이상으로 입력해 주세요.");
+                return false;
+            }
+            
             if(form.bPass.value != form.bPassCheck.value ){
                 alert("비밀번호를 동일하게 입력해 주세요.");
                 return false;
@@ -56,14 +79,15 @@
                 alert("닉네임을 입력해 주세요.");
                 return false;
             }
-            <!--
-            if(form.nickDuplication.value != "nickCheck"){
-                alert("닉네임 중복체크를 해주세요.");
-                return false;
-            }-->
+           
             
             if(form.bRegion.value == ""){
                 alert("지역을 선택해 주세요.");
+                return false;
+            }
+            
+            if(form.bGender.value == ""){
+                alert("성별을 선택해 주세요.");
                 return false;
             }
             
@@ -73,7 +97,7 @@
             }
             
             if(form.bGrade.value == ""){
-                alert("학년을 입력해 주세요");
+                alert("학년을 선택해 주세요");
                 return false;
             }
             
@@ -81,53 +105,18 @@
                 alert("전공을 입력해 주세요.");
                 return false;
             }
+            
+             if(!form.bNumcheck.value){
+            	alert("인증번호를 입력해 주세요.");
+            	return false;
+        	}
 
-            if(!form.bEmail.value){
-                alert("메일 주소를 입력해 주세요.");
-                return false;
-            }
-            
-/*             if(form.emailDuplication.value != "emailCheck"){
-                alert("이메일 인증을 해주세요.");
-                return false;
-            } */
         }
-        // 아이디 중복체크 화면open
-        function openIdChk(){
-        
-            window.name = "parentForm";
-            window.open("idCheckForm",
-                    "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
-        }
-        
-        function openNickChk(){
-            
-            window.name = "parentForm";
-            window.open("nickCheckForm",
-                    "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
-        }
-        
-/*         function openEmailChk(){
-            
-            window.name = "parentForm";
+        function SendCheckNumber(){
+        	window.name = "parentForm";
             window.open("emailCheckForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
-        } */
- 
-        // 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
-        // 이렇게 하는 이유는 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때
-        // 다시 중복체크를 하도록 한다.
-        function inputIdChk(){
-            document.userInfo.idDuplication.value ="idUncheck";
         }
-        
-        function inputNickChk(){
-            document.userInfo.nickDuplication.value ="nickUncheck";
-        }
-        
-/*         function inputEmailChk(){
-            document.userInfo.emailDuplication.value ="emailUncheck";
-        } */
 
   </script>
   </head>
@@ -396,20 +385,16 @@
 			<div class="page-header">
 			<h1>회원가입</h1>
 			</div>
-			<form class="form-horizontal" action="register" method="POST" name="userInfo">
+			<form:form class="form-horizontal" action="register" method="POST" name="userInfo" commandName = "userDto" >
 					
 			<!-- 아이디 입력 -->
+			
 			<div class="form-group">
 			<label class="col-sm-3 control-label">아이디</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<div class="input-group">
-				<input type="text" class="form-control" name="bId" placeholder="아이디" onkeydown="inputIdChk()"/>
-				<span class="input-group-btn">
-					<button class="btn btn-success" type="button" onclick="openIdChk();inputIdChk()"> 중 복 확 인 </button>
-					<input type="hidden" name="idDuplication" value="idUncheck" >
-				</span>
-				</div>	
+				<input type="text" class="form-control" name="bId" value="${userDto.bId}" placeholder="아이디"/> <!-- onkeydown="inputIdChk()" -->
+				<p class="help-block">본인의 이메일을 입력해주세요.</p>
 			</div>
 			</div>
 			</div>
@@ -419,7 +404,7 @@
 			<label class="col-sm-3 control-label">비밀번호</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bPass" type="password" placeholder="비밀번호">
+				<input class="form-control" name="bPass" type="password" value="${userDto.bPass}" placeholder="비밀번호">
 				<p class="help-block">숫자, 영어 포함 8자 이상</p>
 			</div>
 			</div>
@@ -430,7 +415,7 @@
 			<label class="col-sm-3 control-label">비밀번호 확인</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bPassCheck" type="password" placeholder="비밀번호 확인">
+				<input class="form-control" name="bPassCheck" type="password" value="${userDto.bPass}" placeholder="비밀번호 확인">
 				<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
 			</div>
 			</div>
@@ -441,13 +426,7 @@
             <label class="col-sm-3 control-label">닉네임</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<div class="input-group">
-				<input class="form-control" name="bNick" type="text" placeholder="닉네임">
-				<span class="input-group-btn">
-					<button class="btn btn-success" type="button" onclick="openNickChk();inputNickChk()"> 중 복 확 인 </button>
-					<input type="hidden" name="nickDuplication" value="nickUncheck" >
-				</span>
-				</div>
+				<input class="form-control" name="bNick" type="text" value="${userDto.bNick}" placeholder="닉네임">
 			</div>
 			</div>
 			</div>
@@ -457,7 +436,7 @@
 			<label class="col-sm-3 control-label">지역</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<select class="form-control" name="bRegion">
+				<select class="form-control" name="bRegion" id="bRegion">
 					<option value="">시/도 선택</option>
     				<option value="서울특별시">서울특별시</option>
    					<option value="부산광역시">부산광역시</option>
@@ -485,17 +464,12 @@
 			<div class="form-group">
 			<label class="col-sm-3 control-label">성별</label>
 			<div class="row">
-			<div class="col-sm-6">
-				<div class="radio">
-					<label>
-						<input type="radio" name="bGender" type="text" value="남" checked>남
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="bGender" type="text" value="여">여
-					</label>
-				</div>
+			<div class="col-sm-2">
+				<select class="form-control" name="bGender" id="bGender">
+					<option value="">성별 선택</option>
+    				<option value="남">남</option>
+   					<option value="여">여</option>
+				</select>
 			</div>
 			</div>
 			</div>
@@ -505,10 +479,10 @@
             <label class="col-sm-3 control-label">학교</label>
             <div class="row">
 				<div class="col-sm-3">
-             	<input class="form-control" name="bSchool" type="text" placeholder="학교 이름">
+             	<input class="form-control" name="bSchool" type="text" value="${userDto.bSchool}" placeholder="학교 이름">
           		</div>
 				<div class="col-sm-2">
-   				<select class="form-control" name="bGrade">
+   				<select class="form-control" name="bGrade" id="bGrade">
 					<option value="">학년 선택</option>
     				<option value="1">1학년</option>
    					<option value="2">2학년</option>
@@ -525,44 +499,34 @@
             <label class="col-sm-3 control-label">전공</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bMajor" type="text" placeholder="전공">
+				<input class="form-control" name="bMajor" type="text" placeholder="전공" value="${userDto.bMajor}">
 			</div>
 			</div>
 			</div>
-<!-- 			
-			이메일 입력 
-			<div class="form-group">
-			<label class="col-sm-3 control-label">이메일</label>
-			<div class="row">
-			<div class="col-sm-6">
-				<div class="input-group">
-					<input class="form-control" name="bEmail" type="text" placeholder="이메일" onkeydown="inputEmailChk()"/>
-					<span class="input-group-btn">
-                    	<button class="btn btn-success" type="button" onclick="openEmailChk();inputEmailChk()">인증번호 전송<i class="fa fa-mail-forward spaceLeft"></i></button>
-                    	<input type="hidden" name="emailDuplication" value="emailUncheck" >
-                  	</span>
-				</div>
-          	</div>
-          	</div>
-			</div> -->
-
 			
 			<!-- 인증번호 입력--> 
-<!-- 			<div class="form-group">
+ 			<div class="form-group">
 			<label class="col-sm-3 control-label">인증번호 확인</label>
 			<div class="row">
 			<div class="col-sm-6">
             	<div class="input-group">
-					<input class="form-control" name="bNumcheck" type="text" placeholder="인증번호">
+					<input class="form-control" name="bNumcheck" id="bNumcheck" type="text" placeholder="인증번호">
 					<span class="input-group-btn">
-						<button class="btn btn-success" type="button">인증번호 확인<i class="fa fa-edit spaceLeft"></i></button>
+						<button class="btn btn-success" type="button" onclick="SendCheckNumber()">인증번호 전송<i class="fa fa-edit spaceLeft"></i></button>
 					</span>
            		</div>
-            <p class="help-block">전송된 인증번호를 입력해주세요.</p>
+            <p class="help-block">아이디(이메일)로 전송된 인증번호를 입력해주세요.</p>
           	</div>
           	</div>
-        	</div> -->
-
+        	</div>
+        	
+			<div class="col-sm-12 text-center">
+	        <div style="color:red ; margin-top:2px" >
+	        	<form:errors path="bId"/>
+	        	<form:errors path="bNick"/>
+	            <form:errors/>
+	        </div>
+	        </div>
           
 			<div class="form-group">
 			<div class="col-sm-12 text-center">
@@ -570,7 +534,7 @@
             	<button class="btn btn-danger" type="reset" onclick="location.href='index'">가입취소<i class="fa fa-times spaceLeft"></i></button>
 			</div>
 			</div>
-			</form>
+			</form:form>
 			<hr>
 			</div>
       

@@ -384,7 +384,7 @@
 		<br>스터디 장소 : </br>
 		<br>스터디 기간 : </br>
 		<br>연락처 : </br>
-					</textarea>
+				</textarea>
 				</div>
 				
 				<script type="text/javascript">

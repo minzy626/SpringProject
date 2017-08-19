@@ -1,15 +1,18 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
-<%@ page session="true" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
- <head>
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>사이트 이름</title>
+    <title>DASHGUM - FREE Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -25,14 +28,61 @@
 
     <script src="assets/js/chart-master/Chart.js"></script>
     
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+ <!-- 미입력 찾기 함수 -->
+    <script type="text/javascript">
+     $(document).ready(function() {
+        $("#bRegion").val("${principal.bRegion}");
+        $("#bGender").val(<security:authentication property="principal.bGender"/>);
+        $("#bGrade").val(<security:authentication property="principal.bGrade"/>);
+        // you need to specify id of combo to set right combo, if more than one combo
+     });
+        function checkValue()
+        {
+            var form = document.userInfo;
+            
+            if(form.bPass.value.length < 8 && form.bPass.value.length > 0){
+                alert("비밀번호를 8자 이상으로 입력해 주세요.");
+                return false;
+            }
+            
+            if(form.bPass.value != form.bPassCheck.value ){
+                alert("비밀번호를 동일하게 입력해 주세요.");
+                return false;
+            }    
+           
+            if(form.bRegion.value == ""){
+                alert("지역을 선택해 주세요.");
+                return false;
+            }
+
+            
+            if(!form.bSchool.value){
+                alert("학교를 입력해 주세요.");
+                return false;
+            }
+            
+            if(form.bGrade.value == ""){
+                alert("학년을 선택해 주세요");
+                return false;
+            }
+            
+            if(!form.bMajor.value){
+                alert("전공을 입력해 주세요.");
+                return false;
+            }
+            
+        }
+        function MemberWithdraw(){
+        	window.name = "parentForm";
+            window.open("withdrawForm",
+                    "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    
+        }
+  </script>
   </head>
-<body>
- <section id="container" >
+
+  <body>
+
+  <section id="container" >
       <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
@@ -42,14 +92,14 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index" class="logo"><b>사이트 이름</b></a>
+            <a href="index.html" class="logo"><b>DASHGUM FREE</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <ul class="nav top-menu">
                     <!-- settings start -->
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-tasks"></i>
                             <span class="badge bg-theme">4</span>
                         </a>
@@ -59,7 +109,7 @@
                                 <p class="green">You have 4 pending tasks</p>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <div class="task-info">
                                         <div class="desc">DashGum Admin Panel</div>
                                         <div class="percent">40%</div>
@@ -72,7 +122,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <div class="task-info">
                                         <div class="desc">Database Update</div>
                                         <div class="percent">60%</div>
@@ -85,7 +135,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <div class="task-info">
                                         <div class="desc">Product Development</div>
                                         <div class="percent">80%</div>
@@ -98,7 +148,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <div class="task-info">
                                         <div class="desc">Payments Sent</div>
                                         <div class="percent">70%</div>
@@ -118,7 +168,7 @@
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                             <i class="fa fa-envelope-o"></i>
                             <span class="badge bg-theme">5</span>
                         </a>
@@ -128,7 +178,7 @@
                                 <p class="green">You have 5 new messages</p>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Zac Snider</span>
@@ -136,10 +186,11 @@
                                     </span>
                                     <span class="message">
                                         Hi mate, how is everything?
+                                    </span>
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Divya Manian</span>
@@ -151,7 +202,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dan Rogers</span>
@@ -163,7 +214,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">
+                                <a href="index.html#">
                                     <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dj Sherman</span>
@@ -175,7 +226,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="index#">See all messages</a>
+                                <a href="index.html#">See all messages</a>
                             </li>
                         </ul>
                     </li>
@@ -185,12 +236,7 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-              <security:authorize access="isAnonymous()"><li><a class="login_view" href="login_view">login</a></li></security:authorize>
-              <security:authorize access="isAuthenticated()">
-             	 <li>
-	            	  <a class="login_view" href="<c:url value='logout'/>">logout</a>
-	              </li>
-	           </security:authorize>
+                    <li><a class="logout" href="login.html">Logout</a></li>
             	</ul>
             </div>
         </header>
@@ -205,79 +251,48 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile"><img src="assets/rion.png" class="img-circle" width="60"></a></p>
-              		<security:authorize access="isAuthenticated()">
-              		 	<h5 class="centered"><security:authentication property="principal.bNick"/>님 환영합니다</h5>
-              		 </security:authorize>
-              	 	<security:authorize access="! isAuthenticated()">
-              		 	<h5 class="centered">로그인을 해주세요</h5>
-              		 </security:authorize>
+              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">Marcel Newman</h5>
               	  	
                   <li class="mt">
-                      <a class="active" href="index">
+                      <a class="active" href="index.html">
                           <i class="fa fa-dashboard"></i>
-                          <span>홈</span>
+                          <span>Dashboard</span>
                       </a>
                   </li>
-				  <li class="sub-menu">
-                      <a  href="/ex/list">
-                          <i class="fa fa-cogs"></i>
-                          <span>전체글보기</span>
-                      </a>
-                  </li>
+
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-desktop"></i>
-                          <span>스터디</span>
+                          <span>UI Elements</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bbMeetingGroup=&bKeyword=&bSearchMType=스터디
-                          &bStudyGroup=어학
-					&bSearchRType=&bCategory=">어학 스터디</a></li>
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=취업
-					&bSearchRType=&bCategory=">취업 스터디</a></li>
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=전공
-					&bSearchRType=&bCategory=">전공 스터디</a></li>
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=기타
-					&bSearchRType=&bCategory=">기타</a></li>
+                          <li><a  href="general.html">General</a></li>
+                          <li><a  href="buttons.html">Buttons</a></li>
+                          <li><a  href="panels.html">Panels</a></li>
                       </ul>
                   </li>
-				  <li class="sub-menu">
-                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=동아리&bStudyGroup=
-					&bSearchRType=&bCategory=">
-                          <i class="fa fa-cogs"></i>
-                          <span>동아리</span>
-                      </a>
-                  </li>
+
                   <li class="sub-menu">
-                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=공모전&bStudyGroup=
-					&bSearchRType=&bCategory=">
+                      <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
-                          <span>공모전</span>
-                      </a>
-                  </li>
-                 <%--  <li class="sub-menu">
-                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bSearchMType=&bStudyGroup=
-					&bSearchRType=&bCategory=공모전">
-                          <i class="fa fa-cogs"></i>
-                          <span>모임</span>
+                          <span>Components</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar">동아리</a></li>
-                          <li><a  href="gallery">기타1</a></li>
-                          <li><a  href="todo_list">기타2</a></li>
+                          <li><a  href="calendar.html">Calendar</a></li>
+                          <li><a  href="gallery.html">Gallery</a></li>
+                          <li><a  href="todo_list.html">Todo List</a></li>
                       </ul>
-                  </li> --%>
-                  <!--  
+                  </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
                           <span>Extra Pages</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="blank">Blank Page</a></li>
-                          <li><a  href="login">Login</a></li>
-                          <li><a  href="lock_screen">Lock Screen</a></li>
+                          <li><a  href="blank.html">Blank Page</a></li>
+                          <li><a  href="login.html">Login</a></li>
+                          <li><a  href="lock_screen.html">Lock Screen</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -286,7 +301,7 @@
                           <span>Forms</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="form_component">Form Components</a></li>
+                          <li><a  href="form_component.html">Form Components</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -295,8 +310,8 @@
                           <span>Data Tables</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="basic_table">Basic Table</a></li>
-                          <li><a  href="responsive_table">Responsive Table</a></li>
+                          <li><a  href="basic_table.html">Basic Table</a></li>
+                          <li><a  href="responsive_table.html">Responsive Table</a></li>
                       </ul>
                   </li>
                   <li class="sub-menu">
@@ -305,10 +320,10 @@
                           <span>Charts</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris">Morris</a></li>
-                          <li><a  href="chartjs">Chartjs</a></li>
+                          <li><a  href="morris.html">Morris</a></li>
+                          <li><a  href="chartjs.html">Chartjs</a></li>
                       </ul>
-                  </li>-->
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->
@@ -320,73 +335,164 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper">
+		<section id="main-content">
+		<section class="wrapper">
+			<div class="row">
+			<div class="col-lg-9 main-chart">
 			
-              <div class="row">
-                  <div class="col-lg-9 main-chart">
-                  
-                  	
-					<div class="row mt">
-                      <!--CUSTOM CHART START -->
-                      <div class="border-head">
-                          <h3>게시판</h3>
-                          <a href="memberinfo">회원정보보기</a>
-                          <a href="sign_up">회원가입하기</a>
-                          <a href="find_passView">비밀번호 찾기</a>
-                          <a href="memberModify">회원정보 수정</a>
-                      </div>
-                     <!--  <div class="custom-bar-chart">
-                          <ul class="y-axis">
-                              <li><span>10.000</span></li>
-                              <li><span>8.000</span></li>
-                              <li><span>6.000</span></li>
-                              <li><span>4.000</span></li>
-                              <li><span>2.000</span></li>
-                              <li><span>0</span></li>
-                          </ul>
-                          <div class="bar">
-                              <div class="title">JAN</div>
-                              <div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">FEB</div>
-                              <div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">MAR</div>
-                              <div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">APR</div>
-                              <div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-                          </div>
-                          <div class="bar">
-                              <div class="title">MAY</div>
-                              <div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-                          </div>
-                          <div class="bar ">
-                              <div class="title">JUN</div>
-                              <div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-                          </div>
-                          <div class="bar">
-                              <div class="title">JUL</div>
-                              <div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
-                          </div>
-                      </div> -->
-                      <!--custom chart end-->
-					</div> 	
+			<div class="col-md-12">
+			<div class="page-header">
+			<h1>회원정보 수정</h1>
+			</div>
+			<form:form class="form-horizontal" action="user_modify_confirm" method="POST" name="userInfo" commandName = "userDto" >
 					
-                  </div>
-                  
-                  
+			<!-- 아이디 입력 -->
+			
+			<div class="form-group">
+			<label class="col-sm-3 control-label">아이디</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input type="text" class="form-control" value="<security:authentication property="principal.bId"/>" disabled/>
+				<input type="hidden" name="bId" id="bId" value="<security:authentication property="principal.bId"/>">
+			</div>
+			</div>
+			</div>
+					
+			<!-- 비밀번호 입력 -->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">새 비밀번호</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bPass" type="password" placeholder="비밀번호">
+				<p class="help-block">비밀번호를 변경하시려면 입력하세요(숫자, 영어 포함 8자 이상)</p>
+			</div>
+			</div>
+			</div>
+					
+			<!-- 비밀번호 입력 확인-->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">새 비밀번호 확인</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bPassCheck" type="password" placeholder="비밀번호 확인">
+				<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+			</div>
+			</div>
+			</div>     
+			 
+			<!-- 닉네임 입력-->    
+			<div class="form-group">
+            <label class="col-sm-3 control-label">닉네임</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bNick" type="text" value="<security:authentication property="principal.bNick"/>" disabled>
+			</div>
+			</div>
+			</div>
+			
+			<!-- 지역 입력--> 
+			<div class="form-group">
+			<label class="col-sm-3 control-label">지역</label>
+			<div class="row">
+			<div class="col-sm-6">
+			<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
+				<select class="form-control" name="bRegion" id="bRegion">
+					<option value="">시/도 선택</option>
+    				<option value="서울특별시">서울특별시</option>
+   					<option value="부산광역시">부산광역시</option>
+    				<option value="대구광역시">대구광역시</option>
+    				<option value="인천광역시">인천광역시</option>
+    				<option value="광주광역시">광주광역시</option>
+   					<option value="대전광역시">대전광역시</option>
+    				<option value="울산광역시">울산광역시</option>
+    				<option value="세종특별자치시">세종특별자치시</option>
+    				<option value="경기도">경기도</option>
+   					<option value="강원도">강원도</option>
+    				<option value="충청북도">충청북도</option>
+    				<option value="충청남도">충청남도</option>
+    				<option value="전라북도">전라북도</option>
+   					<option value="전라남도">전라남도</option>
+    				<option value="경상북도">경상북도</option>
+    				<option value="경상남도">경상북도</option>
+    				<option value="제주특별자치도">경상북도</option>
+				</select>
+ 				<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
+<%-- 				<input type="hidden" name="hRegion" id="hRegion" value="<security:authentication property="principal.bRegion"/>"> --%>
+			</div>
+			</div>
+			</div>
+			
+			<!-- 성별 입력 -->
+			<div class="form-group">
+			<label class="col-sm-3 control-label">성별</label>
+			<div class="row">
+			<div class="col-sm-2">
+				<select class="form-control" name="bGender" id="bGender">
+					<option value="">성별 선택</option>
+    				<option value="남">남</option>
+   					<option value="여">여</option>
+				</select>
+				<input type="hidden" name="hGender" id="hGender" value="<security:authentication property="principal.bGender"/>">
+			</div>
+			</div>
+			</div>
+			
+			<!-- 학교 입력--> 
+			<div class="form-group">
+            <label class="col-sm-3 control-label">학교</label>
+            <div class="row">
+				<div class="col-sm-3">
+             	<input class="form-control" name="bSchool" type="text" value="<security:authentication property="principal.bSchool"/>" placeholder="학교 이름">
+          		</div>
+				<div class="col-sm-2">
+   				<select class="form-control" name="bGrade" id="bGrade">
+					<option value="">학년 선택</option>
+    				<option value="1">1학년</option>
+   					<option value="2">2학년</option>
+    				<option value="3">3학년</option>
+    				<option value="4">4학년</option>
+    				<option value="5">5학년이상</option>
+				</select>
+				<input type="hidden" name="hGrade" id="hGrade" value="<security:authentication property="principal.bGrade"/>">
+          		</div>
+          	</div>
+			</div>
+			
+			<!-- 전공 입력-->    
+			<div class="form-group">
+            <label class="col-sm-3 control-label">전공</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bMajor" type="text" placeholder="전공" value="<security:authentication property="principal.bMajor"/>">
+			</div>
+			</div>
+			</div>
+        	
+			<div class="col-sm-12 text-center">
+	        <div style="color:red ; margin-top:2px" >
+	            <form:errors/>
+	        </div>
+	        </div>
+          
+			<div class="form-group">
+			<div class="col-sm-12 text-center">
+				<button class="btn btn-primary" type="submit" onclick="return checkValue()">회원수정<i class="fa fa-check spaceLeft"></i></button>
+				<button class="btn btn-warning" type="button" onclick="MemberWithdraw()">회원탈퇴<i class="fa fa-times spaceLeft"></i></button>
+            	<button class="btn btn-danger" type="reset" onclick="location.href='index'">취소</button>
+			</div>
+			</div>
+			</form:form>
+			<hr>
+			</div>
+      
+			</div>
       <!-- **********************************************************************************************************************************************************
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->                  
                   
                   <div class="col-lg-3 ds">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
-						<h3>실시간 인기글</h3>
+						<h3>NOTIFICATIONS</h3>
                                         
                       <!-- First Action -->
                       <div class="desc">
@@ -394,8 +500,8 @@
                       		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                       	</div>
                       	<div class="details">
-                      		<p><muted>2분전</muted><br/>
-                      		   <a href="#">노동길</a> 내용<br/>
+                      		<p><muted>2 Minutes Ago</muted><br/>
+                      		   <a href="#">James Brown</a> subscribed to your newsletter.<br/>
                       		</p>
                       	</div>
                       </div>
@@ -405,8 +511,8 @@
                       		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                       	</div>
                       	<div class="details">
-                      		<p><muted>3시간전</muted><br/>
-                      		   <a href="#">박채범</a> 내용<br/>
+                      		<p><muted>3 Hours Ago</muted><br/>
+                      		   <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
                       		</p>
                       	</div>
                       </div>
@@ -416,8 +522,8 @@
                       		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                       	</div>
                       	<div class="details">
-                      		<p><muted>11시간전</muted><br/>
-                      		   <a href="#">김민지</a> 내용<br/>
+                      		<p><muted>7 Hours Ago</muted><br/>
+                      		   <a href="#">Brandon Page</a> purchased a year subscription.<br/>
                       		</p>
                       	</div>
                       </div>
@@ -427,8 +533,8 @@
                       		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                       	</div>
                       	<div class="details">
-                      		<p><muted>18시간전</muted><br/>
-                      		   <a href="#">정태훈</a> 내용<br/>
+                      		<p><muted>11 Hours Ago</muted><br/>
+                      		   <a href="#">Mark Twain</a> commented your post.<br/>
                       		</p>
                       	</div>
                       </div>
@@ -438,54 +544,85 @@
                       		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                       	</div>
                       	<div class="details">
-                      		<p><muted>18 시간전</muted><br/>
-                      		   <a href="#">심재철</a> 완성하는 날까지 화이팅.<br/>
+                      		<p><muted>18 Hours Ago</muted><br/>
+                      		   <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
                       		</p>
                       	</div>
                       </div>
-                  
-                       
+
+                       <!-- USERS ONLINE SECTION -->
+						<h3>TEAM MEMBERS</h3>
+                      <!-- First Member -->
+                      <div class="desc">
+                      	<div class="thumb">
+                      		<img class="img-circle" src="assets/img/ui-divya.jpg" width="35px" height="35px" align="">
+                      	</div>
+                      	<div class="details">
+                      		<p><a href="#">DIVYA MANIAN</a><br/>
+                      		   <muted>Available</muted>
+                      		</p>
+                      	</div>
+                      </div>
+                      <!-- Second Member -->
+                      <div class="desc">
+                      	<div class="thumb">
+                      		<img class="img-circle" src="assets/img/ui-sherman.jpg" width="35px" height="35px" align="">
+                      	</div>
+                      	<div class="details">
+                      		<p><a href="#">DJ SHERMAN</a><br/>
+                      		   <muted>I am Busy</muted>
+                      		</p>
+                      	</div>
+                      </div>
+                      <!-- Third Member -->
+                      <div class="desc">
+                      	<div class="thumb">
+                      		<img class="img-circle" src="assets/img/ui-danro.jpg" width="35px" height="35px" align="">
+                      	</div>
+                      	<div class="details">
+                      		<p><a href="#">DAN ROGERS</a><br/>
+                      		   <muted>Available</muted>
+                      		</p>
+                      	</div>
+                      </div>
+                      <!-- Fourth Member -->
+                      <div class="desc">
+                      	<div class="thumb">
+                      		<img class="img-circle" src="assets/img/ui-zac.jpg" width="35px" height="35px" align="">
+                      	</div>
+                      	<div class="details">
+                      		<p><a href="#">Zac Sniders</a><br/>
+                      		   <muted>Available</muted>
+                      		</p>
+                      	</div>
+                      </div>
+                      <!-- Fifth Member -->
+                      <div class="desc">
+                      	<div class="thumb">
+                      		<img class="img-circle" src="assets/img/ui-sam.jpg" width="35px" height="35px" align="">
+                      	</div>
+                      	<div class="details">
+                      		<p><a href="#">Marcel Newman</a><br/>
+                      		   <muted>Available</muted>
+                      		</p>
+                      	</div>
+                      </div>
+
+                        <!-- CALENDAR-->
+                        <div id="calendar" class="mb">
+                            <div class="panel green-panel no-margin">
+                                <div class="panel-body">
+                                    <div id="date-popover" class="popover top" style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
+                                        <div class="arrow"></div>
+                                        <h3 class="popover-title" style="disadding: none;"></h3>
+                                        <div id="date-popover-content" class="popover-content"></div>
+                                    </div>
+                                    <div id="my-calendar"></div>
+                                </div>
+                            </div>
+                        </div><!-- / calendar -->
                       
                   </div><!-- /col-lg-3 -->
-                      <!-- 우측 하단  -->
-					 <div class="row mtbox">
-                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-                  			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h3>933</h3>
-                  			</div>
-					  			<p>방문자수</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_cloud"></span>
-					  			<h3>+48</h3>
-                  			</div>
-					  			<p>새 글</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_stack"></span>
-					  			<h3>23</h3>
-                  			</div>
-					  			<p>새 댓글</p>
-                  		</div>
-                  		<!-- <div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_news"></span>
-					  			<h3>+10</h3>
-                  			</div>
-					  			<p>More than 10 news were added in your reader.</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_data"></span>
-					  			<h3>OK!</h3>
-                  			</div>
-					  			<p>Your server is working perfectly. Relax & enjoy.</p>
-                  		</div> -->
-                  		
-                  	</div><!-- /row mt -->	
               </div><! --/row -->
           </section>
       </section>
@@ -495,12 +632,12 @@
       <footer class="site-footer">
           <div class="text-center">
               2014 - Alvarez.is
-              <a href="index#" class="go-top">
+              <a href="index.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
       </footer>
-      <!--footer end-->
+      <!--footer end--> 
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
@@ -516,9 +653,8 @@
     <!--common script for all pages-->
     <script src="assets/js/common-scripts.js"></script>
     
-    <!--  우측 상단 알림창
     <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="assets/js/gritter-conf.js"></script> -->
+    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
 
     <!--script for this page-->
     <script src="assets/js/sparkline-chart.js"></script>    
@@ -579,5 +715,8 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     </script>
-</body>
+  
+
+  </body>
+
 </html>
