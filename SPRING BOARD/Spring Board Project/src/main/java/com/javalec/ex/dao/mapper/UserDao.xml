@@ -26,5 +26,17 @@
 		UPDATE USERINFO SET bPass = #{bPass} WHERE bId = #{bId}
 	</update>
 	
+	<update id="user_modify_pass" parameterType="UserDto">
+		UPDATE USERINFO SET bPass = #{bPass}, bRegion = #{bRegion}, bSchool = #{bSchool}, bGrade = #{bGrade}, bMajor = #{bMajor} WHERE bId = #{bId}
+	</update>
+	
+	<update id="user_modify" parameterType="UserDto">
+		UPDATE USERINFO SET bRegion = #{bRegion}, bSchool = #{bSchool}, bGrade = #{bGrade}, bMajor = #{bMajor} WHERE bId = #{bId}
+	</update>
+	
+	<delete id="drop_by_id" parameterType="UserDto">
+		DELETE FROM USERINFO WHERE bId = #{bId}
+	</delete>	
+	
 </mapper>
     
