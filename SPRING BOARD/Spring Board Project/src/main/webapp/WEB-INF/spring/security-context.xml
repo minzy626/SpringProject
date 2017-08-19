@@ -22,6 +22,7 @@
       	<property name="passwordEncoder" ref="passwordEncoder"></property>
    	  </bean>
    	  
+   	  <bean id="customAuthenticationFailHandler" class="com.javalec.ex.handler.CustomAuthenticationFailHandler"/>
    	  
      <security:authentication-manager>
      	<security:authentication-provider user-service-ref ="customUserDetailsService">
@@ -41,7 +42,8 @@
                            login-processing-url="/login"
                            username-parameter="bId"
                            password-parameter="bPass"
-                           authentication-failure-url="/login_view?error=true" />
+                           authentication-failure-url="/login_view?error=true"
+                           authentication-failure-handler-ref="customAuthenticationFailHandler" />
  
                   <security:logout logout-url="/logout" 
                   				logout-success-url="/index"/>       
