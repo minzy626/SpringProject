@@ -29,13 +29,8 @@
     <script src="assets/js/chart-master/Chart.js"></script>
     
  <!-- 미입력 찾기 함수 -->
+ 	<security:authentication var="principal" property="principal"/>
     <script type="text/javascript">
-     $(document).ready(function() {
-        $("#bRegion").val("${principal.bRegion}");
-        $("#bGender").val(<security:authentication property="principal.bGender"/>);
-        $("#bGrade").val(<security:authentication property="principal.bGrade"/>);
-        // you need to specify id of combo to set right combo, if more than one combo
-     });
         function checkValue()
         {
             var form = document.userInfo;
@@ -352,8 +347,8 @@
 			<label class="col-sm-3 control-label">아이디</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input type="text" class="form-control" value="<security:authentication property="principal.bId"/>" disabled/>
-				<input type="hidden" name="bId" id="bId" value="<security:authentication property="principal.bId"/>">
+				<input type="text" class="form-control" value="${principal.bId}" disabled/>
+				<input type="hidden" name="bId" id="bId" value="${principal.bId}">
 			</div>
 			</div>
 			</div>
@@ -385,7 +380,7 @@
             <label class="col-sm-3 control-label">닉네임</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bNick" type="text" value="<security:authentication property="principal.bNick"/>" disabled>
+				<input class="form-control" name="bNick" type="text" value="${principal.bNick}" disabled>
 			</div>
 			</div>
 			</div>
@@ -395,29 +390,26 @@
 			<label class="col-sm-3 control-label">지역</label>
 			<div class="row">
 			<div class="col-sm-6">
-			<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
 				<select class="form-control" name="bRegion" id="bRegion">
 					<option value="">시/도 선택</option>
-    				<option value="서울특별시">서울특별시</option>
-   					<option value="부산광역시">부산광역시</option>
-    				<option value="대구광역시">대구광역시</option>
-    				<option value="인천광역시">인천광역시</option>
-    				<option value="광주광역시">광주광역시</option>
-   					<option value="대전광역시">대전광역시</option>
-    				<option value="울산광역시">울산광역시</option>
-    				<option value="세종특별자치시">세종특별자치시</option>
-    				<option value="경기도">경기도</option>
-   					<option value="강원도">강원도</option>
-    				<option value="충청북도">충청북도</option>
-    				<option value="충청남도">충청남도</option>
-    				<option value="전라북도">전라북도</option>
-   					<option value="전라남도">전라남도</option>
-    				<option value="경상북도">경상북도</option>
-    				<option value="경상남도">경상북도</option>
-    				<option value="제주특별자치도">경상북도</option>
+    				<option value="서울특별시" <c:out value="${principal.bRegion == '서울특별시'? 'selected' : ''}" />>서울특별시</option>
+   					<option value="부산광역시" <c:out value="${principal.bRegion == '부산광역시'? 'selected' : ''}" />>부산광역시</option>
+    				<option value="대구광역시" <c:out value="${principal.bRegion == '대구광역시'? 'selected' : ''}" />>대구광역시</option>
+    				<option value="인천광역시" <c:out value="${principal.bRegion == '인천광역시'? 'selected' : ''}" />>인천광역시</option>
+    				<option value="광주광역시" <c:out value="${principal.bRegion == '광주광역시'? 'selected' : ''}" />>광주광역시</option>
+   					<option value="대전광역시" <c:out value="${principal.bRegion == '대전광역시'? 'selected' : ''}" />>대전광역시</option>
+    				<option value="울산광역시" <c:out value="${principal.bRegion == '울산광역시'? 'selected' : ''}" />>울산광역시</option>
+    				<option value="세종특별자치시" <c:out value="${principal.bRegion == '세종특별자치시'? 'selected' : ''}" />>세종특별자치시</option>
+    				<option value="경기도" <c:out value="${principal.bRegion == '경기도'? 'selected' : ''}" />>경기도</option>
+   					<option value="강원도" <c:out value="${principal.bRegion == '강원도'? 'selected' : ''}" />>강원도</option>
+    				<option value="충청북도" <c:out value="${principal.bRegion == '충청북도'? 'selected' : ''}" />>충청북도</option>
+    				<option value="충청남도" <c:out value="${principal.bRegion == '충청남도'? 'selected' : ''}" />>충청남도</option>
+    				<option value="전라북도" <c:out value="${principal.bRegion == '전라북도'? 'selected' : ''}" />>전라북도</option>
+   					<option value="전라남도" <c:out value="${principal.bRegion == '전라남도'? 'selected' : ''}" />>전라남도</option>
+    				<option value="경상북도" <c:out value="${principal.bRegion == '경상북도'? 'selected' : ''}" />>경상북도</option>
+    				<option value="경상남도" <c:out value="${principal.bRegion == '경상남도'? 'selected' : ''}" />>경상북도</option>
+    				<option value="제주특별자치도" <c:out value="${principal.bRegion == '제주특별자치도'? 'selected' : ''}" />>경상북도</option>
 				</select>
- 				<c:set var="region"><security:authentication property="principal.bRegion" /></c:set>
-<%-- 				<input type="hidden" name="hRegion" id="hRegion" value="<security:authentication property="principal.bRegion"/>"> --%>
 			</div>
 			</div>
 			</div>
@@ -427,12 +419,12 @@
 			<label class="col-sm-3 control-label">성별</label>
 			<div class="row">
 			<div class="col-sm-2">
-				<select class="form-control" name="bGender" id="bGender">
+				<select class="form-control" name="bGender" id="bGender" disabled>
 					<option value="">성별 선택</option>
-    				<option value="남">남</option>
-   					<option value="여">여</option>
+    				<option value="남" <c:out value="${principal.bGender == '남'? 'selected' : ''}" />>남</option>
+   					<option value="여" <c:out value="${principal.bGender == '여'? 'selected' : ''}" />>여</option>
 				</select>
-				<input type="hidden" name="hGender" id="hGender" value="<security:authentication property="principal.bGender"/>">
+<%-- 				<input type="hidden" name="hGender" id="hGender" value="<security:authentication property="principal.bGender"/>"> --%>
 			</div>
 			</div>
 			</div>
@@ -442,18 +434,17 @@
             <label class="col-sm-3 control-label">학교</label>
             <div class="row">
 				<div class="col-sm-3">
-             	<input class="form-control" name="bSchool" type="text" value="<security:authentication property="principal.bSchool"/>" placeholder="학교 이름">
+             	<input class="form-control" name="bSchool" type="text" value="${principal.bSchool}" placeholder="학교 이름">
           		</div>
 				<div class="col-sm-2">
    				<select class="form-control" name="bGrade" id="bGrade">
 					<option value="">학년 선택</option>
-    				<option value="1">1학년</option>
-   					<option value="2">2학년</option>
-    				<option value="3">3학년</option>
-    				<option value="4">4학년</option>
-    				<option value="5">5학년이상</option>
+    				<option value="1" <c:out value="${principal.bGrade == '1'? 'selected' : ''}" />>1학년</option>
+   					<option value="2" <c:out value="${principal.bGrade == '2'? 'selected' : ''}" />>2학년</option>
+    				<option value="3" <c:out value="${principal.bGrade == '3'? 'selected' : ''}" />>3학년</option>
+    				<option value="4" <c:out value="${principal.bGrade == '4'? 'selected' : ''}" />>4학년</option>
+    				<option value="5" <c:out value="${principal.bGrade == '5'? 'selected' : ''}" />>5학년이상</option>
 				</select>
-				<input type="hidden" name="hGrade" id="hGrade" value="<security:authentication property="principal.bGrade"/>">
           		</div>
           	</div>
 			</div>
@@ -463,7 +454,7 @@
             <label class="col-sm-3 control-label">전공</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input class="form-control" name="bMajor" type="text" placeholder="전공" value="<security:authentication property="principal.bMajor"/>">
+				<input class="form-control" name="bMajor" type="text" placeholder="전공" value="${principal.bMajor}">
 			</div>
 			</div>
 			</div>

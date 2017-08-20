@@ -2,6 +2,7 @@ package com.javalec.ex.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -25,6 +28,7 @@ import com.javalec.ex.UserService.NickDuplicationService;
 import com.javalec.ex.UserService.RegisterService;
 import com.javalec.ex.UserService.UserModifyService;
 import com.javalec.ex.UserService.WithdrawService;
+import com.javalec.ex.dao.UserDao;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
@@ -45,7 +49,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login_view")
-	public String login_view(Model model) {
+	public String login_view(Model model, Principal principal) {
+		model.addAttribute("principal", principal);
 		return "login";
 	}
 	
@@ -131,7 +136,8 @@ public class UserController {
 				out.println("<script>alert('회원가입이 완료 되었습니다.');</script>");
 				out.flush();
 				  
-				session.invalidate();
+				session.removeAttribute("success");
+				session.removeAttribute("certifyNum");
 				return "index";
 			}
 			else {
@@ -196,6 +202,7 @@ public class UserController {
 	
 	@RequestMapping(value="/memberModify2", method = RequestMethod.POST)
 	public String memberModify2(Model model, HttpSession session) {
+
 		return "memberModify2";
 	}
 	
@@ -263,7 +270,7 @@ public class UserController {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('회원탈퇴를 완료하였습니다.');history.go(-1);</script>");
-				out.println("<script>opener.location.href=\"index\";history.go(-1);</script>");	
+				out.println("<script>opener.location.href=\"logout\";history.go(-1);</script>");	
 				out.println("<script>self.close();history.go(-1);</script>");		
 				out.flush();
 				
@@ -276,7 +283,8 @@ public class UserController {
 			return "withdrawForm"; 
 		}
 		
-		session.invalidate();
+		session.removeAttribute("success");
+		session.removeAttribute("certifyNum");
 		return "index";
 	}
 }
