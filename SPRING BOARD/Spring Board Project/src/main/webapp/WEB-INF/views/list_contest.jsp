@@ -244,7 +244,7 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i> 전체 게시판
+					<i class="fa fa-angle-right"></i> 공모전 게시판
 				</h3>
 				<div class="row mt">
 					<div class="col-lg-12">
@@ -296,7 +296,7 @@
 												<td align="center">${dto.bHit}</td>
 											</tr>
 									</c:forEach>
-										<c:forEach items="${list}" var="dto">
+										<c:forEach items="${list_contest}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
 												<td><a
@@ -438,7 +438,7 @@
 	<script src="assets/js/common-scripts.js"></script>
 
 	<!--script for this page-->
-	<script>
+		<script>
 	$(document).ready(function() {
 		$('#selM').change(function() {
 			
@@ -449,9 +449,9 @@
 	// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 	// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
 
-	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+	self.location = "/ex/list_contest${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ bMeetingGroup + "&bSearchRType=" + bSearchRType;
+			+ "공모전" + "&bSearchRType=" + bSearchRType;
 
 });
 $('#selR').change(function() {
@@ -463,9 +463,9 @@ $('#selR').change(function() {
 	// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 	// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
 
-	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+	self.location = "/ex/list_contest${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ bMeetingGroup + "&bSearchRType=" + bSearchRType;
+			+ "공모전" + "&bSearchRType=" + bSearchRType;
 
 });
 	});
@@ -488,9 +488,9 @@ $('#selR').change(function() {
 
 								// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 								// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
-								self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+								self.location = "/ex/list_contest${bPage.makeQuery(1)}&bSearchType="
 										+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-										+ bMeetingGroup + "&bSearchRType=" + bSearchRType;
+										+ "공모전" + "&bSearchRType=" + bSearchRType;
 
 							});
 		});

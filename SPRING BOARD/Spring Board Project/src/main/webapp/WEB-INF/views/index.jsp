@@ -243,14 +243,14 @@
                       </ul>
                   </li>
 				  <li class="sub-menu">
-                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=동아리&bStudyGroup=
+                      <a href="/ex/list_club${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=동아리&bStudyGroup=
 					&bSearchRType=&bCategory=">
                           <i class="fa fa-cogs"></i>
                           <span>동아리</span>
                       </a>
                   </li>
                   <li class="sub-menu">
-                      <a href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=공모전&bStudyGroup=
+                      <a href="/ex/list_contest${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=공모전&bStudyGroup=
 					&bSearchRType=&bCategory=">
                           <i class="fa fa-cogs"></i>
                           <span>공모전</span>

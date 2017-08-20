@@ -43,6 +43,36 @@ public class SearchController {
 
 	}
 	
+	@RequestMapping(value = "/list_club", method = RequestMethod.GET)
+	public void listClubGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_club", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
+	@RequestMapping(value = "/list_contest", method = RequestMethod.GET)
+	public void listContestGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_contest", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
 	@RequestMapping(value="/content_view", method= RequestMethod.GET)
 	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model)
 	{
