@@ -26,6 +26,7 @@ import com.javalec.ex.UserService.FindpassService;
 import com.javalec.ex.UserService.IdDuplicationService;
 import com.javalec.ex.UserService.NickDuplicationService;
 import com.javalec.ex.UserService.RegisterService;
+import com.javalec.ex.UserService.UserConfirmService;
 import com.javalec.ex.UserService.UserModifyService;
 import com.javalec.ex.UserService.WithdrawService;
 import com.javalec.ex.dao.UserDao;
@@ -221,8 +222,19 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user_modify_confirm", method = RequestMethod.POST)
-	public String user_modify_confirm(UserDto userDto,Errors errors,HttpSession httpSession,HttpServletResponse response) throws IOException
+	public String user_modify_confirm(HttpServletRequest request, UserDto userDto, Errors errors, HttpSession httpSession, HttpServletResponse response) throws IOException
 	{
+		String bCurrentPass = (String)request.getParameter("bCurrentPass");
+		
+		try {
+			UserConfirmService confirmService = new UserConfirmService();
+			confirmService.execute(sqlsession, userDto, bCurrentPass);
+		}
+		catch (Exception e) {
+			errors.reject("PassNotMatch");
+			return "memberModify2";
+		}
+		
 		UserModifyService service = new UserModifyService();
 		service.execute(sqlsession,userDto);
 		

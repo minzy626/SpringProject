@@ -35,13 +35,18 @@
         {
             var form = document.userInfo;
             
+            if(!form.bCurrentPass.value){
+                alert("현재비밀번호를 입력해 주세요.");
+                return false;
+            }
+            
             if(form.bPass.value.length < 8 && form.bPass.value.length > 0){
-                alert("비밀번호를 8자 이상으로 입력해 주세요.");
+                alert("새 비밀번호를 8자 이상으로 입력해 주세요.");
                 return false;
             }
             
             if(form.bPass.value != form.bPassCheck.value ){
-                alert("비밀번호를 동일하게 입력해 주세요.");
+                alert("새 비밀번호를 동일하게 입력해 주세요.");
                 return false;
             }    
            
@@ -352,8 +357,18 @@
 			</div>
 			</div>
 			</div>
+			
+			<div class="form-group">
+			<label class="col-sm-3 control-label">현재 비밀번호</label>
+			<div class="row">
+			<div class="col-sm-6">
+				<input class="form-control" name="bCurrentPass" type="password" placeholder="비밀번호">
+				<p class="help-block">현재 비밀번호를 입력하세요</p>
+			</div>
+			</div>
+			</div>
 					
-			<!-- 비밀번호 입력 -->
+			<!-- 새 비밀번호 입력 -->
 			<div class="form-group">
 			<label class="col-sm-3 control-label">새 비밀번호</label>
 			<div class="row">
@@ -364,7 +379,7 @@
 			</div>
 			</div>
 					
-			<!-- 비밀번호 입력 확인-->
+			<!-- 새 비밀번호 입력 확인-->
 			<div class="form-group">
 			<label class="col-sm-3 control-label">새 비밀번호 확인</label>
 			<div class="row">
