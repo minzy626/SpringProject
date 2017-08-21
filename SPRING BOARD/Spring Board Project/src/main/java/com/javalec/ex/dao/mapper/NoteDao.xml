@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.javalec.ex.dao.NoteDao">
+
+	<select id="find_all_by_Receiver" parameterType="String" resultType="NoteDto">
+		select * from note where Receiver = #{Receiver}
+	</select>
+	
+	<select id="find_by_id" parameterType="Integer" resultType="NoteDto">
+		select * from note where Id = #{Id}
+	</select>
+	
+	<delete id="delete_by_id" parameterType="Integer">
+		delete from note where Id = #{Id}
+	</delete>
+	
+	<insert id="insert" parameterType="NoteDto">
+		insert into note (Sender,Receiver,Content) values (#{Sender},#{Receiver},#{Content});
+	</insert>
+</mapper>

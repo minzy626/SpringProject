@@ -20,8 +20,10 @@
 	<context:annotation-config/>
 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/note/**" location="/resources/**" />
 	<resources mapping="/**" location="/resources/**" />
-
+	
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -29,6 +31,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.javalec.ex" />
+	
 	<!-- 브라우저 캐시 지우기 (뒤로가기 방지) -->
 	<mvc:interceptors>
 	     <mvc:interceptor>
