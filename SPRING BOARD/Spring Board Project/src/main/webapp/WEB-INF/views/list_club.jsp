@@ -252,25 +252,24 @@
 							<h4>
 								<!-- 							<i class="fa fa-angle-right"></i> Responsive Table -->
 							</h4>
-							<select class="type02" name="bSearchMType" id="selM">
+							<select class="type02" name="bCategory" id="selM">
 								<!--  	<option selected>분류</option>-->
 								<option value="null"
 									<c:out value="${bPage.sdto.bCategory == null? 'selected': ''}"/>>분류</option>
-								<option value="club" id="searchMClub"
-									<c:out value="${bPage.sdto.bCategory == 'club'? 'selected': ''}"/>>동아리</option>
-								<option value="study"
-									<c:out value="${bPage.sdto.bCategory == 'study'? 'selected': ''}"/>>스터디</option>
-								<option value="meeting"
-									<c:out value="${bPage.sdto.bCategory == 'meeting'? 'selected': ''}"/>>미팅</option>
+								<option value="모집"
+									<c:out value="${bPage.sdto.bCategory == '모집'? 'selected': ''}"/>>모집</option>
+								<option value="참여"
+									<c:out value="${bPage.sdto.bCategory == '참여'? 'selected': ''}"/>>참여</option>
+									
 							</select> <select class="type02" name="bSearchRType" id="selR">
 								<option value="null"
 									<c:out value="${bPage.sdto.bSearchRType == null? 'selected': ''}"/>>지역</option>
-								<option value="seoul"
-									<c:out value="${bPage.sdto.bSearchRType == 'seoul'? 'selected': ''}"/>>서울</option>
-								<option value="incheon"
-									<c:out value="${bPage.sdto.bSearchRType == 'incheon'? 'selected': ''}"/>>인천</option>
-								<option value="ansan"
-									<c:out value="${bPage.sdto.bSearchRType == 'ansan'? 'selected': ''}"/>>안산</option>
+								<option value="서울"
+									<c:out value="${bPage.sdto.bSearchRType == '서울'? 'selected': ''}"/>>서울</option>
+								<option value="인천"
+									<c:out value="${bPage.sdto.bSearchRType == '인천'? 'selected': ''}"/>>인천</option>
+								<option value="안산"
+									<c:out value="${bPage.sdto.bSearchRType == '안산'? 'selected': ''}"/>>안산</option>
 							</select>
 							<section id="unseen">
 								<table
@@ -300,9 +299,11 @@
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
 												<td><a
-													href="list?bMeetingGroup=${dto.bMeetingGroup}&bRegionGroup=${dto.bRegionGroup}"
+													href="/ex/list_club${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
+													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
+													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
 													style="font-size: 12px; color: gray;">
-														${dto.bMeetingGroup}/${dto.bRegionGroup}</a>
+														${dto.bCategory}/${dto.bRegionGroup}</a>
 													&nbsp;&nbsp;|&nbsp; &nbsp; <a
 													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a></td>
 												<td align="center">${dto.bName}</td>
@@ -358,20 +359,21 @@
 
 								<div class="dataTables_paginate paging_simple_numbers text-center"
 									id="example1_paginate">
-									<ul class="pagination">
+									<nav aria-label="Page navigation">
+									<ul class="pagination highlight">
 										<!-- 이전 -->
 										<!-- ${pageMaker.prev} == true 이면 class 그대로, false이면 disabled 추가 -->
 										<c:choose>
 											<c:when test="${bPage.prev}">
 												<li class="paginate_button previous" id="example1_previous">
-													<a href="/ex/list${bPage.makeSearch(bPage.bStartPage-1)}">
+													<a href="/ex/list_club${bPage.makeSearch(bPage.bStartPage-1)}">
 														Previous </a>
 												</li>
 											</c:when>
 											<c:otherwise>
 												<li class="paginate_button previous disabled"
 													id="example1_previous"><a
-													href="/ex/list${bPage.makeSearch(bPage.bStartPage-1) }">
+													href="/ex/list_club${bPage.makeSearch(bPage.bStartPage-1) }">
 														Previous </a></li>
 
 											</c:otherwise>
@@ -379,27 +381,47 @@
 
 										<!-- 페이지 번호 -->
 										<!-- forEach써서 ${pageMaker.startPage} 부터 ${pageMaker.endPage} 까지  li태그로 출력-->
+										<li class="page-item">
+										<a class="page-link" href="/ex/list_club${bPage.makeSearch(bPage.sdto.bPage-1)}" aria-label="before">
+										<span aria-hidden="true">&laquo;</span>
+										<span class="sr-only">before</span>
+										</a>
+										</li>		
 										<c:forEach var="idx" begin="${bPage.bStartPage}"
 											end="${bPage.endPage}">
-											<li class="paginate_button"><a
-												href="/ex/list${bPage.makeSearch(idx)}"> ${idx} </a></li>
+											<c:choose>
+											<c:when test="${idx == bPage.sdto.bPage}">
+											<li class="paginate_button active"><a class="page-link"
+												href="/ex/list_club${bPage.makeSearch(idx)}"> ${idx} </a></li>
+											</c:when>
+											<c:otherwise>
+											<li class="paginate_button page-item"><a class="page-link"
+												href="/ex/list_club${bPage.makeSearch(idx)}"> ${idx} </a></li>
+											</c:otherwise>
+											</c:choose>
 										</c:forEach>
-
+										<li class="page-item">
+										<a class="page-link" href="/ex/list_club${bPage.makeSearch(bPage.sdto.bPage+1)}" aria-label="after">
+										<span aria-hidden="true">&raquo;</span>
+										<span class="sr-only">after</span>
+										</a>
+										</li>
 										<!-- 이후 -->
 										<c:choose>
 											<c:when test="${bPage.next}">
 												<li class="paginate_button next" id="example1_next"><a
-													href="/ex/list${bPage.makeSearch(bPage.endPage+1)}">
+													href="/ex/list_club${bPage.makeSearch(bPage.endPage+1)}">
 														Next </a></li>
 											</c:when>
 											<c:otherwise>
 												<li class="paginate_button next disabled" id="example1_next">
-													<a href="/ex/list${bPage.makeSearch(bPage.endPage+1)}">
+													<a href="/ex/list_club${bPage.makeSearch(bPage.endPage+1)}">
 														Next </a>
 												</li>
 											</c:otherwise>
 										</c:choose>
 									</ul>
+									</nav>
 								</div>
 							</section>
 						</div>
@@ -441,7 +463,7 @@
 	<script>
 	$(document).ready(function() {
 		$('#selM').change(function() {
-			
+			var bCategory = $("select[name=bCategory]").val();
 			var bSearchRType = $("select[name=bSearchRType]").val();
 			var bSearchType = $("select[name=bSearchType]").val();
 			var bKeyword = $("input[name=bKeyword]").val();
@@ -451,11 +473,12 @@
 
 	self.location = "/ex/list_club${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ "동아리" + "&bSearchRType=" + bSearchRType;
+			+ "동아리" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+			+ "&bStudyGroup=" + "";
 
 });
 $('#selR').change(function() {
-			
+			var bCategory = $("select[name=bCategory]").val();
 			var bSearchRType = $("select[name=bSearchRType]").val();
 			var bSearchType = $("select[name=bSearchType]").val();
 			var bKeyword = $("input[name=bKeyword]").val();
@@ -465,7 +488,8 @@ $('#selR').change(function() {
 
 	self.location = "/ex/list_club${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ "동아리" + "&bSearchRType=" + bSearchRType;
+			+ "동아리" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+			+ "&bStudyGroup=" + "";
 
 });
 	});
@@ -475,22 +499,18 @@ $('#selR').change(function() {
 				console.log(event);
 				event.preventDefault();
 			});
-			
-			
-			
 			$('#searchBtn').on("click", function(event) {
-
 								// 검색옵션 값 가져오고
+								var bCategory = $("select[name=bCategory]").val();
 								var bSearchRType = $("select[name=bSearchRType]").val();
-								var bSearchType = $("select[name=bSearchType]")
-										.val();
+								var bSearchType = $("select[name=bSearchType]").val();
 								var bKeyword = $("input[name=bKeyword]").val();
-
 								// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 								// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
 								self.location = "/ex/list_club${bPage.makeQuery(1)}&bSearchType="
-										+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-										+ "동아리" + "&bSearchRType=" + bSearchRType;
+									+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
+									+ "동아리" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+									+ "&bStudyGroup=" + "";
 
 							});
 		});

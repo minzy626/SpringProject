@@ -231,14 +231,13 @@
                           <span>스터디</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bbMeetingGroup=&bKeyword=&bSearchMType=스터디
-                          &bStudyGroup=어학
+                          <li><a  href="/ex/list_Slanguage${bPage.makeQuery(1)}&bMeetingGroup=&bKeyword=&bSearchMType=스터디&bStudyGroup=어학
 					&bSearchRType=&bCategory=">어학 스터디</a></li>
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=취업
+                          <li><a  href="/ex/list_Sjob${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=취업
 					&bSearchRType=&bCategory=">취업 스터디</a></li>
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=전공
+                          <li><a  href="/ex/list_Smajor${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=전공
 					&bSearchRType=&bCategory=">전공 스터디</a></li>
-                          <li><a  href="/ex/list${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=기타
+                          <li><a  href="/ex/list_Setc${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=기타
 					&bSearchRType=&bCategory=">기타</a></li>
                       </ul>
                   </li>
