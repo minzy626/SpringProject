@@ -21,6 +21,7 @@
 			<list>
 				<value>classpath:com/javalec/ex/dao/mapper/IDao.xml</value>
 				<value>classpath:com/javalec/ex/dao/mapper/UserDao.xml</value>
+				<value>classpath:com/javalec/ex/dao/mapper/NoteDao.xml</value>
 			</list>
 		</property>
 	</bean>     
