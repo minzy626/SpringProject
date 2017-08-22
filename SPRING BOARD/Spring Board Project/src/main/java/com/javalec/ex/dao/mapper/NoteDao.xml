@@ -7,18 +7,56 @@
 <mapper namespace="com.javalec.ex.dao.NoteDao">
 
 	<select id="find_all_by_Receiver" parameterType="String" resultType="NoteDto">
-		select * from note where Receiver = #{Receiver}
+		select * from receive_note where Receiver = #{Receiver}
 	</select>
 	
-	<select id="find_by_id" parameterType="Integer" resultType="NoteDto">
-		select * from note where Id = #{Id}
+	<select id="find_all_by_Sender" parameterType="String" resultType="NoteDto">
+		select * from send_note where Sender = #{Sender}
 	</select>
 	
-	<delete id="delete_by_id" parameterType="Integer">
-		delete from note where Id = #{Id}
+	<select id="find_send_by_id" parameterType="Integer" resultType="NoteDto">
+		select * from send_note where Id = #{Id}
+	</select>
+	
+	<select id="find_receive_by_id" parameterType="Integer" resultType="NoteDto">
+		select * from receive_note where Id = #{Id}
+	</select>
+	
+	<update id="identify_id">
+		update send_note inner join receive_note on send_note.Checktime = receive_note.Sendtime set send_note.Id = receive_note.Id
+	</update>
+	
+	
+	<update id="update_send_confirm_by_id" parameterType="Integer">
+		update send_note set Confirm=1 where Id = #{Id}
+	</update>
+	
+	<update id="update_receive_confirm_by_id" parameterType="Integer">
+		update receive_note set Confirm=1 where Id=#{Id}
+	</update>
+	
+	<delete id="delete_send_by_id" parameterType="Integer">
+		delete from send_note where Id = #{Id}
 	</delete>
 	
-	<insert id="insert" parameterType="NoteDto">
-		insert into note (Sender,Receiver,Content) values (#{Sender},#{Receiver},#{Content});
+	<delete id="delete_receive_by_id" parameterType="Integer">
+		delete from receive_note where Id = #{Id}
+	</delete>
+	
+	<delete id="delete_by_Receiver" parameterType="String">
+		delete from receive_note where Receiver = #{Receiver}
+	</delete>
+	
+	<delete id="delete_by_Sender" parameterType="String">
+		delete from send_note where Sender = #{Sender}
+	</delete>
+	
+	<insert id="send_insert" parameterType="NoteDto">
+		insert into send_note (Id,Sender,Receiver,Content) values (#{Id},#{Sender},#{Receiver},#{Content});
 	</insert>
+	
+	<insert id="receive_insert" parameterType="NoteDto">
+		insert into receive_note (Sender,Receiver,Content) values (#{Sender},#{Receiver},#{Content});
+	</insert>
+	
 </mapper>

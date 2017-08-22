@@ -35,16 +35,16 @@
 	<div class="row">
 
 		<section class="content">
-			<h1>받은 쪽지함</h1>
+			<h1>보낸 쪽지함</h1>
 			<div class="col-md-8 col-md-offset-2">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div class="pull-right">
 							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-filter" onclick="location.href='sendlist'">보낸 쪽지함</button>
+								<button type="button" class="btn btn-success btn-filter" onclick="location.href='receivelist'">받은 쪽지함</button>
 								<button type="button" class="btn btn-warning btn-filter" onclick="location.href='write_view'">쪽지 보내기</button>
-								<button type="button" class="btn btn-danger btn-filter" onclick="location.href='receive_delete_all'">전체 삭제</button>
-					
+								<button type="button" class="btn btn-danger btn-filter" onclick="location.href='send_delete_all'">전체 삭제</button>
+								
 							</div>
 						</div>
 						<div class="table-container">
@@ -65,10 +65,11 @@
 														<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
 													</a>
 														<div class="media-body">
-															<span class="media-meta pull-right">보낸 시간<br/>${notedto.sendtime}</span>
-															
+															<c:if test="${notedto.confirm==1}">
+																<span class="media-meta pull-right">읽은 시간<br/>${notedto.checktime}</span>
+															</c:if>
 																<h4 class="title">				
-																		${notedto.sender}
+																		${notedto.receiver}
 																		<c:if test="${notedto.confirm == 0}">
 																			<span class="pull-right pagado">(읽지않음)</span>
 																		</c:if>
@@ -77,7 +78,7 @@
 																		</c:if>
 																	
 																</h4>
-																<a href="content_view?Id=${notedto.id}"><p class="summary">${notedto.content}</p></a>
+																<a href="content_view2?Id=${notedto.id}"><p class="summary">${notedto.content}</p></a>
 															
 														</div>
 													
@@ -87,14 +88,16 @@
 										
 									</c:forEach>
 									
-							
+									
+						
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
 				<div class="content-footer">
-					
+					<p>
+					</p>
 				</div>
 			</div>
 		</section>
