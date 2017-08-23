@@ -1,9 +1,12 @@
 package com.javalec.ex.controller;
 
+import java.security.Principal;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +19,7 @@ import com.javalec.ex.BoardService.BoardService;
 import com.javalec.ex.BoardService.CommentService;
 import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.BPageDto;
+import com.javalec.ex.dto.CustomUserDetails;
 import com.javalec.ex.dto.SearchingPageDto;
 
 @Controller
@@ -136,6 +140,7 @@ public class SearchController {
 	@RequestMapping(value="/content_view", method= RequestMethod.GET)
 	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model)
 	{
+		
 		logger.info("readGET is called......");
 		
 		logger.info(" page : " + spdto.getbPage().toString());
@@ -147,6 +152,7 @@ public class SearchController {
 		model.addAttribute("spdto", spdto);
 		model.addAttribute("BDto", service.read(bId));
 		model.addAttribute("commentList", cService.cListAll(bId));
+		
 	}// readGET()
 	
 	@RequestMapping(value="/modify_view", method= RequestMethod.GET)
@@ -164,13 +170,13 @@ public class SearchController {
 	@RequestMapping(value="/write_view", method= RequestMethod.GET)
 	public void writeView(
 						@ModelAttribute("spdto") SearchingPageDto spdto, 
-						Model model)
+						Model model, Principal principal)
 	{
 		logger.info("writeView is called......");
-		
+		CustomUserDetails user = (CustomUserDetails)((Authentication)principal).getPrincipal();
 		System.out.println("write_view:");
 		model.addAttribute("spdto", spdto);
-		
+		model.addAttribute("connectedUser", user.getbNick());
 	}
 	@RequestMapping(value="/write", method = RequestMethod.POST)
 	public String write(BDto Dto, RedirectAttributes rttr)
