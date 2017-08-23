@@ -7,7 +7,9 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
@@ -20,8 +22,10 @@
 	<context:annotation-config/>
 	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/note/**" location="/resources/**" />
 	<resources mapping="/**" location="/resources/**" />
-
+	
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -29,6 +33,9 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.javalec.ex" />
+	
+	<beans:bean id="noteServiceImpl" class="com.javalec.ex.service.NoteServiceImpl"></beans:bean>
+	
 	<!-- 브라우저 캐시 지우기 (뒤로가기 방지) -->
 	<mvc:interceptors>
 	     <mvc:interceptor>
@@ -39,6 +46,13 @@
 	     </mvc:interceptor>
 	</mvc:interceptors>
 	
+	<!-- 웹소켓 사용 -->
+	<websocket:handlers>
+        <websocket:mapping path="/count" handler="myHandler"/>
+    </websocket:handlers>
+ 
+ 	<!-- 웹 소켓 핸들러  -->
+    <beans:bean id="myHandler" class="com.javalec.ex.handler.WebSocketHandler"/>
 
 
 	
@@ -58,7 +72,7 @@
 				<mvc:mapping path="/logout/**"/>
 				<mvc:mapping path="/memberinfo/**"/>
 				<mvc:exclude-mapping path="/list/**"/>
-				<beans:bean class="com.javalec.ex.Interceptor.LoginCheckInterceptor"/>
+				<beans:bean class="com.javalec.ex.Interceptor.LoginCheckInterceptㅅㅅor"/>
 			</mvc:interceptor>	
 			아래 내용은 로그아웃후 뒤로가기버튼눌렀을때 다시 로그인 되는것을 방지하기 위함. 
 			<mvc:interceptor>

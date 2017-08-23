@@ -26,10 +26,14 @@ public class CommentController {
 	}
 	
 	@RequestMapping(value="/cUpdate")
-	public String cUpdate(CDto cdto, RedirectAttributes rttr)
+	public String cUpdate(@RequestParam("cId") int cId, @RequestParam("cContent") String cContent, @RequestParam("cBoardNum") int cBoardNum, RedirectAttributes rttr)
 	{
-		service.cUpdate(cdto);
-		return "redirect:/content_view?bPage=1&bPerPageNum=10&bSearchType=&bSearchMType&bSearchRType&bKeyword=&bId="+cdto.getcBoardNum();
+		CDto cdto;
+		
+		//cdto.setcContent(cContent);
+		//cdto.setcId(cId);
+		//service.cUpdate(cdto);
+		return "redirect:/content_view?bPage=1&bPerPageNum=10&bSearchType=&bSearchMType&bSearchRType&bKeyword=&bId="+cBoardNum;
 	}
 	
 	@RequestMapping(value="/cDelete")

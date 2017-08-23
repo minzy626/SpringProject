@@ -244,13 +244,13 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i> 전체 게시판
+					<i class="fa fa-angle-right"></i> 어학 스터디 게시판
 				</h3>
 				<div class="row mt">
 					<div class="col-lg-12">
 						<div class="content-panel">
 							<h4>
-								<!-- <i class="fa fa-angle-right"></i> Responsive Table -->
+								<!-- 							<i class="fa fa-angle-right"></i> Responsive Table -->
 							</h4>
 							<select class="type02" name="bCategory" id="selM">
 								<!--  	<option selected>분류</option>-->
@@ -295,7 +295,7 @@
 												<td align="center">${dto.bHit}</td>
 											</tr>
 									</c:forEach>
-										<c:forEach items="${list}" var="dto">
+										<c:forEach items="${list_Slanguage}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
 												<td><a
@@ -473,8 +473,8 @@
 
 	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ "" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
-			+ "&bStudyGroup=" + "";
+			+ "스터디" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+			+ "&bStudyGroup=" + "어학";
 
 });
 $('#selR').change(function() {
@@ -488,8 +488,8 @@ $('#selR').change(function() {
 
 	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ "" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
-			+ "&bStudyGroup=" + "";
+			+ "스터디" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+			+ "&bStudyGroup=" + "어학";
 
 });
 	});
@@ -509,8 +509,8 @@ $('#selR').change(function() {
 								// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
 								self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
 									+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-									+ "" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
-									+ "&bStudyGroup=" + "";
+									+ "스터디" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+									+ "&bStudyGroup=" + "어학";
 
 							});
 		});

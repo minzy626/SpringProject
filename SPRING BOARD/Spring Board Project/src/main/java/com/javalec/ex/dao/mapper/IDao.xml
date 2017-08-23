@@ -132,22 +132,22 @@
 		</if>
 		<!-- 모집/참여에 따른 분류 -->
 		<if test="bCategory != null">
-			<if test="bCategory == 'recruit'.toString()">
-				and bRegionGroup like concat("%", "모집" ,"%")
+			<if test="bCategory == '모집'.toString()">
+				and bCategory like concat("%", "모집" ,"%")
 			</if>
-			<if test="bCategory == 'participation'.toString()">
-				and bRegionGroup like concat("%", "참여" ,"%")
+			<if test="bCategory == '참여'.toString()">
+				and bCategory like concat("%", "참여" ,"%")
 			</if>
 		</if>
 		<!-- 지역에 따른 분류 -->
 		<if test="bSearchRType != null">
-			<if test="bSearchRType == 'seoul'.toString()">
+			<if test="bSearchRType == '서울'.toString()">
 				and bRegionGroup like concat("%", "서울" ,"%")
 			</if>
-			<if test="bSearchRType == 'incheon'.toString()">
+			<if test="bSearchRType == '인천'.toString()">
 				and bRegionGroup like concat("%", "인천" ,"%")
 			</if>
-			<if test="bSearchRType == 'ansan'.toString()">
+			<if test="bSearchRType == '안산'.toString()">
 				and bRegionGroup like concat("%", "안산" ,"%")
 			</if>
 		</if>

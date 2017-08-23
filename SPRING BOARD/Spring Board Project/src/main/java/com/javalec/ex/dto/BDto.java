@@ -8,8 +8,9 @@ public class BDto {
 	String bName;
 	String bTitle;
 	String bContent;
-	String bMeetingGroup;
+	/*String bMeetingGroup;*/
 	String bRegionGroup;
+	String bCategory;
 	String bNotice;
 	Timestamp bDate;
 	int bHit;
@@ -65,13 +66,13 @@ public class BDto {
 		this.bHit = bHit;
 	}
 
-	public String getbMeetingGroup() {
+	/*public String getbMeetingGroup() {
 		return bMeetingGroup;
 	}
 
 	public void setbMeetingGroup(String bMeetingGroup) {
 		this.bMeetingGroup = bMeetingGroup;
-	}
+	}*/
 
 	public String getbRegionGroup() {
 		return bRegionGroup;
@@ -79,6 +80,14 @@ public class BDto {
 
 	public void setbRegionGroup(String bRegionGroup) {
 		this.bRegionGroup = bRegionGroup;
+	}
+
+	public String getbCategory() {
+		return bCategory;
+	}
+
+	public void setbCategory(String bCategory) {
+		this.bCategory = bCategory;
 	}
 
 	public String getbNotice() {

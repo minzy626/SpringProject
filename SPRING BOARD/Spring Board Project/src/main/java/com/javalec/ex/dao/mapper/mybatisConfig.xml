@@ -13,5 +13,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     	<typeAlias alias="BPageDto" type="com.javalec.ex.dto.BPageDto"/>
     	<typeAlias alias="SearchingPageDto" type="com.javalec.ex.dto.SearchingPageDto"/>
     	<typeAlias alias="CDto" type="com.javalec.ex.dto.CDto"/>
+    	<typeAlias alias="NoteDto" type="com.javalec.ex.dto.NoteDto"/>
 	</typeAliases>
 </configuration>

@@ -244,13 +244,13 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i> 전체 게시판
+					<i class="fa fa-angle-right"></i> 공모전 게시판
 				</h3>
 				<div class="row mt">
 					<div class="col-lg-12">
 						<div class="content-panel">
 							<h4>
-								<!-- <i class="fa fa-angle-right"></i> Responsive Table -->
+								<!-- 							<i class="fa fa-angle-right"></i> Responsive Table -->
 							</h4>
 							<select class="type02" name="bCategory" id="selM">
 								<!--  	<option selected>분류</option>-->
@@ -295,11 +295,11 @@
 												<td align="center">${dto.bHit}</td>
 											</tr>
 									</c:forEach>
-										<c:forEach items="${list}" var="dto">
+										<c:forEach items="${list_contest}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
 												<td><a
-													href="/ex/list${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
+													href="/ex/list_contest${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
 													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
 													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
 													style="font-size: 12px; color: gray;">
@@ -366,14 +366,14 @@
 										<c:choose>
 											<c:when test="${bPage.prev}">
 												<li class="paginate_button previous" id="example1_previous">
-													<a href="/ex/list${bPage.makeSearch(bPage.bStartPage-1)}">
+													<a href="/ex/list_contest${bPage.makeSearch(bPage.bStartPage-1)}">
 														Previous </a>
 												</li>
 											</c:when>
 											<c:otherwise>
 												<li class="paginate_button previous disabled"
 													id="example1_previous"><a
-													href="/ex/list${bPage.makeSearch(bPage.bStartPage-1) }">
+													href="/ex/list_contest${bPage.makeSearch(bPage.bStartPage-1) }">
 														Previous </a></li>
 
 											</c:otherwise>
@@ -382,7 +382,7 @@
 										<!-- 페이지 번호 -->
 										<!-- forEach써서 ${pageMaker.startPage} 부터 ${pageMaker.endPage} 까지  li태그로 출력-->
 										<li class="page-item">
-										<a class="page-link" href="/ex/list${bPage.makeSearch(bPage.sdto.bPage-1)}" aria-label="before">
+										<a class="page-link" href="/ex/list_contest${bPage.makeSearch(bPage.sdto.bPage-1)}" aria-label="before">
 										<span aria-hidden="true">&laquo;</span>
 										<span class="sr-only">before</span>
 										</a>
@@ -392,16 +392,16 @@
 											<c:choose>
 											<c:when test="${idx == bPage.sdto.bPage}">
 											<li class="paginate_button active"><a class="page-link"
-												href="/ex/list${bPage.makeSearch(idx)}"> ${idx} </a></li>
+												href="/ex/list_contest${bPage.makeSearch(idx)}"> ${idx} </a></li>
 											</c:when>
 											<c:otherwise>
 											<li class="paginate_button page-item"><a class="page-link"
-												href="/ex/list${bPage.makeSearch(idx)}"> ${idx} </a></li>
+												href="/ex/list_contest${bPage.makeSearch(idx)}"> ${idx} </a></li>
 											</c:otherwise>
 											</c:choose>
 										</c:forEach>
 										<li class="page-item">
-										<a class="page-link" href="/ex/list${bPage.makeSearch(bPage.sdto.bPage+1)}" aria-label="after">
+										<a class="page-link" href="/ex/list_contest${bPage.makeSearch(bPage.sdto.bPage+1)}" aria-label="after">
 										<span aria-hidden="true">&raquo;</span>
 										<span class="sr-only">after</span>
 										</a>
@@ -410,12 +410,12 @@
 										<c:choose>
 											<c:when test="${bPage.next}">
 												<li class="paginate_button next" id="example1_next"><a
-													href="/ex/list${bPage.makeSearch(bPage.endPage+1)}">
+													href="/ex/list_contest${bPage.makeSearch(bPage.endPage+1)}">
 														Next </a></li>
 											</c:when>
 											<c:otherwise>
 												<li class="paginate_button next disabled" id="example1_next">
-													<a href="/ex/list${bPage.makeSearch(bPage.endPage+1)}">
+													<a href="/ex/list_contest${bPage.makeSearch(bPage.endPage+1)}">
 														Next </a>
 												</li>
 											</c:otherwise>
@@ -471,9 +471,9 @@
 	// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 	// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
 
-	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+	self.location = "/ex/list_contest${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ "" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+			+ "공모전" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
 			+ "&bStudyGroup=" + "";
 
 });
@@ -486,9 +486,9 @@ $('#selR').change(function() {
 	// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 	// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
 
-	self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+	self.location = "/ex/list_contest${bPage.makeQuery(1)}&bSearchType="
 			+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-			+ "" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+			+ "공모전" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
 			+ "&bStudyGroup=" + "";
 
 });
@@ -507,9 +507,9 @@ $('#selR').change(function() {
 								var bKeyword = $("input[name=bKeyword]").val();
 								// 서버쪽 url 스트링 완성해서 self.location으로 창 이동.
 								// -> 서버쪽에서 해당 파라미터들을 수집하여 검색결과 리스트를 뿌려줄 것이다.
-								self.location = "/ex/list${bPage.makeQuery(1)}&bSearchType="
+								self.location = "/ex/list_contest${bPage.makeQuery(1)}&bSearchType="
 									+ bSearchType + "&bKeyword=" + bKeyword + "&bMeetingGroup="
-									+ "" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
+									+ "공모전" + "&bSearchRType=" + bSearchRType + "&bCategory=" + bCategory
 									+ "&bStudyGroup=" + "";
 
 							});

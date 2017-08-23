@@ -43,6 +43,96 @@ public class SearchController {
 
 	}
 	
+	@RequestMapping(value = "/list_club", method = RequestMethod.GET)
+	public void listClubGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_club", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
+	@RequestMapping(value = "/list_contest", method = RequestMethod.GET)
+	public void listContestGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_contest", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
+	@RequestMapping(value = "/list_Slanguage", method = RequestMethod.GET)
+	public void listLanguageGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_Slanguage", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
+	@RequestMapping(value = "/list_Sjob", method = RequestMethod.GET)
+	public void listJobGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_Sjob", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
+	@RequestMapping(value = "/list_Smajor", method = RequestMethod.GET)
+	public void listMajorGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_Smajor", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
+	@RequestMapping(value = "/list_Setc", method = RequestMethod.GET)
+	public void listEtcGET(SearchingPageDto spdto, Model model) {
+
+		
+		model.addAttribute("list_Setc", service.listSearchCriteria(spdto));
+		model.addAttribute("listNotice", service.listNotice());
+		
+		BPageDto bPage = new BPageDto();
+		bPage.setSdto(spdto);
+		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
+
+		model.addAttribute("bPage", bPage);
+
+	}
+	
 	@RequestMapping(value="/content_view", method= RequestMethod.GET)
 	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model)
 	{
