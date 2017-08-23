@@ -304,7 +304,7 @@
 				
 			  <h2>신촌지역 스터디/공모전/미팅 게시판 - 글 보기 페이지</h2>
 				
-			  <form role="form" method="post">
+			  <form id="pageInfo" role="form" method="post">
             	<input type="hidden" name="bPage" value="${spdto.bPage}">
             	<input type="hidden" name="bPerPageNum" value="${spdto.bPerPageNum}">
             	<input type="hidden" name="bSearchType" value="${spdto.bSearchType}">
@@ -406,9 +406,10 @@
 			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; height:280px;">
 			  	  <div style="padding-top:10px;"><p id="cType" class="text-center"><strong style="font-size:20px;">댓글 작성</strong></p>
 			  	  <security:authorize access="isAuthenticated()">
-			  	  <form name="commentForm" action="cWrite" role="form" method="post">
+			  	  <form id="commentForm" name="commentForm" action="cWrite" role="form" method="post">
 			  	  	<input type="hidden" name="cNick" value="<security:authentication property="principal.bNick"/>">
 			  	  	<input type="hidden" name="cBoardNum" value="${BDto.bId }">
+			  	  	<input type="hidden" id="cId" name="cId" value="0">
 			  	  	<div id="modifyIdInput"></div>
 			  	  	<div class="centered" style="padding-right:50px; padding-left:50px; padding-top:10px;">
 			  			<textarea class="form-control" id="cContent" name="cContent" rows="3" style="width:800px; height:150px; overflow:auto;" placeholder="댓글 내용"></textarea>
@@ -469,20 +470,13 @@
   	<script>
   	function modifyComment(id, comment)
   	{
+  		document.getElementById('cId').value=id;
   		document.getElementById('cContent').value=comment;
   		document.getElementById('cType').innerHTML='<strong style="font-size:20px;">댓글 내용수정</strong>';
   		//document.getElementById('cButton').innerHTML='<button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
-  		document.getElementById('cButton').innerHTML='<a onclick="updateComment();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></a>';
+  		document.getElementById('cButton').innerHTML='<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
   		//document.getElementById('modifyIdInput').innerHTML='<input type="hidden" name="cId" value="'+id+'">';
-  		
-  	}
-  	
-  	function updateComment()
-  	{
-  		var cForm=$("form[name='commentForm']");
-  		cForm.attr("action","/ex/cUpdate");
-  		
-  		
+  		document.getElementById('commentForm').action = '/ex/cUpdate';
   	}
   	
 	// 버튼 클릭 이벤트로 폼 태그에 action 속성을 달아주면 된다. 원하는 곳에..
@@ -491,12 +485,19 @@
 		
 		
 		// 댓글 수정버튼
+		//var cForm=document.forms['commentForm'];
+		//var cForm = $("form[id='commentForm']");
+		//$(".btn-primary").on("click", function(){
+		//	cForm.elements["cContent"].value=document.getElementById('cContent').value;
+		//	cForm.attr("action","/ex/cUpdate");
+		//	cForm.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
+		//});
 		
-		// 댓글 삭제버튼
 		
 		var formObj = $("form[role='form']");
 		// 리스트 페이지
 		$(".btn-info").on("click", function(){
+			
 			formObj.attr("action", "/ex/list");
 			formObj.attr("method", "get");
 			formObj.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.

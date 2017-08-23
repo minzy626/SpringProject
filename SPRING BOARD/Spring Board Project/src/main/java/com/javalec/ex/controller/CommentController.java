@@ -2,6 +2,8 @@ package com.javalec.ex.controller;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,8 @@ public class CommentController {
 	@Inject
 	CommentService service;
 	
+	private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+	
 	@RequestMapping(value="/cWrite")
 	public String cwrite(CDto cdto, RedirectAttributes rttr)
 	{
@@ -28,11 +32,16 @@ public class CommentController {
 	@RequestMapping(value="/cUpdate")
 	public String cUpdate(@RequestParam("cId") int cId, @RequestParam("cContent") String cContent, @RequestParam("cBoardNum") int cBoardNum, RedirectAttributes rttr)
 	{
-		CDto cdto;
+		logger.info("cUpdate is called......");
 		
-		//cdto.setcContent(cContent);
-		//cdto.setcId(cId);
-		//service.cUpdate(cdto);
+		logger.info(" cId : " + cId);
+		logger.info(" cContent : " + cContent);
+		logger.info(" cBoardNum : " + cBoardNum);
+		CDto cdto=new CDto();
+		cdto.setcId(cId);
+		cdto.setcContent(cContent);
+		cdto.setcBoardNum(cBoardNum);
+		service.cUpdate(cdto);
 		return "redirect:/content_view?bPage=1&bPerPageNum=10&bSearchType=&bSearchMType&bSearchRType&bKeyword=&bId="+cBoardNum;
 	}
 	

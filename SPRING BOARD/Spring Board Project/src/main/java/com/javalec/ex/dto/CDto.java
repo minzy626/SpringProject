@@ -9,7 +9,7 @@ public class CDto {
 	String cContent;
 	Timestamp cDate;
 	public CDto() {
-	
+		
 	}
 	
 	public int getcId() {
