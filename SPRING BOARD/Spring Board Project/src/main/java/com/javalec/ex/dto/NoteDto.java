@@ -10,6 +10,13 @@ public class NoteDto {
 	 int Confirm;
 	 Timestamp Sendtime;
 	 Timestamp Checktime;
+	 String formattedtime;
+	 public void setFormattedtime(String formattedtime) {
+		this.formattedtime = formattedtime;
+	}
+	 public String getFormattedtime() {
+		return formattedtime;
+	}
 	public int getId() {
 		return Id;
 	}
