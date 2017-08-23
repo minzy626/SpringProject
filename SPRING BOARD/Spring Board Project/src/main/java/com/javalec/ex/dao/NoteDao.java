@@ -2,6 +2,8 @@ package com.javalec.ex.dao;
 
 import java.util.List;
 
+import org.springframework.web.socket.WebSocketMessage;
+
 import com.javalec.ex.dto.NoteDto;
 
 public interface NoteDao {
@@ -17,5 +19,6 @@ public interface NoteDao {
 	public void delete_by_Sender(String Sender);
 	public void update_send_confirm_by_id(int Id);
 	public void update_receive_confirm_by_id(int Id);
+	public String count_receive_note(String Receiver);
 	public void identify_id();
 }

@@ -10,6 +10,11 @@
 		select * from receive_note where Receiver = #{Receiver}
 	</select>
 	
+	<select id="count_receive_note" parameterType="String" resultType="String">
+		select count(*) from receive_note where Receiver = #{Receiver} and Confirm = 0
+	</select>
+	
+	
 	<select id="find_all_by_Sender" parameterType="String" resultType="NoteDto">
 		select * from send_note where Sender = #{Sender}
 	</select>
