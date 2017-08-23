@@ -343,16 +343,24 @@
 	            <button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> 목록으로</button>	
 	            <!-- bDto.bNick==security:authentication property="principal.bNick 이라면... -->
 	            
-	            <c:choose>
-	            <c:when test="true">
-		          	<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
-		          	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
-	          	</c:when>
-	          	<c:otherwise>
-	          		<button type="submit" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
+	            <security:authorize access="isAuthenticated()">
+	            	<c:set var="connectedUser"><security:authentication property="principal.bNick" /></c:set>
+	            	<c:set var="contentWriter">${BDto.bName }</c:set>
+	            	<c:choose>
+	            		<c:when test="${connectedUser == contentWriter}">
+		          			<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
+		          			<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
+	          			</c:when>
+	          			<c:otherwise>
+		          			<button type="submit" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
+		          			<button type="submit" class="btn btn-danger" disabled="disabled"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
+	          			</c:otherwise>
+	          		</c:choose>
+	          	</security:authorize>
+	          	<security:authorize access="!isAuthenticated()">
+	            	<button type="submit" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
 		          	<button type="submit" class="btn btn-danger" disabled="disabled"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
-	          	</c:otherwise>
-	          	</c:choose>
+	            </security:authorize>
 	          </div>
 	          </div>
 			</article>
@@ -369,13 +377,14 @@
 			</div>
 			
 			<c:forEach items="${commentList }" var="dto">
+	            <c:set var="commentWriter">${dto.cNick }</c:set>
 				<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
 			  	<div>
 			  	  <p>
 			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> ${dto.cNick}</a> <!-- 클릭 시 멤버정보 팝업창 -->
 					| <i class="glyphicon glyphicon-calendar">${dto.cDate}</i>
-					<c:if test="true">
-					| <a href="#" onclick="modifyComment('${dto.cId}','${dto.cContent }'); return false;">수정</a>
+					<c:if test="${connectedUser== commentWriter}">
+					| <a onclick="modifyComment('${dto.cId}','${dto.cContent }'); return false;">수정</a>
 					| <a href="/ex/cDelete?cId=${dto.cId }&cBoardNum=${BDto.bId}">삭제</a>
 					</c:if>
 			  	  </p>
@@ -388,40 +397,6 @@
 				</div>
 			</c:forEach>
 			
-			<!-- 
-			<!-- 첫번째 댓글(아직 c:forEach 구현x)
-			<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
-			  	<div>
-			  	  <p>
-			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> cNick</a> <!-- 클릭 시 멤버정보 팝업창
-					| <i class="glyphicon glyphicon-calendar">cDate</i>
-					<c:if test="${cDto.cNick==userinfo.bNick }">
-					| <a href="#">수정</a>
-					| <a href="#">삭제</a>
-					</c:if>
-			  	  </p>
-			  	</div>
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; min-height:80px; height:auto;">
-			  	  <div style="padding:10px;">
-			  		BOARD_COMMENT.cContent
-			  	  </div>
-			  	</div>
-			</div>
-			<!-- 두번째 댓글
-			<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
-			  	<div>
-			  	  <p>
-			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> cNick</a> <!-- 클릭 시 멤버정보 팝업창
-					| <i class="glyphicon glyphicon-calendar">cDate</i>  
-			  	  </p>
-			  	</div>
-			  	<div style="border:1px solid; background-color:#F5FFFF; width:900px; min-height:80px; height:auto;">
-			  	  <div style="padding:10px;">
-			  		BOARD_COMMENT.cContent
-			  	  </div>
-			  	</div>
-			</div>
-			 -->
 			<!-- 댓글 작성 부분(로그인여부에 따라 활/비활성화) -->
 			<!-- ****************************************************************************************************************************** -->
 			<!-- ****************************************************************************************************************************** -->
@@ -439,8 +414,8 @@
 			  			<textarea class="form-control" id="cContent" name="cContent" rows="3" style="width:800px; height:150px; overflow:auto;" placeholder="댓글 내용"></textarea>
 			  	 	 </div>
 			  	 	 <div class="centered" id="cButton" style="padding-top:15px; padding-right:50px; padding-left:50px;">
-			  	 	 <button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-ok">등록하기</span></button>
-			  	  	</div>
+			  	 	   <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok">등록하기</span></button>
+			  	  	</div>		  	  	
 				  </form>
 			  	  </security:authorize>
 			  	  <security:authorize access="!isAuthenticated()">
@@ -497,8 +472,16 @@
   		document.getElementById('cContent').value=comment;
   		document.getElementById('cType').innerHTML='<strong style="font-size:20px;">댓글 내용수정</strong>';
   		//document.getElementById('cButton').innerHTML='<button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
-  		document.getElementById('cButton').innerHTML='<a href="/ex/cUpdate?" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></a>';
+  		document.getElementById('cButton').innerHTML='<a onclick="updateComment();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></a>';
   		//document.getElementById('modifyIdInput').innerHTML='<input type="hidden" name="cId" value="'+id+'">';
+  		
+  	}
+  	
+  	function updateComment()
+  	{
+  		var cForm=$("form[name='commentForm']");
+  		cForm.attr("action","/ex/cUpdate");
+  		
   		
   	}
   	
