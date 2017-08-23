@@ -1,8 +1,10 @@
 package com.javalec.ex.controller;
 
+import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
+import java.security.Principal;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,6 +28,7 @@ import com.javalec.ex.UserService.FindpassService;
 import com.javalec.ex.UserService.IdDuplicationService;
 import com.javalec.ex.UserService.NickDuplicationService;
 import com.javalec.ex.UserService.RegisterService;
+import com.javalec.ex.UserService.UserConfirmService;
 import com.javalec.ex.UserService.UserModifyService;
 import com.javalec.ex.UserService.WithdrawService;
 import com.javalec.ex.dto.UserDto;
@@ -45,7 +51,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/login_view")
-	public String login_view(Model model) {
+	public String login_view(Model model, Principal principal) {
+		model.addAttribute("principal", principal);
 		return "login";
 	}
 	
@@ -131,7 +138,8 @@ public class UserController {
 				out.println("<script>alert('회원가입이 완료 되었습니다.');</script>");
 				out.flush();
 				  
-				session.invalidate();
+				session.removeAttribute("success");
+				session.removeAttribute("certifyNum");
 				return "index";
 			}
 			else {
@@ -196,6 +204,7 @@ public class UserController {
 	
 	@RequestMapping(value="/memberModify2", method = RequestMethod.POST)
 	public String memberModify2(Model model, HttpSession session) {
+
 		return "memberModify2";
 	}
 	
@@ -214,14 +223,27 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user_modify_confirm", method = RequestMethod.POST)
-	public String user_modify_confirm(UserDto userDto,Errors errors,HttpSession httpSession,HttpServletResponse response) throws IOException
+	public String user_modify_confirm(HttpServletRequest request, UserDto userDto, Errors errors, HttpSession httpSession, HttpServletResponse response) throws IOException
 	{
+		String bCurrentPass = (String)request.getParameter("bCurrentPass");
+		
+		try {
+			UserConfirmService confirmService = new UserConfirmService();
+			confirmService.execute(sqlsession, userDto, bCurrentPass);
+		}
+		catch (Exception e) {
+			errors.reject("PassNotMatch");
+			return "memberModify2";
+		}
+		
 		UserModifyService service = new UserModifyService();
 		service.execute(sqlsession,userDto);
-		
+
 		response.setContentType("text/html; charset=UTF-8");
 	    PrintWriter out = response.getWriter();
 	    out.println("<script>alert('회원정보 수정을 완료 하였습니다.');</script>");
+	    out.println("<script>alert('변경된 정보로 재로그인해주세요.');</script>");
+		out.println("<script>location.href=\"logout\";</script>");
 	    out.flush();
 	    
 		return "index"; 
@@ -263,7 +285,7 @@ public class UserController {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('회원탈퇴를 완료하였습니다.');history.go(-1);</script>");
-				out.println("<script>opener.location.href=\"index\";history.go(-1);</script>");	
+				out.println("<script>opener.location.href=\"logout\";history.go(-1);</script>");	
 				out.println("<script>self.close();history.go(-1);</script>");		
 				out.flush();
 				
@@ -276,7 +298,8 @@ public class UserController {
 			return "withdrawForm"; 
 		}
 		
-		session.invalidate();
+		session.removeAttribute("success");
+		session.removeAttribute("certifyNum");
 		return "index";
 	}
 }

@@ -29,19 +29,6 @@
     
  <!-- 미입력 찾기 함수 -->
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-/*      $(document).ready(function() {
-    	$('#bRegion').change(function() {
-       		$("#bRegion").val("${userDto.bRegion}");
-    	});
-    	$('#bRegion').change(function() {
-        	$("#bGender").val("${userDto.bGender}");
-    	});
-        $('#bRegion').change(function() {
-        	$("#bGrade").val("${userDto.bGrade}");
-        });
-        // you need to specify id of combo to set right combo, if more than one combo
-    	
-    });  */
     </script>
     
     <script type="text/javascript">
@@ -106,10 +93,10 @@
                 return false;
             }
             
-             if(!form.bNumcheck.value){
+/*              if(!form.bNumcheck.value){
             	alert("인증번호를 입력해 주세요.");
             	return false;
-        	}
+        	} */
 
         }
         function SendCheckNumber(){
@@ -385,7 +372,7 @@
 			<div class="page-header">
 			<h1>회원가입</h1>
 			</div>
-			<form:form class="form-horizontal" action="register" method="POST" name="userInfo" commandName = "userDto" >
+			<form:form class="form-horizontal" action="register" method="POST" name="userInfo" id="userInfo" commandName = "userDto" >
 					
 			<!-- 아이디 입력 -->
 			
@@ -510,7 +497,7 @@
 			<div class="row">
 			<div class="col-sm-6">
             	<div class="input-group">
-					<input class="form-control" name="bNumcheck" id="bNumcheck" type="text" placeholder="인증번호">
+					<input class="form-control" name="bNumcheck" id="bNumcheck" value="${userInfo.bNumcheck}" type="text" placeholder="인증번호">  <!-- value="${userInfo.bNumcheck}" --> 
 					<span class="input-group-btn">
 						<button class="btn btn-success" type="button" onclick="SendCheckNumber()">인증번호 전송<i class="fa fa-edit spaceLeft"></i></button>
 					</span>
