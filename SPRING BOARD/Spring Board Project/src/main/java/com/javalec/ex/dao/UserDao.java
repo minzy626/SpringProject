@@ -1,5 +1,6 @@
 package com.javalec.ex.dao;
 
+import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.UserDto;
 
 public interface UserDao {
@@ -11,4 +12,5 @@ public interface UserDao {
 	public void user_modify_pass(UserDto dto);
 	public void user_modify(UserDto dto);
 	public void drop_by_id(UserDto dto);
+	public Integer count_write(BDto dto);
 }

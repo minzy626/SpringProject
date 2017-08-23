@@ -4,8 +4,10 @@ import java.security.Principal;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalec.ex.BoardService.BoardService;
 import com.javalec.ex.BoardService.CommentService;
+import com.javalec.ex.UserService.WriteCountService;
 import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.BPageDto;
 import com.javalec.ex.dto.CustomUserDetails;
@@ -29,6 +32,8 @@ public class SearchController {
 	BoardService service;
 	@Inject
 	CommentService cService;
+	@Autowired
+	SqlSession sqlsession;
 
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
@@ -181,6 +186,13 @@ public class SearchController {
 	@RequestMapping(value="/write", method = RequestMethod.POST)
 	public String write(BDto Dto, RedirectAttributes rttr)
 	{
+		try {
+			WriteCountService wService = new WriteCountService();
+			wService.execute(sqlsession, Dto);
+		}
+		catch (Exception e) {
+			return "redirect:/list";
+		}
 		service.write(Dto);
 		return "redirect:/list";
 	}

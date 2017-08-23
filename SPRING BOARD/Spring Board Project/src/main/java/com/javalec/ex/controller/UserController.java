@@ -1,9 +1,10 @@
 package com.javalec.ex.controller;
 
+import java.awt.List;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
-import java.util.Map;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -29,7 +31,6 @@ import com.javalec.ex.UserService.RegisterService;
 import com.javalec.ex.UserService.UserConfirmService;
 import com.javalec.ex.UserService.UserModifyService;
 import com.javalec.ex.UserService.WithdrawService;
-import com.javalec.ex.dao.UserDao;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
@@ -237,10 +238,12 @@ public class UserController {
 		
 		UserModifyService service = new UserModifyService();
 		service.execute(sqlsession,userDto);
-		
+
 		response.setContentType("text/html; charset=UTF-8");
 	    PrintWriter out = response.getWriter();
 	    out.println("<script>alert('회원정보 수정을 완료 하였습니다.');</script>");
+	    out.println("<script>alert('변경된 정보로 재로그인해주세요.');</script>");
+		out.println("<script>location.href=\"logout\";</script>");
 	    out.flush();
 	    
 		return "index"; 

@@ -36,7 +36,11 @@
 	
 	<delete id="drop_by_id" parameterType="UserDto">
 		DELETE FROM USERINFO WHERE bId = #{bId}
-	</delete>	
+	</delete>
+	
+  	<select id="count_write" parameterType="Dto" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM MVC_BOARD WHERE bName = #{bName} AND DATE(bDate) = CURDATE()
+	</select>
 	
 </mapper>
     
