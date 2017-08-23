@@ -365,7 +365,7 @@
 			  </label>
 		   </div>
 		  <input type="hidden" name="bHit" id="bHit" value="0">
-		  
+		  <input type="hidden" name="bName" value="${connectedUser}">
 		  <div class="form-group">
 		    <label for="bTitle" class="col-md-1 control-label">제 목</label>
 		    <div class="col-md-9">

@@ -250,7 +250,7 @@
 					<div class="col-lg-12">
 						<div class="content-panel">
 							<h4>
-								<!-- 							<i class="fa fa-angle-right"></i> Responsive Table -->
+								<!-- <i class="fa fa-angle-right"></i> Responsive Table -->
 							</h4>
 							<select class="type02" name="bCategory" id="selM">
 								<!--  	<option selected>분류</option>-->
