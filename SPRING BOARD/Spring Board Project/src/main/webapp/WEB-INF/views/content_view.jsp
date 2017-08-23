@@ -414,8 +414,8 @@
 			  			<textarea class="form-control" id="cContent" name="cContent" rows="3" style="width:800px; height:150px; overflow:auto;" placeholder="댓글 내용"></textarea>
 			  	 	 </div>
 			  	 	 <div class="centered" id="cButton" style="padding-top:15px; padding-right:50px; padding-left:50px;">
-			  	 	 <button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-ok">등록하기</span></button>
-			  	  	</div>
+			  	 	   <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok">등록하기</span></button>
+			  	  	</div>		  	  	
 				  </form>
 			  	  </security:authorize>
 			  	  <security:authorize access="!isAuthenticated()">
@@ -472,8 +472,16 @@
   		document.getElementById('cContent').value=comment;
   		document.getElementById('cType').innerHTML='<strong style="font-size:20px;">댓글 내용수정</strong>';
   		//document.getElementById('cButton').innerHTML='<button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
-  		document.getElementById('cButton').innerHTML='<a href="/ex/cUpdate?cContent=${dto.cContent}" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></a>';
+  		document.getElementById('cButton').innerHTML='<a onclick="updateComment();" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></a>';
   		//document.getElementById('modifyIdInput').innerHTML='<input type="hidden" name="cId" value="'+id+'">';
+  		
+  	}
+  	
+  	function updateComment()
+  	{
+  		var cForm=$("form[name='commentForm']");
+  		cForm.attr("action","/ex/cUpdate");
+  		
   		
   	}
   	
