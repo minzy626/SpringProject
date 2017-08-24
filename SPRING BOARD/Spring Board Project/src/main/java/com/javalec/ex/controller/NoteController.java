@@ -29,7 +29,6 @@ public class NoteController {
 	@RequestMapping("/receivelist") //받은 쪽지함.
 	public String receivelist(Model model,Principal principal)
 	{
-		
 		CustomUserDetails user = (CustomUserDetails)((Authentication)principal).getPrincipal();//현재 로그인 중인 사용자의 닉네임을 가져오기 위해
 		model.addAttribute("list",service.receivelist(user.getbNick()));
 		
