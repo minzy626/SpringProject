@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
 <html>
  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,11 +22,11 @@
     <!-- Custom styles for this template -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
-
 	 <script src="assets/js/chart-master/Chart.js"></script>
 	<security:authorize access="isAuthenticated()">
 		<security:authentication property="principal.bNick" var="nick"/>
 	
+
 	<!-- 웹 소켓 사용해서 현재 몇개의 쪽지가 도착했는지 구해오기. --> 
     <script type="text/javascript">
     var wsUri = "ws://localhost:8181/ex/count";
@@ -51,11 +52,18 @@
     }
     function onError(evt) {
     }
+    
     $(document).ready(function(){
     		send_message();
     });
     		
-    
+    function popupOpen(){
+  	  	var windowW = 400;  // 창의 가로 길이
+        var windowH = 380;  // 창의 세로 길이
+        var left = Math.ceil((window.screen.width - windowW)/2);
+        var top = Math.ceil((window.screen.height - windowH)/2);
+		window.open("write_view","pop_01"," top="+top+", left="+left+", height="+windowH+", width="+windowW);
+    	}
         </script>
   </security:authorize>
   </head>
@@ -70,7 +78,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index" class="logo"><b>사이트 이름</b></a>
+            <a href="http://localhost:8181/ex/index" class="logo"><b>어우름</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -146,7 +154,7 @@
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
-                    <a href="note/receivelist">
+                    <a href="http://localhost:8181/ex/note/receivelist">
                             <i class="fa fa-envelope-o"></i>
                             <span id="count" class="badge bg-theme"></span>
                         </a>

@@ -90,21 +90,21 @@
 									<div id="sel"> -->
 								<!-- 	<div class="row"> -->
 								<table class="type01">
-									<!-- 	<div > -->
-									<tr>
-										<td><select name="bSearchType"
-											class="form-control input-sm">
-												<option value="n"
-													<c:out value="${bPage.sdto.bSearchType == null? 'selected' : ''}" />>---</option>
-												<option value="t"
-													<c:out value="${bPage.sdto.bSearchType == 't'? 'selected' : ''}" />>제목</option>
-												<option value="c"
-													<c:out value="${bPage.sdto.bSearchType == 'c'? 'selected' : ''}" />>내용</option>
-												<option value="w"
-													<c:out value="${bPage.sdto.bSearchType == 'w'? 'selected' : ''}" />>작성자</option>
-										</select></td>
-										<!-- 									</div>
- -->
+									
+										<tr>
+											<td><select name="bSearchType"
+												class="form-control input-sm">
+													<option value="n"
+														<c:out value="${bPage.sdto.bSearchType == null? 'selected' : ''}" />>---</option>
+													<option value="t"
+														<c:out value="${bPage.sdto.bSearchType == 't'? 'selected' : ''}" />>제목</option>
+													<option value="c"
+														<c:out value="${bPage.sdto.bSearchType == 'c'? 'selected' : ''}" />>내용</option>
+													<option value="w"
+														<c:out value="${bPage.sdto.bSearchType == 'w'? 'selected' : ''}" />>작성자</option>
+											</select></td>
+										
+
 										<!-- <div class="col-xs-6"> -->
 										<td width="250px"><input type="text" name="bKeyword"
 											class="form-control" value="${bPage.sdto.bKeyword}"

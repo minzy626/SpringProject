@@ -1,10 +1,13 @@
 package com.javalec.ex.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,11 +111,15 @@ public class NoteController {
 	
 	
 	@RequestMapping("/write")
-	public String note_write(NoteDto noteDto)
+	public void note_write(NoteDto noteDto,HttpServletResponse response) throws IOException
 	{
-		service.insert( noteDto);
-		
-		return "redirect:/note/sendlist";
+		service.insert(noteDto);
+		response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('성공적으로 쪽지가 전송 되었습니다.');opener.parent.location.reload();window.close();</script>");
+        out.flush();
+
+        return;
 	}
 	
 	

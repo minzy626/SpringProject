@@ -9,7 +9,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>사이트 이름</title>
+    <title>어우름</title>
 	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index" class="logo"><b>사이트 이름</b></a>
+            <a href="index" class="logo"><b>어우름</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->

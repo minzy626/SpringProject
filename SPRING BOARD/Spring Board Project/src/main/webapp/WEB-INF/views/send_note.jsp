@@ -1,12 +1,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="include/index_header.jsp" %>
+
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="쪽지함">
-		
+		<style>
+			.content{
+				position:relative;
+				left:17%;
+				top:60px;
+			}	
+		</style>
 		<!-- Bootstrap core CSS -->
 		<link href="assets/css/bootstrap.css" rel="stylesheet">
 		<!--external css-->
@@ -35,14 +43,15 @@
 	<div class="row">
 
 		<section class="content">
-			<h1>보낸 쪽지함</h1>
-			<div class="col-md-8 col-md-offset-2">
+			
+			<div class="col-md-8 col-md-offset-1">
 				<div class="panel panel-default">
-					<div class="panel-body">
+					<div class="panel-body" style=" padding-right: 30px; padding-left: 30px;">
+					<h1>보낸 쪽지함</h1>
 						<div class="pull-right">
 							<div class="btn-group">
 								<button type="button" class="btn btn-success btn-filter" onclick="location.href='receivelist'">받은 쪽지함</button>
-								<button type="button" class="btn btn-warning btn-filter" onclick="location.href='write_view'">쪽지 보내기</button>
+								<button type="button" class="btn btn-warning btn-filter" onclick="popupOpen()">쪽지 보내기</button>
 								<button type="button" class="btn btn-danger btn-filter" onclick="location.href='send_delete_all'">전체 삭제</button>
 								
 							</div>
@@ -52,14 +61,13 @@
 								<tbody>
 									<c:forEach var="notedto" items="${list}">
 										<tr data-status="pagado">
-											<td>
-											</td>
-											<td>
+											
+											<td style="width:30px;">
 												<a href="javascript:;" class="star">
 													<i class="glyphicon glyphicon-star"></i>
 												</a>
 											</td>
-											<td style="width:660px;">
+											<td>
 												<div class="media">
 													<a href="" class="pull-left">
 														<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
