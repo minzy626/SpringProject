@@ -6,31 +6,7 @@
     request.setCharacterEncoding("UTF-8");
 %>
 
-    <script language = "javascript"> 
-    function writeCheck() { 
-    	var form = document.writeform; 
-    	if( !form.bTitle.value ) { 
-    		alert( "제목을 입력해주세요" ); 
-    		form.bTitle.focus(); 
-    		return false;
-    	} 
-    	if( !form.bContent.value ) {
-    		alert( "내용을 입력해주세요" ); 
-    		form.bContent.focus(); 
-    		return false;
-    	}
-    	alert( "작성하신 내용이 성공적으로 게시되었습니다!" ); 
-    	form.submit();
-    }
- 
-    function submitContents() {
-        // 에디터의 내용이 textarea에 적용된다.
-        oEditors.getById["bContent"].exec("UPDATE_CONTENTS_FIELD", []);
-     	alert("javascript:submitContents()");
-        // 에디터의 내용에 대한 값 검증은 이곳에서
-        // document.getElementById("ir1").value를 이용해서 처리한다.
-    }
-    </script>
+    
     
     
 <!DOCTYPE html>
@@ -311,6 +287,32 @@
       </aside>
       <!--sidebar end-->
       
+      <script language = "javascript"> 
+    function writeCheck() { 
+    	var form = document.writeform; 
+    	if( !form.bTitle.value ) { 
+    		alert( "제목을 입력해주세요" ); 
+    		form.bTitle.focus(); 
+    		return false;
+    	} 
+    	if( !form.bContent.value ) {
+    		alert( "내용을 입력해주세요" ); 
+    		form.bContent.focus(); 
+    		return false;
+    	}
+    	alert( "작성하신 내용이 성공적으로 게시되었습니다!" ); 
+    	form.submit();
+    }
+ 
+    function submitContents() {
+        // 에디터의 내용이 textarea에 적용된다.
+        oEditors.getById["bContent"].exec("UPDATE_CONTENTS_FIELD", []);
+     	alert("javascript:submitContents()");
+        // 에디터의 내용에 대한 값 검증은 이곳에서
+        // document.getElementById("ir1").value를 이용해서 처리한다.
+    }
+    </script>
+      
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -334,10 +336,25 @@
 		  </div>	
 		  </div>
 			
-			<legend>신촌지역 스터디/공모전/미팅 게시판</legend>
+			<legend>새로운 글 작성하기</legend>
 			  	  
 			<!-- Select Basic -->
+
 			<div class="form-group">
+			<label class="col-md-1 control-label">게시판</label>
+			
+			  <label class="radio-inline">
+			  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked"> 스터디
+			  </label>
+			  <label class="radio-inline">
+			 	 <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 동아리
+			  </label>
+			  <label class="radio-inline">
+			  	<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 공모전
+			  </label>
+		   </div>
+		   
+		   <div class="form-group">
 			  <label class="col-md-1 control-label" for="selectbasic">글 종류</label>
 			  <div class="col-md-2">
 			    <select id="selectbasic" name="selectbasic" class="form-control">
@@ -351,19 +368,6 @@
 			  </div>
 			</div>
 			
-			<div class="form-group">
-			<label class="col-md-1 control-label">게시판</label>
-			
-			  <label class="radio-inline">
-			  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked"> 스터디
-			  </label>
-			  <label class="radio-inline">
-			 	 <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 공모전
-			  </label>
-			  <label class="radio-inline">
-			  	<input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 미팅
-			  </label>
-		   </div>
 		  <input type="hidden" name="bHit" id="bHit" value="0">
 		  <input type="hidden" name="bName" value="${connectedUser}">
 		  <div class="form-group">

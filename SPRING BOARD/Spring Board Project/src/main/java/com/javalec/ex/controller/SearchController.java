@@ -161,7 +161,7 @@ public class SearchController {
 	}// readGET()
 	
 	@RequestMapping(value="/modify_view", method= RequestMethod.GET)
-	public void writeView(@RequestParam("bId") Integer bId, 
+	public void modifyView(@RequestParam("bId") Integer bId, 
 						@ModelAttribute("spdto") SearchingPageDto spdto, 
 						Model model)
 	{

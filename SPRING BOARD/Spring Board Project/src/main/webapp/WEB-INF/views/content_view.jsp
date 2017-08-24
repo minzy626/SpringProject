@@ -304,12 +304,12 @@
 				
 			  <h2>신촌지역 스터디/공모전/미팅 게시판 - 글 보기 페이지</h2>
 				
-			  <form id="pageInfo" role="form" method="post">
+			  <form id="pageInfo" role="form">
             	<input type="hidden" name="bPage" value="${spdto.bPage}">
             	<input type="hidden" name="bPerPageNum" value="${spdto.bPerPageNum}">
             	<input type="hidden" name="bSearchType" value="${spdto.bSearchType}">
             	<input type="hidden" name="bKeyword" value="${spdto.bKeyword}">
-            	<input type="hidden" name="bId" value="${BDto.bId}">
+			    <input type="hidden" id="bId" name="bId" value="${BDto.bId}">
               </form>
 				
 			  <div>
@@ -323,12 +323,12 @@
 			    <p>
 				    <a href="#"><span class="label label-info">공모전</span></a> <!-- 클릭 시 공모전 게시판 해당 변수+페이지링크 필요 -->
 					<a href="#"><span class="label label-info">질문/답변</span></a> <!-- 클릭 시 공모전-질문답변 글 필터링해서 보여줘(굳이..?) -->
-					| <i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> 홍길동</a> <!-- 클릭 시 멤버정보 팝업창 -->
+					| <i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> ${BDto.bName }</a> <!-- 클릭 시 멤버정보 팝업창 -->
 					| <i class="glyphicon glyphicon-calendar">${BDto.bDate}</i>  
-				 	| <i class="glyphicon glyphicon-comment"></i> <a href="#"> 댓글 0</a> <!-- 클릭 시 댓글 부분으로 스크롤 다운(필요시..) -->
 				   	| <i class="glyphicon glyphicon-eye-open">${BDto.bHit }회</i>
 				</p>
 			  </div>
+			
 			  
 			 <!-- 글 박스 크기 고정에 스크롤바 사용하려면div style-> height:350px, overflow:auto 로 설정 -->
 			  <div class="col-md-12">
@@ -375,13 +375,43 @@
 			  	  </div>
 			  	</div>
 			</div>
-			
+			<div class="row">
+			<div class="comments-container">
+			<ul id="comments-list" class="comments-list">
+			<c:forEach items="${commentList }" var="dto">
+			  <li>
+				<div class="comment-main-level">
+					<!-- 프로필 이미지 -->
+					<div class="comment-avatar"><img src="assets/rion.png" class="img-circle" width="60"></div>
+					<!-- 댓글 내용 -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<c:set var="commentWriter">${dto.cNick }</c:set>
+							<h6 class="comment-name by-author"><a href="/ex/memberinfo">${dto.cNick}</a></h6>
+							<span>${dto.cDate}</span>
+							<c:if test="${connectedUser== commentWriter}">
+								<a href="/ex/cDelete?cId=${dto.cId }&cBoardNum=${BDto.bId}"><i class="glyphicon glyphicon-trash"></i></a>
+								<a onclick="modifyComment('${dto.cId}','${dto.cContent }'); return false;"><i class="glyphicon glyphicon-pencil"></i></a>
+							</c:if>
+							
+						</div>
+						<div class="comment-content">
+							${dto.cContent }
+						</div>
+					</div>
+				</div>
+			  </li>
+			</c:forEach>
+			</ul>
+			</div>
+			</div>
+			<!-- 
 			<c:forEach items="${commentList }" var="dto">
 	            <c:set var="commentWriter">${dto.cNick }</c:set>
 				<div class="col-md-12" style="padding-left:50px; padding-right:50px; padding-bottom:15px;">
 			  	<div>
 			  	  <p>
-			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> ${dto.cNick}</a> <!-- 클릭 시 멤버정보 팝업창 -->
+			  	  	<i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> ${dto.cNick}</a>  클릭 시 멤버정보 팝업창 
 					| <i class="glyphicon glyphicon-calendar">${dto.cDate}</i>
 					<c:if test="${connectedUser== commentWriter}">
 					| <a onclick="modifyComment('${dto.cId}','${dto.cContent }'); return false;">수정</a>
@@ -395,7 +425,7 @@
 			  	  </div>
 			  	</div>
 				</div>
-			</c:forEach>
+			</c:forEach> -->
 			
 			<!-- 댓글 작성 부분(로그인여부에 따라 활/비활성화) -->
 			<!-- ****************************************************************************************************************************** -->
@@ -468,21 +498,10 @@
 
     <!--script for this page-->
   	<script>
-  	function modifyComment(id, comment)
-  	{
-  		document.getElementById('cId').value=id;
-  		document.getElementById('cContent').value=comment;
-  		document.getElementById('cType').innerHTML='<strong style="font-size:20px;">댓글 내용수정</strong>';
-  		//document.getElementById('cButton').innerHTML='<button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
-  		document.getElementById('cButton').innerHTML='<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
-  		//document.getElementById('modifyIdInput').innerHTML='<input type="hidden" name="cId" value="'+id+'">';
-  		document.getElementById('commentForm').action = '/ex/cUpdate';
-  	}
+  	
   	
 	// 버튼 클릭 이벤트로 폼 태그에 action 속성을 달아주면 된다. 원하는 곳에..
 	$(function(){
-		
-		
 		
 		// 댓글 수정버튼
 		//var cForm=document.forms['commentForm'];
@@ -492,9 +511,7 @@
 		//	cForm.attr("action","/ex/cUpdate");
 		//	cForm.submit(); // submit()은 submit이벤트를 발생시켜주는 것으로 <form>에만 사용가능하다.
 		//});
-		
-		
-		var formObj = $("form[role='form']");
+		var formObj = $("#pageInfo");
 		// 리스트 페이지
 		$(".btn-info").on("click", function(){
 			
@@ -525,6 +542,19 @@
 		});
 
 	});//$(function(){})
+	
+	//댓글의 수정버튼을 누르면 호출
+	function modifyComment(id, comment)
+  	{
+  		document.getElementById('cId').value=id;
+  		document.getElementById('cContent').value=comment;
+  		document.getElementById('cType').innerHTML='<strong style="font-size:20px;">댓글 내용수정</strong>';
+  		//document.getElementById('cButton').innerHTML='<button type="submit"  class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
+  		document.getElementById('cButton').innerHTML='<button class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk">수정하기</span></button>';
+  		//document.getElementById('modifyIdInput').innerHTML='<input type="hidden" name="cId" value="'+id+'">';
+  		document.getElementById('commentForm').action = '/ex/cUpdate';
+  		window.scrollTo(0,document.body.scrollHeight);
+  	}
 </script>
 
   </body>
