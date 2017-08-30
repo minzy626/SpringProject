@@ -66,6 +66,20 @@
 										<c:forEach items="${list}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
+												<c:choose>
+												<c:when test="${servertime == dto.bDate}">
+												<td><a
+													href="/ex/list${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
+													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
+													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
+													style="font-size: 12px; color: gray;">
+														${dto.bCategory}/${dto.bRegionGroup}${dto.bDate}</a>
+													&nbsp;&nbsp;|&nbsp; &nbsp; <a
+													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a>
+													<img src="assets/list_css/New_icon.gif"/>
+												</td>
+												</c:when>
+												<c:otherwise>
 												<td><a
 													href="/ex/list${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
 													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
@@ -73,7 +87,10 @@
 													style="font-size: 12px; color: gray;">
 														${dto.bCategory}/${dto.bRegionGroup}</a>
 													&nbsp;&nbsp;|&nbsp; &nbsp; <a
-													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a></td>
+													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a>
+												</td>
+												</c:otherwise>
+												</c:choose>
 												<td align="center">${dto.bName}</td>
 												<td align="center"><fmt:formatDate value="${dto.bDate}"
 														pattern="yyyy-MM-dd" /></td>
@@ -92,7 +109,7 @@
 								<table class="type01">
 									<!-- 	<div > -->
 									<tr>
-										<td><select name="bSearchType"
+										<td width=5%><select name="bSearchType"
 											class="form-control input-sm">
 												<option value="n"
 													<c:out value="${bPage.sdto.bSearchType == null? 'selected' : ''}" />>---</option>
@@ -106,13 +123,13 @@
 										<!-- 									</div>
  -->
 										<!-- <div class="col-xs-6"> -->
-										<td width="250px"><input type="text" name="bKeyword"
+										<td width="25%"><input type="text" name="bKeyword"
 											class="form-control" value="${bPage.sdto.bKeyword}"
 											placeholder="검색 키워드를 입력하세요!"></td>
 										<!-- 									</div>
  -->
 										<!-- 	<div> -->
-										<td><span class="input-group-btn">
+										<td width=5%><span class="input-group-btn">
 												<button class="btn btn-secondary" id="searchBtn"
 													type="submit">찾기</button>
 										</span></td>

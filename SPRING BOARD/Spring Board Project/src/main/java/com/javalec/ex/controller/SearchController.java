@@ -1,6 +1,8 @@
 package com.javalec.ex.controller;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -35,19 +37,22 @@ public class SearchController {
 	@Autowired
 	SqlSession sqlsession;
 
+	SimpleDateFormat  formatter03 = new SimpleDateFormat("yyyy-MM-dd");
+	String todate03 =  formatter03.format(new Date());
+	
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void listGET(SearchingPageDto spdto, Model model) {
 
-		
+		System.out.println(todate03);
 		model.addAttribute("list", service.listSearchCriteria(spdto));
 		model.addAttribute("listNotice", service.listNotice());
 		
 		BPageDto bPage = new BPageDto();
 		bPage.setSdto(spdto);
 		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
-
+		model.addAttribute("serverTime", todate03);
 		model.addAttribute("bPage", bPage);
 
 	}
