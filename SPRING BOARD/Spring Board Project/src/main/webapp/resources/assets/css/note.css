@@ -22,8 +22,8 @@ body {
 	:: Table Filter
 	-------------------------------------------------- */
 .panel {
-	border: 1px solid #ddd;
-	background-color: #fcfcfc;
+	height:100%;
+	width:100%;
 }
 .panel .btn-group {
 	margin: 15px 0 30px;
@@ -34,6 +34,8 @@ body {
 .table-filter {
 	background-color: #fff;
 	border-bottom: 1px solid #eee;
+}
+.panel-body {
 }
 .table-filter tbody tr:hover {
 	cursor: pointer;
@@ -47,9 +49,6 @@ body {
 	background-color: #eee;
 }
 
-.table-filter tr td:nth-child(2) {
-	width: 35px;
-}
 .ckbox {
 	position: relative;
 }

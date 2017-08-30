@@ -5,11 +5,34 @@
 
 <mapper namespace="com.javalec.ex.dao.mapper.IDao">
 
+	<!-- 접속중인 유저의 bNick에 해당하는 게시물들 mvc_board에서 조회해서 해당 게시물들의 bId값을 구하고(0개이상),
+		  board_comment테이블에서 cBoardNum값이 위에서 얻은 bId인 댓글들 조회
+		    그 중 cIsSeen이 false인 댓글의 개수를 가져옴(읽음처리가 되지 않은 댓글) -->
+	<select id="cGetNewCommentCount" parameterType="string" resultType="Integer">
+		SELECT COUNT(*) FROM BOARD_COMMENT WHERE CISSEEN=0 AND CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
+	</select>
+	
+	<!-- 읽지않은 댓글들이 속한 게시물의 cBoardNum과 그 댓글의 작성자 cNick을 List<CDto>형식으로 가져온다. -->
+	<select id="cGetNewCommentDetails" parameterType="string" resultType="CDto">
+		SELECT * FROM BOARD_COMMENT WHERE CISSEEN=0 AND CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
+	</select>
+
+	<!-- 댓글 읽음 처리(게시물 작성자가 자신의 게시물 읽으면 모든 댓글 읽음처리됨) -->
+	<update id="isSeenToTrue" parameterType="Integer">
+		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM=#{param1}
+	</update>
+	
 	<!-- 댓글 작성 -->
 	<insert id="cWrite" parameterType="CDto">
 		INSERT INTO BOARD_COMMENT
-		(CBOARDNUM,CNICK,CCONTENT)
-		VALUES(#{cBoardNum},#{cNick},#{cContent})
+		(CBOARDNUM,CNICK,CCONTENT,CISSEEN)
+		VALUES(#{cBoardNum},#{cNick},#{cContent},#{cIsSeen})
 	</insert>
 	
 	<!-- 댓글 수정 -->
@@ -56,6 +79,10 @@
 	<select id="read" resultType="Dto">
 		SELECT * FROM MVC_BOARD WHERE BID =
 		#{bId}
+	</select>
+	
+	<select id="getBTitleFromBId" resultType="String">
+		SELECT BTITLE FROM MVC_BOARD WHERE BID=#{cBoardNum}
 	</select>
 
 	<insert id="write" parameterType="Dto">

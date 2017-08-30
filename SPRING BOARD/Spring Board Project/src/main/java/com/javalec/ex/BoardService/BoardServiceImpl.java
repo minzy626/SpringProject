@@ -62,6 +62,12 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		return dao.read(bId);
 	}
+	
+	@Override
+	// cBoardNum에 해당하는 bTitle가져오기 query
+	public String getBTitleFromBId(Integer cBoardNum) {
+		return dao.getBTitleFromBId(cBoardNum);
+	}
 
 	@Override
 	public List<BDto> listNotice() {

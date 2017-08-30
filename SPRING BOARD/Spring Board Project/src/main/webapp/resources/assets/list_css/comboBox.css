@@ -1,7 +1,7 @@
 @charset "EUC-KR";
 
 td.right {
-    width: 70%;
+    width: 85%;
     text-align: right;
     white-space: nowrap;
     float: none;
@@ -9,6 +9,18 @@ td.right {
 
 ul.center {
 	text-align: center;
+}
+
+select.search {
+	width:80%;
+}
+
+input.search {
+	width:80%;
+}
+
+button.search {
+	width:80%
 }
 body {
 		margin: 10px;

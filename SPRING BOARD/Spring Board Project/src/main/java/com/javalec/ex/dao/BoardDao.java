@@ -15,6 +15,8 @@ public interface BoardDao {
 	public void write(BDto dto);
 	// 게시물 조회(bId에 해당하는 단일 게시물 조회)
 	public BDto read(Integer bId);
+	// cBoardNum에 해당하는 bTitle가져오기 query
+	public String getBTitleFromBId(Integer cBoardNum);
 	// 게시물 업데이트
 	public void update(BDto dto);
 	// 공지사항 조회

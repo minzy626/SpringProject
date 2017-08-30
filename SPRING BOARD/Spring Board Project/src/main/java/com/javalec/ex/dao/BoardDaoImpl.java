@@ -73,6 +73,11 @@ public class BoardDaoImpl implements BoardDao{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".read", bId);
 	}
+	@Override
+	// cBoardNum에 해당하는 bTitle가져오기 query
+	public String getBTitleFromBId(Integer cBoardNum) {
+		return session.selectOne(namespace+".getBTitleFromBId", cBoardNum);
+	}
 
 	@Override
 	public void delete(Integer bId) {
