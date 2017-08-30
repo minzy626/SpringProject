@@ -8,10 +8,10 @@ public class BDto {
 	String bName;
 	String bTitle;
 	String bContent;
-	/*String bMeetingGroup;*/
 	String bRegionGroup;
 	String bCategory;
 	String bNotice;
+	String bYyMmDd;
 	Timestamp bDate;
 	int bHit;
 	
@@ -55,7 +55,17 @@ public class BDto {
 	}
 
 	public void setbDate(Timestamp bDate) {
+		bYyMmDd = bDate.toString();
+		bYyMmDd = bYyMmDd.substring(0, 10);
 		this.bDate = bDate;
+	}
+
+	public String getbYyMmDd() {
+		return bYyMmDd;
+	}
+
+	public void setYyMmDd(String bYyMmDd) {
+		setbDate(bDate);
 	}
 
 	public int getbHit() {
@@ -65,14 +75,6 @@ public class BDto {
 	public void setbHit(int bHit) {
 		this.bHit = bHit;
 	}
-
-	/*public String getbMeetingGroup() {
-		return bMeetingGroup;
-	}
-
-	public void setbMeetingGroup(String bMeetingGroup) {
-		this.bMeetingGroup = bMeetingGroup;
-	}*/
 
 	public String getbRegionGroup() {
 		return bRegionGroup;

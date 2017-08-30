@@ -27,32 +27,35 @@ import com.javalec.ex.dto.BPageDto;
 import com.javalec.ex.dto.CustomUserDetails;
 import com.javalec.ex.dto.SearchingPageDto;
 
+	
 @Controller
 public class SearchController {
 
+	
 	@Inject
 	BoardService service;
 	@Inject
 	CommentService cService;
 	@Autowired
 	SqlSession sqlsession;
-
-	SimpleDateFormat  formatter03 = new SimpleDateFormat("yyyy-MM-dd");
-	String todate03 =  formatter03.format(new Date());
+	
+	
+	
+	SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");
+	String todate =  formatter.format(new Date());
 	
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void listGET(SearchingPageDto spdto, Model model) {
 
-		System.out.println(todate03);
 		model.addAttribute("list", service.listSearchCriteria(spdto));
 		model.addAttribute("listNotice", service.listNotice());
 		
 		BPageDto bPage = new BPageDto();
 		bPage.setSdto(spdto);
 		bPage.setTotalCount(service.searchBoardTotalCount(spdto));
-		model.addAttribute("serverTime", todate03);
+		model.addAttribute("serverTime", todate);
 		model.addAttribute("bPage", bPage);
 
 	}
@@ -148,7 +151,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/content_view", method= RequestMethod.GET)
-	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model)
+	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model, Principal principal)
 	{
 		
 		logger.info("readGET is called......");
@@ -160,13 +163,30 @@ public class SearchController {
 		System.out.println("read:");
 		service.upHit(bId);
 		model.addAttribute("spdto", spdto);
-		model.addAttribute("BDto", service.read(bId));
+		//BDto 객체를 저장하고 나중에 추가, 여기서 게시물 작성자의 정보를 가져온다.
+		BDto dto=new BDto();
+		dto=service.read(bId);
+		model.addAttribute("BDto", dto);
 		model.addAttribute("commentList", cService.cListAll(bId));
+		if(principal==null) System.out.println("read: if(principal==null) 로그인 안되어있으면 여기에 걸림!!");
+		else
+		{
+			System.out.println("read: if(principal!=null) 로그인 되어있으면 여기에 걸림!!");
+			CustomUserDetails user = (CustomUserDetails)((Authentication)principal).getPrincipal();
+			// 디버그용!
+			System.out.println("접속중인사람: "+user.getbNick());
+			System.out.println("글쓴사람: "+dto.getbName());
+			if(user.getbNick().equals(dto.getbName())) {
+				cService.isSeenToTrue(bId);
+				System.out.println("read: if(principal!=null) if(user.getbNick()==dto.getbName()) 둘다 걸림!!!");
+			}
+		}
+		// 자신이 쓴 글을 읽는경우, 해당 게시물의 댓글을 모두 읽음 처리한다.
 		
 	}// readGET()
 	
 	@RequestMapping(value="/modify_view", method= RequestMethod.GET)
-	public void writeView(@RequestParam("bId") Integer bId, 
+	public void modifyView(@RequestParam("bId") Integer bId, 
 						@ModelAttribute("spdto") SearchingPageDto spdto, 
 						Model model)
 	{

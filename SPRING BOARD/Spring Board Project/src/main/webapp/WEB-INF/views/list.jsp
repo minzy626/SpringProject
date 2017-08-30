@@ -67,13 +67,13 @@
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
 												<c:choose>
-												<c:when test="${servertime == dto.bDate}">
+												<c:when test="${serverTime == dto.bYyMmDd}">
 												<td><a
 													href="/ex/list${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
 													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
 													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
 													style="font-size: 12px; color: gray;">
-														${dto.bCategory}/${dto.bRegionGroup}${dto.bDate}</a>
+														${dto.bCategory}/${dto.bRegionGroup}</a>
 													&nbsp;&nbsp;|&nbsp; &nbsp; <a
 													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a>
 													<img src="assets/list_css/New_icon.gif"/>
