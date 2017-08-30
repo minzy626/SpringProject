@@ -17,4 +17,6 @@ public interface CommentDao {
 	public void isSeenToTrue(Integer cBoardNum);
 	// 아직 읽지않은 댓글 수 가져오기(새로운 댓글 알람용)
 	public int cGetNewCommentCount(String bName);
+	// 아직 읽지않은 댓글의 cDto객체를 가져오기(알림 상세내용 보여주기용)
+	public List<CDto> cGetNewCommentDetails(String bName);
 }

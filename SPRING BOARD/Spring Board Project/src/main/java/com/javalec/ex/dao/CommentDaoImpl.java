@@ -55,4 +55,10 @@ public class CommentDaoImpl implements CommentDao {
 	public int cGetNewCommentCount(String bName) {
 		return session.selectOne(namespace+".cGetNewCommentCount", bName);
 	}
+	
+	@Override
+	// 아직 읽지않은 댓글의 cDto객체를 가져오기(알림 상세내용 보여주기용)
+	public List<CDto> cGetNewCommentDetails(String bName){
+		return session.selectList(namespace+".cGetNewCommentDetails", bName);
+	}
 }

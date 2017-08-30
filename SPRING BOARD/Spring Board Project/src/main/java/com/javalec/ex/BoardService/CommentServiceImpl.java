@@ -52,4 +52,9 @@ public class CommentServiceImpl implements CommentService {
 		return cdao.cGetNewCommentCount(bName);
 	}
 	
+	@Override
+	// 아직 읽지않은 댓글의 cDto객체를 가져오기(알림 상세내용 보여주기용)
+	public List<CDto> cGetNewCommentDetails(String bName){
+		return cdao.cGetNewCommentDetails(bName);
+	}
 }

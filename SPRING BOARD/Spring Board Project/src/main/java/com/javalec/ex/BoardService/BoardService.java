@@ -10,6 +10,9 @@ public interface BoardService {
 
 	public BDto read(Integer bno);
 	
+	// cBoardNum에 해당하는 bTitle가져오기 query
+	public String getBTitleFromBId(Integer cBoardNum);
+	
 	public void update(BDto dto);
 	
 	public void write(BDto dto);
