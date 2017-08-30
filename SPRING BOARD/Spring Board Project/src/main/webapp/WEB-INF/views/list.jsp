@@ -66,6 +66,8 @@
 										<c:forEach items="${list}" var="dto">
 											<tr class="listToChange">
 												<th scope="row" class="text-center">${dto.bId}</th>
+												<c:choose>
+												<c:when test="${servertime == dto.bDate}">
 												<td><a
 													href="/ex/list${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
 													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
