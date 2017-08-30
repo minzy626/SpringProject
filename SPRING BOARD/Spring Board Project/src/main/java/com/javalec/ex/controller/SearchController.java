@@ -143,7 +143,7 @@ public class SearchController {
 	}
 	
 	@RequestMapping(value="/content_view", method= RequestMethod.GET)
-	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model)
+	public void readGET(@RequestParam("bId") Integer bId, @ModelAttribute("spdto") SearchingPageDto spdto, Model model, Principal principal)
 	{
 		
 		logger.info("readGET is called......");
@@ -155,8 +155,25 @@ public class SearchController {
 		System.out.println("read:");
 		service.upHit(bId);
 		model.addAttribute("spdto", spdto);
-		model.addAttribute("BDto", service.read(bId));
+		//BDto 객체를 저장하고 나중에 추가, 여기서 게시물 작성자의 정보를 가져온다.
+		BDto dto=new BDto();
+		dto=service.read(bId);
+		model.addAttribute("BDto", dto);
 		model.addAttribute("commentList", cService.cListAll(bId));
+		if(principal==null) System.out.println("read: if(principal==null) 로그인 안되어있으면 여기에 걸림!!");
+		else
+		{
+			System.out.println("read: if(principal!=null) 로그인 되어있으면 여기에 걸림!!");
+			CustomUserDetails user = (CustomUserDetails)((Authentication)principal).getPrincipal();
+			// 디버그용!
+			System.out.println("접속중인사람: "+user.getbNick());
+			System.out.println("글쓴사람: "+dto.getbName());
+			if(user.getbNick().equals(dto.getbName())) {
+				cService.isSeenToTrue(bId);
+				System.out.println("read: if(principal!=null) if(user.getbNick()==dto.getbName()) 둘다 걸림!!!");
+			}
+		}
+		// 자신이 쓴 글을 읽는경우, 해당 게시물의 댓글을 모두 읽음 처리한다.
 		
 	}// readGET()
 	

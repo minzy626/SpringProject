@@ -13,4 +13,8 @@ public interface CommentService {
 		public void cDelete(Integer cId);
 		// bId 번째 게시물에 해당하는 댓글 리스트 가져오기
 		public List<CDto> cListAll(Integer bId);
+		// 댓글 읽음 처리(게시물 작성자가 자신의 게시물 읽은 경우)
+		public void isSeenToTrue(Integer cBoardNum);
+		// 아직 읽지않은 댓글 수 가져오기(새로운 댓글 알람용)
+		public int cGetNewCommentCount(String bName);
 }

@@ -8,6 +8,15 @@ public class CDto {
 	String cNick;
 	String cContent;
 	Timestamp cDate;
+	boolean cIsSeen;
+	public boolean iscIsSeen() {
+		return cIsSeen;
+	}
+
+	public void setcIsSeen(boolean cIsSeen) {
+		this.cIsSeen = cIsSeen;
+	}
+
 	public CDto() {
 		
 	}

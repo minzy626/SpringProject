@@ -43,4 +43,16 @@ public class CommentDaoImpl implements CommentDao {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".cListAll", bId);
 	}
+	
+	@Override
+	// 댓글 읽음 처리(게시물 작성자가 자신의 게시물 읽은 경우)
+	public void isSeenToTrue(Integer cBoardNum) {
+		session.update(namespace+".isSeenToTrue", cBoardNum);
+	}
+	
+	@Override
+	// 아직 읽지않은 댓글 수 가져오기(새로운 댓글 알람용)
+	public int cGetNewCommentCount(String bName) {
+		return session.selectOne(namespace+".cGetNewCommentCount", bName);
+	}
 }

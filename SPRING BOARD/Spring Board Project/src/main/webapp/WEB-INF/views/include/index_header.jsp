@@ -28,6 +28,7 @@
 	
 
 	<!-- 웹 소켓 사용해서 현재 몇개의 쪽지가 도착했는지 구해오기. --> 
+	<!-- 웹 소켓 사용해서 현재 몇개의 미확인 댓글이 있는지 구해오기. --> 
     <script type="text/javascript">
     var wsUri = "ws://localhost:8181/ex/count";
     function send_message() {
@@ -48,7 +49,9 @@
        websocket.send("${nick}");
     }
     function onMessage(evt) {
-    		$('#count').append(evt.data);
+    	var jsonObj=JSON.parse(evt.data);
+    	$('#count').append(jsonObj.noteCnt);
+    	$('#notificationCnt').append(jsonObj.notificationCnt);
     }
     function onError(evt) {
     }
@@ -80,77 +83,49 @@
             <!--logo start-->
             <a href="http://localhost:8181/ex/index" class="logo"><b>어우름</b></a>
             <!--logo end-->
+            
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <ul class="nav top-menu">
                     <!-- settings start -->
+                    <security:authorize access="isAuthenticated()">
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
                             <i class="fa fa-tasks"></i>
-                            <span  class="badge bg-theme"></span>
+                            <span id="notificationCnt" class="badge bg-theme"></span>
                         </a>
                         <ul class="dropdown-menu extended tasks-bar">
                             <div class="notify-arrow notify-arrow-green"></div>
                             <li>
-                                <p class="green">You have 4 pending tasks</p>
+                                <p class="green" style="text:bold;">알림</p>
                             </li>
-                            <li>
-                                <a href="index#">
-                                    <div class="task-info">
-                                        <div class="desc">DashGum Admin Panel</div>
-                                        <div class="percent">40%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </a>
+                            <li>	
+                                <a href="index#">홍길동님이 회원님의  [신입부원 모집!] 글에 댓글을 작성하였습니다.</a>
                             </li>
-                            <li>
-                                <a href="index#">
-                                    <div class="task-info">
-                                        <div class="desc">Database Update</div>
-                                        <div class="percent">60%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index#">
-                                    <div class="task-info">
-                                        <div class="desc">Product Development</div>
-                                        <div class="percent">80%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index#">
-                                    <div class="task-info">
-                                        <div class="desc">Payments Sent</div>
-                                        <div class="percent">70%</div>
-                                    </div>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                            <span class="sr-only">70% Complete (Important)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                            <!-- 노트에 옮겨둔거 여기에 삽입 -->
                             <li class="external">
-                                <a href="#">See All Tasks</a>
+                                <a href="#" style="color:blue;">모든 댓글 읽음처리하기</a>
                             </li>
                         </ul>
                     </li>
+                    </security:authorize>
+                    <security:authorize access="isAnonymous()">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index#">
+                            <i class="fa fa-tasks"></i>
+                            <span class="badge bg-theme"></span>
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">알림</p>
+                            </li>
+                            <li>	
+                                <a href="login_view">로그인 후 사용하실 수 있습니다.<br>클릭하시면 로그인 창으로 이동합니다 :)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    </security:authorize>
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
@@ -163,6 +138,7 @@
                 </ul>
                 <!--  notification end -->
             </div>
+            
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
               <security:authorize access="isAnonymous()"><li><a class="login_view" href="login_view">login</a></li></security:authorize>
