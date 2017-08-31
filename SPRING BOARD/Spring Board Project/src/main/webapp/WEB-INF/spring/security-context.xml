@@ -14,11 +14,15 @@
       	<property name="sqlsession" ref="sqlsession"></property>
       </bean>
       
-      <bean id="registerService" class="com.javalec.ex.UserService.RegisterService">
+<!--       <bean id="registerService" class="com.javalec.ex.UserService.RegisterService">
       	<property name="passwordEncoder" ref="passwordEncoder"></property>
       </bean>
       
       <bean id="findpassService" class="com.javalec.ex.UserService.FindpassService">
+      	<property name="passwordEncoder" ref="passwordEncoder"></property>
+   	  </bean> -->
+   	  
+      <bean id="UserController" class="com.javalec.ex.controller.UserController">
       	<property name="passwordEncoder" ref="passwordEncoder"></property>
    	  </bean>
    	  

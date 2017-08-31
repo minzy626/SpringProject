@@ -4,10 +4,10 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
-<mapper namespace="com.javalec.ex.dao.UserDao">
+<mapper namespace="com.javalec.ex.dao.mapper.UserDao">
 
 	<insert id="register" parameterType="UserDto">
-		INSERT INTO USERINFO (bid,bpass,bnick,bgender,bschool,bgrade,bmajor,bregion) VALUES(#{bId},#{bPass},#{bNick},#{bGender},#{bSchool},#{bGrade},#{bMajor},#{bRegion})
+		INSERT INTO USERINFO (bid,bpass,bnick,bgender,bschool,bgrade,bmajor,bregion,bimage) VALUES(#{bId},#{bPass},#{bNick},#{bGender},#{bSchool},#{bGrade},#{bMajor},#{bRegion},#{bImage})
 	</insert>
 	
 	<select id="find_by_id" parameterType="UserDto" resultType="UserDto">
@@ -27,20 +27,20 @@
 	</update>
 	
 	<update id="user_modify_pass" parameterType="UserDto">
-		UPDATE USERINFO SET bPass = #{bPass}, bRegion = #{bRegion}, bSchool = #{bSchool}, bGrade = #{bGrade}, bMajor = #{bMajor} WHERE bId = #{bId}
+		UPDATE USERINFO SET bPass = #{bPass}, bRegion = #{bRegion}, bSchool = #{bSchool}, bGrade = #{bGrade}, bMajor = #{bMajor}, bImage = #{bImage} WHERE bId = #{bId}
 	</update>
 	
 	<update id="user_modify" parameterType="UserDto">
-		UPDATE USERINFO SET bRegion = #{bRegion}, bSchool = #{bSchool}, bGrade = #{bGrade}, bMajor = #{bMajor} WHERE bId = #{bId}
+		UPDATE USERINFO SET bRegion = #{bRegion}, bSchool = #{bSchool}, bGrade = #{bGrade}, bMajor = #{bMajor}, bImage = #{bImage} WHERE bId = #{bId}
 	</update>
 	
 	<delete id="drop_by_id" parameterType="UserDto">
 		DELETE FROM USERINFO WHERE bId = #{bId}
 	</delete>
 	
-  	<select id="count_write" parameterType="Dto" resultType="java.lang.Integer">
+<!--   	<select id="count_write" parameterType="Dto" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM MVC_BOARD WHERE bName = #{bName} AND DATE(bDate) = CURDATE()
 	</select>
-	
+	 -->
 </mapper>
     
