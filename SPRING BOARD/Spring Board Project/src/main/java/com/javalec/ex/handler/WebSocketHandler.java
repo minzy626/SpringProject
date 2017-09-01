@@ -54,14 +54,25 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		String notificationCnt=Integer.toString(cService.cGetNewCommentCount(bNick));
 		
 		//JSON 사용하여 데이터 client로 넘긴다.
-		String jsonStr="{\"noteCnt\":"+noteCnt+", \"notificationCnt\":"+notificationCnt+"}";
+		String jsonStr="{\"noteCnt\":"+noteCnt+", \"notificationCnt\":"+notificationCnt+", \"nickList\":";
 		
 		// 진행중........
 		// 이제 jsonStr에 notificationDetails배열을 추가해야함. 한개의 열에 title, nick이 짝을 이루어야....
+		String nicktmp="[\"";
+		String titletmp="[\"";
+		String nickList=null, titleList=null;
 		for(CDto cdto : cService.cGetNewCommentDetails(bNick)) {
-			String title = bService.getBTitleFromBId(cdto.getcBoardNum());
-			String nick = cdto.getcNick();
+			titletmp.concat(bService.getBTitleFromBId(cdto.getcBoardNum()));
+			titleList=titletmp;
+			titletmp.concat("\",\"");
+			nicktmp.concat(cdto.getcNick());
+			nickList=nicktmp;
+			nicktmp.concat("\",\"");
 		}
+		nickList.concat("\"]");
+		titleList.concat("\"]");
+		
+		jsonStr.concat(nickList+",\"titleList\":"+titleList+"}");
 		
 		session.sendMessage(new TextMessage(jsonStr));
 	}
@@ -72,5 +83,5 @@ public class WebSocketHandler extends TextWebSocketHandler {
   "font":"arial",\
   "a":"A"\
 }
-var jsonStr="{\"noteCnt\":"+noteCnt+", \"alarmCnt\":"+alarmCnt+"}"
+var jsonStr="{\"noteCnt\":"+noteCnt+", \"alarmCnt\":"+alarmCnt+""
 */

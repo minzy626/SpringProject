@@ -56,6 +56,7 @@
     	var jsonObj=JSON.parse(evt.data);
     	$('#count').append(jsonObj.noteCnt);
     	$('#notificationCnt').append(jsonObj.notificationCnt);
+    	document.getElementById('notificationDiv').innerHTML='<c:forEach items="${}" var="notification"></c:forEach>';
     }
     function onError(evt) {
     }
@@ -103,9 +104,11 @@
                             <li>
                                 <p class="green" style="text:bold;">알림</p>
                             </li>
-                            <li>	
-                                <a href="index#">홍길동님이 회원님의  [신입부원 모집!] 글에 댓글을 작성하였습니다.</a>
-                            </li>
+                            <div id="notificationDiv">
+	                            <li>	
+	                                <a href="index#">홍길동님이 회원님의  [신입부원 모집!] 글에 댓글을 작성하였습니다.</a>
+	                            </li>
+                            </div>
                             <!-- 노트에 옮겨둔거 여기에 삽입 -->
                             <li class="external">
                                 <a href="#" style="color:blue;">모든 댓글 읽음처리하기</a>
