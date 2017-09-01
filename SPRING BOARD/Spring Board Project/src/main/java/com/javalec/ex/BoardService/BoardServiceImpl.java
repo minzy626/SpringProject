@@ -85,4 +85,10 @@ public class BoardServiceImpl implements BoardService{
 	public void upHit(Integer bId) {
 		dao.upHit(bId);
 	}
+	
+	@Override
+	public Integer writeCount(BDto dto) {
+		// TODO Auto-generated method stub
+		return dao.writeCount(dto);
+	}
 }

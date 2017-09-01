@@ -9,6 +9,7 @@ public class UserDto {
 	int bGrade;
 	String bMajor;
 	String bRegion;
+	String bImage;
 	
 	public UserDto() {
 	
@@ -75,6 +76,14 @@ public class UserDto {
 	}
 	public void setbRegion(String bRegion) {
 		this.bRegion = bRegion;
+	}
+
+	public String getbImage() {
+		return bImage;
+	}
+
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
 	}
 	
 }

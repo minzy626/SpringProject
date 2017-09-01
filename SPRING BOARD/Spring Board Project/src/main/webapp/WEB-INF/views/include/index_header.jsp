@@ -168,7 +168,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile"><img src="assets/rion.png" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="profile"><img src="assets/userImage/${principal.bImage}.png" class="img-circle" width="60"></a></p>
               		<security:authorize access="isAuthenticated()">
               		 	<h5 class="centered"><security:authentication property="principal.bNick"/>님 환영합니다</h5>
               		 </security:authorize>

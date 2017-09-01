@@ -39,4 +39,7 @@ public interface BoardService {
 	
 	// 조회수 늘리기
 	public void upHit(Integer bId);
+	
+	//하루 개인 게시물 수 계산
+	public Integer writeCount(BDto dto);
 }

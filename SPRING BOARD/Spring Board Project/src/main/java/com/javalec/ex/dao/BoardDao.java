@@ -36,4 +36,7 @@ public interface BoardDao {
 
 	// 총 검색 결과 게시물 수 계산
 	public Integer searchBoardTotalCount(SearchingPageDto spdto);
+	
+	//개인 하루 글 작성 개수 계산
+	public Integer writeCount(BDto dto);
 }
