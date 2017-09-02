@@ -5,7 +5,6 @@
 <%
     request.setCharacterEncoding("UTF-8");
 %>
-<%@include file="include/index_header.jsp" %>
       
 <script language = "javascript"> 
 function writeCheck() { 

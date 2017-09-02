@@ -65,28 +65,14 @@
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 	</beans:bean>
 	
-	<!-- 컨트롤러로 요청이 가기전에 인터셉트
+	<!-- 컨트롤러로 요청이 가기전에 인터셉트-->
 		<mvc:interceptors>
 			<mvc:interceptor>
-				<mvc:mapping path="/board/**"/>  http://localhost:8181/ex/board/ 포함 및 그 하위 경로를 나타냄 
-				<mvc:mapping path="/logout/**"/>
-				<mvc:mapping path="/memberinfo/**"/>
-				<mvc:exclude-mapping path="/list/**"/>
-				<beans:bean class="com.javalec.ex.Interceptor.LoginCheckInterceptㅅㅅor"/>
+				<mvc:mapping path="/write_view/**"/>
+				<beans:bean class="com.javalec.ex.Interceptor.IPCheckInterceptor"/>
 			</mvc:interceptor>	
-			아래 내용은 로그아웃후 뒤로가기버튼눌렀을때 다시 로그인 되는것을 방지하기 위함. 
-			<mvc:interceptor>
-				<mvc:mapping path="/logout/**"/>
-				<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-			        <beans:property name="cacheSeconds" value="0" />
-			        <beans:property name="useExpiresHeader" value="true" />
-			        <beans:property name="useCacheControlHeader" value="true" />
-			        <beans:property name="useCacheControlNoStore" value="true" />
-			     </beans:bean>	
-		     </mvc:interceptor>
 		</mvc:interceptors>
-	   -->
-	
+	   
 	<!-- jdbc 템플릿
 	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
 		<beans:property name="dataSource" ref="dataSource"/>

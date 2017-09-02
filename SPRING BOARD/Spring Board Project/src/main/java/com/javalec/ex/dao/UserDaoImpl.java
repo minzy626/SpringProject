@@ -1,5 +1,7 @@
 package com.javalec.ex.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -64,6 +66,17 @@ public class UserDaoImpl implements UserDao {
 	public void drop_by_id(UserDto dto) {
 		// TODO Auto-generated method stub
 		session.delete(namespace+".drop_by_id", dto);
+	}
+
+	@Override
+	public List<String> find_ip_ban_list() {
+
+		return session.selectList(namespace+".find_ip_ban_list");
+	}
+
+	@Override
+	public void insert_ip_ban(String ip) {
+		session.insert(namespace+".insert_ip_ban",ip);
 	}
 
 }
