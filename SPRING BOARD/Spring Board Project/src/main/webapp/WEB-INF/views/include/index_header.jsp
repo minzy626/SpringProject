@@ -50,19 +50,28 @@
    
     function onOpen(evt) 
     {
-       websocket.send("${nick}");
+    	websocket.send("${nick}");
     }
     function onMessage(evt) {
     	var jsonObj=JSON.parse(evt.data);
     	$('#count').append(jsonObj.noteCnt);
     	$('#notificationCnt').append(jsonObj.notificationCnt);
-    	document.getElementById('notificationDiv').innerHTML='<c:forEach items="${}" var="notification"></c:forEach>';
+    	
+    	var html="", id="", nick="", title="";
+    	for(var i=0; i<jsonObj.notificationCnt; i++)
+    	{
+    		id=jsonObj.notificationArray[i].id;
+    		nick=jsonObj.notificationArray[i].nick;
+    		title=jsonObj.notificationArray[i].title;
+    		html+=("<li><a href='content_view?bId="+id+"'>["+nick+"]님이 회원님의 ["+title+"]글에 댓글을 작성하였습니다.</a></li>");
+    	}
+    	document.getElementById("notificationDiv").innerHTML=html;
     }
     function onError(evt) {
     }
     
     $(document).ready(function(){
-    		send_message();
+    	send_message();
     });
     		
     function popupOpen(){
@@ -106,7 +115,7 @@
                             </li>
                             <div id="notificationDiv">
 	                            <li>	
-	                                <a href="index#">홍길동님이 회원님의  [신입부원 모집!] 글에 댓글을 작성하였습니다.</a>
+	                                <a href='content_view?bId=1'>error in index_header.jsp file</a>
 	                            </li>
                             </div>
                             <!-- 노트에 옮겨둔거 여기에 삽입 -->
