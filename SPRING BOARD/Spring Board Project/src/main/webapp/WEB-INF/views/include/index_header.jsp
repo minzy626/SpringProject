@@ -119,10 +119,11 @@
 	                                <a href='content_view?bId=1'>error in index_header.jsp file</a>
 	                            </li>
                             </div>
-                            <!-- 노트에 옮겨둔거 여기에 삽입 -->
+                            
                             <li class="external">
-                                <a href="#" style="color:blue;">모든 댓글 읽음처리하기</a>
+                                <a href="/ex/cReadAllComments?bName=${principal.bNick }" style="color:black;">모든 댓글 읽음처리하기</a>
                             </li>
+                            
                         </ul>
                     </li>
                     </security:authorize>

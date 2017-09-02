@@ -61,4 +61,10 @@ public class CommentDaoImpl implements CommentDao {
 	public List<CDto> cGetNewCommentDetails(String bName){
 		return session.selectList(namespace+".cGetNewCommentDetails", bName);
 	}
+	
+	@Override
+	// 접속중인 사용자의 모든 알림을 읽음처리
+	public void cReadAllComments(String bName) {
+		session.update(namespace+".cReadAllComments", bName);
+	}
 }
