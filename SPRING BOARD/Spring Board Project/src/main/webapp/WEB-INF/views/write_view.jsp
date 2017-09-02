@@ -20,7 +20,7 @@ function writeCheck() {
     		form.bContent.focus(); 
     		return false;
     }
-    alert( "작성하신 내용이 성공적으로 게시되었습니다!" ); 
+    //alert( "작성하신 내용이 성공적으로 게시되었습니다!" ); 
     form.submit();
 }
  

@@ -213,4 +213,9 @@
 	]]>
 		<include refid="dynamicSearchCondition"></include>
 	</select>
+	
+	<!-- 하루 개인 게시물 수 계산 -->
+	<select id="writeCount" parameterType="Dto" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM MVC_BOARD WHERE bName = #{bName} AND DATE(bDate) = CURDATE()
+	</select>
 </mapper>

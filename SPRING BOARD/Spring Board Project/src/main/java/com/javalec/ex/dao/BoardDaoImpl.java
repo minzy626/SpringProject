@@ -88,4 +88,10 @@ public class BoardDaoImpl implements BoardDao{
 	public void upHit(Integer bId) {
 		session.selectOne(namespace+".upHit", bId);
 	}
+	
+	@Override
+	public Integer writeCount(BDto dto) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".writeCount", dto);
+	}
 }

@@ -1,15 +1,15 @@
 package com.javalec.ex.controller;
 
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalec.ex.BoardService.BoardService;
 import com.javalec.ex.BoardService.CommentService;
-import com.javalec.ex.UserService.WriteCountService;
 import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.BPageDto;
 import com.javalec.ex.dto.CustomUserDetails;
@@ -36,9 +35,6 @@ public class SearchController {
 	BoardService service;
 	@Inject
 	CommentService cService;
-	@Autowired
-	SqlSession sqlsession;
-	
 	
 	
 	SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -209,16 +205,23 @@ public class SearchController {
 		model.addAttribute("connectedUser", user.getbNick());
 	}
 	@RequestMapping(value="/write", method = RequestMethod.POST)
-	public String write(BDto Dto, RedirectAttributes rttr)
+	public String write(BDto Dto, RedirectAttributes rttr, HttpServletResponse response)
 	{
-		try {
-			WriteCountService wService = new WriteCountService();
-			wService.execute(sqlsession, Dto);
+		int count = service.writeCount(Dto);
+		if(count >= 5) {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('하루 글 작성 가능 개수는 5개까지입니다.');history.go(-1);</script>");
+				out.flush();
+				
+				return "write_view";
+			} catch (Exception e) {
+				System.out.println(e);
+			}
 		}
-		catch (Exception e) {
-			return "redirect:/list";
-		}
-		service.write(Dto);
+		else
+			service.write(Dto);
 		return "redirect:/list";
 	}
 	

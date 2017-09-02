@@ -18,6 +18,7 @@ public class CustomUserDetails implements UserDetails {
 	private int bGrade;
 	private String bMajor;
 	private String bRegion;
+	private String bImage;
 	private boolean enabled;
 	
 	
@@ -84,7 +85,14 @@ public class CustomUserDetails implements UserDetails {
 	public void setbRegion(String bRegion) {
 		this.bRegion = bRegion;
 	}
+	
+	public String getbImage() {
+		return bImage;
+	}
 
+	public void setbImage(String bImage) {
+		this.bImage = bImage;
+	}
 	public boolean getEnabled() {
 		return enabled;
 	}
@@ -92,6 +100,7 @@ public class CustomUserDetails implements UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
