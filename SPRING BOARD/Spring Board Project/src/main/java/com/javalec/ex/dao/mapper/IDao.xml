@@ -28,6 +28,14 @@
 		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM=#{param1}
 	</update>
 	
+	<!-- 접속중인 유저의 모든 댓글 읽음 처리 -->
+	<update id="cReadAllComments" parameterType="string">
+		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
+	</update>
+	
 	<!-- 댓글 작성 -->
 	<insert id="cWrite" parameterType="CDto">
 		INSERT INTO BOARD_COMMENT

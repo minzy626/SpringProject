@@ -57,4 +57,10 @@ public class CommentServiceImpl implements CommentService {
 	public List<CDto> cGetNewCommentDetails(String bName){
 		return cdao.cGetNewCommentDetails(bName);
 	}
+	
+	@Override
+	// 접속중인 사용자의 모든 알림을 읽음처리
+	public void cReadAllComments(String bName) {
+		cdao.cReadAllComments(bName);
+	}
 }
