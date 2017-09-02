@@ -23,8 +23,10 @@
    	  </bean>
    	  
    	  <bean id="customAuthenticationFailHandler" class="com.javalec.ex.handler.CustomAuthenticationFailHandler"/>
+   	  <bean id="customIPAddressAuthenticationProvider" class="com.javalec.ex.UserService.CustomIPAddressAuthenticationProvider"></bean>
    	  
      <security:authentication-manager>
+     	<security:authentication-provider ref ="customIPAddressAuthenticationProvider"/>
      	<security:authentication-provider user-service-ref ="customUserDetailsService">
      		<security:password-encoder ref="passwordEncoder"/>
      	</security:authentication-provider>
