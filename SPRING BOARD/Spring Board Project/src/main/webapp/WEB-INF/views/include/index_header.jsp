@@ -29,6 +29,7 @@
 	 <script src="assets/js/chart-master/Chart.js"></script>
 	<security:authorize access="isAuthenticated()">
 		<security:authentication property="principal.bNick" var="nick"/>
+		<security:authentication property="principal" var="principal"/>
 	
 
 	<!-- 웹 소켓 사용해서 현재 몇개의 쪽지가 도착했는지 구해오기. --> 
