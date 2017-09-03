@@ -204,7 +204,7 @@
                           <span>스터디</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="/ex/list_Slanguage${bPage.makeQuery(1)}&bMeetingGroup=&bKeyword=&bSearchMType=스터디&bStudyGroup=어학
+                          <li><a  href="/ex/list_Slanguage${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=어학
 					&bSearchRType=&bCategory=">어학 스터디</a></li>
                           <li><a  href="/ex/list_Sjob${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=취업
 					&bSearchRType=&bCategory=">취업 스터디</a></li>
