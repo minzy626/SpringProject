@@ -77,7 +77,7 @@
     		
     function popupOpen(){
   	  	var windowW = 400;  // 창의 가로 길이
-        var windowH = 380;  // 창의 세로 길이
+        var windowH = 385;  // 창의 세로 길이
         var left = Math.ceil((window.screen.width - windowW)/2);
         var top = Math.ceil((window.screen.height - windowH)/2);
 		window.open("write_view","pop_01"," top="+top+", left="+left+", height="+windowH+", width="+windowW);

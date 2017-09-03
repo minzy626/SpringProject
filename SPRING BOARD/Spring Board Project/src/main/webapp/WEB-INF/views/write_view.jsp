@@ -22,7 +22,7 @@ function writeCheck() {
     //alert( "작성하신 내용이 성공적으로 게시되었습니다!" ); 
     form.submit();
 }
- 
+
 function submitContents() {
     // 에디터의 내용이 textarea에 적용된다.
     oEditors.getById["bContent"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -88,7 +88,7 @@ function submitContents() {
 			</div>
 			
 		  <input type="hidden" name="bHit" id="bHit" value="0">
-		  <input type="hidden" name="bName" value="${connectedUser}">
+		  <input type="hidden" name="bName" value="${connectedUser}" >
 		  <div class="form-group">
 		    <label for="bTitle" class="col-md-1 control-label">제 목</label>
 		    <div class="col-md-9">

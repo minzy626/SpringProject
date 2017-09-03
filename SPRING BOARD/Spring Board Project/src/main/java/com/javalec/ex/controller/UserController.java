@@ -2,6 +2,8 @@ package com.javalec.ex.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.Principal;
 
 import javax.inject.Inject;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,9 +21,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalec.ex.UserService.UserService;
+import com.javalec.ex.UserService.UserServiceImpl;
+import com.javalec.ex.dto.CDto;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
@@ -26,10 +34,13 @@ import com.javalec.ex.validator.NickDuplicationValidator;
 
 @Controller
 public class UserController {
+
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Inject
 	UserService uService;
-	
+	@Autowired
+	UserServiceImpl service;
 	public UserController() {
 	
 	}
@@ -82,8 +93,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/memberinfo")
-	public String memberinfo(Model model,Authentication auth) {
-		model.addAttribute("userinfo",auth);
+	public String memberinfo(Model model,HttpServletRequest request) throws UnsupportedEncodingException {
+		String decode = URLDecoder.decode(request.getParameter("nickname"),"UTF-8");
+		UserDto dto = new UserDto();
+		dto.setbNick(decode);
+		model.addAttribute("dto",service.find_by_nick(dto));
 		return "memberinfo";
 	}
 	

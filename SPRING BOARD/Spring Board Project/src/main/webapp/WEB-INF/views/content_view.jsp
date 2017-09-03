@@ -7,8 +7,19 @@
     request.setCharacterEncoding("UTF-8");
 %>
 <%@include file="include/index_header.jsp" %>
-
-      
+<script type="text/javascript">
+function popupopen(string){
+	 var encode = encodeURI(encodeURIComponent(string));
+	 var winWidth = 350;
+	 var winHeight = 405;
+	 var winName = "회원 정보 보기";
+	 var winURL = "/ex/memberinfo?nickname="+encode;
+	 var winPosLeft = (screen.width - winWidth) / 2;
+	 var winPosTop = (screen.height - winHeight) / 2;
+	 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
+	 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no");
+}
+</script>
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -47,9 +58,9 @@
 			    <p>
 				    <a href="#"><span class="label label-info">공모전</span></a> <!-- 클릭 시 공모전 게시판 해당 변수+페이지링크 필요 -->
 					<a href="#"><span class="label label-info">질문/답변</span></a> <!-- 클릭 시 공모전-질문답변 글 필터링해서 보여줘(굳이..?) -->
-					| <i class="glyphicon glyphicon-user"></i> <a href="/ex/memberinfo"> ${BDto.bName }</a> <!-- 클릭 시 멤버정보 팝업창 -->
+					| <i class="glyphicon glyphicon-user"></i> <a href="" onclick="popupopen('${BDto.bName}');"> ${BDto.bName }</a> <!-- 클릭 시 멤버정보 팝업창 -->
 					| <i class="glyphicon glyphicon-calendar">${BDto.bDate}</i>  
-				   	| <i class="glyphicon glyphicon-eye-open">${BDto.bHit }회</i>
+				   	| <i class="glyphicon glyphicon-eye-open">${BDto.bHit}회</i>
 				</p>
 			  </div>
 			
@@ -111,7 +122,7 @@
 					<div class="comment-box">
 						<div class="comment-head">
 							<c:set var="commentWriter">${dto.cNick }</c:set>
-							<h6 class="comment-name by-author"><a href="/ex/memberinfo">${dto.cNick}</a></h6>
+							<h6 class="comment-name by-author"><a href="" onClick="popupopen();">${dto.cNick}</a></h6>
 							<span>${dto.cDate}</span>
 							<c:if test="${connectedUser== commentWriter}">
 								<a href="/ex/cDelete?cId=${dto.cId }&cBoardNum=${BDto.bId}"><i class="glyphicon glyphicon-trash"></i></a>
