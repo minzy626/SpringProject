@@ -91,7 +91,7 @@
 												</td>
 												</c:otherwise>
 												</c:choose>
-												<td align="center">${dto.bName}</td>
+												<td align="center"><a href="/ex/other_memberinfo?bNick=${dto.bName}">${dto.bName}</a></td>
 												<td align="center"><fmt:formatDate value="${dto.bDate}"
 														pattern="yyyy-MM-dd" /></td>
 												<td align="center">${dto.bHit}</td>
