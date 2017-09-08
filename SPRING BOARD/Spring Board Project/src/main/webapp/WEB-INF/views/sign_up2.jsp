@@ -178,6 +178,7 @@
 	        <div style="color:red ; margin-top:2px" >
 	        	<form:errors path="bId"/>
 	        	<form:errors path="bNick"/>
+	        	<form:errors path="bPass"/>
 	            <form:errors/>
 	        </div>
 	        </div>

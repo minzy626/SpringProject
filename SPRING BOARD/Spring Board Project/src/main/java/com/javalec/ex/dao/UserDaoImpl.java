@@ -79,4 +79,13 @@ public class UserDaoImpl implements UserDao {
 		session.insert(namespace+".insert_ip_ban",ip);
 	}
 
+	@Override
+	public void insert_dropuser(UserDto dto) {
+		session.insert(namespace+".insert_dropuser", dto);
+	}
+	
+	@Override
+	public String select_dropuser(UserDto dto) {
+		return session.selectOne(namespace+".select_dropuser", dto);
+	}
 }

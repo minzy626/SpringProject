@@ -16,5 +16,6 @@ public interface UserDao {
 	public void drop_by_id(UserDto dto);
 	public List<String> find_ip_ban_list();
 	public void insert_ip_ban(String ip);
-//	public Integer count_write(BDto dto);
+	public void insert_dropuser(UserDto dto);
+	public String select_dropuser(UserDto dto);
 }

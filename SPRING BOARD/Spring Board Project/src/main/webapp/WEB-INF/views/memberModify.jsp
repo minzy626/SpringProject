@@ -27,8 +27,7 @@
 			<label class="col-sm-3 control-label">아이디</label>
 			<div class="row">
 			<div class="col-sm-6">
-				<input type="text" class="form-control" value="${principal.bId}" disabled/>
-				<input type="hidden" name="bId" id="bId" value="${principal.bId}">
+				<input type="text" class="form-control" name="bId" id="bId" value="${principal.bId}" readonly/>
 			</div>
 			</div>
 			</div>
@@ -264,31 +263,6 @@
                        
                       
                   </div><!-- /col-lg-3 -->
-                      <!-- 우측 하단  -->
-					 <div class="row mtbox">
-                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-                  			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h3>933</h3>
-                  			</div>
-					  			<p>방문자수</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_cloud"></span>
-					  			<h3>+48</h3>
-                  			</div>
-					  			<p>새 글</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_stack"></span>
-					  			<h3>23</h3>
-                  			</div>
-					  			<p>새 댓글</p>
-                  		</div>
-	
-                  </div><!-- /col-lg-3 -->
               </div><!--/row -->
           </section>
       </section>
@@ -384,6 +358,7 @@
             
         }
         function MemberWithdraw(){
+        	
         	window.name = "parentForm";
             window.open("withdrawForm",
                     "chkForm", "width=500, height=300, resizable = no, scrollbars = no");    

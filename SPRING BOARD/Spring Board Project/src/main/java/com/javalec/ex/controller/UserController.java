@@ -31,6 +31,7 @@ import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
 import com.javalec.ex.validator.NickDuplicationValidator;
+import com.javalec.ex.validator.PasswordValidator;
 
 @Controller
 public class UserController {
@@ -114,6 +115,7 @@ public class UserController {
 	
 	@RequestMapping(value="/register" ,method = RequestMethod.POST) //회원가입 완료
 	public String register(HttpServletRequest request, HttpServletResponse response, UserDto userDto, Errors errors, HttpSession session){
+		//ID 타당성 체크
 		new IdDuplicationValidator().validate(userDto, errors);
 		if(errors.hasErrors()) 
 			return "sign_up2";
@@ -122,7 +124,8 @@ public class UserController {
 			errors.reject("IDExist");
 			return "sign_up2"; 
 		}
-
+		
+		//닉네임 타당성 체크
 		new NickDuplicationValidator().validate(userDto, errors);
 		if(errors.hasErrors()) 
 			return "sign_up2";
@@ -132,6 +135,17 @@ public class UserController {
 			return "sign_up2"; 
 		}
 		
+		//패스워드 타당성 체크
+		new PasswordValidator().validate(userDto, errors);
+		if(errors.hasErrors()) 
+			return "sign_up2";
+		
+		if(uService.select_dropuser(userDto) != null) {
+			errors.reject("RecentDropUser");
+			return "sign_up2"; 
+		}
+		
+		//이메일 인증 세션 확인
 		String success = (String)session.getAttribute("success");
 		System.out.println(success);
 		
@@ -210,18 +224,6 @@ public class UserController {
 		return "memberModify";
 	}
 	
-/*	@RequestMapping(value="/memberModify2", method = RequestMethod.POST)
-	public String memberModify2(Model model, HttpSession session) {
-
-		return "memberModify2";
-	}
-	
-	@RequestMapping(value="/user_modify", method = RequestMethod.POST)
-	public String user_modify(UserDto userDto,Errors errors,HttpSession httpSession,HttpServletResponse response)
-	{
-	    return "memberModify2";
-	}
-	*/
 	@RequestMapping(value="/user_modify_confirm", method = RequestMethod.POST)
 	public String user_modify_confirm(HttpServletRequest request, UserDto userDto, Errors errors, HttpSession httpSession, HttpServletResponse response) throws IOException
 	{
@@ -231,13 +233,17 @@ public class UserController {
 		
 		if(!passwordEncoder.matches(bCurrentPass, currentPassword)) {
 			errors.reject("PassNotMatch");
-			return "memberModify2";
+			return "memberModify";
 		}
 		
 		if(userDto.getbPass().equals("")) {
 			uService.user_modify(userDto);
 		}
 		else {
+			//패스워드 타당성 체크
+			new PasswordValidator().validate(userDto, errors);
+			if(errors.hasErrors()) 
+				return "memberModify";
 			String Password = userDto.getbPass();
 			String encrypted = passwordEncoder.encode(Password);
 			userDto.setbPass(encrypted);
@@ -278,13 +284,13 @@ public class UserController {
 		String certifyNum = (String)session.getAttribute("certifyNum");
 		String certNumber = (String)request.getParameter("certNumber");
 		String dropId = (String)request.getParameter("dropId");
-		UserDto userDto = new UserDto();
-		userDto.setbId(dropId);
+		UserDto userDto = uService.find_by_string_id(dropId);
 		
 		if(certifyNum.equals(certNumber) && certNumber != null) {
 			
 			try {
 				uService.drop_by_id(userDto);
+				uService.insert_dropuser(userDto);
 					
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();

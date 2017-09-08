@@ -2,30 +2,228 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    
-<mapper namespace="com.javalec.ex.dao.IDao">
 
-	<select id="list" resultType="Dto">
-		SELECT * FROM MVC_BOARD ORDER BY bId desc
+<mapper namespace="com.javalec.ex.dao.mapper.IDao">
+
+	<!-- 접속중인 유저의 bNick에 해당하는 게시물들 mvc_board에서 조회해서 해당 게시물들의 bId값을 구하고(0개이상),
+		  board_comment테이블에서 cBoardNum값이 위에서 얻은 bId인 댓글들 조회
+		    그 중 cIsSeen이 false인 댓글의 개수를 가져옴(읽음처리가 되지 않은 댓글) -->
+	<select id="cGetNewCommentCount" parameterType="string" resultType="Integer">
+		SELECT COUNT(*) FROM BOARD_COMMENT WHERE CISSEEN=0 AND CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
 	</select>
 	
+	<!-- 읽지않은 댓글들이 속한 게시물의 cBoardNum과 그 댓글의 작성자 cNick을 List<CDto>형식으로 가져온다. -->
+	<select id="cGetNewCommentDetails" parameterType="string" resultType="CDto">
+		SELECT * FROM BOARD_COMMENT WHERE CISSEEN=0 AND CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
+	</select>
+
+	<!-- 댓글 읽음 처리(게시물 작성자가 자신의 게시물 읽으면 모든 댓글 읽음처리됨) -->
+	<update id="isSeenToTrue" parameterType="Integer">
+		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM=#{param1}
+	</update>
+	
+	<!-- 접속중인 유저의 모든 댓글 읽음 처리 -->
+	<update id="cReadAllComments" parameterType="string">
+		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
+	</update>
+	
+	<!-- 댓글 작성 -->
+	<insert id="cWrite" parameterType="CDto">
+		INSERT INTO BOARD_COMMENT
+		(CBOARDNUM,CNICK,CCONTENT,CISSEEN,CIMAGE)
+		VALUES(#{cBoardNum},#{cNick},#{cContent},#{cIsSeen},#{cImage})
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="cUpdate">
+		UPDATE BOARD_COMMENT SET CCONTENT=#{cContent}
+		WHERE CID=#{cId}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="cDelete">
+		DELETE FROM BOARD_COMMENT WHERE CID=#{cId}
+	</delete>
+	
+	<!-- 댓글 조회(클릭한 게시물에 해당하는 모든 댓글) -->
+	<select id="cListAll" parameterType="Integer" resultType="CDto">
+		SELECT * FROM BOARD_COMMENT WHERE CBOARDNUM=#{param1} ORDER BY cId asc
+	</select>
+
+	<select id="list" resultType="com.javalec.ex.dto.BDto">
+		SELECT * FROM MVC_BOARD ORDER BY
+		bId desc
+	</select>
+	
+	<select id="listNotice" resultType="com.javalec.ex.dto.BDto">
+			SELECT * FROM MVC_BOARD WHERE BNOTICE LIKE '%notice%' ORDER BY bId desc 
+	</select>
+
 	<select id="contentView" parameterType="string" resultType="Dto">
 		SELECT * FROM MVC_BOARD WHERE BID = #{param2}
 	</select>
-	
+
 	<update id="modify" parameterType="Dto">
-		UPDATE MVC_BOARD SET BNAME = #{bName}, BTITLE = #{bTitle}, BCONTENT= #{bContent} WHERE BID = #{bId}
+		UPDATE MVC_BOARD SET BNAME =
+		#{bName}, BTITLE = #{bTitle}, BCONTENT= #{bContent} WHERE BID = #{bId}
 	</update>
-	
-	<delete id="delete" parameterType="String">
-		DELETE FROM MVC_BOARD WHERE BID = #{param1}
+
+	<delete id="delete">
+		DELETE FROM MVC_BOARD WHERE
+		BID = #{bId}
 	</delete>
 	
-	<insert id="write" parameterType="Dto">
-		INSERT INTO MVC_BOARD (BNAME,BTITLE,BCONTENT,BHIT) VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
-	</insert>
 	
-	<update id="upHit" parameterType="String">
-		UPDATE MVC_BOARD SET BHIT = BHIT + 1 WHERE BID = #{param1}
+
+	<select id="read" resultType="Dto">
+		SELECT * FROM MVC_BOARD WHERE BID =
+		#{bId}
+	</select>
+	
+	<select id="getBTitleFromBId" resultType="String">
+		SELECT BTITLE FROM MVC_BOARD WHERE BID=#{cBoardNum}
+	</select>
+
+	<insert id="write" parameterType="Dto">
+		INSERT INTO MVC_BOARD
+		(BNAME,BTITLE,BCONTENT,BHIT,BREGIONGROUP,BMEETINGGROUP,BSTUDYGROUP,BCATEGORY)
+		VALUES(#{bName},#{bTitle},#{bContent},#{bHit},#{bRegionGroup},#{bMeetingGroup},#{bStudyGroup},#{bCategory})
+	</insert>
+
+	<update id="upHit" parameterType="Integer">
+		UPDATE MVC_BOARD SET BHIT =
+		BHIT + 1 WHERE BID = #{param1}
 	</update>
+
+	<!-- 게시물 업데이트 -->
+	<update id="update">
+		UPDATE MVC_BOARD SET BTITLE = #{bTitle}, BCONTENT =
+		#{bContent} WHERE BID = #{bId}
+	</update>
+
+	<!-- 게시물 조회( 모든 게시물 조회 ) -->
+	<select id="listAll" resultType="Dto">
+	<![CDATA[
+	SELECT * FROM MVC_BOARD WHERE BID>0 ORDER BY BID desc, BDATE desc
+	]]>
+	</select>
+	
+
+	<!-- 페이징된 게시물 조회( Criteria( page, perPageNum ) -->
+	<select id="listCriteria" resultType="Dto"
+		parameterType="com.javalec.ex.dto.BSearchDto">
+	<![CDATA[
+	SELECT * FROM MVC_BOARD WHERE bId>0 ORDER BY bId desc, bDate desc limit #{bPageStart}, #{bPerPageNum}
+	]]>
+	</select>
+
+	<!-- 게시물 총 갯수 계산 -->
+	<select id="boardTotalCount" resultType="java.lang.Integer">
+	<![CDATA[
+	SELECT COUNT(*) FROM MVC_BOARD WHERE bId>0
+	]]>
+	</select>
+	<!-- select 조건에 따른 검색 쿼리 -->
+	<sql id="dynamicSearchCondition">
+		
+		<!-- 스터디 종류에 따른 검색 -->
+		<if test="bStudyGroup != null">
+			<if test="bStudyGroup == '어학'.toString()">
+				and bStudyGroup like concat("%", "어학" ,"%")
+			</if>
+			<if test="bStudyGroup == '취업'.toString()">
+				and bStudyGroup like concat("%", "취업" ,"%")
+			</if>
+			<if test="bStudyGroup == '전공'.toString()">
+				and bStudyGroup like concat("%", "전공" ,"%")
+			</if>
+			<if test="bStudyGroup == '기타'.toString()">
+				and bStudyGroup like concat("%", "기타" ,"%")
+			</if>
+		</if>
+		<!-- 모임 종류에 따른 검색 -->
+		<if test="bMeetingGroup != null">
+			<if test="bMeetingGroup == '스터디'.toString()">
+				and bMeetingGroup like concat("%", "스터디" ,"%")
+			</if>
+			<if test="bMeetingGroup == '공모전'.toString()">
+				and bMeetingGroup like concat("%", "공모전" ,"%")
+			</if>
+			<if test="bMeetingGroup == '동아리'.toString()">
+				and bMeetingGroup like concat("%", "동아리" ,"%")
+			</if>
+			<if test="bMeetingGroup == '전체글보기'.toString()">
+				and bMeetingGroup like concat("%", "전체글보기" ,"%")
+			</if>
+		</if>
+		<!-- 모집/참여에 따른 분류 -->
+		<if test="bCategory != null">
+			<if test="bCategory == '모집'.toString()">
+				and bCategory like concat("%", "모집" ,"%")
+			</if>
+			<if test="bCategory == '참여'.toString()">
+				and bCategory like concat("%", "참여" ,"%")
+			</if>
+		</if>
+		<!-- 지역에 따른 분류 -->
+		<if test="bSearchRType != null">
+			<if test="bSearchRType == '서울'.toString()">
+				and bRegionGroup like concat("%", "서울" ,"%")
+			</if>
+			<if test="bSearchRType == '인천'.toString()">
+				and bRegionGroup like concat("%", "인천" ,"%")
+			</if>
+			<if test="bSearchRType == '안산'.toString()">
+				and bRegionGroup like concat("%", "안산" ,"%")
+			</if>
+		</if>
+		<!-- 키워드로 검색 -->
+		<if test="bSearchType != null">
+			<if test="bSearchType == 't'.toString()">
+				and bTitle like concat("%", #{bKeyword} ,"%")
+			</if>
+			<if test="bSearchType == 'c'.toString()">
+				and bContent like concat("%", #{bKeyword} ,"%")
+			</if>
+			<if test="bSearchType == 'w'.toString()">
+				and bName like concat("%", #{bKeyword} ,"%")
+			</if>
+		</if>
+	</sql>
+
+	<!-- 페이징 + 검색처리된 게시물 조회( SearchCriteria( page, perPageNum, searchType, keyword 
+		) -->
+	<select id="listSearchCriteria" resultType="Dto"
+		parameterType="com.javalec.ex.dto.SearchingPageDto">
+	<![CDATA[
+	SELECT * FROM MVC_BOARD WHERE bId>0
+	]]>
+		<include refid="dynamicSearchCondition" />
+	<![CDATA[
+	ORDER BY bId desc, bDate desc limit #{bPageStart}, #{bPerPageNum}
+	]]>
+	</select>
+
+	<!-- 검색 결과 게시물 총 갯수 계산 -->
+	<select id="searchBoardTotalCount" resultType="java.lang.Integer"
+		parameterType="com.javalec.ex.dto.SearchingPageDto">
+	<![CDATA[
+	SELECT COUNT(*) FROM MVC_BOARD WHERE bId>0
+	]]>
+		<include refid="dynamicSearchCondition"></include>
+	</select>
+	
+	<!-- 하루 개인 게시물 수 계산 -->
+	<select id="writeCount" parameterType="Dto" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM MVC_BOARD WHERE bName = #{bName} AND DATE(bDate) = CURDATE()
+	</select>
 </mapper>
