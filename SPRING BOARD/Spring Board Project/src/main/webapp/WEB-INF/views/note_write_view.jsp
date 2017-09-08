@@ -33,8 +33,8 @@
 
 <body>
 
-<div class="container" style="padding-right:0px;padding-left:0px;">  
-  <form:form id="contact" action="write" method="post" style="margin-top:0px; margin-bottom:0px;">
+<div>  
+  <form:form id="contact" action="write" method="post">
     <h3>쪽지 보내기</h3>
     <fieldset>
       <input placeholder="보내는 사람" type="text" name="Sender" value="${sender}" tabindex="1" required >

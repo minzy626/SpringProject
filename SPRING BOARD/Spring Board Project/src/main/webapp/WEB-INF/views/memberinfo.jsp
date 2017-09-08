@@ -13,7 +13,7 @@
 			function popupopen(string){
 				 var encode = encodeURI(encodeURIComponent(string));
 				 var winWidth = 450;
-				 var winHeight = 405;
+				 var winHeight = 385;
 				 var winName = "쪽지 보내기";
 				 var winURL = "/ex/note/write_view?nickname="+encode;
 				 var winPosLeft = (screen.width - winWidth) / 2;
@@ -89,7 +89,7 @@
                 </div>
               </div>
             </div>
-                 <div class="panel-footer">
+                 <div style="margin-right:10px">
                  <span class="pull-right">
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary" 
                         	onclick="self.close(); popupopen('${dto.bNick}');"><i class="glyphicon glyphicon-envelope"></i></a>
