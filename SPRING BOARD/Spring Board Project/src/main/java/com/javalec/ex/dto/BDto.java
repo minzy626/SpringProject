@@ -8,12 +8,37 @@ public class BDto {
 	String bName;
 	String bTitle;
 	String bContent;
+	int bHit;
 	String bRegionGroup;
+	String bMeetingGroup;
+	String bStudyGroup;
 	String bCategory;
 	String bNotice;
 	String bYyMmDd;
 	Timestamp bDate;
-	int bHit;
+	
+	
+	public String getbMeetingGroup() {
+		return bMeetingGroup;
+	}
+
+	public void setbMeetingGroup(String bMeetingGroup) {
+		this.bMeetingGroup = bMeetingGroup;
+	}
+
+	public String getbStudyGroup() {
+		return bStudyGroup;
+	}
+
+	public void setbStudyGroup(String bStudyGroup) {
+		this.bStudyGroup = bStudyGroup;
+	}
+
+	public void setbYyMmDd(String bYyMmDd) {
+		this.bYyMmDd = bYyMmDd;
+	}
+
+	
 	
 	public BDto() {
 	}

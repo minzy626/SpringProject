@@ -95,8 +95,8 @@
 
 	<insert id="write" parameterType="Dto">
 		INSERT INTO MVC_BOARD
-		(BNAME,BTITLE,BCONTENT,BHIT)
-		VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
+		(BNAME,BTITLE,BCONTENT,BHIT,BREGIONGROUP,BMEETINGGROUP,BSTUDYGROUP,BCATEGORY)
+		VALUES(#{bName},#{bTitle},#{bContent},#{bHit},#{bRegionGroup},#{bMeetingGroup},#{bStudyGroup},#{bCategory})
 	</insert>
 
 	<update id="upHit" parameterType="Integer">

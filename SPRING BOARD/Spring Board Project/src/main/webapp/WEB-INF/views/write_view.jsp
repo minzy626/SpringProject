@@ -31,9 +31,13 @@ function submitContents() {
     // document.getElementById("ir1").value를 이용해서 처리한다.
 }
 
-function getStudyGroup(){
-	var bMeetingGroupVal=document.getElementById("mRadio1").value;
-	if(bMeetingGroupVal==m1)
+function mRadioFunc(val){
+	if(val=="스터디"){
+		document.getElementById("bStudyGroupDiv").style.display="block";
+	}
+	else{
+		document.getElementById("bStudyGroupDiv").style.display="none";
+	}
 }
 </script>
       
@@ -65,46 +69,62 @@ function getStudyGroup(){
 			<!-- Select Basic -->
 
 			<div class="form-group">
-			<label class="col-md-1 control-label">게시판</label>
+			<label for="bMeetingGroup" class="col-md-1 control-label">게시판</label>
 			<div class="col-md-3">
 			  <label class="radio-inline">
-			  	<input type="radio" name="meetingGroupRadio" id="mRadio1" value="m1" checked="checked"> 스터디
+			  	<input type="radio" name="bMeetingGroup" id="mRadio1" value="스터디" onclick="mRadioFunc(this.value)" checked="checked"> 스터디
 			  </label>
 			  <label class="radio-inline">
-			 	 <input type="radio" name="meetingGroupRadio" id="mRadio2" value="m2"> 동아리
+			 	 <input type="radio" name="bMeetingGroup" id="mRadio2" onclick="mRadioFunc(this.value)" value="동아리"> 동아리
 			  </label>
 			  <label class="radio-inline">
-			  	<input type="radio" name="meetingGroupRadio" id="mRadio3" value="m3"> 공모전
+			  	<input type="radio" name="bMeetingGroup" id="mRadio3" onclick="mRadioFunc(this.value)" value="공모전"> 공모전
 			  </label>
 		   </div>
 		   </div>
 		   
-		   
+		   <div id="bStudyGroupDiv" class="form-group">
+			<label for="bStudyGroup" class="col-md-1 control-label"></label>
+			<div class="col-md-3">
+			  <label class="radio-inline">
+			  	<input type="radio" name="bStudyGroup" id="sRadio1" value="어학"> 어학
+			  </label>
+			  <label class="radio-inline">
+			 	 <input type="radio" name="bStudyGroup" id="sRadio2" value="취업"> 취업
+			  </label>
+			  <label class="radio-inline">
+			  	<input type="radio" name="bStudyGroup" id="sRadio3" value="전공"> 전공
+			  </label>
+			  <label class="radio-inline">
+			  	<input type="radio" name="bStudyGroup" id="sRadio3" value="기타" checked="checked"> 기타
+			  </label>
+		   </div>
+		   </div>
 
 		   
 		   <div class="form-group">
-			<label class="col-md-1 control-label">글 종류</label>
+			<label for="bCategory" class="col-md-1 control-label">글 분류</label>
 			<div class="col-md-3">
 			  <label class="radio-inline">
-			  	<input type="radio" name="categoryRadio" id="cRadio1" value="option1" > 모집
+			  	<input type="radio" name="bCategory" id="cRadio1" value="모집" > 모집
 			  </label>
 			  <label class="radio-inline">
-			 	 <input type="radio" name="categoryRadio" id="cRadio2" value="option2"> 참여
+			 	 <input type="radio" name="bCategory" id="cRadio2" value="참여"> 참여
 			  </label>
 			  <label class="radio-inline">
-			  	<input type="radio" name="categoryRadio" id="cRadio3" value="option3"> 질문
+			  	<input type="radio" name="bCategory" id="cRadio3" value="질문"> 질문
 			  </label>
 			  <label class="radio-inline">
-			  	<input type="radio" name="categoryRadio" id="cRadio4" value="option4" checked="checked"> 기타
+			  	<input type="radio" name="bCategory" id="cRadio4" value="option4" checked="checked"> 기타
 			  </label>
 		   </div>
 		   </div>
 		   
 		   <div class="form-group">
-			<label class="col-md-1 control-label">지역</label>
+			<label for="bRegionGroup" class="col-md-1 control-label">지역</label>
 			<div class="row">
 			<div class="col-md-3">
-				<select class="form-control" name="bRegion" id="bRegion">
+				<select class="form-control" name="bRegionGroup" id="bRegionGroup">
 					<option value="">시/도 선택</option>
     				<option value="서울특별시">서울특별시</option>
    					<option value="부산광역시">부산광역시</option>
