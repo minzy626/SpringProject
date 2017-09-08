@@ -7,6 +7,14 @@ public class CDto {
 	int cBoardNum;
 	String cNick;
 	String cContent;
+	String cImage;
+	public String getcImage() {
+		return cImage;
+	}
+
+	public void setcImage(String cImage) {
+		this.cImage = cImage;
+	}
 	Timestamp cDate;
 	boolean cIsSeen;
 	public boolean iscIsSeen() {

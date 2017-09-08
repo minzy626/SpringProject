@@ -39,8 +39,8 @@
 	<!-- 댓글 작성 -->
 	<insert id="cWrite" parameterType="CDto">
 		INSERT INTO BOARD_COMMENT
-		(CBOARDNUM,CNICK,CCONTENT,CISSEEN)
-		VALUES(#{cBoardNum},#{cNick},#{cContent},#{cIsSeen})
+		(CBOARDNUM,CNICK,CCONTENT,CISSEEN,CIMAGE)
+		VALUES(#{cBoardNum},#{cNick},#{cContent},#{cIsSeen},#{cImage})
 	</insert>
 	
 	<!-- 댓글 수정 -->

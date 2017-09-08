@@ -37,7 +37,7 @@ function popupopen(string){
 			  </div>
 			  
 				
-			  <h2>신촌지역 스터디/공모전/미팅 게시판 - 글 보기 페이지</h2>
+			  
 				
 			  <form id="pageInfo" role="form">
             	<input type="hidden" name="bPage" value="${spdto.bPage}">
@@ -56,8 +56,9 @@ function popupopen(string){
 			  
 			  <div class="col-md-12 ">
 			    <p>
-				    <a href="#"><span class="label label-info">공모전</span></a> <!-- 클릭 시 공모전 게시판 해당 변수+페이지링크 필요 -->
-					<a href="#"><span class="label label-info">질문/답변</span></a> <!-- 클릭 시 공모전-질문답변 글 필터링해서 보여줘(굳이..?) -->
+				    <a href="#"><span class="label label-info">${BDto.bMeetingGroup}</span></a> <!-- 클릭 시 공모전 게시판 해당 변수+페이지링크 필요 -->
+					<a href="#"><span class="label label-info">${BDto.bCategory}</span></a> <!-- 클릭 시 공모전-질문답변 글 필터링해서 보여줘(굳이..?) -->
+					<a href="#"><span class="label label-info">${BDto.bRegionGroup}</span></a>
 					| <i class="glyphicon glyphicon-user"></i> <a href="" onclick="popupopen('${BDto.bName}');"> ${BDto.bName }</a> <!-- 클릭 시 멤버정보 팝업창 -->
 					| <i class="glyphicon glyphicon-calendar">${BDto.bDate}</i>  
 				   	| <i class="glyphicon glyphicon-eye-open">${BDto.bHit}회</i>
@@ -117,7 +118,7 @@ function popupopen(string){
 			  <li>
 				<div class="comment-main-level">
 					<!-- 프로필 이미지 -->
-					<div class="comment-avatar"><img src="assets/rion.png" class="img-circle" width="60"></div>
+					<div class="comment-avatar"><a href="profile"><img src="assets/userImage/${dto.cImage}.png" class="img-circle" width="60"></a></div>
 					<!-- 댓글 내용 -->
 					<div class="comment-box">
 						<div class="comment-head">
@@ -174,6 +175,7 @@ function popupopen(string){
 			  	  <form id="commentForm" name="commentForm" action="cWrite" role="form" method="post">
 			  	  	<input type="hidden" name="cNick" value="<security:authentication property="principal.bNick"/>">
 			  	  	<input type="hidden" name="cBoardNum" value="${BDto.bId }">
+			  	  	<input type="hidden" name="cImage" value="<security:authentication property="principal.bImage"/>">
 			  	  	<input type="hidden" id="cId" name="cId" value="0">
 			  	  	<div id="modifyIdInput"></div>
 			  	  	<div class="centered" style="padding-right:50px; padding-left:50px; padding-top:10px;">
