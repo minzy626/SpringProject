@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="include/index_header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,21 +33,24 @@
 
 <body>
 
-<div class="container">  
-  <form id="contact" action="write" method="post">
+<div class="col-md-5 col-md-offset-4" style="padding-top:50px; padding-right:40px;padding-left:40px; height:100%; background-color: #f9f9f9">
+  <form id="contact" action="reply_write" method="post">
     <h3>쪽지 보내기</h3>
-    <fieldset>
-      <input placeholder="보내는 사람" type="text" name="Sender" value="${noteDto.receiver}" tabindex="1" required autofocus readonly/>
-    </fieldset>
-    <fieldset>
-      <input placeholder="받는 사람" type="text" name="Receiver" value="${noteDto.sender}" tabindex="2" required readonly/>
-    </fieldset>
-    <fieldset>
-      <textarea placeholder="쪽지 내용을 입력해주세요." name="Content" tabindex="3" required></textarea>
-    </fieldset>
-    <fieldset>
+    <div style="margin-top:20px;">
+      <label for="description">보내는 사람</label>
+      <input  type="text" name="Sender" value="${noteDto.receiver}" tabindex="1" required autofocus readonly/>
+    </div >
+    <div class="form-group">
+    	  <label for="description">받는 사람</label>
+      <input type="text" name="Receiver" value="${noteDto.sender}" tabindex="2" required readonly/>
+    </div>
+    <div class="form-group" >
+    		        <label for="description">쪽지 내용</label>
+    		        <textarea rows="12" name="Content" value="${noteDto.content}" required></textarea>
+    </div>
+    <div style="margin-top:20px;">
       <button type="submit" id="contact-submit" data-submit="보내는중..">전송</button>
-    </fieldset>
+    </div>
   </form>
  
   

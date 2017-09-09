@@ -128,8 +128,18 @@ public class NoteController {
         out.println("<script>window.close();</script>");
         out.flush();
 
-        return;
+        return;	
 	}
 	
-	
+	@RequestMapping("/reply_write")
+	public String note_reply_write(NoteDto noteDto,HttpServletResponse response) throws IOException
+	{
+		service.insert(noteDto);
+		response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('성공적으로 쪽지가 전송 되었습니다.');opener.parent.location.reload();</script>");
+        out.flush();
+
+        return "index";
+	}
 }
