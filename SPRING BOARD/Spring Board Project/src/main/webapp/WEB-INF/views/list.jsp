@@ -134,14 +134,8 @@
 								<hr />
 								<h4></h4>
 
-								<!-- <div id="wrapper">
-									<div id="sel"> -->
-								<!-- 	<div class="row"> -->
-								<table class="type01">
-									<!-- 	<div > -->
-									<tr>
-										<td width=5%><select name="bSearchType"
-											class="form-control input-sm">
+									<div >
+										<select name="bSearchType" class=" input-sm">
 												<option value="n"
 													<c:out value="${bPage.sdto.bSearchType == null? 'selected' : ''}" />>---</option>
 												<option value="t"
@@ -150,28 +144,19 @@
 													<c:out value="${bPage.sdto.bSearchType == 'c'? 'selected' : ''}" />>내용</option>
 												<option value="w"
 													<c:out value="${bPage.sdto.bSearchType == 'w'? 'selected' : ''}" />>작성자</option>
-										</select></td>
-										<!-- 									</div>
- -->
-										<!-- <div class="col-xs-6"> -->
-										<td width="25%"><input type="text" name="bKeyword"
-											class="form-control" value="${bPage.sdto.bKeyword}"
-											placeholder="검색 키워드를 입력하세요!"></td>
-										<!-- 									</div>
- -->
-										<!-- 	<div> -->
-										<td width=5%><span class="input-group-btn">
+										</select>
+									
+										<input type="text" name="bKeyword" class="noh"
+										 value="${bPage.sdto.bKeyword}"
+											placeholder="검색 키워드를 입력하세요!">
+										<span class="input-btn">
 												<button class="btn btn-secondary" id="searchBtn"
 													type="submit">찾기</button>
-										</span></td>
-										<!-- </div> -->
-										<td class="right">
-										<a href="/ex/write_view${bPage.makeSearch(bPage.sdto.bPage)}" class="btn btn-default">글작성</a>
-										</td>
-									</tr>
-								</table>
-								<!-- </div> -->
-								<%-- <a href="/ex/write_view${bPage.makeSearch(bPage.sdto.bPage)}" class="btn btn-default pull-right">글작성</a> --%>
+										</span>
+									
+										<a href="/ex/write_view${bPage.makeSearch(bPage.sdto.bPage)}" class="btn btn-default pull-right">글작성</a>
+								
+								 </div>
 
 								<div class="dataTables_paginate paging_simple_numbers text-center"
 									id="example1_paginate">

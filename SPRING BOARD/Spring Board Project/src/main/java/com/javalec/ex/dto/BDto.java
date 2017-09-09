@@ -34,9 +34,7 @@ public class BDto {
 		this.bStudyGroup = bStudyGroup;
 	}
 
-	public void setbYyMmDd(String bYyMmDd) {
-		this.bYyMmDd = bYyMmDd;
-	}
+
 
 	
 	
@@ -85,13 +83,17 @@ public class BDto {
 		this.bDate = bDate;
 	}
 
+	public void setbYyMmDd(String bYyMmDd) {
+		this.bYyMmDd = bYyMmDd;
+	}
+	
 	public String getbYyMmDd() {
 		return bYyMmDd;
 	}
-
+/*
 	public void setYyMmDd(String bYyMmDd) {
 		setbDate(bDate);
-	}
+	}*/
 
 	public int getbHit() {
 		return bHit;
