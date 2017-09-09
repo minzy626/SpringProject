@@ -1,10 +1,9 @@
 @charset "EUC-KR";
 
-td.right {
-    width: 85%;
-    text-align: right;
-    white-space: nowrap;
-    float: none;
+input.noh {
+    width: 25%;
+    height:32px;
+    border-radius: 5px;
 }
 
 ul.center {
