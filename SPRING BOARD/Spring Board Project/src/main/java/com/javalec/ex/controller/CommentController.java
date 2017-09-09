@@ -60,4 +60,11 @@ public class CommentController {
 		service.cDelete(cId);
 		return "redirect:/content_view?bPage=1&bPerPageNum=10&bSearchType=&bSearchMType&bSearchRType&bKeyword=&bId="+cBoardNum;
 	}
+	
+	@RequestMapping(value="/cReadAllComments")
+	public String cReadAllComments(@RequestParam("bName") String bName)
+	{
+		service.cReadAllComments(bName);
+		return "redirect:/index";
+	}
 }

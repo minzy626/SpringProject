@@ -28,11 +28,19 @@
 		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM=#{param1}
 	</update>
 	
+	<!-- 접속중인 유저의 모든 댓글 읽음 처리 -->
+	<update id="cReadAllComments" parameterType="string">
+		UPDATE BOARD_COMMENT SET CISSEEN=1 WHERE CBOARDNUM IN
+		(
+			SELECT BID FROM MVC_BOARD WHERE BNAME=#{param1}
+		)
+	</update>
+	
 	<!-- 댓글 작성 -->
 	<insert id="cWrite" parameterType="CDto">
 		INSERT INTO BOARD_COMMENT
-		(CBOARDNUM,CNICK,CCONTENT,CISSEEN)
-		VALUES(#{cBoardNum},#{cNick},#{cContent},#{cIsSeen})
+		(CBOARDNUM,CNICK,CCONTENT,CISSEEN,CIMAGE)
+		VALUES(#{cBoardNum},#{cNick},#{cContent},#{cIsSeen},#{cImage})
 	</insert>
 	
 	<!-- 댓글 수정 -->
@@ -87,8 +95,8 @@
 
 	<insert id="write" parameterType="Dto">
 		INSERT INTO MVC_BOARD
-		(BNAME,BTITLE,BCONTENT,BHIT)
-		VALUES(#{bName},#{bTitle},#{bContent},#{bHit})
+		(BNAME,BTITLE,BCONTENT,BHIT,BREGIONGROUP,BMEETINGGROUP,BSTUDYGROUP,BCATEGORY)
+		VALUES(#{bName},#{bTitle},#{bContent},#{bHit},#{bRegionGroup},#{bMeetingGroup},#{bStudyGroup},#{bCategory})
 	</insert>
 
 	<update id="upHit" parameterType="Integer">
@@ -189,7 +197,7 @@
 			<if test="bSearchType == 'w'.toString()">
 				and bName like concat("%", #{bKeyword} ,"%")
 			</if>
-		</if>
+		</if> 
 	</sql>
 
 	<!-- 페이징 + 검색처리된 게시물 조회( SearchCriteria( page, perPageNum, searchType, keyword 

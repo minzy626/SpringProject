@@ -19,4 +19,6 @@ public interface CommentDao {
 	public int cGetNewCommentCount(String bName);
 	// 아직 읽지않은 댓글의 cDto객체를 가져오기(알림 상세내용 보여주기용)
 	public List<CDto> cGetNewCommentDetails(String bName);
+	// 접속중인 사용자의 모든 알림을 읽음처리
+	public void cReadAllComments(String bName);
 }

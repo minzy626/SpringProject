@@ -8,12 +8,12 @@ import org.springframework.validation.Validator;
 
 import com.javalec.ex.dto.UserDto;
 
-public class IdDuplicationValidator implements Validator {
+public class PasswordValidator implements Validator {
 
 	private Pattern pattern;
 	private Matcher matcher;
-	String regexp = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$"; //이메일 정규 표현식
-	public IdDuplicationValidator() {
+	String regexp = "^[a-zA-Z0-9]{8,20}$"; //8자이상 20자 이하 영문+숫자 정규표현식
+	public PasswordValidator() {
 		pattern = pattern.compile(regexp);
 	}
 	
@@ -25,12 +25,13 @@ public class IdDuplicationValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		UserDto userDto = (UserDto)target;
-		String id = userDto.getbId();
-		matcher = pattern.matcher(userDto.getbId());
+		String pass = userDto.getbPass();
+		matcher = pattern.matcher(userDto.getbPass());
 		
-		if(id == null || id.trim().isEmpty()) 
-			errors.rejectValue("bId", "IdRequired");
-		else if(!matcher.matches())
-			errors.rejectValue("bId", "bad");
+		if(pass == null) 
+			errors.rejectValue("bPass", "PassRequired");
+		else if(pass.length() < 8 || pass.trim().isEmpty() || !matcher.matches())
+			errors.rejectValue("bPass", "PassBad");
 	}
+
 }

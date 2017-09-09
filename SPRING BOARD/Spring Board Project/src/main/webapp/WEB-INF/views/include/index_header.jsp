@@ -29,6 +29,7 @@
 	 <script src="assets/js/chart-master/Chart.js"></script>
 	<security:authorize access="isAuthenticated()">
 		<security:authentication property="principal.bNick" var="nick"/>
+		<security:authentication property="principal" var="principal"/>
 	
 
 	<!-- 웹 소켓 사용해서 현재 몇개의 쪽지가 도착했는지 구해오기. --> 
@@ -50,23 +51,33 @@
    
     function onOpen(evt) 
     {
-       websocket.send("${nick}");
+    	websocket.send("${nick}");
     }
     function onMessage(evt) {
     	var jsonObj=JSON.parse(evt.data);
     	$('#count').append(jsonObj.noteCnt);
     	$('#notificationCnt').append(jsonObj.notificationCnt);
+    	
+    	var html="", id="", nick="", title="";
+    	for(var i=0; i<jsonObj.notificationCnt; i++)
+    	{
+    		id=jsonObj.notificationArray[i].id;
+    		nick=jsonObj.notificationArray[i].nick;
+    		title=jsonObj.notificationArray[i].title;
+    		html+=("<li><a href='content_view?bId="+id+"'>["+nick+"]님이 회원님의 ["+title+"]글에 댓글을 작성하였습니다.</a></li>");
+    	}
+    	document.getElementById("notificationDiv").innerHTML=html;
     }
     function onError(evt) {
     }
     
     $(document).ready(function(){
-    		send_message();
+    	send_message();
     });
     		
     function popupOpen(){
   	  	var windowW = 400;  // 창의 가로 길이
-        var windowH = 380;  // 창의 세로 길이
+        var windowH = 385;  // 창의 세로 길이
         var left = Math.ceil((window.screen.width - windowW)/2);
         var top = Math.ceil((window.screen.height - windowH)/2);
 		window.open("write_view","pop_01"," top="+top+", left="+left+", height="+windowH+", width="+windowW);
@@ -103,13 +114,16 @@
                             <li>
                                 <p class="green" style="text:bold;">알림</p>
                             </li>
-                            <li>	
-                                <a href="index#">홍길동님이 회원님의  [신입부원 모집!] 글에 댓글을 작성하였습니다.</a>
-                            </li>
-                            <!-- 노트에 옮겨둔거 여기에 삽입 -->
+                            <div id="notificationDiv">
+	                            <li>	
+	                                <a href='content_view?bId=1'>error in index_header.jsp file</a>
+	                            </li>
+                            </div>
+                            
                             <li class="external">
-                                <a href="#" style="color:blue;">모든 댓글 읽음처리하기</a>
+                                <a href="/ex/cReadAllComments?bName=${principal.bNick }" style="color:black;">모든 댓글 읽음처리하기</a>
                             </li>
+                            
                         </ul>
                     </li>
                     </security:authorize>
@@ -164,7 +178,6 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
-              
               	  <p class="centered"><a href="profile"><img src="assets/userImage/${principal.bImage}.png" class="img-circle" width="60"></a></p>
               		<security:authorize access="isAuthenticated()">
               		 	<h5 class="centered"><security:authentication property="principal.bNick"/>님 환영합니다</h5>
@@ -191,7 +204,7 @@
                           <span>스터디</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="/ex/list_Slanguage${bPage.makeQuery(1)}&bMeetingGroup=&bKeyword=&bSearchMType=스터디&bStudyGroup=어학
+                          <li><a  href="/ex/list_Slanguage${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=어학
 					&bSearchRType=&bCategory=">어학 스터디</a></li>
                           <li><a  href="/ex/list_Sjob${bPage.makeQuery(1)}&bSearchType=&bKeyword=&bMeetingGroup=스터디&bStudyGroup=취업
 					&bSearchRType=&bCategory=">취업 스터디</a></li>

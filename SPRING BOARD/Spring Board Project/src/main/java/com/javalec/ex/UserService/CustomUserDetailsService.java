@@ -15,7 +15,6 @@ import com.javalec.ex.dto.UserDto;
 public class CustomUserDetailsService implements UserDetailsService {
 
 	SqlSession sqlsession;
-	
 	public void setSqlsession(SqlSession sqlsession) {
 		this.sqlsession = sqlsession;
 	}
@@ -47,4 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		return user;
 	}
 
+	
 }
+
+

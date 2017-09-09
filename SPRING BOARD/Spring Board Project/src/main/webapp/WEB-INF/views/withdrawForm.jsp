@@ -14,24 +14,6 @@
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
     <script src="assets/js/chart-master/Chart.js"></script>
-
-    <script type="text/javascript">
-        // 사용하기 클릭 시 부모창으로 값 전달 
-       	function pValue(){
-            document.getElementById("bId").value = opener.document.userInfo.bId.value;
-            document.getElementById("userId").value = opener.document.userInfo.bId.value;
-            document.getElementById("dropId").value = opener.document.userInfo.bId.value;
-        }
-        
-        function sendCheckValue(){
-
-            if(!document.number.certNumber.value){
-            	alert("인증번호를 입력해 주세요.");
-            	return false;
-        	}
-        	          
-        }
-   </script>
     
 </head>
 <body onload="pValue()">
@@ -45,10 +27,9 @@
             <div class="form-group">
             <div class="col-sm-6 text-center">
             	<div class="input-group">          
-            	<input type="text" class="form-control" id="userId" value="${userDto.bId}" placeholder="아이디를 입력해주세요" disabled>
-            	<input type="hidden" name="bId" id="bId" value="${userDto.bId}">
+            	<input type="text" class="form-control" id="bId" name="bId" value="${userDto.bId}" placeholder="아이디를 입력해주세요" readonly>
             	<span class="input-group-btn">
-            		<button class="btn btn-success" type="submit">인증번호 전송</button><!-- onclick="sendCheckValue()" -->
+            		<button class="btn btn-success" type="submit">인증번호 전송</button>
             	</span>
             	</div>
             </div>
@@ -81,5 +62,22 @@
 	        </div>
     		</form:form>
    </div>
+   
+   <script type="text/javascript">
+        // 사용하기 클릭 시 부모창으로 값 전달 
+       	function pValue(){
+            document.getElementById("bId").value = opener.document.userInfo.bId.value;
+            document.getElementById("dropId").value = opener.document.userInfo.bId.value;
+        }
+        
+        function sendCheckValue(){
+
+            if(!document.number.certNumber.value){
+            	alert("인증번호를 입력해 주세요.");
+            	return false;
+        	}
+        	          
+        }
+   </script>
 </body>
 </html>

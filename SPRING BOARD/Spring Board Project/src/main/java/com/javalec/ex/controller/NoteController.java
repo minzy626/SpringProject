@@ -2,6 +2,8 @@ package com.javalec.ex.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.List;
@@ -48,10 +50,16 @@ public class NoteController {
 	}
 	
 	@RequestMapping("/write_view") 
-	public String note_write_view(Model model,Principal principal)
+	public String note_write_view(Model model,Principal principal,HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		CustomUserDetails user = (CustomUserDetails)((Authentication)principal).getPrincipal();//현재 로그인 중인 사용자의 닉네임을 가져오기 위해
 		model.addAttribute("sender",user.getbNick());
+		String receiver;
+		if(request.getParameter("nickname") != null)
+		{
+			receiver = URLDecoder.decode(request.getParameter("nickname"),"UTF-8");
+			model.addAttribute("receiver",receiver);
+		}
 		return "note_write_view";
 	}
 	
@@ -117,6 +125,7 @@ public class NoteController {
 		response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<script>alert('성공적으로 쪽지가 전송 되었습니다.');opener.parent.location.reload();window.close();</script>");
+        out.println("<script>window.close();</script>");
         out.flush();
 
         return;

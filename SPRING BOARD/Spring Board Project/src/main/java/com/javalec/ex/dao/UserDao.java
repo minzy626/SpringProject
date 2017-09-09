@@ -1,5 +1,7 @@
 package com.javalec.ex.dao;
 
+import java.util.List;
+
 //import com.javalec.ex.dto.BDto;
 import com.javalec.ex.dto.UserDto;
 
@@ -12,5 +14,8 @@ public interface UserDao {
 	public void user_modify_pass(UserDto dto);
 	public void user_modify(UserDto dto);
 	public void drop_by_id(UserDto dto);
-//	public Integer count_write(BDto dto);
+	public List<String> find_ip_ban_list();
+	public void insert_ip_ban(String ip);
+	public void insert_dropuser(UserDto dto);
+	public String select_dropuser(UserDto dto);
 }

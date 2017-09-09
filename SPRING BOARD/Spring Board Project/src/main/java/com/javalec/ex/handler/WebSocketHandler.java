@@ -46,6 +46,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
 	// (매개변수:접속한 사용자, 메시지 내용)
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		logger.info("for debugging handleTextMessage()*********************************************************************************"); // 디버그용
 		String bNick=message.getPayload();
 		NoteDao dao = sqlsession.getMapper(NoteDao.class);
 		// 현재 수신자에게 몇개의 메세지가 와있는지 디비에서 검색함.
@@ -53,16 +54,23 @@ public class WebSocketHandler extends TextWebSocketHandler {
 		// 현재 접속중인 사용자가 아직 읽지않은 댓글의 총 개수를 가져옵니다.
 		String notificationCnt=Integer.toString(cService.cGetNewCommentCount(bNick));
 		
-		//JSON 사용하여 데이터 client로 넘긴다.
-		String jsonStr="{\"noteCnt\":"+noteCnt+", \"notificationCnt\":"+notificationCnt+"}";
-		
+		//JSON 사용하여 댓글알림 데이터를 client로 넘긴다.
+		//String jsonStr="{\"noteCnt\":"+noteCnt+", \"notificationCnt\":"+notificationCnt+"}";
+		String jsonStr="{\"noteCnt\":"+noteCnt+", \"notificationCnt\":"+notificationCnt+", \"notificationArray\":[";
 		// 진행중........
 		// 이제 jsonStr에 notificationDetails배열을 추가해야함. 한개의 열에 title, nick이 짝을 이루어야....
+		String tempStr=jsonStr;
 		for(CDto cdto : cService.cGetNewCommentDetails(bNick)) {
-			String title = bService.getBTitleFromBId(cdto.getcBoardNum());
-			String nick = cdto.getcNick();
+			String nick=cdto.getcNick(), title=bService.getBTitleFromBId(cdto.getcBoardNum()), id=Integer.toString(cdto.getcBoardNum());
+			
+			tempStr+=("{\"nick\": \""+nick+"\", \"title\": \""+title+"\", \"id\":"+id+"}");
+			jsonStr=tempStr;
+			tempStr+=",";
 		}
+		jsonStr+="]}";
 		
+		
+		logger.info("웹소켓디버그: "+jsonStr); // 디버그용
 		session.sendMessage(new TextMessage(jsonStr));
 	}
 
@@ -72,5 +80,5 @@ public class WebSocketHandler extends TextWebSocketHandler {
   "font":"arial",\
   "a":"A"\
 }
-var jsonStr="{\"noteCnt\":"+noteCnt+", \"alarmCnt\":"+alarmCnt+"}"
+var jsonStr="{\"noteCnt\":"+noteCnt+", \"alarmCnt\":"+alarmCnt+""
 */

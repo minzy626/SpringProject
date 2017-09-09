@@ -33,17 +33,17 @@
 
 <body>
 
-<div class="container" style="padding-right:0px;padding-left:0px;">  
-  <form:form id="contact" action="write" method="post" style="margin-top:0px; margin-bottom:0px;">
+<div>  
+  <form:form id="contact" action="write" method="post">
     <h3>쪽지 보내기</h3>
     <fieldset>
-      <input placeholder="보내는 사람" type="text" name="Sender" value="${sender}" tabindex="1" required autofocus>
+      <input placeholder="보내는 사람" type="text" name="Sender" value="${sender}" tabindex="1" required >
     </fieldset>
     <fieldset>
-      <input placeholder="받는 사람" type="text" name="Receiver" tabindex="2" required>
+      <input placeholder="받는 사람" type="text" name="Receiver" value="${receiver}" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <textarea placeholder="쪽지 내용을 입력해주세요." name="Content" tabindex="3" required></textarea>
+      <textarea placeholder="쪽지 내용을 입력해주세요." name="Content" tabindex="3" required ></textarea>
     </fieldset>
     <fieldset>
       <button type="submit" id="contact-submit" data-submit="보내는중..">전송</button>

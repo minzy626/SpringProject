@@ -1,5 +1,7 @@
 package com.javalec.ex.UserService;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -59,6 +61,18 @@ public class UserServiceImpl implements UserService {
 	public void drop_by_id(UserDto dto) {
 		// TODO Auto-generated method stub
 		dao.drop_by_id(dto);
+	}
+
+	@Override
+	public void insert_dropuser(UserDto dto) {
+		// TODO Auto-generated method stub
+		dao.insert_dropuser(dto);
+	}
+
+	@Override
+	public String select_dropuser(UserDto dto) {
+		// TODO Auto-generated method stub
+		return dao.select_dropuser(dto);
 	}
 
 }
