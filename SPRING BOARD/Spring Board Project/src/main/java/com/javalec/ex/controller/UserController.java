@@ -14,19 +14,16 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.javalec.ex.UserService.UserService;
 import com.javalec.ex.UserService.UserServiceImpl;
-import com.javalec.ex.dto.CDto;
 import com.javalec.ex.dto.UserDto;
 import com.javalec.ex.validator.FindPassValidator;
 import com.javalec.ex.validator.IdDuplicationValidator;
@@ -102,6 +99,12 @@ public class UserController {
 		return "memberinfo";
 	}
 	
+	@RequestMapping(value="/other_memberinfo")
+	public String memberinfo(Model model, UserDto uDto) {
+		model.addAttribute("userinfo", uService.find_by_nick(uDto));
+		return "other_memberinfo";
+	}
+
 	//회원가입 관련
 	@RequestMapping(value="/sign_up", method = RequestMethod.GET)//이용약관
 	public String sign_up(Model model) {
