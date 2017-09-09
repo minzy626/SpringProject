@@ -197,7 +197,7 @@
 			<if test="bSearchType == 'w'.toString()">
 				and bName like concat("%", #{bKeyword} ,"%")
 			</if>
-		</if>
+		</if> 
 	</sql>
 
 	<!-- 페이징 + 검색처리된 게시물 조회( SearchCriteria( page, perPageNum, searchType, keyword 
