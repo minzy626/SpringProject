@@ -115,7 +115,7 @@ function mRadioFunc(val){
 			  	<input type="radio" name="bCategory" id="cRadio3" value="질문"> 질문
 			  </label>
 			  <label class="radio-inline">
-			  	<input type="radio" name="bCategory" id="cRadio4" value="option4" checked="checked"> 기타
+			  	<input type="radio" name="bCategory" id="cRadio4" value="기타" checked="checked"> 기타
 			  </label>
 		   </div>
 		   </div>
