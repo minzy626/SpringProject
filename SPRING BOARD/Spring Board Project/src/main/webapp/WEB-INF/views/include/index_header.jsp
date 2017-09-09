@@ -178,7 +178,12 @@
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
+              <security:authorize access="isAuthenticated()">
               	  <p class="centered"><a href="profile"><img src="assets/userImage/${principal.bImage}.png" class="img-circle" width="60"></a></p>
+              </security:authorize>
+              <security:authorize access="! isAuthenticated()">
+              	  <p class="centered"><a href="profile"><img src="assets/userImage/user.png" class="img-circle" width="60"></a></p>
+              </security:authorize>
               		<security:authorize access="isAuthenticated()">
               		 	<h5 class="centered"><security:authentication property="principal.bNick"/>님 환영합니다</h5>
               		 </security:authorize>

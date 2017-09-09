@@ -32,6 +32,7 @@
             		<button class="btn btn-success" type="submit">인증번호 전송</button>
             	</span>
             	</div>
+            	<p class="help-block">회원탈퇴 후 7일간 동일계정으로 회원가입 불가능합니다.</p>
             </div>
             </div> 
             <div class="col-sm-12 text-center">
