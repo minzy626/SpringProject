@@ -173,18 +173,67 @@
 			<if test="bCategory == '참여'.toString()">
 				and bCategory like concat("%", "참여" ,"%")
 			</if>
+			<if test="bCategory == '질문'.toString()">
+				and bCategory like concat("%", "질문" ,"%")
+			</if>
+			<if test="bCategory == '기타'.toString()">
+				and bCategory like concat("%", "기타" ,"%")
+			</if>
 		</if>
 		<!-- 지역에 따른 분류 -->
 		<if test="bSearchRType != null">
-			<if test="bSearchRType == '서울'.toString()">
-				and bRegionGroup like concat("%", "서울" ,"%")
+			<if test="bSearchRType == '서울특별시'.toString()">
+				and bRegionGroup like concat("%", "서울특별시" ,"%")
 			</if>
-			<if test="bSearchRType == '인천'.toString()">
-				and bRegionGroup like concat("%", "인천" ,"%")
+			<if test="bSearchRType == '부산광역시'.toString()">
+				and bRegionGroup like concat("%", "부산광역시" ,"%")
 			</if>
-			<if test="bSearchRType == '안산'.toString()">
-				and bRegionGroup like concat("%", "안산" ,"%")
+			<if test="bSearchRType == '대구광역시'.toString()">
+				and bRegionGroup like concat("%", "대구광역시" ,"%")
 			</if>
+			<if test="bSearchRType == '인천광역시'.toString()">
+				and bRegionGroup like concat("%", "인천광역시" ,"%")
+			</if>
+			<if test="bSearchRType == '광주광역시'.toString()">
+				and bRegionGroup like concat("%", "광주광역시" ,"%")
+			</if>
+			<if test="bSearchRType == '대전광역시'.toString()">
+				and bRegionGroup like concat("%", "대전광역시" ,"%")
+			</if>
+			<if test="bSearchRType == '울산광역시'.toString()">
+				and bRegionGroup like concat("%", "울산광역시" ,"%")
+			</if>
+			<if test="bSearchRType == '세종특별자치시'.toString()">
+				and bRegionGroup like concat("%", "세종특별자치시" ,"%")
+			</if>
+			<if test="bSearchRType == '경기도'.toString()">
+				and bRegionGroup like concat("%", "경기도" ,"%")
+			</if>
+			<if test="bSearchRType == '강원도'.toString()">
+				and bRegionGroup like concat("%", "강원도" ,"%")
+			</if>
+			<if test="bSearchRType == '충청북도'.toString()">
+				and bRegionGroup like concat("%", "충청북도" ,"%")
+			</if>
+			<if test="bSearchRType == '충청남도'.toString()">
+				and bRegionGroup like concat("%", "충청남도" ,"%")
+			</if>
+			<if test="bSearchRType == '전라북도'.toString()">
+				and bRegionGroup like concat("%", "전라북도" ,"%")
+			</if>
+			<if test="bSearchRType == '전라남도'.toString()">
+				and bRegionGroup like concat("%", "전라남도" ,"%")
+			</if>
+			<if test="bSearchRType == '경상북도'.toString()">
+				and bRegionGroup like concat("%", "경상북도" ,"%")
+			</if>
+			<if test="bSearchRType == '경상남도'.toString()">
+				and bRegionGroup like concat("%", "경상남도" ,"%")
+			</if>
+			<if test="bSearchRType == '제주특별자치도'.toString()">
+				and bRegionGroup like concat("%", "제주특별자치도" ,"%")
+			</if>
+			
 		</if>
 		<!-- 키워드로 검색 -->
 		<if test="bSearchType != null">

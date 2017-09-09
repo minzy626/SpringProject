@@ -29,16 +29,47 @@
 									<c:out value="${bPage.sdto.bCategory == '모집'? 'selected': ''}"/>>모집</option>
 								<option value="참여"
 									<c:out value="${bPage.sdto.bCategory == '참여'? 'selected': ''}"/>>참여</option>
-									
+								<option value="질문"
+									<c:out value="${bPage.sdto.bCategory == '질문'? 'selected': ''}"/>>질문</option>
+								
 							</select> <select class="type02" name="bSearchRType" id="selR">
 								<option value="null"
 									<c:out value="${bPage.sdto.bSearchRType == null? 'selected': ''}"/>>지역</option>
-								<option value="서울"
-									<c:out value="${bPage.sdto.bSearchRType == '서울'? 'selected': ''}"/>>서울</option>
-								<option value="인천"
-									<c:out value="${bPage.sdto.bSearchRType == '인천'? 'selected': ''}"/>>인천</option>
-								<option value="안산"
-									<c:out value="${bPage.sdto.bSearchRType == '안산'? 'selected': ''}"/>>안산</option>
+								<option value="서울특별시"
+									<c:out value="${bPage.sdto.bSearchRType == '서울특별시'? 'selected': ''}"/>>서울특별시</option>
+								<option value="부산광역시"
+									<c:out value="${bPage.sdto.bSearchRType == '부산광역시'? 'selected': ''}"/>>부산광역시</option>
+								<option value="대구광역시"
+									<c:out value="${bPage.sdto.bSearchRType == '대구광역시'? 'selected': ''}"/>>대구광역시</option>
+								<option value="인천광역시"
+									<c:out value="${bPage.sdto.bSearchRType == '인천광역시'? 'selected': ''}"/>>인천광역시</option>
+								<option value="광주광역시"
+									<c:out value="${bPage.sdto.bSearchRType == '광주광역시'? 'selected': ''}"/>>광주광역시</option>	
+								<option value="대전광역시"
+									<c:out value="${bPage.sdto.bSearchRType == '대전광역시'? 'selected': ''}"/>>대전광역시</option>	
+								<option value="울산광역시"
+									<c:out value="${bPage.sdto.bSearchRType == '울산광역시'? 'selected': ''}"/>>울산광역시</option>	
+								<option value="세종특별자치시"
+									<c:out value="${bPage.sdto.bSearchRType == '세종특별자치시'? 'selected': ''}"/>>세종특별자치시</option>
+								<option value="경기도"
+									<c:out value="${bPage.sdto.bSearchRType == '경기도'? 'selected': ''}"/>>경기도</option>
+								<option value="강원도"
+									<c:out value="${bPage.sdto.bSearchRType == '강원도'? 'selected': ''}"/>>강원도</option>
+								<option value="충청북도"
+									<c:out value="${bPage.sdto.bSearchRType == '충청북도'? 'selected': ''}"/>>충청북도</option>
+								<option value="충청남도"
+									<c:out value="${bPage.sdto.bSearchRType == '충청남도'? 'selected': ''}"/>>충청남도</option>
+								<option value="전라북도"
+									<c:out value="${bPage.sdto.bSearchRType == '전라북도'? 'selected': ''}"/>>전라북도</option>		
+								<option value="전라남도"
+									<c:out value="${bPage.sdto.bSearchRType == '전라남도'? 'selected': ''}"/>>전라남도</option>	
+								<option value="경상북도"
+									<c:out value="${bPage.sdto.bSearchRType == '경상북도'? 'selected': ''}"/>>경상북도</option>	
+								<option value="경상남도"
+									<c:out value="${bPage.sdto.bSearchRType == '경상남도'? 'selected': ''}"/>>경상남도</option>	
+								<option value="제주특별자치도"
+									<c:out value="${bPage.sdto.bSearchRType == '제주특별자치도'? 'selected': ''}"/>>제주특별자치도</option>	
+									
 							</select>
 							<section id="unseen">
 								<table
