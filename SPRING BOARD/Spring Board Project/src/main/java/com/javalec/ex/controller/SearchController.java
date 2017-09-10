@@ -178,6 +178,8 @@ public class SearchController {
 			System.out.println("글쓴사람: "+dto.getbName());
 			if(user.getbNick().equals(dto.getbName())) {
 				cService.isSeenToTrue(bId);
+				String equal = "true";
+				model.addAttribute("equal", equal);
 				System.out.println("read: if(principal!=null) if(user.getbNick()==dto.getbName()) 둘다 걸림!!!");
 			}
 		}

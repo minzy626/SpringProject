@@ -11,10 +11,9 @@
       <section id="main-content">
       <section class="wrapper">
 			
-      	<div class="row">
+      	<div class="row mt">
       	<div class="col-lg-9 main-chart">
                   
-        	<div class="col-md-12">
 			<div class="page-header">
 			<h1>이용약관</h1>
 			</div>
@@ -83,8 +82,7 @@
     <script>
 
     </script>
-
-	</div>				
+				
 	</div>
 	</div>       
       <!-- **********************************************************************************************************************************************************

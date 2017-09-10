@@ -173,7 +173,37 @@
 					<option value="sheep" data-image="assets/userImage/sheep.png">양</option>
 					<option value="siberian-husky" data-image="assets/userImage/siberian-husky.png">허스키</option>
 					<option value="squirrel" data-image="assets/userImage/squirrel.png">다람쥐</option>
-					<option value="tiger" data-image="assets/userImage/tiger.png">호랑이</option>
+					<option value="tiger" data-image="assets/userImage/tiger.png">호랑이</option>					
+					<option value="bat" data-image="assets/userImage/bat.png">박쥐</option>
+					<option value="beaver" data-image="assets/userImage/beaver.png">비버</option>
+					<option value="bee" data-image="assets/userImage/bee.png">벌</option>
+					<option value="beetle" data-image="assets/userImage/beetle.png">딱정벌레</option>
+					<option value="camel" data-image="assets/userImage/camel.png">낙타</option>
+					<option value="canary" data-image="assets/userImage/canary.png">카나리아</option>
+					<option value="chameleon" data-image="assets/userImage/chameleon.png">카멜레온</option>
+					<option value="cobra" data-image="assets/userImage/cobra.png">코브라</option>
+					<option value="cow" data-image="assets/userImage/cow.png">소</option>
+					<option value="crab" data-image="assets/userImage/crab.png">게</option>
+					<option value="crocodile" data-image="assets/userImage/crocodile.png">악어</option>
+					<option value="giraffe" data-image="assets/userImage/giraffe.png">기린</option>
+					<option value="hippopotamus" data-image="assets/userImage/hippopotamus.png">하마</option>
+					<option value="hummingbird" data-image="assets/userImage/hummingbird.png">벌새</option>
+					<option value="kangaroo" data-image="assets/userImage/kangaroo.png">캥거루</option>
+					<option value="llama" data-image="assets/userImage/llama.png">라마</option>
+					<option value="macaw" data-image="assets/userImage/macaw.png">마코 앵무새</option>
+					<option value="moose" data-image="assets/userImage/moose.png">무스</option>
+					<option value="octopus" data-image="assets/userImage/octopus.png">문어</option>
+					<option value="ostrich" data-image="assets/userImage/ostrich.png">타조</option>
+					<option value="owl" data-image="assets/userImage/owl.png">올빼미</option>
+					<option value="pelican" data-image="assets/userImage/pelican.png">펠리컨</option>
+					<option value="rhinoceros" data-image="assets/userImage/rhinoceros.png">코뿔소</option>
+					<option value="shark" data-image="assets/userImage/shark.png">상어</option>
+					<option value="sloth" data-image="assets/userImage/sloth.png">나무늘보</option>
+					<option value="snake" data-image="assets/userImage/snake.png">뱀</option>
+					<option value="swan" data-image="assets/userImage/swan.png">백조</option>
+					<option value="toucan" data-image="assets/userImage/toucan.png">투우칸</option>
+					<option value="turtle" data-image="assets/userImage/turtle.png">거북이</option>
+					<option value="whale" data-image="assets/userImage/whale.png">고래</option>
 				</select>
 			</div>
 			</div>
