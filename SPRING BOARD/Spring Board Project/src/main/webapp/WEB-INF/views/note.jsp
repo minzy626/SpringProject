@@ -38,22 +38,21 @@
 	
 	</head>
 
-<body>
+<body style="background-color:#FFFFFF">
 <div class="container">
 	<div class="row">
 
-		<section class="content">
+		<section class="content" >
 			
-			<div class="col-md-8 col-md-offset-1">
-				<div class="panel panel-default">
+			<div class="col-md-8 col-md-offset-1" >
+				<div>
 					<div class="panel-body" style=" padding-right: 30px; padding-left: 30px;">
 						<h1>받은 쪽지함</h1>
 						<div class="pull-right">
-							<div class="btn-group">
+							<div class="btn-group" style="margin-bottom:20px;">
 								<button type="button" class="btn btn-success btn-filter" onclick="location.href='sendlist'">보낸 쪽지함</button>
 								<button type="button" class="btn btn-warning btn-filter" onclick="popupOpen()">쪽지 보내기</button>
 								<button type="button" class="btn btn-danger btn-filter" onclick="location.href='receive_delete_all'">전체 삭제</button>
-					
 							</div>
 						</div>
 						<div class="table-container">

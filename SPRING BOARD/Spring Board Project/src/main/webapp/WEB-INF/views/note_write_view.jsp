@@ -28,7 +28,6 @@
 	    <script src="assets/js/jquery.scrollTo.min.js"></script>
 	    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 	    <script src="assets/js/jquery.sparkline.js"></script>
-
 </head>
 
 <body>
@@ -43,7 +42,7 @@
       <input placeholder="받는 사람" type="text" name="Receiver" value="${receiver}" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <textarea placeholder="쪽지 내용을 입력해주세요." name="Content" tabindex="3" required ></textarea>
+      <textarea rows="5" placeholder="쪽지 내용을 입력해주세요." name="Content" tabindex="3" required ></textarea>
     </fieldset>
     <fieldset>
       <button type="submit" id="contact-submit" data-submit="보내는중..">전송</button>

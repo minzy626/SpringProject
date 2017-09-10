@@ -19,10 +19,6 @@
                       <!--CUSTOM CHART START -->
                       <div class="border-head">
                           <h3>게시판</h3>
-                          <a href="memberinfo">회원정보보기</a>
-                          <a href="sign_up">회원가입하기</a>
-                          <a href="find_passView">비밀번호 찾기</a>
-                          <a href="memberModify">회원정보 수정</a>
                       </div>
                      <!--  <div class="custom-bar-chart">
                           <ul class="y-axis">

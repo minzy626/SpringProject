@@ -192,7 +192,7 @@
               		 </security:authorize>
               	  	
                   <li class="mt">
-                      <a class="active" href="index">
+                      <a class="active" href="/ex/">
                           <i class="fa fa-dashboard"></i>
                           <span>홈</span>
                       </a>

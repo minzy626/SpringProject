@@ -80,8 +80,8 @@ function popupopen(string){
 	            <!-- bDto.bNick==security:authentication property="principal.bNick 이라면... -->
 	            
 	            <security:authorize access="isAuthenticated()">
-	            	<c:set var="connectedUser"><security:authentication property="principal.bNick" /></c:set>
-	            	<c:set var="contentWriter">${BDto.bName }</c:set>
+	            	<c:set var="connectedUser"><security:authentication property="principal.bNick"/></c:set>
+	            	<c:set var="contentWriter">${BDto.bName}</c:set>
 	            	<c:choose>
 	            		<c:when test="${connectedUser == contentWriter}">
 		          			<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
