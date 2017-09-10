@@ -7,18 +7,93 @@
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
-      <!--main content start-->
+ <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
 			
               <div class="row">
-                  <div class="col-lg-9 main-chart">
-                  
+                  <div class="col-lg-9 main-chart">                 
                   	
 					<div class="row mt">
                       <!--CUSTOM CHART START -->
-                      <div class="border-head">
+                    <!--   <div class="border-head">
                           <h3>게시판</h3>
+                          <a href="memberinfo">회원정보보기</a>
+                          <a href="sign_up">회원가입하기</a>
+                          <a href="find_passView">비밀번호 찾기</a>
+                          <a href="memberModify">회원정보 수정</a>
+                      </div>-->
+                      <div class="row content">
+                      <div class="col-lg-3" style="margin-left:50px;">
+                      <table class="table table-bordered table-striped table-condensed">
+									<thead style="background-color:#68dff0;color:ffffff;">
+										<tr>
+									<th  scope="col" class="text-center"><i class="fa fa-chevron-right"></i><a href="list_club">동아리</a></th>
+										</tr>
+									</thead>
+									
+									<tbody>
+									<c:forEach items="${list_club}" var="dto">
+											<tr class="listToChange info">
+											<td><a
+													href="/ex/list_club${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
+													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
+													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
+													style="font-size: 12px; color: gray;">
+														${dto.bCategory}/${dto.bRegionGroup}</a>
+													&nbsp;&nbsp;|&nbsp; &nbsp; <a
+													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a></td>
+											</tr>
+									</c:forEach>
+									</tbody>
+								</table> 
+                      </div>
+                      <div class="col-lg-3" style="margin-left:20px;">
+                      <table class="table table-bordered table-striped table-condensed">
+									<thead style="background-color:#68dff0 ;color:ffffff;">
+										<tr>
+											<th scope="col" class="text-center"><i class="fa fa-chevron-right"></i><a href="list_contest">공모전</a></th>
+										</tr>
+									</thead>
+									<tbody>
+									<c:forEach items="${list_contest}" var="dto">
+											<tr class="listToChange info">
+											<td><a
+													href="/ex/list_club${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
+													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
+													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
+													style="font-size: 12px; color: gray;">
+														${dto.bCategory}/${dto.bRegionGroup}</a>
+													&nbsp;&nbsp;|&nbsp; &nbsp; <a
+													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a></td>
+											</tr>
+									</c:forEach>
+									</tbody>
+								</table> 	
+                      </div>
+                      <div class="col-lg-3" style="margin-left:20px;">
+                      <table class="table table-bordered table-striped table-condensed">
+									<thead style="background-color:#68dff0;color:ffffff;">
+										<tr>
+									<th  scope="col" class="text-center"><i class="fa fa-chevron-right"></i><a href="list_Slanguage">스터디</a></th>
+										</tr> 
+									</thead>
+									<tbody>
+									<c:forEach items="${list_Slanguage}" var="dto">
+											<tr class="listToChange info">
+																								<td><a
+													href="/ex/list_club${bPage.makeQuery(1)}&bSearchType=${bPage.sdto.bSearchType}
+													&bKeyword=${bPage.sdto.bKeyword}&bMeetingGroup=${bPage.sdto.bMeetingGroup}
+													&bSearchRType=${dto.bRegionGroup}&bCategory=${dto.bCategory}&bStudyGroup="
+													style="font-size: 12px; color: gray;">
+														${dto.bCategory}/${dto.bRegionGroup}</a>
+													&nbsp;&nbsp;|&nbsp; &nbsp; <a
+													href="/ex/content_view${bPage.makeSearch(bPage.sdto.bPage)}&bId=${dto.bId}" OnClick="">${dto.bTitle}</a></td>
+											</tr>
+									</c:forEach>
+									</tbody>
+								</table> 
+                      </div>
                       </div>
                      <!--  <div class="custom-bar-chart">
                           <ul class="y-axis">
@@ -63,97 +138,43 @@
 					
                   </div>
                   
-                  
       <!-- **********************************************************************************************************************************************************
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->                  
-                  
+                   
                   <div class="col-lg-3 ds">
                     <!--COMPLETED ACTIONS DONUTS CHART-->
-						<h3>실시간 인기글</h3>
-                                        
+                          <thead>
+										<tr>
+											<th scope="col" class="text-center"><h3>공지사항</h3></th>
+										</tr>
+						</thead>              
                       <!-- First Action -->
                       <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>2분전</muted><br/>
-                      		   <a href="#">노동길</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Second Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>3시간전</muted><br/>
-                      		   <a href="#">박채범</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Third Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>11시간전</muted><br/>
-                      		   <a href="#">김민지</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fourth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>18시간전</muted><br/>
-                      		   <a href="#">정태훈</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fifth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>18 시간전</muted><br/>
-                      		   <a href="#">심재철</a> 완성하는 날까지 화이팅.<br/>
-                      		</p>
-                      	</div>
+                  
+                      	
+                    		  <tbody>
+									<c:forEach items="${listNotice}" var="dto">
+									<div class="thumb">
+					                   	<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+					                      	</div>
+											<tr class="details">
+												<th scope="row" class="text-center">${dto.bNotice}</th>
+												<td><a
+													href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+											</tr>
+									</c:forEach>
+									</tbody>
+                      		 
+                             </div>
+                                           	
                       </div>
                   
                        
                       
-                  </div><!-- /col-lg-3 -->
-                      <!-- 우측 하단  -->
-					 <div class="row mtbox">
-                  		<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-                  			<div class="box1">
-					  			<span class="li_heart"></span>
-					  			<h3>933</h3>
-                  			</div>
-					  			<p>방문자수</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_cloud"></span>
-					  			<h3>+48</h3>
-                  			</div>
-					  			<p>새 글</p>
-                  		</div>
-                  		<div class="col-md-2 col-sm-2 box0">
-                  			<div class="box1">
-					  			<span class="li_stack"></span>
-					  			<h3>23</h3>
-                  			</div>
-					  			<p>새 댓글</p>
-                  		</div>
+                  </div>
+                  
+                    
                   		<!-- <div class="col-md-2 col-sm-2 box0">
                   			<div class="box1">
 					  			<span class="li_news"></span>
@@ -170,13 +191,13 @@
                   		</div> -->
                   		
                   	</div><!-- /row mt -->	
-              </div><! --/row -->
+              </div>
           </section>
       </section>
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer"  style="margin-bottom:0px;">
           <div class="text-center">
               2014 - Alvarez.is
               <a href="index#" class="go-top">
