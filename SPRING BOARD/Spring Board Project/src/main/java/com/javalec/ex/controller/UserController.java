@@ -205,7 +205,7 @@ public class UserController {
 		String certNumber = (String)request.getParameter("certNumber");
 		String success = "fail";
 		
-		if(certifyNum.equals(certNumber) && certNumber != null) {
+		if(certNumber.equals(certifyNum) && certNumber != null) {
 			try {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
@@ -216,6 +216,17 @@ public class UserController {
 			} catch(Exception e){
 				System.out.println(e);
 			}
+		}
+		else {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('올바른 인증번호를 입력해주세요.');history.go(-1);</script>");		
+				out.flush();
+			} catch(Exception e){
+				System.out.println(e);
+			}
+			return "emailCheckForm"; 
 		}
 
 		session.setAttribute("success", success);
@@ -308,6 +319,14 @@ public class UserController {
 			}
 		}
 		else {
+			try {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('올바른 인증번호를 입력해주세요.');history.go(-1);</script>");		
+				out.flush();
+			} catch(Exception e){
+				System.out.println(e);
+			}
 			return "withdrawForm"; 
 		}
 		

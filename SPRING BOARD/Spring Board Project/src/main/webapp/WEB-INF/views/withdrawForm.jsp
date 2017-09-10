@@ -18,10 +18,11 @@
 </head>
 <body onload="pValue()">
 
-<div class="container">   
-    <br>
+<div class="container">
+<div class="row mt">
+<div class="col-lg-9 main-chart">   
     <b><font size="4" color="gray">회원탈퇴 본인확인</font></b>
-    <hr size="1" width="460">
+    <hr size="1" width="95%">
     <br>
         <form:form  id="checkForm" role="form" commandName = "userDto" action="withdraw_certify" method="post">
             <div class="form-group">
@@ -46,7 +47,7 @@
         	<div class="form-group">
             <div class="col-sm-6 text-center">
             	<div class="input-group">          
-            	<input type="text" class="form-control" id="certNumber" name="certNumber" placeholder="인증번호를 입력해주세요">
+            	<input type="text" class="form-control" id="certNumber" name="certNumber" placeholder="인증번호 입력">
             	<input type="hidden" name="dropId" id="dropId" value="${userDto.bId}">
             	</div>
             </div>
@@ -62,6 +63,9 @@
 	            </div>
 	        </div>
     		</form:form>
+    		
+    </div>
+    </div>
    </div>
    
    <script type="text/javascript">

@@ -83,7 +83,7 @@ function popupopen(string){
 	            	<c:set var="connectedUser"><security:authentication property="principal.bNick"/></c:set>
 	            	<c:set var="contentWriter">${BDto.bName}</c:set>
 	            	<c:choose>
-	            		<c:when test="${connectedUser == contentWriter}">
+	            		<c:when test="${equal == 'true'}">
 		          			<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
 		          			<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
 	          			</c:when>
