@@ -82,6 +82,18 @@
         var top = Math.ceil((window.screen.height - windowH)/2);
 		window.open("write_view","pop_01"," top="+top+", left="+left+", height="+windowH+", width="+windowW);
     	}
+    
+    function popUp(string){
+    		 var encode = encodeURI(encodeURIComponent(string));
+    		 var winWidth = 350;
+    		 var winHeight = 405;
+    		 var winName = "회원 정보 보기";
+    		 var winURL = "/ex/memberinfo?nickname="+encode;
+    		 var winPosLeft = (screen.width - winWidth) / 2;
+    		 var winPosTop = (screen.height - winHeight) / 2;
+    		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
+    		 window.open(winURL, winName, winOpt + ",menubar=no,status=no,scrollbars=no,resizable=no");
+    	}
         </script>
   </security:authorize>
   </head>
@@ -179,10 +191,10 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               <security:authorize access="isAuthenticated()">
-              	  <p class="centered"><a href="profile"><img src="assets/userImage/${principal.bImage}.png" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="" onclick="popUp('${nick}');"><img src="assets/userImage/${principal.bImage}.png" class="img-circle" width="60"></a></p>
               </security:authorize>
               <security:authorize access="! isAuthenticated()">
-              	  <p class="centered"><a href="profile"><img src="assets/userImage/user.png" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><img src="assets/userImage/user.png" class="img-circle" width="60"></a></p>
               </security:authorize>
               		<security:authorize access="isAuthenticated()">
               		 	<h5 class="centered"><security:authentication property="principal.bNick"/>님 환영합니다</h5>
