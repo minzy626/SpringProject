@@ -88,8 +88,8 @@ function popupopen(string){
 		          			<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
 	          			</c:when>
 	          			<c:otherwise>
-		          			<button type="submit" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span>${connectedUser } 글 수정</button>
-		          			<button type="submit" class="btn btn-danger" disabled="disabled"><span class="glyphicon glyphicon-trash"></span>${contentWriter } 글 삭제</button>
+		          			<button type="submit" class="btn btn-warning" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span> 글 수정</button>
+		          			<button type="submit" class="btn btn-danger" disabled="disabled"><span class="glyphicon glyphicon-trash"></span> 글 삭제</button>
 	          			</c:otherwise>
 	          		</c:choose>
 	          	</security:authorize>
