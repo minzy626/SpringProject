@@ -171,10 +171,10 @@
             
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-              <security:authorize access="isAnonymous()"><li><a class="login_view" href="login_view">login</a></li></security:authorize>
+              <security:authorize access="isAnonymous()"><li><a class="login" href="login_view">login</a></li></security:authorize>
               <security:authorize access="isAuthenticated()">
              	 <li>
-	            	  <a class="login_view" href="<c:url value='logout'/>">logout</a>
+	            	  <a class="logout" href="<c:url value='logout'/>">logout</a>
 	              </li>
 	           </security:authorize>
             	</ul>
