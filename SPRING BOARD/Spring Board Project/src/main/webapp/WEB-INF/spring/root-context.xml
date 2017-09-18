@@ -37,7 +37,7 @@
       <property name="host" value="smtp.gmail.com" />
       <property name="port" value="587" />
       <property name="username" value="springteam11@gmail.com" />
-      <property name="password" value="springteam!!" />
+      <property name="password" value="qfycezhylsoydfat" />
       <property name="javaMailProperties">
             <props>
              <prop key="mail.transport.protocol">smtp</prop>

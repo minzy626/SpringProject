@@ -50,12 +50,6 @@ public class HomeController {
 	}
 	
 	
-	
-	/*@RequestMapping(value="/index")
-	public String Index(Model model,HttpSession httpSession) {
-		
-		return "index";
-	}*/
 
 	@RequestMapping(value = "/index")
 	public String listGET(SearchingPageDto spdto, Model model,Principal principal) {
@@ -69,69 +63,6 @@ public class HomeController {
 		return "index";
 	}
 	
-	
-	
-	@RequestMapping(value="/lock_screen", method = RequestMethod.GET)
-	public String Lock_Screen(Model model) {
-		return "lock_screen";
-	}
-	
-	@RequestMapping(value="/morris", method = RequestMethod.GET)
-	public String Moriss(Model model) {
-		return "morris";
-	}
-	
-	@RequestMapping(value="/panels", method = RequestMethod.GET)
-	public String Panels(Model model) {
-		return "panels";
-	}
-	
-	@RequestMapping(value="/responsive_table", method = RequestMethod.GET)
-	public String Responsive_Table(Model model) {
-		return "responsive_table";
-	}
-	
-	@RequestMapping(value="/todo_list", method = RequestMethod.GET)
-	public String Todo_List(Model model) {
-		return "todo_list";
-	}
-	
-	@RequestMapping(value="/general", method = RequestMethod.GET)
-	public String General(Model model) {
-		return "general";
-	}
-	@RequestMapping(value="/gallery", method = RequestMethod.GET)
-	public String Gallery(Model model) {
-		return "gallery";
-	}
-	@RequestMapping(value="/form_component", method = RequestMethod.GET)
-	public String Form_Component(Model model) {
-		return "form_component";
-	}
-	@RequestMapping(value="/chartjs", method = RequestMethod.GET)
-	public String Chartjs(Model model) {
-		return "chartjs";
-	}
-	@RequestMapping(value="/calendar", method = RequestMethod.GET)
-	public String Calendar(Model model) {
-		return "calendar";
-	}
-	@RequestMapping(value="/buttons", method = RequestMethod.GET)
-	public String Buttons(Model model) {
-		return "buttons";
-	}
-	
-	@RequestMapping(value="/blank", method = RequestMethod.GET)
-	public String Blank(Model model) {
-		return "blank";
-	}
-	
-	
-	
-	@RequestMapping(value="/basic_table", method = RequestMethod.GET)
-	public String Basic_Table(Model model) {
-		return "basic_table";
-	}
 	
 	
 }

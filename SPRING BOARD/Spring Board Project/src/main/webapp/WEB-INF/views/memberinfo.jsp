@@ -15,7 +15,7 @@
 				 var winWidth = 450;
 				 var winHeight = 385;
 				 var winName = "쪽지 보내기";
-				 var winURL = "/ex/note/write_view?nickname="+encode;
+				 var winURL = "/note/write_view?nickname="+encode;
 				 var winPosLeft = (screen.width - winWidth) / 2;
 				 var winPosTop = (screen.height - winHeight) / 2;
 				 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
@@ -91,7 +91,7 @@
             </div>
                  <div style="margin-right:10px">
                  <span class="pull-right">
-                 		<a data-original-title="Rewrite profile" data-doggle="toolip" type="button" class="btn btn-sm btn-success" onclick="location.href='http://localhost:8181/ex/memberModify'";><i class="glyphicon glyphicon-pencil"></i></a>
+                 		<a data-original-title="Rewrite profile" data-doggle="toolip" type="button" class="btn btn-sm btn-success" onclick="location.href='http://springteam.cafe24.com/memberModify'";><i class="glyphicon glyphicon-pencil"></i></a>
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"
                         	onclick="self.close(); popupopen('${dto.bNick}');"><i class="glyphicon glyphicon-envelope"></i></a>
                            <a data-original-title="Remove this user" data-toggle="tooltip"  type="button" class="btn btn-sm btn-danger" onClick="self.close();"><i class="glyphicon glyphicon-remove"></i></a>

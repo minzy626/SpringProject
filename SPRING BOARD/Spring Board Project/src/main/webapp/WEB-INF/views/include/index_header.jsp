@@ -35,7 +35,7 @@
 	<!-- 웹 소켓 사용해서 현재 몇개의 쪽지가 도착했는지 구해오기. --> 
 	<!-- 웹 소켓 사용해서 현재 몇개의 미확인 댓글이 있는지 구해오기. --> 
     <script type="text/javascript">
-    var wsUri = "ws://localhost:8181/ex/count";
+    var wsUri = "ws://springteam.cafe24.com/count";
     function send_message() {
         websocket = new WebSocket(wsUri);
         websocket.onopen = function(evt) {
@@ -88,7 +88,7 @@
     		 var winWidth = 350;
     		 var winHeight = 405;
     		 var winName = "회원 정보 보기";
-    		 var winURL = "/ex/memberinfo?nickname="+encode;
+    		 var winURL = "/memberinfo?nickname="+encode;
     		 var winPosLeft = (screen.width - winWidth) / 2;
     		 var winPosTop = (screen.height - winHeight) / 2;
     		 var winOpt = "width="+winWidth+",height="+winHeight+",top="+winPosTop+",left="+winPosLeft;
@@ -108,7 +108,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="http://localhost:8181/ex/index" class="logo"><b>어우름</b></a>
+            <a href="http://springteam.cafe24.com/index" class="logo"><b>어우름</b></a>
             <!--logo end-->
             
             <div class="nav notify-row" id="top_menu">
@@ -159,7 +159,7 @@
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
                     <li id="header_inbox_bar" class="dropdown">
-                    <a href="http://localhost:8181/ex/note/receivelist">
+                    <a href="http://springteam.cafe24.com/note/receivelist">
                             <i class="fa fa-envelope-o"></i>
                             <span id="count" class="badge bg-theme"></span>
                         </a>
