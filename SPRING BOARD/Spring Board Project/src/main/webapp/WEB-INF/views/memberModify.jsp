@@ -230,70 +230,35 @@
       <!-- **********************************************************************************************************************************************************
       RIGHT SIDEBAR CONTENT
       *********************************************************************************************************************************************************** -->                  
-                  <div class="col-lg-3 ds">
-                    <!--COMPLETED ACTIONS DONUTS CHART-->
-						<h3>실시간 인기글</h3>
-                                        
+                 <div class="col-lg-3 ds">
+                  <!--COMPLETED ACTIONS DONUTS CHART-->
+                          <thead>
+										<tr>
+											<th scope="col" class="text-center"><h3>공지사항</h3></th>
+										</tr>
+						</thead>              
                       <!-- First Action -->
                       <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>2분전</muted><br/>
-                      		   <a href="#">노동길</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Second Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>3시간전</muted><br/>
-                      		   <a href="#">박채범</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Third Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>11시간전</muted><br/>
-                      		   <a href="#">김민지</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fourth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>18시간전</muted><br/>
-                      		   <a href="#">정태훈</a> 내용<br/>
-                      		</p>
-                      	</div>
-                      </div>
-                      <!-- Fifth Action -->
-                      <div class="desc">
-                      	<div class="thumb">
-                      		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                      	</div>
-                      	<div class="details">
-                      		<p><muted>18 시간전</muted><br/>
-                      		   <a href="#">심재철</a> 완성하는 날까지 화이팅.<br/>
-                      		</p>
-                      	</div>
-                      </div>
                   
-                       
-                      
-                  </div><!-- /col-lg-3 -->
-              </div><!--/row -->
+                      	
+                    		  <tbody>
+									<c:forEach items="${listNotice}" var="dto">
+									<div class="thumb">
+					                   	<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
+					                      	</div>
+											<tr class="details">
+												<th scope="row" class="text-center">${dto.bNotice}</th>
+												<td><a
+													href="content_view?bId=${dto.bId}">${dto.bTitle}</a></td>
+											</tr>
+									</c:forEach>
+									</tbody>
+                      		 
+                             </div>
+                                           	
+                      </div>
+     
+                  </div>
           </section>
       </section>
 
